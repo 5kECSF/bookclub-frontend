@@ -1,6 +1,6 @@
-import ECommerce from "@/components/Dashboard/E-commerce";
+import ECommerce from "@/components/other/Dashboard/E-commerce";
 import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import DefaultLayout from "@/app/admin/_components/Layouts/DefaultLayout";
 
 export const metadata: Metadata = {
   title:
@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      <DefaultLayout>
-        <ECommerce />
-      </DefaultLayout>
-    </>
+    <div>
+        NO Data
+    </div>
   );
 }

@@ -1,0 +1,4 @@
+
+## tasks
+
+- [x] finish auth
