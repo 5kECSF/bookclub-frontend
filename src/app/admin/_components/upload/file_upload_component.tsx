@@ -117,7 +117,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
 
   const mutation = useMutate();
 
-  const operate = async (url: string, data: FormData, method: MTD) => {
+  const operate = async (url: string, data, method: MTD) => {
     try {
       // @ts-ignore
       const datas = await mutation.mutateAsync({
@@ -233,7 +233,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
         {/*{imgList.length < fileNo && uploadButton}*/}
       </Upload>
 
-      {/*   ================||    This is To Display New Added Images*/}
+      {/*   ================ ||    This is To Display New Added Images*/}
       <div className={"grayscale-0"}> New Files</div>
       <Upload
         beforeUpload={imgOnly ? beforeImageUpload : beforeUpload}

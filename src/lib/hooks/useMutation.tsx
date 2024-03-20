@@ -17,7 +17,7 @@ interface MutationParam {
   url: string;
   method: MTD;
   headers?: any;
-  body: any;
+  body?: any;
 }
 export const useMutate = (
   onSuccess: () => void = () => {},

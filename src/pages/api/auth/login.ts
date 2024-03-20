@@ -11,7 +11,7 @@ export default async function(req, res) {
   }
   try {
     const response = await axios.post(`${BASE_URL}/${API.login}`, req.body)
-    console.log("respones", response)
+    console.log("respones.data", response.data)
     const { auth_tokens, user_data } = response?.data
 
     const serialisedAccess = makeTokenCooke(CookieNames.AccessToken, auth_tokens?.access_token)

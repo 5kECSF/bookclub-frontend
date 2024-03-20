@@ -10,13 +10,22 @@ import { toast } from "react-toastify"
 import { isTokenExpired } from "@/lib/common/tokenExpires"
 
 interface User {
-  // Define user properties
+  fName: string
+  lName: string
+  email: string
+  avatar: string
+  role: string
+}
+interface LoginResponse{
+ access_token: string,
+  user_data : User
+
 }
 
 interface AuthContextProps {
   user: User | null;
   accessToken: string | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<LoginResponse>;
   logout: () => void;
   refreshToken: () => Promise<void>;
   isTokenExpired: (token: string | null) => boolean;
@@ -25,7 +34,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps>({
   user: null,
   accessToken: null,
-  login: async () => {
+  login: async ():Promise<LoginResponse> => {
   },
   logout: () => {
   },
@@ -54,14 +63,13 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   //   getToken()
   // }, [])
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string):Promise<LoginResponse> => {
     setLoading(true)
     try{
       const response = await axios.post(`/api/auth/login`, { info: email, password, info_type: "m" })
-      console.log("response.data")
-      const { access_token, user_data } = response.data
+      console.log("response.data=======>")
+      const { access_token, user_data } = response?.data
       // console.log("logindata", response.data)
-      toast.success(`Successfully logged In as ${user_data.email}`)
       setUser(user_data)
       setAccessToken(access_token)
       // localStorage.setItem("accessToken", access_token)

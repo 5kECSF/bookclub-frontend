@@ -19,9 +19,10 @@ interface InputProps {
   inputType?: string;
   row?: number;
 }
-interface SelectInput extends InputProps {
-  idx: string;
-  dispIdx: string;
+interface SelectInput extends Omit<InputProps, "register"> {
+  idx?: string;
+  dispIdx?: string;
+  register?: any;
   data: any;
   multi?: boolean;
   control: any;

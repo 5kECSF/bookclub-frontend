@@ -1,12 +1,13 @@
 "use client"
-import "@/css/style.css";
 import React from "react"
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb"
-import { AuthLayout, EmailInput, GoogleSignin, GoToLink, Password, SubmitInput } from "@/app/(auth)/_components/inputs"
+import { EmailInput, GoogleSignin, GoToLink, Password, SubmitInput } from "@/app/(auth)/_components/inputs"
 import { useForm } from "react-hook-form"
 import { LoginValidator, TLoginSchema } from "../models"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "@/lib/context/auth.context"
+import {AuthLayout} from "@/app/(auth)/_components/authLayout";
+import {toast} from "react-toastify";
 
 
 const SignIn: React.FC = () => {
@@ -23,12 +24,11 @@ const SignIn: React.FC = () => {
     const data = await refreshToken()
     console.log("the refreshed data is===", data)
   }
-  const onSubmit = async (data: TLoginSchema) => {
+  const onSubmit = async (input: TLoginSchema) => {
     try {
       // console.log("---------}submitting", data)
-      await login(data.email, data.password)
-      // toa  st(response?.user_data?.email)
-
+    const data = await login(input?.email, input.password)
+      toast.success(`Successfully logged In as ${data?.user_data.email}`)
     } catch (e) {
       console.log("login error is ==", e.message)
     }
@@ -41,7 +41,7 @@ const SignIn: React.FC = () => {
           <EmailInput register={register("email")} error={errors.email} />
           <Password register={register("password")} error={errors.password}
                     placeHolder={"Enter Password"} label={"Password"} />
-          <SubmitInput loading={loading}/>
+          <SubmitInput title={"Login"} loading={loading}/>
           <GoogleSignin />
           <button onClick={refresh}>refresh</button>
           <GoToLink path={"/signup"} text={" Don’t have any account?"} />

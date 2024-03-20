@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
-import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb"
+import "@/css/style.css";
+// import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb"
 // import {Metadata} from "next";
 import { useMutate } from "@/lib/hooks/useMutation"
 import { useForm } from "react-hook-form"
@@ -10,7 +11,6 @@ import { toast } from "react-toastify"
 import { MTD } from "@/lib/constants"
 import { API } from "@/lib/constants/api-paths"
 import {
-  AuthLayout,
   EmailInput,
   GoogleSignin,
   GoToLink,
@@ -18,6 +18,7 @@ import {
   Password,
   SubmitInput,
 } from "@/app/(auth)/_components/inputs"
+import {AuthLayout} from "@/app/(auth)/_components/authLayout";
 
 
 const SignUp: React.FC = () => {
@@ -68,7 +69,7 @@ const SignUp: React.FC = () => {
                     placeHolder={"Re-enter your password"} label={"Re-type Password"} />
           {console.log(errors)}
           {/*===========   Submit button*/}
-          <SubmitInput />
+          <SubmitInput title={"Create account"}/>
           {/*  ==============  Signup With Google    ========  */}
           <GoogleSignin />
 

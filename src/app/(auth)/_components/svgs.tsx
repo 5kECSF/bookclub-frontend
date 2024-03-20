@@ -201,7 +201,7 @@ export function Svg4() {
     </svg>;
 }
 
-export function Svg5() {
+export function PassowrdSvg() {
     return <svg
         className="fill-current"
         width="22"
@@ -223,7 +223,7 @@ export function Svg5() {
     </svg>;
 }
 
-export function Svg6() {
+export function EmailSvg() {
     return <svg
         className="fill-current"
         width="22"

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 import {ToastContainer} from "react-toastify";
 import DataProvider from "@/app/DataProvider";
-
+import "react-toastify/dist/ReactToastify.min.css"
 
 export default function RootLayout({
   children,
