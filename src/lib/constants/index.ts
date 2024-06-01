@@ -1,4 +1,4 @@
-export const BASE_URL = "http://127.0.0.1:8000/api/v1";
+export const BASE_URL = "http://172.24.90.115:8000/api/v1" //"http://127.0.0.1:8000/api/v1";
 
 export enum CookieNames {
   AccessToken = "access_token",

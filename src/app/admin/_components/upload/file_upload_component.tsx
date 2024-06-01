@@ -117,7 +117,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
 
   const mutation = useMutate();
 
-  const operate = async (url: string, data, method: MTD) => {
+  const operate = async (url: string, data: any, method: MTD) => {
     try {
       // @ts-ignore
       const datas = await mutation.mutateAsync({

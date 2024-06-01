@@ -1,56 +1,58 @@
-import { message, Upload } from "antd"
-import type { RcFile, UploadProps } from "antd/es/upload"
+import { message, Upload } from "antd";
+import type { RcFile, UploadProps } from "antd/es/upload";
 
-export const isJpgOrPng = (file) => {
+export const isJpgOrPng = (file: any) => {
   return (
     file.type === "image/jpeg" ||
     file.type === "image/jpg" ||
     file.type === "image/png"
-  )
-}
+  );
+};
+
 export const getBase64 = (file: RcFile): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
-}
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+      } else {
+        reject(new Error("File reading error: result is not a string"));
+      }
+    }; //resolve(reader.result)
+    reader.onerror = (error) => reject(error);
+  });
+};
 
 export const beforeUpload = (file: RcFile) => {
   try {
-
-    const isLt30M = file.size / 1024 / 1024 < 50
+    const isLt30M = file.size / 1024 / 1024 < 50;
     if (!isLt30M) {
-      message.error("Image must smaller than 50MB!")
+      message.error("Image must smaller than 50MB!");
     }
-    return false
-
-  } catch (e) {
-    console.log(e.details)
-    return false
+    return false;
+  } catch (e: any) {
+    console.log(e.details);
+    return false;
   }
-
-}
+};
 export const beforeImageUpload = (file: RcFile) => {
   // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   try {
-    const isImage = isJpgOrPng(file)
+    const isImage = isJpgOrPng(file);
     if (!isImage) {
-      message.error("You can only upload JPG/PNG file!")
+      message.error("You can only upload JPG/PNG file!");
     }
-    const isLt10M = file.size / 1024 / 1024 < 10
+    const isLt10M = file.size / 1024 / 1024 < 10;
     if (!isLt10M) {
-      message.error("Image must smaller than 10MB!")
+      message.error("Image must smaller than 10MB!");
     }
-    return false
-
-  } catch (e) {
-    console.log(e.details)
-    return false
+    return false;
+  } catch (e: any) {
+    console.log(e.details);
+    return false;
   }
-
-}
+};
 
 //
 // function addWaterMark(file) {
@@ -77,11 +79,9 @@ export const beforeImageUpload = (file: RcFile) => {
 // }
 //
 
-
 // const beforeUpload = (file) => {
 //   if (!isJpgOrPng(file)) {
 //     message.error("Book cover can only be JPG/PNG file!");
 //   }
 //   return false;
 // };
-

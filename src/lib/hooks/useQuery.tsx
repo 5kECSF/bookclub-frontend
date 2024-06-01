@@ -12,7 +12,7 @@ export const useFetch = (queryKey: string[], url: string, params = "limit=25") =
         const response = await axiosAuth.get(`${url}?${params}`)
         // console.log("rssp", response)
         return response.data
-      } catch (e) {
+      } catch (e: any) {
         console.log("--response.mes", e.message)
         console.log("--response", e)
         return []

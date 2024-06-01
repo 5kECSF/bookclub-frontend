@@ -9,15 +9,18 @@ export const axiosAuth = axios.create({
     baseURL: BASE_URL,
     headers: {"Content-Type": "application/json"},
 });
+
 const useAxiosAuth = () => {
-    const {accessToken} = useAuth();
+    const {accessToken, getAccessToken} = useAuth();
 //   const refreshToken = useRefreshToken();
 
     useEffect(() => {
         const requestIntercept = axiosAuth.interceptors.request.use(
-            (config) => {
+            async (config) => {
                 if (!config.headers["Authorization"]) {
-                    // config.headers["Authorization"] = `${accessToken}`;
+                    const token = await getAccessToken();
+                    config.headers["Authorization"] = `Bearer ${token}`;
+                    // config.headers["Authorization"] = `${getAccessToken()}`;
                 }
                 return config;
             },
@@ -29,13 +32,16 @@ const useAxiosAuth = () => {
             async (error) => {
                 const prevRequest = error?.config;
                 if (error?.response?.status === 401 && !prevRequest?.sent) {
+                    console.log("axios error11111111 -----")
                     prevRequest.sent = true;
+                    const token = await getAccessToken();
+                    prevRequest.headers["Authorization"] = `Bearer ${token}`;
+                    return axiosAuth(prevRequest);
                     // await refreshToken();
                     //   signOut();
                     // prevRequest.headers[
                     //     "Authorization"
                     //     ] = `${accessToken}`;
-                    return axiosAuth(prevRequest);
                 }
                 return Promise.reject(error);
             }
@@ -45,9 +51,14 @@ const useAxiosAuth = () => {
             axiosAuth.interceptors.request.eject(requestIntercept);
             axiosAuth.interceptors.response.eject(responseIntercept);
         };
-    }, [accessToken]);
+    }, [accessToken, getAccessToken]);
 
     return axiosAuth;
 };
 
 export default useAxiosAuth;
+
+// if (prevRequest?.sent) {
+//     logout();
+//     return axiosAuth(prevRequest);
+// }
