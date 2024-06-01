@@ -1,5 +1,6 @@
 export enum API {
   register = "auth/register",
   login = "auth/login",
-  reset = "auth/reset",
+  refresh = "auth/refresh",
+  logout = "auth/logout"
 }
