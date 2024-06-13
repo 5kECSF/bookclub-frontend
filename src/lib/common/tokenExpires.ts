@@ -1,72 +1,103 @@
-import jwt from "jsonwebtoken"
-import { CookieNames } from "@/lib/constants"
-import { serialize } from "cookie"
+import jwt, { DecodeOptions } from "jsonwebtoken";
+import { serialize } from "cookie";
 
-export const isTokenExpired = (token: string) => {
-  try {
-    // Decode the token
-    const decodedToken = jwt.decode(token)
-
-    // Check if the token has an expiration claim and if it has expired
-    if (decodedToken && decodedToken?.exp && decodedToken.exp * 1000 < Date.now()) {
-      return true // Token has expired
-    }
-
-    return false // Token is still valid
-  } catch (error) {
-    console.error("Error decoding JWT:", error)
-    return true // Assume the token is expired if there is an error decoding it
-  }
+interface DecodedToken {
+  exp?: number;
+  [key: string]: any; // If you have other claims, you can define them here
 }
 
+// Function to check if a token is expired
+export const isTokenExpired = (token: string | null) => {
+  try {
+    if (!token) {
+      return true; // Token is considered expired if it's null or undefined
+    }
+    // Decode the token
+    const decodedToken = jwt.decode(token) as DecodedToken | null;
 
+    // Check if the token has an expiration claim and if it has expired
+    if (decodedToken?.exp && decodedToken.exp * 1000 < Date.now()) {
+      return true; // Token has expired
+    }
+    return false; // Token is still valid
+  } catch (error) {
+    console.error("Error decoding JWT:", error);
+    return true; // Assume the token is expired if there is an error decoding it
+  }
+};
+
+// Function to get the expiry date of a token
 export const getExpiryDate = (token: string) => {
   try {
     // Decode the token
-    const decodedToken = jwt.decode(token)
+    const decodedToken = jwt.decode(token) as DecodedToken | null;
     // Check if the token has an expiration claim and if it has expired
-    if (decodedToken && decodedToken?.exp) {
-      return decodedToken?.exp
+    if (decodedToken?.exp) {
+      return decodedToken.exp;
     }
-    return -1
-
+    return null;
   } catch (error) {
-    console.error("Error decoding JWT:", error)
-    return true // Assume the token is expired if there is an error decoding it
+    console.error("Error decoding JWT:", error);
+    return null; // Assume the token is expired if there is an error decoding it
   }
-}
-export const getRemainingTime = (token) => {
-  const expiryTime = getExpiryDate(token)
-  const currentTimeInSeconds = Math.floor(Date.now() / 1000)
-  const refreshTokenRemainingTime = expiryTime - currentTimeInSeconds
-  // Set maxAge for the cookie based on the remaining time
-  return Math.max(refreshTokenRemainingTime, 0)
-}
+};
 
-export const haveTime = (token, minutes) => {
-  const expiryTIme = getExpiryDate(token)
+// Function to get the remaining time until token expiry
+export const getRemainingTime = (token: string): number => {
+ 
+  const expiryTime = getExpiryDate(token);
+  const currentTimeInMiliSeconds = Date.now();
+  if (expiryTime !== null) {
+    const refreshTokenRemainingTime = expiryTime * 1000 - currentTimeInMiliSeconds;
+    return Math.max(refreshTokenRemainingTime, 0);
+  }
 
-  const now = Date.now() / 1000 // Current time in seconds
-  const minutesFromNow = now + (minutes * 60) // Add 5 minutes in seconds
-  return expiryTIme > minutesFromNow
-}
+  return 0; // If token doesn't have expiry or is invalid, return 0
+};
 
-export const makeTokenCooke = (cookieName, token) => {
+// Function to check if the token has a certain time remaining
+export const haveTime = (token: string, minutes: number): boolean => {
+  const expiryTime = getExpiryDate(token);
+  if (expiryTime !== null) {
+    const now = Math.floor(Date.now() / 1000);
+    const minutesFromNow = now + minutes * 60;
+
+    return expiryTime > minutesFromNow;
+  }
+
+  return false;  // If token doesn't have expiry or is invalid, return false
+};
+
+// Function to create a JWT token cookie
+export const makeTokenCooke = (cookieName: string, token: string): string => {
+  const maxAge = getRemainingTime(token) / 1000;
   return serialize(cookieName, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     path: "/",
     sameSite: "strict",
-    maxAge: getRemainingTime(token),
-  })
-}
+    maxAge: maxAge,
+  });
+};
 
-export const makeDataCooke = (cookieName, data, time) => {
+// Function to create a data cookie
+export const makeDataCooke = (cookieName: string, data: any, time: any): string => {
   return serialize(cookieName, data, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     path: "/",
     sameSite: "strict",
     maxAge: time,
-  })
-}
+  });
+};
+
+// Function to destroy a cookie
+export const destroyCooke = (cookieName: string) => {
+  return serialize(cookieName, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    sameSite: "strict",
+    maxAge: -1,
+  });
+};

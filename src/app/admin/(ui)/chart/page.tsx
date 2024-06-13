@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 const BasicChartPage: React.FC = () => {
   return (
     <>
-      <Chart />
+      {/* <Chart /> */}
+      Chart Page
     </>
   );
 };
