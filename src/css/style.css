@@ -5,30 +5,90 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply relative z-1 bg-whiten font-satoshi text-base font-normal text-body;
-    }
+  body {
+    @apply relative z-1 bg-whiten font-satoshi text-base font-normal text-body;
+  }
 }
 
 @layer components {
 }
 
 @layer utilities {
-    /* Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-    .no-scrollbar {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-    }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-    .chat-height {
-        @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
-    }
+  .chat-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
 
-    .inbox-height {
-        @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
-    }
+  .inbox-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+}
+
+/* for links on the sidebar */
+.link-css {
+  @apply relative flex items-center gap-8 rounded-md p-4 duration-300 ease-in-out hover:bg-graydark dark:bg-boxdark dark:hover:bg-boxdark-2;
+}
+
+/* Ant design Modal customization */
+body.dark .ant-modal-content,
+body.dark .ant-modal-header,
+body.dark .ant-modal-body,
+body.dark .ant-modal-footer {
+  @apply bg-boxdark text-white;
+}
+body.dark .ant-modal-title {
+  @apply py-2 text-white;
+}
+body.dark .ant-modal-close-x {
+  @apply text-white;
+}
+
+/* Ant design Select component */
+body.dark .ant-select-selector {
+  @apply border-form-strokedark bg-form-input text-white !important;
+}
+body.dark .ant-select-dropdown {
+  @apply bg-form-input;
+}
+body.dark .ant-select-item,
+body.dark .ant-select-selection-placeholder,
+body.dark .ant-select-item-option-content,
+body.dark .ant-select-item-option-selected,
+body.dark .ant-select-clear,
+body.dark .ant-select-clear:hover,
+body.dark .ant-select-arrow {
+  @apply text-white;
+}
+
+body.dark .ant-select-item-option-selected {
+  @apply bg-boxdark-2; /* Dark background color, adjust as needed */
+  /* color: white; */
+}
+
+/* Ant design Table */
+body.dark .ant-table,
+body.dark .ant-table-thead > tr > th,
+body.dark .ant-table-tbody > tr > td,
+body.dark .ant-table-tbody:hover > tr:hover > td:hover,
+body.dark .ant-table-row:hover:not(.ant-table-row-expand) > td,
+body.dark .ant-table-placeholder,
+body.dark .ant-table .ant-table-row-expand-icon {
+  @apply bg-boxdark text-white;
+}
+
+body.dark .ant-table-row:hover {
+  @apply bg-black;
+}
+/* For general Tables */
+.table-wrapper {
+  @apply h-full min-h-screen overflow-x-auto rounded-lg border border-stroke bg-white p-10 px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1;
 }
