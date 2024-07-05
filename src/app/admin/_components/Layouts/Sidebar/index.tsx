@@ -113,7 +113,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </ItemGroup>
 
                 {/*======    Core OPERATIONS   ========*/}
-                <ItemGroup name={"Core Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
+                {/* <ItemGroup name={"Core Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
                   <ChildItems name={"Domains"} pathname={pathname}
@@ -131,9 +131,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   <ChildItems name={"WorkRole"} pathname={pathname}
                               path={"/admin/workRole"} />
 
-                </ItemGroup>
+                </ItemGroup> */}
+
                 {/*======    Learning OPERATIONS   ========*/}
-                <ItemGroup name={"Learning Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
+                {/* <ItemGroup name={"Learning Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
                   <ChildItems name={"Content"} pathname={pathname}
@@ -149,8 +150,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   <ChildItems name={"Trainings"} pathname={pathname}
                               path={"/admin/training"} />
 
-                </ItemGroup> {/*======    Learning OPERATIONS   ========*/}
-                <ItemGroup name={"Assessment Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
+                </ItemGroup> 
+                 */}
+                 
+                {/*======    Learning OPERATIONS   ========*/}
+                {/* <ItemGroup name={"Assessment Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
                   <ChildItems name={"Questions"} pathname={pathname}
@@ -170,7 +174,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   <ChildItems name={"WorkShop"} pathname={pathname}
                               path={"/admin/workShop"} />
 
-                </ItemGroup>
+                </ItemGroup> */}
 
 
                 {/*<ItemWithSvg SVG={CalendarSvg} name={"Calendar"} path={"calendar"} pathname={pathname} />*/}

@@ -1,6 +1,10 @@
+"use client";
+
 import { ApexOptions } from "apexcharts";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const options: ApexOptions = {
   colors: ["#3C50E0", "#80CAEE"],
@@ -44,7 +48,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["M", "T", "W", "T", "F", "S", "S"],
+    categories: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   },
   legend: {
     position: "top",
@@ -52,7 +56,6 @@ const options: ApexOptions = {
     fontFamily: "Satoshi",
     fontWeight: 500,
     fontSize: "14px",
-
     markers: {
       radius: 99,
     },
@@ -62,6 +65,11 @@ const options: ApexOptions = {
   },
 };
 
+interface ChartTwoProps {
+  build: any;
+  implant: any;
+}
+
 interface ChartTwoState {
   series: {
     name: string;
@@ -69,15 +77,15 @@ interface ChartTwoState {
   }[];
 }
 
-const ChartTwo: React.FC = () => {
+const ChartTwo= () => {
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
-        name: "Sales",
+        name: "Achieved",
         data: [44, 55, 41, 67, 22, 43, 65],
       },
       {
-        name: "Revenue",
+        name: "Target",
         data: [13, 23, 20, 8, 13, 27, 15],
       },
     ],
@@ -152,3 +160,4 @@ const ChartTwo: React.FC = () => {
 };
 
 export default ChartTwo;
+
