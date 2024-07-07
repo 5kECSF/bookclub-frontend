@@ -1,7 +1,7 @@
 "use client";
-import { AgGridReact } from "ag-grid-react"; // React Grid Logic
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import { AgGridReact } from "ag-grid-react"; // React Grid Logic
 // import "ag-grid-enterprise"
 import { useTheme } from "@/lib/context/ThemeContext"; // Theme
 
@@ -13,7 +13,7 @@ export const TableComponent = ({
   colDefs: any;
 }) => {
   const { currentTheme } = useTheme();
-  // console.log("theme Mode", currentTheme)
+  console.log("theme Mode", currentTheme)
   return (
     <div
       className={

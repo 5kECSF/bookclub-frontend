@@ -1,5 +1,5 @@
-import jwt, { DecodeOptions } from "jsonwebtoken";
 import { serialize } from "cookie";
+import jwt from "jsonwebtoken";
 
 interface DecodedToken {
   exp?: number;
@@ -16,10 +16,16 @@ export const isTokenExpired = (token: string | null) => {
     const decodedToken = jwt.decode(token) as DecodedToken | null;
 
     // Check if the token has an expiration claim and if it has expired
-    if (decodedToken?.exp && decodedToken.exp * 1000 < Date.now()) {
-      return true; // Token has expired
-    }
-    return false; // Token is still valid
+    return !!(
+      decodedToken &&
+      decodedToken?.exp &&
+      decodedToken.exp * 1000 < Date.now()
+    );
+
+    // if (decodedToken?.exp && decodedToken.exp * 1000 < Date.now()) {
+    //   return true; // Token has expired
+    // }
+    // return false; // Token is still valid
   } catch (error) {
     console.error("Error decoding JWT:", error);
     return true; // Assume the token is expired if there is an error decoding it

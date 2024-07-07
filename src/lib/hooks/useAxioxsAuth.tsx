@@ -1,8 +1,8 @@
 "use client";
+import { BASE_URL } from "@/lib/constants";
 import axios from "axios";
-import {useEffect} from "react";
-import {BASE_URL} from "@/lib/constants";
-import {useAuth} from "../context/auth.context";
+import { useEffect } from "react";
+import { useAuth } from "../context/auth.context";
 
 
 export const axiosAuth = axios.create({
@@ -18,8 +18,8 @@ const useAxiosAuth = () => {
         const requestIntercept = axiosAuth.interceptors.request.use(
             async (config) => {
                 if (!config.headers["Authorization"]) {
-                    const token = await getAccessToken();
-                    config.headers["Authorization"] = `Bearer ${token}`;
+                    // const token = await getAccessToken();
+                    config.headers["Authorization"] = `Bearer {token}`;
                     // config.headers["Authorization"] = `${getAccessToken()}`;
                 }
                 return config;

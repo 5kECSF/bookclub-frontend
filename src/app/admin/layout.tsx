@@ -1,9 +1,9 @@
-import "jsvectormap/dist/css/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
+
 // import "@/app/admin/css/satoshi.css";
+import DefaultLayout from "@/app/admin/_components/Layouts/DefaultLayout";
 import "@/css/dashboard.css";
 import React from "react";
-import DefaultLayout from "@/app/admin/_components/Layouts/DefaultLayout";
 
 export default function AdminLayout({
   children,

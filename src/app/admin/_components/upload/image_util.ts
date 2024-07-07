@@ -1,5 +1,5 @@
-import { message, Upload } from "antd";
-import type { RcFile, UploadProps } from "antd/es/upload";
+import { message } from "antd";
+import type { RcFile } from "antd/es/upload";
 
 export const isJpgOrPng = (file: any) => {
   return (
@@ -9,17 +9,18 @@ export const isJpgOrPng = (file: any) => {
   );
 };
 
+export const doesObjectExist = (
+  name: string,
+  list: { name: string }[],
+): boolean => {
+  return list.some((file: { name: string }) => file.name === name);
+};
 export const getBase64 = (file: RcFile): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (typeof reader.result === "string") {
-        resolve(reader.result);
-      } else {
-        reject(new Error("File reading error: result is not a string"));
-      }
-    }; //resolve(reader.result)
+    // @ts-ignore
+    reader.onload = () => resolve(reader?.result);
     reader.onerror = (error) => reject(error);
   });
 };
@@ -37,7 +38,6 @@ export const beforeUpload = (file: RcFile) => {
   }
 };
 export const beforeImageUpload = (file: RcFile) => {
-  // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   try {
     const isImage = isJpgOrPng(file);
     if (!isImage) {

@@ -1,5 +1,6 @@
-export const BASE_URL = "http://172.24.90.115:8000/api/v1" //"http://127.0.0.1:8000/api/v1";
-
+export const BASE_URL = "https://fivekecsf.onrender.com" //"http://127.0.0.1:8000/api/v1";
+// export const BASE_URL = "http://127.0.0.1:9001";
+import { IUpload } from "@/app/admin/_components/upload/upload";
 export enum CookieNames {
   AccessToken = "access_token",
   RefreshToken = "refresh_token",
@@ -23,25 +24,34 @@ export enum MTD {
 }
 
 export enum KY {
-  //core modules
-  domain = "domain",
-  learnArea = "learnArea",
-  subject = "subject",
-  knowledge = "knowledge",
-  skill = "skill",
-  task = "task",
-  workRole = "workRole",
-  //learning modules
-  content = "content",
+  //library modules
+  category = "category",
+  genre = "genre",
+  book = "book",
+  author = "author",
   section = "section",
-  course = "course",
-  pkg = "pkg",
-  group = "group",
-  training = "training",
 }
 
-export const getImg = (image: string): string => {
-  // const addon: imgAddon = paths[image.path];
-  // return addon.prefix + image.image + addon.suffix;
-  return BASE_URL + "/" + image;
+const projName = `aait-a3640.appspot.com`;
+const ToBeAdded = `https://firebasestorage.googleapis.com/v0/b/${projName}/o/`;
+
+interface imgAddon {
+  prefix: string;
+  suffix: string;
+}
+
+const paths: Record<string, imgAddon> = {
+  p1: {
+    prefix: ToBeAdded,
+    suffix: "?alt=media",
+  },
+};
+
+export const getImg = (image: IUpload): string => {
+  const addon: imgAddon = paths[image?.pathId || "p1"];
+  return addon.prefix + image?.fileName + addon.suffix;
+};
+export const getImgUrl = (imgName: string, p: string): string => {
+  const addon = paths[p || "p1"];
+  return addon.prefix + imgName + addon.suffix;
 };

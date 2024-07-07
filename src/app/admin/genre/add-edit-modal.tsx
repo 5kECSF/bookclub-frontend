@@ -1,0 +1,152 @@
+"use client";
+import { message, Modal } from "antd";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { KY, MTD } from "@/lib/constants";
+import { useQueryClient } from "@tanstack/react-query";
+import { IGenre, GenreValidator, TGenreDto } from "./model";
+import { useMutate } from "@/lib/hooks/useMutation";
+import { toast } from "react-toastify";
+import { updateLocalData } from "@/lib/functions/updateLocal";
+import {
+  AddEditLayout,
+  InputField,
+  Submit,
+  TextField,
+} from "@/components/forms/inputs";
+import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
+
+interface IGenreProps {
+  isUpdate: boolean;
+  isOpen: boolean;
+  onClose: (e?: any) => void;
+  genre?: IGenre;
+}
+
+const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
+  const uploadRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    control,
+  } = useForm<TGenreDto>({
+    resolver: zodResolver(GenreValidator),
+    defaultValues: isUpdate ? { ...genre } : {},
+  });
+
+  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  // Function to handle field changes
+  const handleChange = (fieldName: keyof TGenreDto, value: string) => {
+    setModifiedData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+
+  const queryClient = useQueryClient();
+  const mutation = useMutate();
+
+  const operate = async (
+    url: string,
+    data: any,
+    method: MTD,
+    msgStr: string,
+  ) => {
+    try {
+      //@ts-ignore
+      const response = await mutation.mutateAsync({
+        url,
+        method: method,
+        body: data,
+      });
+      console.log("the resp-->>", response);
+      updateLocalData(
+        method,
+        KY.genre,
+        queryClient,
+        reset,
+        response,
+        genre?._id as string,
+      );
+      toast.success(`successfully ${msgStr} with id ${response?.id}`);
+    } catch (e: any) {
+      console.log(" `````````` `````````` error data", e);
+      toast.error(`Server error: ${e?.message}`);
+    }
+  };
+
+  const onSubmit = async (data: IGenre) => {
+    if (uploadRef.current) {
+      //@ts-ignore
+      const fileNames = await uploadRef.current.uploadAndReturnFileNames();
+      console.log("=>>>>>>", fileNames); // Logs the array of file names
+      if (!fileNames) {
+        toast.error("uploading failed");
+        return;
+      }
+      data.fileId = fileNames._id;
+    }
+    if (isUpdate && genre && "_id" in genre) {
+      if (Object.keys(modifiedData).length === 0) {
+        message.warning(`No data is modified`);
+        // toast.error(`Nothing modified`);
+        return;
+      }
+      await operate(`${KY.genre}/${genre._id}`, data, MTD.PATCH, "update");
+    } else if (!isUpdate) {
+      await operate(`${KY.genre}`, data, MTD.POST, "create");
+    }
+  };
+
+  return (
+    <>
+      <Modal
+        title={isUpdate ? `Update ${KY.genre}` : `Create ${KY.genre}`}
+        open={isOpen}
+        onOk={handleSubmit(onSubmit)}
+        onCancel={onClose}
+        footer={[]}
+      >
+        <AddEditLayout title={"Genre"}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="p-6.5">
+              <InputField
+                label={"Genre Name"}
+                name={"name"}
+                errors={errors}
+                register={register}
+                changeFunc={handleChange}
+                placeholder={"write name"}
+              />
+
+              <TextField
+                label={"Description"}
+                name={"desc"}
+                errors={errors}
+                register={register}
+                req={false}
+                changeFunc={handleChange}
+                placeholder={"Add the Description"}
+              />
+              <MultiFileUpload
+                oldData={[genre?.upload]}
+                imgOnly={false}
+                maxFileNo={1}
+                ref={uploadRef}
+                isUpdate={isUpdate}
+                isLoading={mutation.isPending}
+                fileId={genre?.upload?._id}
+              />
+              <Submit isLoading={mutation.isPending} update={isUpdate} />
+            </div>
+          </form>
+        </AddEditLayout>
+      </Modal>
+    </>
+  );
+};
+
+export default AddEditGenre;

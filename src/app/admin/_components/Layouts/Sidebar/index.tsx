@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import React, { useEffect, useRef, useState } from "react"
 import { ChildItems, ItemGroup, ItemWithSvg } from "./SidebarLinkGroup"
-import Image from "next/image"
 import {
   AuthSvg,
   DashBoardSvg,
   FormSvg,
   ProfileSvg,
   SettingsSvg,
-  SvgButton,
-
+  SvgButton
 } from "./sidebarSvgs"
 
 interface SidebarProps {
@@ -109,72 +108,42 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
                   <ChildItems name={"Statics"} pathname={pathname}
-                              path={"/"} />
+                              path={"/admin"} />
                 </ItemGroup>
 
-                {/*======    Core OPERATIONS   ========*/}
-                {/* <ItemGroup name={"Core Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
+                {/*======    Library OPERATIONS   ========*/}
+                <ItemGroup name={"Library Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
-                  <ChildItems name={"Domains"} pathname={pathname}
-                              path={"/admin/domain"} />
-                  <ChildItems name={"Learning Areas"} pathname={pathname}
-                              path={"/admin/learnArea"} />
-                  <ChildItems name={"Subjects"} pathname={pathname}
-                              path={"/admin/subject"} />
-                  <ChildItems name={"Knowledge"} pathname={pathname}
-                              path={"/admin/knowledge"} />
-                  <ChildItems name={"Skill"} pathname={pathname}
-                              path={"/admin/skill"} />
-                  <ChildItems name={"Task"} pathname={pathname}
-                              path={"/admin/task"} />
-                  <ChildItems name={"WorkRole"} pathname={pathname}
-                              path={"/admin/workRole"} />
+                  <ChildItems name={"Genres"} pathname={pathname}
+                              path={"/admin/genre"} />
+                  <ChildItems name={"Category"} pathname={pathname}
+                              path={"/admin/category"} />
+                  <ChildItems name={"Books"} pathname={pathname}
+                              path={"/admin/book"} />
+                  <ChildItems name={"Authors"} pathname={pathname}
+                              path={"/admin/author"} />
+                  <ChildItems name={"Borrow History"} pathname={pathname}
+                              path={"/admin/borrow"} />
+                  <ChildItems name={"Donations"} pathname={pathname}
+                              path={"/admin/donation"} />
 
-                </ItemGroup> */}
+                </ItemGroup>
 
-                {/*======    Learning OPERATIONS   ========*/}
-                {/* <ItemGroup name={"Learning Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
+                {/*======    Extra OPERATIONS   ========*/}
+                <ItemGroup name={"Extra Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
                            setSidebarExpanded={setSidebarExpanded}
                            sidebarExpanded={sidebarExpanded}>
-                  <ChildItems name={"Content"} pathname={pathname}
-                              path={"/admin/content"} />
-                  <ChildItems name={"Sections"} pathname={pathname}
-                              path={"/admin/section"} />
-                  <ChildItems name={"Courses"} pathname={pathname}
-                              path={"/admin/course"} />
-                  <ChildItems name={"Packages"} pathname={pathname}
-                              path={"/admin/pkg"} />
-                  <ChildItems name={"Groups"} pathname={pathname}
-                              path={"/admin/group"} />
-                  <ChildItems name={"Trainings"} pathname={pathname}
-                              path={"/admin/training"} />
+                  <ChildItems name={"Notifications"} pathname={pathname}
+                              path={"/admin/notification"} />
+                  <ChildItems name={"Feedback"} pathname={pathname}
+                              path={"/admin/feedback"} />
 
                 </ItemGroup> 
-                 */}
+                
                  
-                {/*======    Learning OPERATIONS   ========*/}
-                {/* <ItemGroup name={"Assessment Operations"} path={"admin"} pathname={pathname} Svg={FormSvg}
-                           setSidebarExpanded={setSidebarExpanded}
-                           sidebarExpanded={sidebarExpanded}>
-                  <ChildItems name={"Questions"} pathname={pathname}
-                              path={"/admin/choiceQuestions"} />
-                  <ChildItems name={"Quiz"} pathname={pathname}
-                              path={"/admin/quiz"} />
-                  <ChildItems name={"Test"} pathname={pathname}
-                              path={"/admin/test"} />
-                  <ChildItems name={"Exam"} pathname={pathname}
-                              path={"/admin/exam"} />
-                  <ChildItems name={"Flag"} pathname={pathname}
-                              path={"/admin/flag"} />
-                  <ChildItems name={"CtfRoom"} pathname={pathname}
-                              path={"/admin/ctfRoom"} />
-                  <ChildItems name={"Ctf"} pathname={pathname}
-                              path={"/admin/ctf"} />
-                  <ChildItems name={"WorkShop"} pathname={pathname}
-                              path={"/admin/workShop"} />
+                {/*======    Extra OPERATIONS   ========*/}
 
-                </ItemGroup> */}
 
 
                 {/*<ItemWithSvg SVG={CalendarSvg} name={"Calendar"} path={"calendar"} pathname={pathname} />*/}

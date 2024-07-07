@@ -1,15 +1,17 @@
 import { AlertModal } from "@/app/admin/_components/ui/AlertModal";
 import { GenericButton } from "@/app/admin/_components/ui/genericButton";
-import React, { ReactNode } from "react";
+import { Tag } from "antd";
 import {
-  Plus,
+  FileCode2,
+  FileImage,
   FileSpreadsheet,
   FileText,
   FileType,
-  FileImage,
-  FileCode2,
+  Plus,
 } from "lucide-react";
-import { Tag } from "antd";
+import React, { ReactNode } from "react";
+
+import { Avatar } from "antd";
 
 type FileExtension = "pdf" | "jpg" | "png" | "doc" | "docx" | "csv" | "js";
 type FileIconComponent = React.ReactNode | React.JSX.Element;
@@ -25,7 +27,7 @@ const fileIconMap: FileIconMap = {
   // Add more mappings as needed
 };
 
-//for content column
+//for genre column
 export const FileList = ({ files }: { files: any }) => {
   return (
     <div className="flex flex-col space-y-2">
@@ -37,7 +39,6 @@ export const FileList = ({ files }: { files: any }) => {
           .toLowerCase();
         // Get the icon based on the extension
         const Icon = fileIconMap[extension] || <FileType />; // Default icon if not found
-
         return (
           <div key={index} className="flex items-center space-x-2">
             {Icon}
@@ -54,6 +55,11 @@ export const FileList = ({ files }: { files: any }) => {
       })}
     </div>
   );
+};
+
+//for genre column
+export const Fileicon = ({ files }: { files: any }) => {
+  return <Avatar src={files?.url} />;
 };
 
 export const MultiItem = ({ list }: { list: any }) => {
@@ -116,6 +122,10 @@ export const MultiSubContent = ({ list, first }) => {
     </>
   );
 };
+
+/**
+--------------------------   Action Columns
+ */
 
 export function CellUi({
   onEditClick,

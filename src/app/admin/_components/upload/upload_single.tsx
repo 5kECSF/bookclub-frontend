@@ -1,0 +1,265 @@
+import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
+import { Modal, UploadFile, UploadProps, message, Button } from "antd";
+import Upload, { RcFile } from "antd/es/upload";
+import {
+  beforeImageUpload,
+  beforeUpload,
+  doesObjectExist,
+  getBase64,
+} from "@/app/admin/_components/upload/image_util";
+import Image from "next/image";
+import { useMutate } from "@/lib/hooks/useMutation";
+import { MTD, AppHeaders, getImg } from "@/lib/constants";
+import { toast } from "react-toastify";
+import { logTrace } from "@/lib/logger";
+
+import { IUpload } from "./upload";
+import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
+import { RotateCcw } from "lucide-react";
+export const MultiFileUpload = forwardRef(function UploadComp(
+  {
+    isLoading,
+    isUpdate,
+    maxFileNo,
+    imgOnly,
+    oldData,
+    fileId,
+  }: {
+    isLoading: boolean;
+    imgOnly: boolean;
+    oldData: any;
+    isUpdate: boolean;
+    maxFileNo: number;
+    fileId?: string;
+  },
+  ref,
+) {
+  /**
+   * ==========================     Images List  ======
+   * =============================================================
+   */
+  const [imgList, setImgList] = useState<UploadFile[]>([]);
+  //remove image from the existing images
+  const onOldRemove = (file: UploadFile) => {
+    if (
+      file?.url &&
+      file.name &&
+      !doesObjectExist(file?.name as string, removedImages)
+    ) {
+      // add it ot the removed images list
+      setRemovedImages([...removedImages, file]);
+      //remove it from the old images list
+      const filteredList = imgList.filter(
+        (oldImg) => oldImg.name !== file.name,
+      );
+      setImgList(filteredList);
+    }
+    console.log("rmvd--", removedImages);
+  };
+
+  const onNewFileChange: UploadProps["onChange"] = (info) => {
+    let newFileList = [...info.fileList];
+    // if (oldImgList.length >= maxFileNo) {
+    //   toast.warning("Maximum file Has Reached");
+    //   return;
+    // }
+    newFileList = newFileList.map((file) => {
+      if (file.response) {
+        // Component will show file.url as link
+        file.url = file.response.url;
+      }
+      return file;
+    });
+    setImgList(newFileList);
+    // setAddedFileList(newFileList);
+  };
+
+  /**
+   * ==========================     Removed Images   ======
+   * =============================================================
+   */
+
+  const [removedImages, setRemovedImages] = useState<UploadFile[]>([]);
+
+  // re-add removed image
+  const onReAdd = (file: UploadFile) => {
+    if (imgList.length >= maxFileNo) {
+      toast.warning(
+        "Max files has Reached, remove added image to restore this",
+      );
+      return;
+    }
+    if (
+      file?.url &&
+      file.name &&
+      !doesObjectExist(file?.name as string, imgList)
+    ) {
+      // add it ot the Main Images List
+      setImgList([...imgList, file]);
+      //remove it from the removed Images List
+      const filteredList = removedImages.filter(
+        (oldImg) => oldImg.name !== file.name,
+      );
+      setRemovedImages(filteredList);
+    }
+    console.log("rmvd--", removedImages);
+  };
+
+  useEffect(() => {
+    if (isUpdate && oldData) {
+      if (oldData && oldData.length > 0) {
+        let list: UploadFile[] = [];
+        oldData?.forEach((img: IUpload) => {
+          //@ts-ignore
+          let sImage: UploadFile = {
+            "aria-label": undefined,
+            "aria-labelledby": undefined,
+            name: img?.fileName,
+            response: undefined,
+            uid: "",
+            xhr: undefined,
+            url: getImg(img),
+          };
+          list.push(sImage);
+        });
+        setImgList(list);
+        console.log("the old data i---}", list);
+        setRemovedImages([]);
+      }
+    }
+  }, [isUpdate, oldData]);
+
+  /**==================================================================
+   * ==---------------->    Http Functions
+   * ==========================================================
+   */
+  const mutation = useMutate();
+
+  // for making post requests
+  const uploadImages = async () => {
+    const formData = new FormData();
+    if (!imgList.length) {
+      return message.error("at least one file is required");
+    }
+    imgList.forEach((file) => {
+      if (!("url" in file)) {
+        formData.append("file", file.originFileObj as Blob);
+      }
+    });
+    //this don't matter for single images
+    removedImages.forEach((img) => {
+      formData.append("removedImages", img.name);
+    });
+    let data;
+    if (isUpdate) {
+      data = await operate(`file/${fileId}`, formData, MTD.PATCH);
+    } else {
+      data = await operate("file/single", formData, MTD.POST);
+    }
+    logTrace("data", data);
+    return data;
+  };
+  const operate = async (url: string, data: any, method: MTD) => {
+    try {
+      // @ts-ignore
+      const datas = await mutation.mutateAsync({
+        url,
+        method: method,
+        body: data,
+        headers: AppHeaders.MULTIPART,
+      });
+      return datas;
+    } catch (e: any) {
+      console.log("````````````````````error data", e);
+      toast.error(`Uploading file Error: ${e?.message}`);
+      return null;
+    }
+  };
+
+  useImperativeHandle(ref, () => ({
+    uploadAndReturnFileNames: uploadImages,
+  }));
+
+  /**==================================================================
+   * ==---------------->    states related to PREVIEW
+   * ==========================================================
+   */
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const handleCancel = () => setPreviewOpen(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+
+  const handlePreview = async (file: UploadFile) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj as RcFile);
+    }
+    setPreviewImage(file.url || (file.preview as string));
+    setPreviewOpen(true);
+    setPreviewTitle(
+      file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1),
+    );
+  };
+  // !----------  END OF STATES RELATED TO PREVIEW   ---------!
+  //=============================================================
+
+  return (
+    <div className={"my-8"}>
+      {/*   ================ ||    DISPLAY IMAGES ====================*/}
+      <Upload
+        beforeUpload={imgOnly ? beforeImageUpload : beforeUpload}
+        listType={imgOnly ? "picture-card" : "picture-circle"}
+        fileList={imgList}
+        onPreview={handlePreview}
+        maxCount={maxFileNo}
+        onChange={onNewFileChange}
+        onRemove={onOldRemove}
+      >
+        {/*{addedFileList.length + oldImgList.length < maxFileNo  && (*/}
+        {imgList.length < maxFileNo && (
+          <UploadButton isLoading={isLoading} txt="Add Image" />
+        )}
+      </Upload>
+
+      {/* =======================  this is to display Removed images images*/}
+      {removedImages.length > 0 && (
+        <div className={"mt-6 border-t-4 text-red"}>
+          Warning : These Uploaded files below are about to be deleted
+        </div>
+      )}
+      <Upload
+        beforeUpload={beforeUpload}
+        listType={"picture"}
+        fileList={removedImages}
+        onPreview={handlePreview}
+        onRemove={onReAdd}
+        {...props}
+      ></Upload>
+      {/*====================================   Modal ============================*/}
+
+      <Modal
+        open={previewOpen}
+        title={previewTitle}
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <Image
+          alt={previewTitle}
+          width={500}
+          height={700}
+          style={{ width: "100%" }}
+          src={previewImage}
+        />
+      </Modal>
+    </div>
+  );
+});
+const props: UploadProps = {
+  showUploadList: {
+    showRemoveIcon: true,
+    removeIcon: (
+      <RotateCcw size={20} strokeWidth={1.75}>
+        restore
+      </RotateCcw>
+    ),
+  },
+};
