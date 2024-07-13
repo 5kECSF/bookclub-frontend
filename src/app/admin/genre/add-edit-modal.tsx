@@ -1,21 +1,22 @@
 "use client";
-import { message, Modal } from "antd";
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { KY, MTD } from "@/lib/constants";
-import { useQueryClient } from "@tanstack/react-query";
-import { IGenre, GenreValidator, TGenreDto } from "./model";
-import { useMutate } from "@/lib/hooks/useMutation";
-import { toast } from "react-toastify";
-import { updateLocalData } from "@/lib/functions/updateLocal";
+import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
 import {
   AddEditLayout,
   InputField,
   Submit,
   TextField,
 } from "@/components/forms/inputs";
-import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
+import { KY, MTD } from "@/lib/constants";
+import { updateLocalData } from "@/lib/functions/updateLocal";
+import { useMutate } from "@/lib/hooks/useMutation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { message, Modal } from "antd";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { GenreValidator, IGenre, TGenreDto } from "./model";
+import { IUpload } from "../_components/upload/upload";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -38,6 +39,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   });
 
   const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  const [uploading, setUploading] = useState<boolean>(false);
   // Function to handle field changes
   const handleChange = (fieldName: keyof TGenreDto, value: string) => {
     setModifiedData((prevData) => ({
@@ -57,7 +59,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   ) => {
     try {
       //@ts-ignore
-      const response = await mutation.mutateAsync({
+      const response: IGenre = await mutation.mutateAsync({
         url,
         method: method,
         body: data,
@@ -71,7 +73,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
         response,
         genre?._id as string,
       );
-      toast.success(`successfully ${msgStr} with id ${response?.id}`);
+      toast.success(`successfully ${msgStr} with id ${response?._id}`);
     } catch (e: any) {
       console.log(" `````````` `````````` error data", e);
       toast.error(`Server error: ${e?.message}`);
@@ -80,13 +82,15 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
 
   const onSubmit = async (data: IGenre) => {
     if (uploadRef.current) {
+      setUploading(true);
       //@ts-ignore
-      const fileNames = await uploadRef.current.uploadAndReturnFileNames();
+      const fileNames: IUpload = await uploadRef.current.uploadSingle();
       console.log("=>>>>>>", fileNames); // Logs the array of file names
       if (!fileNames) {
         toast.error("uploading failed");
         return;
       }
+      setUploading(false);
       data.fileId = fileNames._id;
     }
     if (isUpdate && genre && "_id" in genre) {
@@ -140,7 +144,10 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
                 isLoading={mutation.isPending}
                 fileId={genre?.upload?._id}
               />
-              <Submit isLoading={mutation.isPending} update={isUpdate} />
+              <Submit
+                isLoading={mutation.isPending || uploading}
+                update={isUpdate}
+              />
             </div>
           </form>
         </AddEditLayout>

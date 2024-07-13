@@ -6,5 +6,6 @@ export interface IUpload {
     url?: string;
     uid?: string;
     images?: string[];
+    model?: string
   }
   

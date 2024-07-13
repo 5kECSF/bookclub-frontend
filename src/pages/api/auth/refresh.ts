@@ -1,18 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { parse } from "cookie";
-import { BASE_URL, CookieNames } from "@/lib/constants";
 import {
-  getExpiryDate,
   getRemainingTime,
   haveTime,
   isTokenExpired,
   makeDataCooke,
-  makeTokenCooke,
+  makeTokenCooke
 } from "@/lib/common/tokenExpires";
-import axios from "axios";
+import { BASE_URL, CookieNames } from "@/lib/constants";
 import { API } from "@/lib/constants/api-paths";
-
+import { TokenResponse } from "@/types/authTypes";
+import axios, { AxiosResponse } from "axios";
+import { parse } from "cookie";
 
 export default async function (req: any, res: any) {
 
@@ -23,7 +22,7 @@ export default async function (req: any, res: any) {
   try {
     const cookies = parse(req.headers.cookie || "");
     const refreshToken = cookies[CookieNames.RefreshToken];
-    const access_token = cookies[CookieNames.AccessToken];
+    const accessToken = cookies[CookieNames.AccessToken];
     const user = cookies[CookieNames.User];
 
 
@@ -33,12 +32,12 @@ export default async function (req: any, res: any) {
         .json({ message: "No Refresh Token!", status: "NOT_FOUND" });
       return;
     }
-    if (haveTime(access_token, 2)) {
+    if (haveTime(accessToken, 2)) {
       console.log("access token have time");
       res.status(200).json({
         message: "Access Token Is Still Valid!",
-        access_token,
-        user: JSON.parse(user),
+        access_token:accessToken,
+        user_data: JSON.parse(user),
       });
       return;
     }
@@ -51,26 +50,26 @@ export default async function (req: any, res: any) {
         .status(403)
         .json({ message: "Refresh Token expired!", status: "NOT_AUTHORIZED" });
     }
-    const response = await axios.post(`${BASE_URL}/${API.refresh}`, { token: refreshToken })
+    const response: AxiosResponse<TokenResponse> = await axios.post(`${BASE_URL}/${API.refresh}`, { refreshToken: refreshToken })
 
-    const { auth_tokens, user_data } = response?.data?.body;
-    if (!auth_tokens) {
+    const { authToken, userData } = response?.data;
+    if (!authToken) {
       return res
         .status(404)
         .json({ message: "No Refresh Token!", status: "NOT_FOUND" });
     }
 
 
-      const serialisedAccess = makeTokenCooke(CookieNames.AccessToken, auth_tokens?.access_token)
-      const serialisedRefresh = makeTokenCooke(CookieNames.RefreshToken, auth_tokens?.refresh_token)
-      const serialisedUser = makeDataCooke(CookieNames.User, JSON.stringify(user_data), getRemainingTime(auth_tokens?.access_token),)
+      const serialisedAccess = makeTokenCooke(CookieNames.AccessToken, authToken?.accessToken)
+      const serialisedRefresh = makeTokenCooke(CookieNames.RefreshToken, authToken?.refreshToken)
+      const serialisedUser = makeDataCooke(CookieNames.User, JSON.stringify(userData), getRemainingTime(authToken?.accessToken),)
 
       res.setHeader("Set-Cookie", [serialisedAccess, serialisedRefresh, serialisedUser])
 
       res.status(200).json({
         message: "Success!",
-        user_data,
-        access_token: auth_tokens?.access_token,
+        user_data: userData,
+        access_token: authToken?.accessToken,
       })
 
   } catch (e: any) {

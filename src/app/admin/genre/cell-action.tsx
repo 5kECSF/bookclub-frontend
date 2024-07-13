@@ -19,11 +19,11 @@ const CellAction = ({ row }: { row: IGenre }) => {
   const onDelete = async () => {
     try {
       //@ts-ignore
-      const data = await mutation.mutateAsync({
+      const data:IGenre = await mutation.mutateAsync({
         url: `${KY.genre}/${row._id}`,
         method: MTD.DELETE,
       });
-      message.success(`delete ${KY.genre}: ${data?.body?.name} success`);
+      message.success(`delete ${KY.genre}: ${data?.name} success`);
       updateAfterDelete(KY.genre, queryClient, row?._id as string);
       setDeleteOpen(false);
     } catch (e: any) {

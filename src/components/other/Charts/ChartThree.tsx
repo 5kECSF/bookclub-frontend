@@ -14,9 +14,9 @@ const options: ApexOptions = {
     type: "donut",
   },
   colors: ["#3C50E0", "#6577F3", "#8FD0EF", "#0FADCF"],
-  labels: ["Desktop", "Tablet", "Mobile", "Unknown"],
+  labels: ["Desktop", "Tablet", "Mobile", "Unknown", "a"],
   legend: {
-    show: false,
+    show: true,
     position: "bottom",
   },
 
@@ -53,13 +53,13 @@ const options: ApexOptions = {
 
 const ChartThree: React.FC = () => {
   const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56],
+    series: [65, 34, 12, 56, 40],
   });
 
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [65, 34, 12, 56],
+      series: [65, 34, 12, 56, 40],
     }));
   };
   handleReset;

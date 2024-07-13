@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
-import { Select, Spin } from "antd";
+import { Select } from "antd";
+import { ReactNode } from "react";
 import { Controller } from "react-hook-form";
+import { Spinner } from "../spinner";
 
 const CssCls = {
   input:
@@ -244,25 +245,27 @@ export function Submit({
   update: boolean;
 }) {
   return (
-    <div className="mb-5">
-      <input
+    // <div className="mb-5">
+      <button
+        disabled={isLoading}
         type="submit"
-        //@ts-ignore
-        value={
-          isLoading ? (
-            <div>
-              <Spin />
-              {update ? "Updating" : "Creating"}
-            </div>
-          ) : update ? (
-            "Update"
-          ) : (
-            "Create"
-          )
-        }
-        className="w-full cursor-pointer rounded border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90"
-      />
-    </div>
+        // value={
+        //
+        // }
+        className={"mb-5 w-full cursor-pointer rounded border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90 disabled:hover:bg-opacity-100 disabled:bg-whiter dark:disabled:bg-black "}
+      >
+        {isLoading ? (
+          <div>
+            <Spinner />
+            {update ? "Updating" : "Creating"}
+          </div>
+        ) : update ? (
+          "Update"
+        ) : (
+          "Create"
+        )}
+      </button>
+    // </div>
   );
 }
 

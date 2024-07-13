@@ -4,7 +4,6 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react"; // React Grid Logic
 // import "ag-grid-enterprise"
 import { useTheme } from "@/lib/context/ThemeContext"; // Theme
-
 export const TableComponent = ({
   rowData,
   colDefs,
@@ -12,12 +11,16 @@ export const TableComponent = ({
   rowData: any;
   colDefs: any;
 }) => {
-  const { currentTheme } = useTheme();
+  const { currentTheme, colorMode } = useTheme();
+  
   console.log("theme Mode", currentTheme)
+  // useEffect(() => {
+   
+  // }, [currentTheme, colorMode]);
   return (
     <div
       className={
-        currentTheme === "dark" ? "ag-theme-quartz-dark" : "ag-theme-quartz"
+        colorMode === "dark" ? "ag-theme-quartz-dark" : "ag-theme-quartz"
       }
       style={{
         // height: 500,

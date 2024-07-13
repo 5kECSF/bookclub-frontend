@@ -1,25 +1,25 @@
 "use client";
 // AuthContext.tsx
-import React, { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import React, { createContext, useContext, useState } from "react";
 
-import { toast } from "react-toastify";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
-import { set, string } from "zod";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export interface User {
   id: string;
   fName: string;
   lName: string;
-  userName: string;
+  userName?: string;
+  email?: string;
   avatar: string;
   roleId: number;
 }
 interface LoginResponse {
   access_token: string;
-  user_data?: User;
+  user_data: User | null;
 }
 
 interface AuthContextProps {
@@ -38,7 +38,7 @@ export const AuthContext = createContext<AuthContextProps>({
   user: null,
   accessToken: null,
   login: async (): Promise<LoginResponse> => {
-    return { access_token: "" };
+    return { access_token: "", user_data: null };
   },
   logout: () => {},
   refreshToken: async (): Promise<string> => {
@@ -95,13 +95,13 @@ export default function AuthProvider({
   ): Promise<LoginResponse> => {
     setLoading(true);
     try {
-      const response = await axios.post(`/api/auth/login`, {
+      const response: AxiosResponse<LoginResponse> = await axios.post(`/api/auth/login`, {
         info: userName,
         password,
         info_type: "m",
       });
       console.log("login response--", response.data)
-      const { access_token, user_data } = response?.data;
+      const { access_token, user_data } = response.data;
       
       setUser(user_data);
       setAccessToken(access_token);
@@ -119,6 +119,9 @@ export default function AuthProvider({
 
   let refreshPromise: any = null;
 
+  //==================  Refresh the token==============
+  //===========================================
+
   const refreshToken = async (): Promise<string> => {
     if (refreshPromise) {
       console.log("Refresh in progress, waiting for result...");
@@ -128,7 +131,7 @@ export default function AuthProvider({
     try {
       refreshPromise = axios.post(`/api/auth/refresh`);
 
-      const response = await refreshPromise;
+      const response: AxiosResponse<LoginResponse> = await refreshPromise;
       const { access_token, user_data } = response?.data;
 
       setAccessToken(access_token);
@@ -140,7 +143,7 @@ export default function AuthProvider({
       refreshPromise = null;
       // setUser(null)
       // setAccessToken(null);
-      console.error("Failed to refresh token:", error);
+      console.error("**Failed to refresh token:", error);
       throw error;
     }
 
@@ -185,7 +188,7 @@ export default function AuthProvider({
       console.log("Failed TO Refresh");
     }
 
-    console.log("getted access token", accessToken);
+    console.log("fetched token", accessToken);
     return accessToken;
 
   };

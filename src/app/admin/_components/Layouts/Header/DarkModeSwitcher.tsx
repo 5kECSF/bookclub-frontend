@@ -1,7 +1,8 @@
 import useColorMode from "@/lib/hooks/useColorMode";
-
+import { useTheme } from "@/lib/context/ThemeContext"; 
 const DarkModeSwitcher = () => {
-  const [colorMode, setColorMode] = useColorMode();
+  // const [colorMode, setColorMode] = useColorMode();
+  const { colorMode, setColorMode } = useTheme();
 
   return (
     <li>

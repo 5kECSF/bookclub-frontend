@@ -1,21 +1,20 @@
-import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
-import { Modal, UploadFile, UploadProps, message, Button } from "antd";
-import Upload, { RcFile } from "antd/es/upload";
 import {
   beforeImageUpload,
   beforeUpload,
   doesObjectExist,
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
-import Image from "next/image";
+import { AppHeaders, MTD, getImg } from "@/lib/constants";
 import { useMutate } from "@/lib/hooks/useMutation";
-import { MTD, AppHeaders, getImg } from "@/lib/constants";
+import { Modal, UploadFile, UploadProps, message } from "antd";
+import Upload, { RcFile } from "antd/es/upload";
+import Image from "next/image";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
-import { logTrace } from "@/lib/logger";
 
-import { IUpload } from "./upload";
 import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
 import { RotateCcw } from "lucide-react";
+import { IUpload } from "./upload";
 export const MultiFileUpload = forwardRef(function UploadComp(
   {
     isLoading,
@@ -116,7 +115,8 @@ export const MultiFileUpload = forwardRef(function UploadComp(
             "aria-labelledby": undefined,
             name: img?.fileName,
             response: undefined,
-            uid: "",
+            //FIXME this might change on other projects with no ID
+            uid: img._id as string,
             xhr: undefined,
             url: getImg(img),
           };
@@ -150,13 +150,19 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     removedImages.forEach((img) => {
       formData.append("removedImages", img.name);
     });
-    let data;
+    //TODO if the image is not updated, dont call the image upload function
+    if (formData.entries().next().done) {
+      let newData: any = imgList[0];
+      newData._id = newData.uid;
+      if (isUpdate) return imgList[0];
+    }
+    let data: IUpload;
     if (isUpdate) {
       data = await operate(`file/${fileId}`, formData, MTD.PATCH);
     } else {
       data = await operate("file/single", formData, MTD.POST);
     }
-    logTrace("data", data);
+    console.log("data", data);
     return data;
   };
   const operate = async (url: string, data: any, method: MTD) => {
@@ -177,7 +183,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
   };
 
   useImperativeHandle(ref, () => ({
-    uploadAndReturnFileNames: uploadImages,
+    uploadSingle: uploadImages,
   }));
 
   /**==================================================================

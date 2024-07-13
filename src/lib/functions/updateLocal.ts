@@ -14,20 +14,20 @@ interface NewData<T> {
 
 // Define a generic type for entities that have an id property
 interface Identifiable {
-  id: string | number | undefined;
+  _id?: string | number | undefined;
 }
 
 export const updateAfterDelete = <T extends Identifiable>(
   key: KY,
   queryClient: QueryClient,
-  id: T["id"],
+  id: T["_id"],
 ) => {
   queryClient.setQueryData<QueryData<T>>([key], (prevData) => {
     if (!prevData) return { count: 0, body: [] };
 
     return {
       count: prevData.count ? prevData.count - 1 : 0,
-      body: prevData.body?.filter((item) => item.id !== id),
+      body: prevData.body?.filter((item) => item._id !== id),
     };
   });
 };
@@ -37,8 +37,8 @@ export const updateLocalData = <T extends Identifiable>(
   key: KY,
   queryClient: QueryClient,
   reset: () => void,
-  newData: NewData<T>,
-  id?: T["id"],
+  newData: T,
+  id?: T["_id"],
 ) => {
   try {
     console.log("local data", newData);
@@ -51,7 +51,7 @@ export const updateLocalData = <T extends Identifiable>(
         return {
           ...prevData,
           count: count + 1,
-          body: [...data, newData?.body ? newData.body : null],
+          body: [...data, newData],
         };
       });
       reset();
@@ -60,8 +60,8 @@ export const updateLocalData = <T extends Identifiable>(
       if (!currentData) return;
 
       const updatedData = currentData.body.map((item) => {
-        if (item.id === id) {
-          return { ...item, ...newData.body };
+        if (item._id === id) {
+          return { ...item, ...newData };
         }
         return item;
       });

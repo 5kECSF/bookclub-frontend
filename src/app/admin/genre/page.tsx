@@ -16,7 +16,7 @@ const GenrePage = () => {
   );
   const [open, setOpen] = useState(false);
   console.log("data is", data);
-  const displayedData = data?.data || [];
+  const displayedData = data?.body || [];
   // const Table = useReactTable({columns, data: displayedData})
   return (
     <>
@@ -45,7 +45,7 @@ const GenrePage = () => {
         )}
         <AddEditGenre
           isOpen={open}
-          onClose={(e) => setOpen(false)}
+          onClose={(e: any) => setOpen(false)}
           isUpdate={false}
         />
       </div>

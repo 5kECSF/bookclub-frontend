@@ -11,16 +11,16 @@ export const axiosAuth = axios.create({
 });
 
 const useAxiosAuth = () => {
-    const {accessToken, getAccessToken} = useAuth();
-//   const refreshToken = useRefreshToken();
+    const {accessToken, getAccessToken, logout, refreshToken} = useAuth();
+
 
     useEffect(() => {
         const requestIntercept = axiosAuth.interceptors.request.use(
             async (config) => {
                 if (!config.headers["Authorization"]) {
-                    // const token = await getAccessToken();
-                    config.headers["Authorization"] = `Bearer {token}`;
-                    // config.headers["Authorization"] = `${getAccessToken()}`;
+                    const token = await getAccessToken();
+                    config.headers["Authorization"] = `Bearer ${token}`;
+
                 }
                 return config;
             },
@@ -37,11 +37,11 @@ const useAxiosAuth = () => {
                     const token = await getAccessToken();
                     prevRequest.headers["Authorization"] = `Bearer ${token}`;
                     return axiosAuth(prevRequest);
-                    // await refreshToken();
-                    //   signOut();
-                    // prevRequest.headers[
-                    //     "Authorization"
-                    //     ] = `${accessToken}`;
+                    await refreshToken();
+                    logout();
+                    prevRequest.headers[
+                        "Authorization"
+                        ] = `${accessToken}`;
                 }
                 return Promise.reject(error);
             }
@@ -51,7 +51,7 @@ const useAxiosAuth = () => {
             axiosAuth.interceptors.request.eject(requestIntercept);
             axiosAuth.interceptors.response.eject(responseIntercept);
         };
-    }, [accessToken, getAccessToken]);
+    }, [accessToken, getAccessToken, logout, refreshToken]);
 
     return axiosAuth;
 };

@@ -1,5 +1,5 @@
-export const BASE_URL = "https://fivekecsf.onrender.com" //"http://127.0.0.1:8000/api/v1";
-// export const BASE_URL = "http://127.0.0.1:9001";
+// export const BASE_URL = "https://fivekecsf.onrender.com"
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { IUpload } from "@/app/admin/_components/upload/upload";
 export enum CookieNames {
   AccessToken = "access_token",
