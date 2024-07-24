@@ -1,4 +1,4 @@
-import { IUpload } from "@/app/admin/_components/upload/upload";
+import { IUpload } from "@/types/upload";
 import { z } from "zod";
 
 export interface IGenre {

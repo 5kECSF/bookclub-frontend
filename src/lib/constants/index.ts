@@ -1,6 +1,6 @@
 // export const BASE_URL = "https://fivekecsf.onrender.com"
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-import { IUpload } from "@/app/admin/_components/upload/upload";
+import { IUpload } from "@/types/upload";
 export enum CookieNames {
   AccessToken = "access_token",
   RefreshToken = "refresh_token",

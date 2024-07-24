@@ -16,7 +16,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
-import { IUpload } from "../_components/upload/upload";
+import { IUpload } from "@/types/upload";
 
 interface IGenreProps {
   isUpdate: boolean;

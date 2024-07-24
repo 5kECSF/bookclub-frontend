@@ -14,8 +14,13 @@ export const useFetch = (queryKey: string[], url: string, params = "limit=25") =
         return response.data
       } catch (e: any) {
         console.log("--response.mes", e.message)
-        console.log("--response", e)
-        return []
+        console.log("--response::========", e)
+        if (e?.response?.data?.error){
+          console.log("--response.mes", e?.response?.data?.error)
+          throw new Error(e?.response?.data?.error);
+        }
+        console.log("--=====>", e?.response?.data?.error)
+        throw e
       }
 
     },

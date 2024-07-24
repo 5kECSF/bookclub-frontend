@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 
 import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
 import { RotateCcw } from "lucide-react";
-import { IUpload } from "./upload";
+import { IUpload } from "@/types/upload";
 export const MultiFileUpload = forwardRef(function UploadComp(
   {
     isLoading,

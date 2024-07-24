@@ -1,18 +1,18 @@
-import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
-import { Modal, UploadFile, UploadProps, message, Button } from "antd";
-import Upload, { RcFile } from "antd/es/upload";
 import {
   beforeImageUpload,
   beforeUpload,
   doesObjectExist,
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
-import Image from "next/image";
+import { AppHeaders, MTD, getImgUrl } from "@/lib/constants";
 import { useMutate } from "@/lib/hooks/useMutation";
-import { MTD, AppHeaders, getImgUrl } from "@/lib/constants";
-import { toast } from "react-toastify";
+import { IUpload } from "@/types/upload";
+import { Button, Modal, UploadFile, UploadProps, message } from "antd";
+import Upload, { RcFile } from "antd/es/upload";
 import { Plus } from "lucide-react";
-import { IUpload } from "./upload";
+import Image from "next/image";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { toast } from "react-toastify";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {
@@ -30,12 +30,17 @@ export const FileWithCover = forwardRef(function UploadComp(
   },
   ref,
 ) {
-  /**
+ 
+  const [coverImage, setCoverImage] = useState<UploadFile[]>([]);
+  //secondary images list
+  const [imgList, setImgList] = useState<UploadFile[]>([]);
+  //list of images that are removed
+  const [removedImages, setRemovedImages] = useState<UploadFile[]>([]);
+
+   /**
    * ==========================     Cover Image   ================
    * =============================================================
    */
-  const [coverImage, setCoverImage] = useState<UploadFile[]>([]);
-
   const onCoverImageChange: UploadProps["onChange"] = (info) => {
     let newFileList = [...info.fileList];
     newFileList = newFileList.map((file) => {
@@ -51,7 +56,7 @@ export const FileWithCover = forwardRef(function UploadComp(
   /**
    * ==========================     Images List   ======
    * =============================================================*/
-  const [imgList, setImgList] = useState<UploadFile[]>([]);
+  
   const onNewImagesChange: UploadProps["onChange"] = (info) => {
     let newFileList = [...info.fileList];
     newFileList = newFileList.map((file) => {
@@ -64,7 +69,9 @@ export const FileWithCover = forwardRef(function UploadComp(
     });
     setImgList(newFileList);
   };
-
+  
+  /*** ============     Remove Images from images list  ======
+   * =============================================================*/
   const onRemove = (file: UploadFile) => {
     if (
       file?.url &&
@@ -82,9 +89,9 @@ export const FileWithCover = forwardRef(function UploadComp(
     console.log("rmvd--", removedImages);
   };
 
-  /*** ==========================     Removed Images   ======
+  /*** ============     Re Add Removed Images   ======
    * =============================================================*/
-  const [removedImages, setRemovedImages] = useState<UploadFile[]>([]);
+  
   const onReAdd = (file: UploadFile) => {
     if (imgList.length >= maxFileNo) {
       toast.warning("you must first remove the added image");
@@ -163,6 +170,11 @@ export const FileWithCover = forwardRef(function UploadComp(
       return { body: [] };
     }
   };
+  const resetData=()=>{
+    setImgList([])
+    setCoverImage([])
+    setRemovedImages([]);
+  }
   // for making post requests
   const uploadImages = async () => {
     console.log("---- uploading images");
@@ -196,6 +208,7 @@ export const FileWithCover = forwardRef(function UploadComp(
   };
   useImperativeHandle(ref, () => ({
     uploadAndReturnFileNames: uploadImages,
+    resetData
   }));
 
   /**==================================================================

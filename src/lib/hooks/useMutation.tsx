@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
-import useAxiosAuth from "@/lib/hooks/useAxioxsAuth";
 import { MTD } from "@/lib/constants";
+import useAxiosAuth from "@/lib/hooks/useAxioxsAuth";
+import { useMutation } from "@tanstack/react-query";
 // import axios from "axios"
 
 const errorCodes = ["ERR_BAD_REQUEST", "ERR_BAD_RESPONSE"];
@@ -40,10 +40,12 @@ export const useMutate = (
         if (e.code == "ERR_NETWORK") {
           throw new Error(e.message);
         }
-        // console.log("---->>", e)
-        // console.log("emsg---->>", e.message)
+        if (e?.response?.data?.error){
+          throw new Error(e?.response?.data?.error);
+        }
         console.log("---->>", e.response?.data?.error);
-        throw new Error(e?.response?.data?.error);
+        throw e
+       
       }
     },
     onSuccess: onSuccess,

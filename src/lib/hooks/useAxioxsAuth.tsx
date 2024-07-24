@@ -37,6 +37,7 @@ const useAxiosAuth = () => {
                     const token = await getAccessToken();
                     prevRequest.headers["Authorization"] = `Bearer ${token}`;
                     return axiosAuth(prevRequest);
+                    //TODO make this work
                     await refreshToken();
                     logout();
                     prevRequest.headers[
