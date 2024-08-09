@@ -1,7 +1,7 @@
-import { BASE_URL, CookieNames } from "@/lib/constants"
 import { destroyCooke } from "@/lib/common/tokenExpires"
-import axios from "axios"
+import { BASE_URL, CookieNames } from "@/lib/constants"
 import { API } from "@/lib/constants/api-paths"
+import axios from "axios"
 import { parse } from "cookie"
 
 const secret = process.env.SECRET
@@ -33,8 +33,12 @@ export default async function(req: any, res: any) {
     res.status(200).json({
       message: "Success!",
     });
-  } catch (e) {
+  } catch (e:any) {
     console.error("Error occurred during logout:", e)
+    if(e?.response?.data.message ||e?.response?.data?.message!=undefined){
+      res.status(e?.response?.status).json({ message: e.response.data.error, error: e.message });
+      return
+    }
     res.status(500).json({ message: "Internal Server Error" })
   }
 }

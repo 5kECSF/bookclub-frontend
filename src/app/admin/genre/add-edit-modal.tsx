@@ -9,6 +9,7 @@ import {
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
 import { useMutate } from "@/lib/hooks/useMutation";
+import { IUpload } from "@/types/upload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { message, Modal } from "antd";
@@ -16,7 +17,6 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
-import { IUpload } from "@/types/upload";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -75,7 +75,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       );
       toast.success(`successfully ${msgStr} with id ${response?._id}`);
     } catch (e: any) {
-      console.log(" `````````` `````````` error data", e);
+      console.log(" `````````` `````````` error data", e.message);
       toast.error(`Server error: ${e?.message}`);
     }
   };

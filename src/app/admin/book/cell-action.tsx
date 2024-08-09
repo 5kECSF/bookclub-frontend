@@ -1,13 +1,13 @@
 "use client";
-import { message } from "antd";
-import React, { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { KY, MTD } from "@/lib/constants";
-import { IBook } from "./model";
-import { useMutate } from "@/lib/hooks/useMutation";
 import { CellUi } from "@/app/admin/_components/cell-ui";
-import AddEditBook from "./add-edit-modal";
+import { KY, MTD } from "@/lib/constants";
 import { updateAfterDelete } from "@/lib/functions/updateLocal";
+import { useMutate } from "@/lib/hooks/useMutation";
+import { useQueryClient } from "@tanstack/react-query";
+import { message } from "antd";
+import { useState } from "react";
+import AddEditBook from "./add-edit-modal";
+import { IBook } from "./model";
 
 const CellAction = ({ row }: { row: IBook }) => {
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -27,7 +27,7 @@ const CellAction = ({ row }: { row: IBook }) => {
       updateAfterDelete(KY.book, queryClient, row?._id as string);
       setDeleteOpen(false);
     } catch (e: any) {
-      console.log(e);
+      console.log(e.message);
       message.error(`ERROR: ${e?.message}`);
     }
   };

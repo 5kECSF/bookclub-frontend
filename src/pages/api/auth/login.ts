@@ -28,7 +28,11 @@ export default async function(req: any, res: any) {
       access_token: authToken?.accessToken,
     })
   } catch (e: any) {
-    console.log(e)
+    console.error("Error Logging user:", e?.response?.data);
+    if(e?.response?.data.message ||e?.response?.data?.message!=undefined){
+      res.status(e?.response?.status).json({ message: e.response.data.error, error: e.message });
+      return
+    }
     res.status(500).json({
       message: e.message,
 

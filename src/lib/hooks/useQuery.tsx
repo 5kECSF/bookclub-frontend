@@ -15,7 +15,7 @@ export const useFetch = (queryKey: string[], url: string, params = "limit=25") =
       } catch (e: any) {
         console.log("--response.mes", e.message)
         console.log("--response::========", e)
-        if (e?.response?.data?.error){
+        if (e?.response?.data?.error ||e?.response?.data?.error!= undefined){
           console.log("--response.mes", e?.response?.data?.error)
           throw new Error(e?.response?.data?.error);
         }

@@ -87,7 +87,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
       
       toast.success(`successfully ${msgStr} with name ${response?.title}`);
     } catch (e: any) {
-      console.log(" `````````` `````````` error data", e);
+      console.log(" `````````` `````````` error data", e.message);
       toast.error(`Server error: ${e?.message}`);
     }
   };

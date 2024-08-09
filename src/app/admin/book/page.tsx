@@ -12,7 +12,7 @@ import { AddButton } from "@/app/admin/_components/cell-ui";
 const BookPage = () => {
   const { isLoading, data, isError, error } = useFetch([KY.book], `${KY.book}`);
   const [open, setOpen] = useState(false);
-  // console.log("data is", data);
+
   const displayedData = data?.body || [];
   // const Table = useReactTable({columns, data: displayedData})
   return (

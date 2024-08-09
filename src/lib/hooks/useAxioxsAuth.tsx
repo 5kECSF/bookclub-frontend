@@ -38,12 +38,13 @@ const useAxiosAuth = () => {
                     prevRequest.headers["Authorization"] = `Bearer ${token}`;
                     return axiosAuth(prevRequest);
                     //TODO make this work
-                    await refreshToken();
-                    logout();
-                    prevRequest.headers[
-                        "Authorization"
-                        ] = `${accessToken}`;
+                    // await refreshToken();
+                    // 
+                    // prevRequest.headers[
+                    //     "Authorization"
+                    //     ] = `${accessToken}`;
                 }
+                logout();
                 return Promise.reject(error);
             }
         );
