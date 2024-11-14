@@ -3,7 +3,7 @@ import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react"; // React Grid Logic
 // import "ag-grid-enterprise"
-import { useTheme } from "@/lib/context/ThemeContext"; // Theme
+import { useTheme } from "@/lib/state/context/ThemeContext"; // Theme
 export const TableComponent = ({
   rowData,
   colDefs,
@@ -12,10 +12,10 @@ export const TableComponent = ({
   colDefs: any;
 }) => {
   const { currentTheme, colorMode } = useTheme();
-  
-  console.log("theme Mode", currentTheme)
+
+  console.log("theme Mode", currentTheme);
   // useEffect(() => {
-   
+
   // }, [currentTheme, colorMode]);
   return (
     <div

@@ -6,7 +6,8 @@ import React, { createContext, useContext, useState } from "react";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 
 export interface User {
   id: string;
@@ -71,38 +72,23 @@ export default function AuthProvider({
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // Check if we're in the browser
-  //   if (typeof window !== "undefined") {
-  //     // Fetch user and access token from localStorage if available
-  //     const storedUser = localStorage.getItem("user");
-  //     const storedToken = localStorage.getItem("accessToken");
-
-  //     if (storedUser) {
-  //       setUser(JSON.parse(storedUser));
-  //     }
-  //     if (storedToken) {
-  //       setAccessToken(storedToken);
-  //     }
-
-  //     setLoading(false); // Set loading to false once initial data is fetched
-  //   }
-  // }, [setUser]);
-
   const login = async (
     userName: string,
     password: string,
   ): Promise<LoginResponse> => {
     setLoading(true);
     try {
-      const response: AxiosResponse<LoginResponse> = await axios.post(`/api/auth/login`, {
-        info: userName,
-        password,
-        info_type: "m",
-      });
-      console.log("login response--", response.data)
+      const response: AxiosResponse<LoginResponse> = await axios.post(
+        `/api/auth/login`,
+        {
+          info: userName,
+          password,
+          info_type: "m",
+        },
+      );
+      console.log("login response--", response.data);
       const { access_token, user_data } = response.data;
-      
+
       setUser(user_data);
       setAccessToken(access_token);
       setLoading(false);
@@ -110,9 +96,10 @@ export default function AuthProvider({
 
       return response.data;
     } catch (e: any) {
+      const resp = HandleAxiosErr(e);
       console.log("err", e.message);
       setLoading(false);
-      toast.error(`login failed ${e.message}`);
+      toast.error(`login failed ${resp.Message}`);
       throw e;
     }
   };
@@ -146,29 +133,20 @@ export default function AuthProvider({
       console.error("**Failed to refresh token:", error);
       throw error;
     }
-
-    // try {
-    //   const response = await axios.post(`/api/auth/refresh`)
-    //   const { access_token, user_data } = response?.data
-    //   console.log("refresh data------", response.data)
-    //   if (user_data) {
-    //     setUser(response?.data?.user_data)
-    //   }
-    //   setAccessToken(access_token)
-    //   return access_token
-    // } catch (error) {
-    //   console.error("Failed to refresh token:", error)
-    //   throw(error)
-    // }
   };
 
   const logout = async () => {
-    const response = await axios.post(`/api/auth/logout`);
-    console.log("logout data---", response?.data);
+    try {
+      const response = await axios.post(`/api/auth/logout`);
 
-    setUser(null);
-    setAccessToken(null);
-    router.push("/signin");
+      setUser(null);
+      setAccessToken(null);
+      console.log("logout response");
+      router.push("/signin");
+    } catch (err: any) {
+      console.log("logout Error", err.message);
+      router.push("/signin");
+    }
   };
 
   const getAccessToken = async () => {
@@ -190,12 +168,11 @@ export default function AuthProvider({
 
     console.log("fetched token", accessToken);
     return accessToken;
-
   };
 
   const getUser = async () => {
     if (!accessToken || isTokenExpired(accessToken)) {
-       await refreshToken();
+      await refreshToken();
     }
     return user;
   };

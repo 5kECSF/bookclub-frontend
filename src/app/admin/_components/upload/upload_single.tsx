@@ -5,7 +5,7 @@ import {
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
 import { AppHeaders, MTD, getImg } from "@/lib/constants";
-import { useMutate } from "@/lib/hooks/useMutation";
+import { useMutate } from "@/lib/state/hooks/useMutation";
 import { Modal, UploadFile, UploadProps, message } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import Image from "next/image";

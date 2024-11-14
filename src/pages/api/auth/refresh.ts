@@ -5,7 +5,7 @@ import {
   haveTime,
   isTokenExpired,
   makeDataCooke,
-  makeTokenCooke
+  makeTokenCooke,
 } from "@/lib/common/tokenExpires";
 import { BASE_URL, CookieNames } from "@/lib/constants";
 import { API } from "@/lib/constants/api-paths";
@@ -13,8 +13,9 @@ import { TokenResponse } from "@/types/authTypes";
 import axios, { AxiosResponse } from "axios";
 import { parse } from "cookie";
 
-export default async function (req: any, res: any) {
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 
+export default async function (req: any, res: any) {
   if (req.method != "POST") {
     res.status(405).json({ error: "Method Not Allowed" });
   }
@@ -24,7 +25,6 @@ export default async function (req: any, res: any) {
     const refreshToken = cookies[CookieNames.RefreshToken];
     const accessToken = cookies[CookieNames.AccessToken];
     const user = cookies[CookieNames.User];
-
 
     if (!refreshToken) {
       res
@@ -36,7 +36,7 @@ export default async function (req: any, res: any) {
       console.log("access token have time");
       res.status(200).json({
         message: "Access Token Is Still Valid!",
-        access_token:accessToken,
+        access_token: accessToken,
         user_data: JSON.parse(user),
       });
       return;
@@ -50,7 +50,10 @@ export default async function (req: any, res: any) {
         .status(403)
         .json({ message: "Refresh Token expired!", status: "NOT_AUTHORIZED" });
     }
-    const response: AxiosResponse<TokenResponse> = await axios.post(`${BASE_URL}/${API.refresh}`, { refreshToken: refreshToken })
+    const response: AxiosResponse<TokenResponse> = await axios.post(
+      `${BASE_URL}/${API.refresh}`,
+      { refreshToken: refreshToken },
+    );
 
     const { authToken, userData } = response?.data;
     if (!authToken) {
@@ -59,25 +62,34 @@ export default async function (req: any, res: any) {
         .json({ message: "No Refresh Token!", status: "NOT_FOUND" });
     }
 
+    const serialisedAccess = makeTokenCooke(
+      CookieNames.AccessToken,
+      authToken?.accessToken,
+    );
+    const serialisedRefresh = makeTokenCooke(
+      CookieNames.RefreshToken,
+      authToken?.refreshToken,
+    );
+    const serialisedUser = makeDataCooke(
+      CookieNames.User,
+      JSON.stringify(userData),
+      getRemainingTime(authToken?.accessToken),
+    );
 
-      const serialisedAccess = makeTokenCooke(CookieNames.AccessToken, authToken?.accessToken)
-      const serialisedRefresh = makeTokenCooke(CookieNames.RefreshToken, authToken?.refreshToken)
-      const serialisedUser = makeDataCooke(CookieNames.User, JSON.stringify(userData), getRemainingTime(authToken?.accessToken),)
+    res.setHeader("Set-Cookie", [
+      serialisedAccess,
+      serialisedRefresh,
+      serialisedUser,
+    ]);
 
-      res.setHeader("Set-Cookie", [serialisedAccess, serialisedRefresh, serialisedUser])
-
-      res.status(200).json({
-        message: "Success!",
-        user_data: userData,
-        access_token: authToken?.accessToken,
-      })
-
+    res.status(200).json({
+      message: "Success!",
+      user_data: userData,
+      access_token: authToken?.accessToken,
+    });
   } catch (e: any) {
-    console.error("Error refreshing token:", e?.response?.data);
-    if(e?.response?.data.message ||e?.response?.data?.message!=undefined){
-      res.status(e?.response?.status).json({ message: e.response.data.error, error: e.message });
-      return
-    }
-    res.status(500).json({ message: e.response.data.error, error: e.message });
+    console.error("--| API:..refresh:", e.message);
+    const msg = HandleAxiosErr(e);
+    res.status(msg.Status).json({ message: msg.Message, error: e.message });
   }
 }

@@ -6,7 +6,7 @@ import {
   SubmitInput,
   UserNameInput,
 } from "@/app/(auth)/_components/inputs";
-import { useAuth } from "@/lib/context/auth.context";
+import { useAuth } from "@/lib/state/context/auth.context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -22,15 +22,14 @@ const SignIn: React.FC = () => {
     reset,
   } = useForm<TLoginSchema>({ resolver: zodResolver(LoginValidator) });
 
-  const refresh = async (e:any) => {
+  const refresh = async (e: any) => {
     e.preventDefault();
-    try{
+    try {
       const data = await refreshToken();
-    console.log("the refreshed data ===", data);
-    }catch(e:any){
-      console.log("err-=",e.message)
+      console.log("the refreshed data ===", data);
+    } catch (e: any) {
+      console.log("err-=", e.message);
     }
-    
   };
 
   const onSubmit = async (input: TLoginSchema) => {

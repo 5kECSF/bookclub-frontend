@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { KY, MTD } from "@/lib/constants";
 import { IGenre } from "./model";
-import { useMutate } from "@/lib/hooks/useMutation";
+import { useMutate } from "@/lib/state/hooks/useMutation";
 import { CellUi } from "@/app/admin/_components/cell-ui";
 import AddEditGenre from "./add-edit-modal";
 import { updateAfterDelete } from "@/lib/functions/updateLocal";
@@ -19,7 +19,7 @@ const CellAction = ({ row }: { row: IGenre }) => {
   const onDelete = async () => {
     try {
       //@ts-ignore
-      const data:IGenre = await mutation.mutateAsync({
+      const data: IGenre = await mutation.mutateAsync({
         url: `${KY.genre}/${row._id}`,
         method: MTD.DELETE,
       });

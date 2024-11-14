@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "@/css/style.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { BASE_URL, MTD } from "@/lib/constants";
 import { API } from "@/lib/constants/api-paths";
 import {
+  EmailInput,
   GoToLink,
   NameInput,
   Password,
@@ -16,8 +17,11 @@ import {
 } from "@/app/(auth)/_components/inputs";
 import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import axios from "axios";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { useRouter } from "next/navigation";
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -25,16 +29,21 @@ const SignUp: React.FC = () => {
     reset,
   } = useForm<TSignupSchema>({ resolver: zodResolver(SignupValidator) });
 
+  const [verify, setVerify] = useState<boolean>(false);
+
   const onSubmit = async (data: TSignupSchema) => {
     try {
+      //Todo set signup email
       const datas = await axios.post(`${BASE_URL}/${API.register}`, data); // mutation.mutateAsync({ url: API.register, body: data, method: MTD.POST })
       console.log("registration data==", datas);
       toast.success("Successfully Registered");
       reset();
+
+      router.push(`/signup/${data.email}`);
       console.log("data====||", datas);
     } catch (e: any) {
-      toast.error(e.message);
-      console.log(e);
+      const resp = HandleAxiosErr(e);
+      toast.error(resp.Message);
     }
   };
 
@@ -63,10 +72,10 @@ const SignUp: React.FC = () => {
               </div>
             </div>
           </div>
-          <UserNameInput
-            register={register("userName")}
-            error={errors.userName}
-            placeholder={"User Name"}
+          <EmailInput
+            register={register("email")}
+            error={errors.email}
+            placeholder={"email"}
           />
           <Password
             register={register("password")}

@@ -1,10 +1,10 @@
-import { User } from "@/lib/context/auth.context";
+import { User } from "@/lib/state/context/auth.context";
 
 export interface AuthToken {
-    accessToken: string;
-    refreshToken: string;
-    sessionId?: string;
-    expiresIn?: number;
+  accessToken: string;
+  refreshToken: string;
+  sessionId?: string;
+  expiresIn?: number;
 }
 export interface TokenResponse {
   authToken: AuthToken;

@@ -5,7 +5,7 @@ import {
 } from "@/app/(auth)/_components/svgs";
 import React from "react";
 import Link from "next/link";
-import { LucideUser } from "lucide-react";
+import { LucideMail, LucideUser } from "lucide-react";
 
 export function GoogleSignin() {
   return (
@@ -35,29 +35,51 @@ export function GoToLink({ path, text1, text2 }: GoToLinkProps) {
     </div>
   );
 }
+export function EmailInputs({ register, error, placeholder }: any) {
+  return (
+    <div className="mb-4">
+      <label className="mb-2.5 block font-medium text-black dark:text-white">
+        Email
+      </label>
+      <div className="relative">
+        <input
+          {...register}
+          type="email"
+          placeholder={placeholder}
+          required
+          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+        />
 
-// export function EmailInput({ register, error }) {
-//   return (
-//     <div className="mb-4">
-//       <label className="mb-2.5 block font-medium text-black dark:text-white">
-//         Email
-//       </label>
-//       <div className="relative">
-//         <input
-//           {...register}
-//           type="email"
-//           placeholder="Enter your email"
-//           className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-//         />
+        <span className="absolute right-4 top-4">
+          <LucideMail className="text-current" />
+        </span>
+        {error && <p className="text-red">{error.message}</p>}
+      </div>
+    </div>
+  );
+}
+export function EmailInput({ register, error }: any) {
+  return (
+    <div className="mb-4">
+      <label className="mb-2.5 block font-medium text-black dark:text-white">
+        Email
+      </label>
+      <div className="relative">
+        <input
+          {...register}
+          type="email"
+          placeholder="Enter your email"
+          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+        />
 
-//         <span className="absolute right-4 top-4">
-//           <EmailSvg />
-//         </span>
-//         {error && <p className="text-red">{error.message}</p>}
-//       </div>
-//     </div>
-//   );
-// }
+        <span className="absolute right-4 top-4">
+          <EmailSvg />
+        </span>
+        {error && <p className="text-red">{error.message}</p>}
+      </div>
+    </div>
+  );
+}
 
 export function Password({ register, error, placeHolder, label }: any) {
   return (
@@ -99,11 +121,11 @@ export function NameInput({ register, error, placeholder }: any) {
   );
 }
 
-export function UserNameInput({ register, error, placeholder }: any) {
+export function UserNameInput({ register, error, placeholder, lable }: any) {
   return (
     <div className="mb-4">
       <label className="mb-2.5 block font-medium text-black dark:text-white">
-        User Name
+        {lable}
       </label>
       <div className="relative">
         <input

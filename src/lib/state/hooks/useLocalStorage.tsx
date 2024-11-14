@@ -5,7 +5,7 @@ type SetValue<T> = T | ((val: T) => T);
 
 function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: SetValue<T>) => void] {
   // State to store our value
   // Pass  initial state function to useState so logic is only executed once
@@ -18,9 +18,9 @@ function useLocalStorage<T>(
         // Parse stored json or if none return initialValue
         return item ? JSON.parse(item) : initialValue;
       }
-    } catch (error) {
+    } catch (error: any) {
       // If error also return initialValue
-      console.log(error);
+      console.log(error.message);
       return initialValue;
     }
   });
@@ -38,9 +38,9 @@ function useLocalStorage<T>(
         // browser code
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
-    } catch (error) {
+    } catch (error: any) {
       // A more advanced implementation would handle the error case
-      console.log(error);
+      console.log(error.message);
     }
   }, [key, storedValue]);
 

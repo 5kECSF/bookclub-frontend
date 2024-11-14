@@ -2,7 +2,7 @@
 import { CellUi } from "@/app/admin/_components/cell-ui";
 import { KY, MTD } from "@/lib/constants";
 import { updateAfterDelete } from "@/lib/functions/updateLocal";
-import { useMutate } from "@/lib/hooks/useMutation";
+import { useMutate } from "@/lib/state/hooks/useMutation";
 import { useQueryClient } from "@tanstack/react-query";
 import { message } from "antd";
 import { useState } from "react";

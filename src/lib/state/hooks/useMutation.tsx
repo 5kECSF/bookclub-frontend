@@ -1,5 +1,5 @@
 import { MTD } from "@/lib/constants";
-import useAxiosAuth from "@/lib/hooks/useAxioxsAuth";
+import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useMutation } from "@tanstack/react-query";
 // import axios from "axios"
 
@@ -40,12 +40,11 @@ export const useMutate = (
         if (e.code == "ERR_NETWORK") {
           throw new Error(e.message);
         }
-        if (e?.response?.data?.error){
+        if (e?.response?.data?.error) {
           throw new Error(e?.response?.data?.error);
         }
         console.log("---->>", e.response?.data?.error);
-        throw e
-       
+        throw e;
       }
     },
     onSuccess: onSuccess,

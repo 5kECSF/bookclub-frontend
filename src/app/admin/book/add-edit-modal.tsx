@@ -10,8 +10,8 @@ import {
 } from "@/components/forms/inputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
-import { useMutate } from "@/lib/hooks/useMutation";
-import { useFetch } from "@/lib/hooks/useQuery";
+import { useMutate } from "@/lib/state/hooks/useMutation";
+import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { message, Modal } from "antd";
@@ -84,7 +84,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         response,
         book?._id as string,
       );
-      
+
       toast.success(`successfully ${msgStr} with name ${response?.title}`);
     } catch (e: any) {
       console.log(" `````````` `````````` error data", e.message);
@@ -104,7 +104,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         return;
       }
       data.fileId = uploadDto._id;
-      modifiedData.fileId= uploadDto._id
+      modifiedData.fileId = uploadDto._id;
     }
     if (isUpdate && book && "_id" in book) {
       if (Object.keys(modifiedData).length === 0) {
@@ -114,13 +114,12 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
       }
       await operate(`${KY.book}/${book._id}`, data, MTD.PATCH, "update");
       setLoading(false);
-      
     } else if (!isUpdate) {
       await operate(`${KY.book}`, data, MTD.POST, "create");
       setLoading(false);
       if (uploadRef.current) {
         //@ts-ignore
-        uploadRef.current.resetData()
+        uploadRef.current.resetData();
       }
     }
   };

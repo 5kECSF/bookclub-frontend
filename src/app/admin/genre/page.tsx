@@ -3,7 +3,7 @@ import { AddButton } from "@/app/admin/_components/cell-ui";
 import { TableComponent } from "@/components/AgGrid";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { KY } from "@/lib/constants";
-import { useFetch } from "@/lib/hooks/useQuery";
+import { useFetch } from "@/lib/state/hooks/useQuery";
 import { Loader } from "lucide-react";
 import { useState } from "react";
 import AddEditGenre from "./add-edit-modal";

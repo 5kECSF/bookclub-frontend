@@ -5,7 +5,7 @@ import {
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
 import { AppHeaders, MTD, getImgUrl } from "@/lib/constants";
-import { useMutate } from "@/lib/hooks/useMutation";
+import { useMutate } from "@/lib/state/hooks/useMutation";
 import { IUpload } from "@/types/upload";
 import { Button, Modal, UploadFile, UploadProps, message } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
@@ -30,14 +30,13 @@ export const FileWithCover = forwardRef(function UploadComp(
   },
   ref,
 ) {
- 
   const [coverImage, setCoverImage] = useState<UploadFile[]>([]);
   //secondary images list
   const [imgList, setImgList] = useState<UploadFile[]>([]);
   //list of images that are removed
   const [removedImages, setRemovedImages] = useState<UploadFile[]>([]);
 
-   /**
+  /**
    * ==========================     Cover Image   ================
    * =============================================================
    */
@@ -56,7 +55,7 @@ export const FileWithCover = forwardRef(function UploadComp(
   /**
    * ==========================     Images List   ======
    * =============================================================*/
-  
+
   const onNewImagesChange: UploadProps["onChange"] = (info) => {
     let newFileList = [...info.fileList];
     newFileList = newFileList.map((file) => {
@@ -69,7 +68,7 @@ export const FileWithCover = forwardRef(function UploadComp(
     });
     setImgList(newFileList);
   };
-  
+
   /*** ============     Remove Images from images list  ======
    * =============================================================*/
   const onRemove = (file: UploadFile) => {
@@ -91,7 +90,7 @@ export const FileWithCover = forwardRef(function UploadComp(
 
   /*** ============     Re Add Removed Images   ======
    * =============================================================*/
-  
+
   const onReAdd = (file: UploadFile) => {
     if (imgList.length >= maxFileNo) {
       toast.warning("you must first remove the added image");
@@ -170,11 +169,11 @@ export const FileWithCover = forwardRef(function UploadComp(
       return { body: [] };
     }
   };
-  const resetData=()=>{
-    setImgList([])
-    setCoverImage([])
+  const resetData = () => {
+    setImgList([]);
+    setCoverImage([]);
     setRemovedImages([]);
-  }
+  };
   // for making post requests
   const uploadImages = async () => {
     console.log("---- uploading images");
@@ -208,7 +207,7 @@ export const FileWithCover = forwardRef(function UploadComp(
   };
   useImperativeHandle(ref, () => ({
     uploadAndReturnFileNames: uploadImages,
-    resetData
+    resetData,
   }));
 
   /**==================================================================

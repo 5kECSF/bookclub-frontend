@@ -1,6 +1,6 @@
 "use client";
 import { KY } from "@/lib/constants";
-import { useFetch } from "@/lib/hooks/useQuery";
+import { useFetch } from "@/lib/state/hooks/useQuery";
 import { Loader } from "lucide-react";
 import React, { useState } from "react";
 import { agColumns } from "./column-def";
@@ -31,7 +31,7 @@ const BookPage = () => {
         ) : isError ? (
           <div>
             {" "}
-            Fetching Error: 
+            Fetching Error:
             {error?.message}
           </div>
         ) : (
