@@ -5,15 +5,20 @@ interface Msg {
 
 export function HandleAxiosErr(e: any): Msg {
   if (e.response) {
-    console.error("--| Response Error:", e.message, e.response.data.message);
-    let msg: string = "";
+    console.error("--||| Response Error:", e.response.data);
+    let msg: string;
     if (typeof e.response.data.message === "string") {
       msg = e.response.data.message;
+    } else if (typeof e.response.data === "string") {
+      msg = e.response.data;
     } else if (
       Array.isArray(e.response.data.message) &&
       e.response.data.message.length > 0
     ) {
       msg = e.response.data.message[0];
+    } else if (e.response.data.message === undefined) {
+      console.error("--||| Undefined msg:", e.response.data);
+      msg = JSON.stringify(e.response.data);
     } else {
       msg = JSON.stringify(e.response.data.message);
     }

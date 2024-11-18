@@ -17,7 +17,26 @@ export interface User {
   email?: string;
   avatar: string;
   roleId: number;
+  role: string;
 }
+const EmptyValue: AuthContextProps = {
+  user: null,
+  accessToken: null,
+  login: async (): Promise<LoginResponse> => {
+    return { access_token: "", user_data: null };
+  },
+  logout: () => {},
+  refreshToken: async (): Promise<string> => {
+    return "";
+  },
+  isTokenExpired: () => false,
+  getAccessToken: async (): Promise<string> => "",
+  getUser: async (): Promise<User | null> => {
+    return null;
+  },
+  loading: false,
+};
+
 interface LoginResponse {
   access_token: string;
   user_data: User | null;
@@ -35,23 +54,7 @@ interface AuthContextProps {
   loading: boolean;
 }
 
-export const AuthContext = createContext<AuthContextProps>({
-  user: null,
-  accessToken: null,
-  login: async (): Promise<LoginResponse> => {
-    return { access_token: "", user_data: null };
-  },
-  logout: () => {},
-  refreshToken: async (): Promise<string> => {
-    return "";
-  },
-  isTokenExpired: () => false,
-  getAccessToken: async (): Promise<string> => "",
-  getUser: async (): Promise<User | null> => {
-    return null;
-  },
-  loading: false,
-});
+export const AuthContext = createContext<AuthContextProps>(EmptyValue);
 
 //this is the hook
 export function useAuth() {
@@ -97,7 +100,6 @@ export default function AuthProvider({
       return response.data;
     } catch (e: any) {
       const resp = HandleAxiosErr(e);
-      console.log("err", e.message);
       setLoading(false);
       toast.error(`login failed ${resp.Message}`);
       throw e;

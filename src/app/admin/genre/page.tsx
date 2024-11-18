@@ -8,6 +8,7 @@ import { Loader } from "lucide-react";
 import { useState } from "react";
 import AddEditGenre from "./add-edit-modal";
 import { agColumns } from "./column-def";
+import withAuthorization from "@/lib/functions/withAuthorization";
 
 const GenrePage = () => {
   const { isLoading, data, isError, error } = useFetch(
@@ -17,7 +18,6 @@ const GenrePage = () => {
   const [open, setOpen] = useState(false);
   console.log("data is", data);
   const displayedData = data?.body || [];
-  // const Table = useReactTable({columns, data: displayedData})
   return (
     <>
       <Breadcrumb pageName="Genre" />
@@ -53,4 +53,5 @@ const GenrePage = () => {
   );
 };
 
-export default GenrePage;
+// export default GenrePage;
+export default withAuthorization(GenrePage, ["ADMIN"]);

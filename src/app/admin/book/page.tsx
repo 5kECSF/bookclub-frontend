@@ -8,6 +8,7 @@ import AddEditBook from "./add-edit-modal";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TableComponent } from "@/components/AgGrid";
 import { AddButton } from "@/app/admin/_components/cell-ui";
+import withAuthorization from "@/lib/functions/withAuthorization";
 
 const BookPage = () => {
   const { isLoading, data, isError, error } = useFetch([KY.book], `${KY.book}`);
@@ -50,4 +51,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage;
+export default withAuthorization(BookPage, ["USER"]);

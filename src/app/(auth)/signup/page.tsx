@@ -19,6 +19,7 @@ import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import axios from "axios";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { useRouter } from "next/navigation";
+import { ReturnErrors } from "@/lib/functions/object";
 
 const SignUp: React.FC = () => {
   const router = useRouter();
@@ -30,19 +31,23 @@ const SignUp: React.FC = () => {
   } = useForm<TSignupSchema>({ resolver: zodResolver(SignupValidator) });
 
   const [verify, setVerify] = useState<boolean>(false);
+  const navigateWithQuery = () => {
+    router.push("", {});
+  };
 
   const onSubmit = async (data: TSignupSchema) => {
     try {
       //Todo set signup email
       const datas = await axios.post(`${BASE_URL}/${API.register}`, data); // mutation.mutateAsync({ url: API.register, body: data, method: MTD.POST })
       console.log("registration data==", datas);
-      toast.success("Successfully Registered");
+      // toast.success("Successfully Registered");
       reset();
 
       router.push(`/signup/${data.email}`);
       console.log("data====||", datas);
     } catch (e: any) {
       const resp = HandleAxiosErr(e);
+      console.log("---", resp);
       toast.error(resp.Message);
     }
   };
@@ -90,7 +95,7 @@ const SignUp: React.FC = () => {
             label={"Re-type Password"}
           />
           <SubmitInput title={"Create account"} />
-
+          {ReturnErrors(errors)}
           <GoToLink
             path={"/signin"}
             text1={"Already have an account?"}
