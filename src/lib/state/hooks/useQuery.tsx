@@ -1,5 +1,7 @@
 import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { logTrace } from "@/lib/logger";
 const buildQuery = (params: Record<string, any>) => {
   const queryParams = new URLSearchParams();
 
@@ -18,12 +20,11 @@ export const useFetch = (
   queryKey: string[],
   url: string,
   params = {},
-  refetchInterval: number = 10000,
+  refetchInterval: number = 100000,
 ) => {
-  //Todo Make a build query function
   const axiosAuth = useAxiosAuth();
   const defaultParams = {
-    limit: 25,
+    limit: 10,
     ord: "updated_at",
     dir: "desc",
     ...params,
@@ -34,28 +35,17 @@ export const useFetch = (
       try {
         const queryString = buildQuery(defaultParams);
         const response = await axiosAuth.get(`${url}?${queryString}`);
-        console.log("rssp", response);
+        console.log("||useQuery.get", response.data);
         return response.data;
       } catch (e: any) {
-        console.log("--response.mes", e.message);
-        if (e?.response) {
-          //Server Responded with an error
-          console.log(
-            "--SERVER RESPONDED WITH ERROR",
-            e.response.status,
-            e.response?.data?.error,
-          );
-          throw new Error(e?.response?.data?.error);
-        } else if (e.request) {
-          //Request made but no response(network issues, timeout)
-          console.log("--response.mes", e.request);
-        } else {
-          console.error("Request setup error:", e.message);
-        }
+        let Err = HandleAxiosErr(e);
+        logTrace("||useQueryErr.err", Err);
+
         // throw e;
         return [];
       }
     },
     refetchInterval,
+    placeholderData: keepPreviousData,
   });
 };

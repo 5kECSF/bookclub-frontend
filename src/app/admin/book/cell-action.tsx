@@ -1,5 +1,5 @@
 "use client";
-import { CellUi } from "@/app/admin/_components/cell-ui";
+import { CellUi } from "@/app/admin/_components/ui/cell-ui";
 import { KY, MTD } from "@/lib/constants";
 import { updateAfterDelete } from "@/lib/functions/updateLocal";
 import { useMutate } from "@/lib/state/hooks/useMutation";

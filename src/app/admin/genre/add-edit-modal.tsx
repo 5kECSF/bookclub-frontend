@@ -17,6 +17,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -75,8 +76,9 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       );
       toast.success(`successfully ${msgStr} with id ${response?._id}`);
     } catch (e: any) {
+      let resp = HandleAxiosErr(e);
       console.log(" `````````` `````````` error data", e.message);
-      toast.error(`Server error: ${e?.message}`);
+      toast.error(`Server error: ${resp.Message}`);
     }
   };
 
@@ -85,9 +87,9 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       setUploading(true);
       //@ts-ignore
       const fileNames: IUpload = await uploadRef.current.uploadSingle();
-      console.log("=>>>>>>", fileNames); // Logs the array of file names
+      console.log("=>>>>>>UPLOAD RESULTS", fileNames); // Logs the array of file names
       if (!fileNames) {
-        toast.error("uploading failed");
+        setUploading(false);
         return;
       }
       setUploading(false);

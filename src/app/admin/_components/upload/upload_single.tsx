@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
 import { RotateCcw } from "lucide-react";
 import { IUpload } from "@/types/upload";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 export const MultiFileUpload = forwardRef(function UploadComp(
   {
     isLoading,
@@ -123,7 +124,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
           list.push(sImage);
         });
         setImgList(list);
-        console.log("the old data i---}", list);
+        // console.log("the old data i---}", list);
         setRemovedImages([]);
       }
     }
@@ -162,7 +163,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     } else {
       data = await operate("file/single", formData, MTD.POST);
     }
-    console.log("data", data);
+    console.log("UPDLOAD-data", data);
     return data;
   };
   const operate = async (url: string, data: any, method: MTD) => {
@@ -176,8 +177,9 @@ export const MultiFileUpload = forwardRef(function UploadComp(
       });
       return datas;
     } catch (e: any) {
+      let resp = HandleAxiosErr(e);
       console.log("````````````````````error data", e);
-      toast.error(`Uploading file Error: ${e?.message}`);
+      toast.error(`Uploading file Error: ${resp.Message}`);
       return null;
     }
   };

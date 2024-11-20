@@ -7,7 +7,7 @@ import { agColumns } from "./column-def";
 import AddEditBook from "./add-edit-modal";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TableComponent } from "@/components/AgGrid";
-import { AddButton } from "@/app/admin/_components/cell-ui";
+import { AddButton } from "@/app/admin/_components/ui/cell-ui";
 import withAuthorization from "@/lib/functions/withAuthorization";
 
 const BookPage = () => {

@@ -40,9 +40,11 @@ const useAxiosAuth = () => {
           // prevRequest.headers[
           //     "Authorization"
           //     ] = `${accessToken}`;
+        } else if (error?.response?.status === 401 && prevRequest?.sent) {
+          console.log("logging out-------------");
+          logout();
         }
-        console.log("logging out-------------");
-        logout();
+
         return Promise.reject(error);
       },
     );

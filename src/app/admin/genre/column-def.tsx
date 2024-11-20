@@ -1,11 +1,11 @@
 "use client";
 
-import CellAction from "./cell-action";
-import { FileList, MultiItem, Fileicon } from "@/app/admin/_components/cell-ui";
 import { IGenre } from "./model";
 import { Avatar } from "antd";
-import React from "react";
-import { getImg } from "@/lib/constants";
+import React, { useState } from "react";
+import { getImg, KY, MTD } from "@/lib/constants";
+import { CellUiFull } from "@/app/admin/_components/ui/cell-ui";
+import AddEditGenre from "@/app/admin/genre/add-edit-modal";
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
@@ -32,10 +32,29 @@ export const agColumns = [
   // 4 - Function - A function that returns a JSX element for display
   {
     cellRenderer: (params: { data: IGenre }) => (
-      <CellAction row={params.data} />
+      <MiniAction row={params.data} />
     ),
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
   },
 ];
+
+const MiniAction = ({ row }: { row: IGenre }) => {
+  const [editOpen, setEditOpen] = useState(false);
+  return (
+    <CellUiFull
+      name={row.name}
+      id={row._id}
+      url={KY.genre}
+      onEditClick={() => setEditOpen(true)}
+    >
+      <AddEditGenre
+        genre={row}
+        isOpen={editOpen}
+        onClose={() => setEditOpen(false)}
+        isUpdate={true}
+      />
+    </CellUiFull>
+  );
+};

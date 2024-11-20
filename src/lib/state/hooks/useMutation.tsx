@@ -1,6 +1,8 @@
 import { MTD } from "@/lib/constants";
 import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useMutation } from "@tanstack/react-query";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { logTrace } from "@/lib/logger";
 // import axios from "axios"
 
 const errorCodes = ["ERR_BAD_REQUEST", "ERR_BAD_RESPONSE"];
@@ -37,13 +39,8 @@ export const useMutate = (
         });
         return response?.data;
       } catch (e: any) {
-        if (e.code == "ERR_NETWORK") {
-          throw new Error(e.message);
-        }
-        if (e?.response?.data?.error) {
-          throw new Error(e?.response?.data?.error);
-        }
-        console.log("---->>", e.response?.data?.error);
+        let Err = HandleAxiosErr(e);
+        console.log("||----useMutation.err", Err);
         throw e;
       }
     },
