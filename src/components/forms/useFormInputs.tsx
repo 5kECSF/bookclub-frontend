@@ -3,30 +3,31 @@ import { ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import { Spinner } from "../spinner";
 
-const CssCls = {
+export const CssCls = {
   input:
     "w-full rounded border-[1.5px] disabled:cursor-default disabled:bg-whiter font-medium border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:text-white dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary",
   select:
     "relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:text-white dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary",
 };
-interface InputProps {
+export interface InputProps {
+  register?: any;
+  errors?: any;
+  //non use Form
   label: string;
   name: string;
-  register: any;
   changeFunc: any;
   placeholder: string;
-  errors: any;
   req?: boolean;
   inputType?: string;
   row?: number;
 }
-interface SelectInput extends Omit<InputProps, "register"> {
+export interface SelectInput extends Omit<InputProps, "register"> {
+  control: any;
+  register?: any;
   idx?: string;
   dispIdx?: string;
-  register?: any;
   data: any;
   multi?: boolean;
-  control: any;
 }
 export const InputField = ({
   label,
@@ -170,6 +171,7 @@ export const MultiSelectWithName = ({
     </div>
   );
 };
+
 export const MultiSelectWithSlug = ({
   data,
   label,
@@ -246,30 +248,32 @@ export function Submit({
 }) {
   return (
     // <div className="mb-5">
-      <button
-        disabled={isLoading}
-        type="submit"
-        // value={
-        //
-        // }
-        className={"mb-5 w-full cursor-pointer rounded border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90 disabled:hover:bg-opacity-100 disabled:bg-whiter dark:disabled:bg-black "}
-      >
-        {isLoading ? (
-          <div>
-            <Spinner />
-            {update ? "Updating" : "Creating"}
-          </div>
-        ) : update ? (
-          "Update"
-        ) : (
-          "Create"
-        )}
-      </button>
+    <button
+      disabled={isLoading}
+      type="submit"
+      // value={
+      //
+      // }
+      className={
+        "mb-5 w-full cursor-pointer rounded border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90 disabled:bg-whiter disabled:hover:bg-opacity-100 dark:disabled:bg-black "
+      }
+    >
+      {isLoading ? (
+        <div>
+          <Spinner />
+          {update ? "Updating" : "Creating"}
+        </div>
+      ) : update ? (
+        "Update"
+      ) : (
+        "Create"
+      )}
+    </button>
     // </div>
   );
 }
 
-function FormSvg1() {
+export function FormSvg1() {
   return (
     <svg
       className="fill-current"

@@ -7,7 +7,7 @@ import {
   SelectInput,
   Submit,
   TextField,
-} from "@/components/forms/inputs";
+} from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
 import { useMutate } from "@/lib/state/hooks/useMutation";

@@ -12,6 +12,11 @@ export interface IBook {
   genres?: string[];
   upload?: IUpload;
 }
+/*
+Books can be filtered via:
+- language(select), category(select), genres(multi-select), author(select),
+- queries: (instance count<gt,eq>), page<gt,eq>
+* */
 
 export const BookValidator = z.object({
   title: z.string().min(2, { message: "min length is 2" }),

@@ -5,7 +5,7 @@ import {
   InputField,
   Submit,
   TextField,
-} from "@/components/forms/inputs";
+} from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
 import { useMutate } from "@/lib/state/hooks/useMutation";
@@ -39,8 +39,8 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     defaultValues: isUpdate ? { ...genre } : {},
   });
 
-  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
   const [uploading, setUploading] = useState<boolean>(false);
+  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
   // Function to handle field changes
   const handleChange = (fieldName: keyof TGenreDto, value: string) => {
     setModifiedData((prevData) => ({

@@ -3,17 +3,22 @@ import { TableComponent } from "@/components/AgGrid";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { KY } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { Loader } from "lucide-react";
 import { useState } from "react";
 import AddEditGenre from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { Pagination } from "@/app/admin/_components/ui/pagination";
-import { Drawer, TopButtons } from "@/app/admin/_components/ui/Drawer";
+import {
+  FilterDrawer,
+  TopButtons,
+} from "@/app/admin/_components/ui/FilterDrawer";
+import { InputField, SelectInput } from "@/components/forms/cleanInputs";
+import { TGenreDto } from "@/app/admin/genre/model";
+import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
 
 const GenrePage = () => {
   const [query, setQuery] = useState({ page: 1, limit: 10 });
-  const [isOpen, setIsOpen] = useState(true);
+  const [filterOpen, setFilterOpen] = useState(true);
   const setPage = (page: number) => {
     setQuery({ ...query, page });
   };
@@ -22,23 +27,18 @@ const GenrePage = () => {
     `${KY.genre}`,
     query,
   );
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const displayedData = data?.body || [];
   return (
     <>
       <Breadcrumb pageName="Genre" />
       <div className="bg-blue h-full">
-        <TopButtons openModal={setOpen} openDrawer={setIsOpen} />
+        <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
 
         {isLoading ? (
-          <div className="flex min-h-[80vh] items-center justify-center">
-            <Loader className="animate-spin" />
-          </div>
+          <Spinner />
         ) : isError ? (
-          <div>
-            Fetching Error:
-            {error?.message}
-          </div>
+          <FetchError message={error?.message} />
         ) : (
           <div className="pt-8">
             <TableComponent colDefs={agColumns} rowData={displayedData} />
@@ -52,13 +52,15 @@ const GenrePage = () => {
         )}
 
         <AddEditGenre
-          isOpen={open}
-          onClose={(e: any) => setOpen(false)}
+          isOpen={modalOpen}
+          onClose={(e: any) => setModalOpen(false)}
           isUpdate={false}
         />
-        <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-          <div></div>
-        </Drawer>
+        <Filters
+          setQuery={setQuery}
+          filterOpen={filterOpen}
+          setFilterOpen={(e: any) => setFilterOpen(false)}
+        />
       </div>
     </>
   );
@@ -66,3 +68,45 @@ const GenrePage = () => {
 
 // export default GenrePage;
 export default withAuthorization(GenrePage, ["USER"]);
+interface Ifilter {
+  filterOpen: boolean;
+  setFilterOpen: any;
+  setQuery: any;
+}
+const Filters = ({ filterOpen, setFilterOpen, setQuery }: Ifilter) => {
+  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  // Function to handle field changes
+  const handleChange = (fieldName: string, value: any) => {
+    setQuery((prevData: any) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+    console.log("modifiedData", modifiedData);
+  };
+  // console.log("modifiedData", modifiedData);
+  return (
+    <div>
+      <FilterDrawer isOpen={filterOpen} setIsOpen={setFilterOpen}>
+        <div>
+          <SelectInput
+            changeFunc={handleChange}
+            data={[{ name: "a" }, { name: "b" }]}
+            name={"name"}
+            idx={"name"}
+            dispIdx={"name"}
+            label={"items"}
+            req={false}
+          />
+          <InputField
+            label={"Book Title"}
+            name={"q"}
+            // errors={errors}
+            // register={register}
+            changeFunc={handleChange}
+            placeholder={"write name"}
+          />
+        </div>
+      </FilterDrawer>
+    </div>
+  );
+};
