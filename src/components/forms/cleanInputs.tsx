@@ -36,6 +36,9 @@ export const SelectInput = ({
             changeFunc(name, e.target.value);
           }}
         >
+          <option value="" disabled={req}>
+            -- empty --
+          </option>
           {data?.length > 0 ? (
             data.map((domain: any) => (
               <option key={domain[idx]} value={domain[idx]}>

@@ -1,0 +1,114 @@
+import { useState } from "react";
+import { TGenreDto } from "@/app/admin/genre/model";
+import { FilterDrawer } from "@/app/admin/_components/ui/FilterDrawer";
+import { InputField, SelectInput } from "@/components/forms/cleanInputs";
+import { Filter } from "lucide-react";
+
+interface IFilter {
+  filterOpen: boolean;
+  setFilterOpen: any;
+  setQuery: any;
+}
+export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
+  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  // Function to handle field changes
+  const handleChange = (fieldName: string, value: any) => {
+    // setQuery((prevData: any) => ({
+    //   ...prevData,
+    //   [fieldName]: value,
+    // }));
+    setQuery((prevData: any) => {
+      // If the value is empty, remove the key from the state
+      if (value === "") {
+        const { [fieldName]: _, ...rest } = prevData; // Remove the field
+        return rest;
+      }
+      // Otherwise, update the field with the new value
+      return {
+        ...prevData,
+        [fieldName]: value,
+      };
+    });
+
+    console.log("modifiedData", modifiedData);
+  };
+  const handleFilter = (fieldName: string, value: any) => {
+    setModifiedData((prevData: any) => {
+      // If the value is empty, remove the key from the state
+      // if (value === "") {
+      //   const { [fieldName]: _, ...rest } = prevData; // Remove the field
+      //   return rest;
+      // }
+      // Otherwise, update the field with the new value
+      return {
+        ...prevData,
+        [fieldName]: value,
+      };
+    });
+    console.log("modifiedData", modifiedData);
+  };
+  // const FinishFilter = () => {
+  //   setQuery((prevData: any) => ({
+  //     ...prevData,
+  //     ...modifiedData,
+  //   }));
+  // };
+  const FinishFilter = () => {
+    setQuery((prevData: any) => {
+      // Clean up modifiedData by filtering out keys with empty string values
+      const cleanedData = Object.entries(modifiedData).reduce(
+        (acc, [key, value]) => {
+          // If value is not an empty string, keep the key-value pair
+          if (value !== "") {
+            acc[key] = value;
+          } else {
+            // If value is empty, remove key from the existing prevData
+            const { [key]: _, ...rest } = prevData; // Destructure to remove the key
+            prevData = rest; // Update prevData by removing the key
+          }
+          return acc;
+        },
+        {},
+      );
+
+      // Now merge cleanedData into prevData (which no longer contains empty string keys)
+      return {
+        ...prevData,
+        ...cleanedData,
+      };
+    });
+  };
+  // console.log("modifiedData", modifiedData);
+  return (
+    <div>
+      <FilterDrawer isOpen={filterOpen} setIsOpen={setFilterOpen}>
+        <div>
+          <InputField
+            label={"Search"}
+            name={"q"}
+            // errors={errors}
+            // register={register}
+            changeFunc={handleChange}
+            placeholder={"write name"}
+          />
+          <SelectInput
+            changeFunc={handleFilter}
+            data={[{ name: "a" }, { name: "b" }]}
+            name={"name"}
+            idx={"name"}
+            dispIdx={"name"}
+            label={"items"}
+            req={false}
+          />
+        </div>
+        <button
+          onClick={FinishFilter}
+          className="mr-10 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          <Filter className="h-5 w-5" />
+          Filter
+        </button>
+      </FilterDrawer>
+    </div>
+  );
+};
