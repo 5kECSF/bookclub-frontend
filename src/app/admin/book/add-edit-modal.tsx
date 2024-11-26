@@ -19,6 +19,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -29,6 +30,8 @@ interface IBookProps {
 
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef();
+  const [uploading, setUploading] = useState<boolean>(false);
+
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -87,8 +90,8 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
 
       toast.success(`successfully ${msgStr} with name ${response?.title}`);
     } catch (e: any) {
-      console.log(" `````````` `````````` error data", e.message);
-      toast.error(`Server error: ${e?.message}`);
+      let resp = HandleAxiosErr(e);
+      toast.error(`${resp.Message}`);
     }
   };
 
@@ -109,7 +112,6 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     if (isUpdate && book && "_id" in book) {
       if (Object.keys(modifiedData).length === 0) {
         message.warning(`No data is modified`);
-        // toast.error(`Nothing modified`);
         return;
       }
       await operate(`${KY.book}/${book._id}`, data, MTD.PATCH, "update");

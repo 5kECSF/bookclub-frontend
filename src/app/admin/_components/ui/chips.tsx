@@ -48,7 +48,7 @@ const QueryChips = ({ query, setQuery }: { query: any; setQuery: any }) => {
                 </div>
               </div>
             );
-          } else {
+          } else if (typeof value === "string" || typeof value === "number") {
             // If the value is not an array, just render the chip
             return (
               <div

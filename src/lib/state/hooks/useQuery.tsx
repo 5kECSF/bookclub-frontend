@@ -39,10 +39,10 @@ export const useFetch = (
         return response.data;
       } catch (e: any) {
         let Err = HandleAxiosErr(e);
-        logTrace("||useQueryErr.err", Err);
+        console.log("||useQueryErr.err", Err);
 
-        // throw e;
-        return [];
+        throw e;
+        // return [];
       }
     },
     refetchInterval,

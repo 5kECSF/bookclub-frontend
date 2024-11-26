@@ -3,6 +3,7 @@ import { TGenreDto } from "@/app/admin/genre/model";
 import { FilterDrawer } from "@/app/admin/_components/ui/FilterDrawer";
 import { InputField, SelectInput } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
+import { TBookDto } from "@/app/admin/book/model";
 
 interface IFilter {
   filterOpen: boolean;
@@ -10,13 +11,9 @@ interface IFilter {
   setQuery: any;
 }
 export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
-  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  const [modifiedData, setModifiedData] = useState<Partial<TBookDto>>({});
   // Function to handle field changes
-  const handleChange = (fieldName: string, value: any) => {
-    // setQuery((prevData: any) => ({
-    //   ...prevData,
-    //   [fieldName]: value,
-    // }));
+  const handleLiveChange = (fieldName: string, value: any) => {
     setQuery((prevData: any) => {
       // If the value is empty, remove the key from the state
       if (value === "") {
@@ -34,12 +31,6 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
   };
   const handleFilter = (fieldName: string, value: any) => {
     setModifiedData((prevData: any) => {
-      // If the value is empty, remove the key from the state
-      // if (value === "") {
-      //   const { [fieldName]: _, ...rest } = prevData; // Remove the field
-      //   return rest;
-      // }
-      // Otherwise, update the field with the new value
       return {
         ...prevData,
         [fieldName]: value,
@@ -47,12 +38,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
     });
     console.log("modifiedData", modifiedData);
   };
-  // const FinishFilter = () => {
-  //   setQuery((prevData: any) => ({
-  //     ...prevData,
-  //     ...modifiedData,
-  //   }));
-  // };
+
   const FinishFilter = () => {
     setQuery((prevData: any) => {
       // Clean up modifiedData by filtering out keys with empty string values
@@ -78,6 +64,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
       };
     });
   };
+
   return (
     <div>
       <FilterDrawer isOpen={filterOpen} setIsOpen={setFilterOpen}>
@@ -87,7 +74,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
             name={"q"}
             // errors={errors}
             // register={register}
-            changeFunc={handleChange}
+            changeFunc={handleLiveChange}
             placeholder={"write name"}
           />
           <SelectInput

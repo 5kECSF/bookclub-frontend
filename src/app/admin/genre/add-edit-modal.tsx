@@ -28,6 +28,8 @@ interface IGenreProps {
 
 const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   const uploadRef = useRef();
+  const [uploading, setUploading] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -39,8 +41,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     defaultValues: isUpdate ? { ...genre } : {},
   });
 
-  const [uploading, setUploading] = useState<boolean>(false);
-  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  const [modifiedData, setModifiedData] = useState<Partial<IGenre>>({});
   // Function to handle field changes
   const handleChange = (fieldName: keyof TGenreDto, value: string) => {
     setModifiedData((prevData) => ({
@@ -77,8 +78,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       toast.success(`successfully ${msgStr} with id ${response?._id}`);
     } catch (e: any) {
       let resp = HandleAxiosErr(e);
-      console.log(" `````````` `````````` error data", e.message);
-      toast.error(`Server error: ${resp.Message}`);
+      toast.error(`${resp.Message}`);
     }
   };
 
@@ -94,16 +94,20 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       }
       setUploading(false);
       data.fileId = fileNames._id;
+      modifiedData.fileId = fileNames._id;
     }
     if (isUpdate && genre && "_id" in genre) {
       if (Object.keys(modifiedData).length === 0) {
         message.warning(`No data is modified`);
-        // toast.error(`Nothing modified`);
         return;
       }
       await operate(`${KY.genre}/${genre._id}`, data, MTD.PATCH, "update");
     } else if (!isUpdate) {
       await operate(`${KY.genre}`, data, MTD.POST, "create");
+      if (uploadRef.current) {
+        //@ts-ignore
+        uploadRef.current.resetData();
+      }
     }
   };
 

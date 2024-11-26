@@ -183,9 +183,13 @@ export const MultiFileUpload = forwardRef(function UploadComp(
       return null;
     }
   };
-
+  const resetData = () => {
+    setImgList([]);
+    setRemovedImages([]);
+  };
   useImperativeHandle(ref, () => ({
     uploadSingle: uploadImages,
+    resetData,
   }));
 
   /**==================================================================

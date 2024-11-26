@@ -3,18 +3,23 @@ import { TableComponent } from "@/components/AgGrid";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { KY } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddEditGenre from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { Pagination } from "@/app/admin/_components/ui/pagination";
 import { TopButtons } from "@/app/admin/_components/ui/FilterDrawer";
 import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
-import { Filters } from "@/app/admin/genre/filters";
+import { Filters } from "./filters";
 import QueryChips from "@/app/admin/_components/ui/chips";
+import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
 const GenrePage = () => {
-  const [query, setQuery] = useState({ page: 1, limit: 10, tags: ["a", "b"] });
+  const [modalOpen, setModalOpen] = useState(false);
+  //======================>  Url Related
+
+  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl);
+  console.log("===+++++++++++quwey222", query);
   const [filterOpen, setFilterOpen] = useState(false);
   const setPage = (page: number) => {
     setQuery({ ...query, page });
@@ -24,8 +29,11 @@ const GenrePage = () => {
     `${KY.genre}`,
     query,
   );
-  const [modalOpen, setModalOpen] = useState(false);
-  const displayedData = data?.body || [];
+
+  useEffect(() => {
+    setUrl(query);
+  }, [query]);
+
   return (
     <>
       <Breadcrumb pageName="Genre" />
@@ -39,11 +47,11 @@ const GenrePage = () => {
           <FetchError message={error?.message} />
         ) : (
           <div className="pt-8">
-            <TableComponent colDefs={agColumns} rowData={displayedData} />
+            <TableComponent colDefs={agColumns} rowData={data?.body || []} />
             <Pagination
               isPlaceholderData={isPlaceholderData}
               page={query.page}
-              hasNext={data.hasNext}
+              hasNext={data?.hasNext || false}
               setPage={setPage}
             />
           </div>
