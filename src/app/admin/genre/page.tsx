@@ -16,11 +16,11 @@ import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
 const GenrePage = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  //======================>  Url Related
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  //======================>  Query related
 
   const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl);
-  console.log("===+++++++++++quwey222", query);
-  const [filterOpen, setFilterOpen] = useState(false);
   const setPage = (page: number) => {
     setQuery({ ...query, page });
   };

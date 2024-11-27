@@ -1,7 +1,6 @@
 import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { logTrace } from "@/lib/logger";
 const buildQuery = (params: Record<string, any>) => {
   const queryParams = new URLSearchParams();
 
@@ -41,7 +40,7 @@ export const useFetch = (
         let Err = HandleAxiosErr(e);
         console.log("||useQueryErr.err", Err);
 
-        throw e;
+        throw new Error(Err.Message);
         // return [];
       }
     },

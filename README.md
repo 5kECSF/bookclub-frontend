@@ -1,14 +1,20 @@
 # Powered by TailAdmin Next.js - Free Next.js Tailwind Admin Dashboard Template
 
-TailAdmin is a free and open-source admin dashboard template built on **Next.js and Tailwind CSS** providing developers with everything they need to create a feature-rich and data-driven: back-end, dashboard, or admin panel solution for any sort of web project.
-
-[![tailwind nextjs admin template](https://github.com/TailAdmin/free-nextjs-admin-dashboard/blob/main/tailadmin-nextjs.jpg)](https://nextjs-demo.tailadmin.com/)
-
-### [🚀 FREE Demo](https://nextjs-free-demo.tailadmin.com/)
-
-### [⬇️ Download Now](https://tailadmin.com/download)
-
-### [🖌️ TailAdmin Figma Free Sample](https://www.figma.com/community/file/1214477970819985778)
+> This is and admin dashboard with basic features
+- authentication via httponly cookies
+  - signup
+  - signin
+  - refresh token
+  - logout()
+- layout with responsive sidebar & dark and white themes
+- crud pages with sing multi image upload
+  - use ag grid table to display data
+  - pagination
+  - reusable filter sidebar
+  - update url when filter query changes
+  - queries displayed as removable chips
+  - Independent single & multi image upload component
+  - Create form with zod validation & auto error rendering
 
 ## Installation
 
@@ -18,20 +24,20 @@ Here are the steps you need to follow to install the dependencies.
 
 2. After that **cd** into the template directory then run this command to install all the dependencies
 
+    ```bash
+    pnpm install
+    ```
+    or
+    
+    ```bash
+    yarn install
+    ```
+3. make a `.env` file and copy the `NEXT_PUBLIC_BASE_URL=http://127.0.0.1:9001` to the actual servers url
+4. Now run this command to start the developement server
+
+
 ```bash
-npm install
-```
-
-or
-
-```bash
-yarn install
-```
-
-3. Now run this command to start the developement server
-
-```bash
-npm run dev
+pnpm dev
 ```
 
 or
@@ -40,28 +46,35 @@ or
 yarn dev
 ```
 
+## Tasks
+
+
+- [x] add page max & min filters
+- [] add html renderer for descriptions with view button
+- [] make the drafts page for creating books
+- [] create a view modal for images
+
+
+
 ## Update Logs
 
-### Version 1.3.1 - [Feb 12, 2024]
+### Version 1.0.1 - [Feb 26, 2024]
 
 #### Issues
-
-- **Issues 02:** Fix Misspelling issue [Default Layout/Layouts].
-
+- **Issues 01:** the error in useQuery page from `logTrace` function & made it throw the error
 #### Enhancements
+- **Enhancement 01:** Make the url to be updated with the query & also to load initial state from url
 
-- **Enhancement 01:** Update style.css
+### Version 1.0 - [Feb 25, 2024]
 
-### Version 1.3.0 - [Feb 05, 2024]
-
+#### Issues
+- **Issues 01:** Fix Axios errors not displayed correctly.
 #### Enhancements
-
-- **Enhancement 01:** Update Next.js into version 14
-- **Enhancement 02:** Integrate flatpickr in [Date Picker/Form Elements]
-- **Enhancement 03:** Change color after select an option [Select Element/Form Elements].
-- **Enhancement 04:** Make it functional [Multiselect Dropdown/Form Elements].
-- **Enhancement 05:** Make best value editable [Pricing Table One/Pricing Table].
-- **Enhancement 06:** Add Default Layout Component and make App/Layout more clean and use it in every pages.
+- **Enhancement 01:** Finished pagination
+- **Enhancement 02:** Finished authentication using http only cookies
+- **Enhancement 03:** Finished Authorization
+- **Enhancement 04:** Finished filtering with filter Sidebar
+- **Enhancement 04:** Add Default Layout Component and make App/Layout more clean and use it in every pages.
 
 ### Version 0.1.0 - Initial Release - [Aug 3, 2023]
 
