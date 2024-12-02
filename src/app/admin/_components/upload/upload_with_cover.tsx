@@ -4,8 +4,8 @@ import {
   doesObjectExist,
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
-import { AppHeaders, MTD, getImgUrl } from "@/lib/constants";
-import { useMutate } from "@/lib/state/hooks/useMutation";
+import { Headers, MTD, getImgUrl } from "@/lib/constants";
+import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { IUpload } from "@/types/upload";
 import { Button, Modal, UploadFile, UploadProps, message } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
@@ -13,6 +13,8 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
+import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {
@@ -150,44 +152,26 @@ export const FileWithCover = forwardRef(function UploadComp(
    * ==---------------->    Http Functions
    * ==========================================================
    */
-  const mutation = useMutate();
+  const makeReq = useMakeReq();
 
-  const operate = async (url: string, data: any, method: MTD) => {
-    try {
-      // @ts-ignore
-      const datas = await mutation.mutateAsync({
-        url,
-        method: method,
-        body: data,
-        headers: AppHeaders.MULTIPART,
-      });
-      console.log("======}}}}}}}}}returned datas", datas);
-      return datas;
-    } catch (e: any) {
-      console.log("````````````````````error data", e);
-      toast.error(`Uploading file Error: ${e?.message}`);
-      return { body: [] };
-    }
-  };
   const resetData = () => {
     setImgList([]);
     setCoverImage([]);
     setRemovedImages([]);
   };
   // for making post requests
-  const uploadImages = async () => {
-    console.log("---- uploading images");
+  const uploadImages = async (name: string): Promise<Resp<any>> => {
+    console.log("---- uploading images||", name);
     const formData = new FormData();
-    if (!coverImage.length) {
-      return message.error("the cover image is required");
-    }
+    if (!coverImage.length) return FAIL("the cover image is required");
+
     //if it is a file(not just Url, files dont have url property)
     coverImage.forEach((file) => {
       if (!("url" in file)) {
         formData.append("cover", file.originFileObj as Blob);
       }
     });
-    //if it is a file(not just Url, files dont have url property)
+    //if it is a file(not just Url, files don't have url property)
     imgList.forEach((file) => {
       if (!("url" in file)) {
         formData.append("images", file.originFileObj as Blob);
@@ -196,17 +180,19 @@ export const FileWithCover = forwardRef(function UploadComp(
     removedImages.forEach((img) => {
       formData.append("removedImages", img.name);
     });
-    let data;
     if (isUpdate) {
-      data = await operate(`file/multi/${oldImg?._id}`, formData, MTD.PATCH);
+      return makeReq(
+        `file/multi/${oldImg?._id}`,
+        formData,
+        MTD.PATCH,
+        Headers.MULTI,
+      );
     } else {
-      data = await operate("file/multi", formData, MTD.POST);
+      return makeReq("file/multi", formData, MTD.POST, Headers.MULTI);
     }
-
-    return data;
   };
   useImperativeHandle(ref, () => ({
-    uploadAndReturnFileNames: uploadImages,
+    uploadFiles: uploadImages,
     resetData,
   }));
 

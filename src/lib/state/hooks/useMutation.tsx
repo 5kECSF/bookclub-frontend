@@ -2,7 +2,7 @@ import { MTD } from "@/lib/constants";
 import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useMutation } from "@tanstack/react-query";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { logTrace } from "@/lib/logger";
+import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 // import axios from "axios"
 
 const errorCodes = ["ERR_BAD_REQUEST", "ERR_BAD_RESPONSE"];
@@ -26,7 +26,6 @@ export const useMutate = (
   onError: () => void = () => {},
 ) => {
   const axiosAuth = useAxiosAuth();
-  //@ts-ignore
   return useMutation({
     mutationFn: async (data: MutationParam) => {
       try {
@@ -47,4 +46,28 @@ export const useMutate = (
     onSuccess: onSuccess,
     onError: onError,
   });
+};
+
+export const useMakeReq = () => {
+  const axiosAuth = useAxiosAuth();
+
+  return async (
+    url: string,
+    body: any,
+    method: MTD,
+    headers?: any,
+  ): Promise<Resp<any>> => {
+    try {
+      const response = await axiosAuth.request({
+        url: `${url}`,
+        method: method,
+        headers: headers ? headers : AppHeaders.JSON,
+        data: body,
+      });
+      return Succeed(response?.data);
+    } catch (e: any) {
+      let Err = HandleAxiosErr(e);
+      return FAIL(Err.Message, Err.Status, e);
+    }
+  };
 };

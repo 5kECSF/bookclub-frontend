@@ -10,16 +10,16 @@ import {
 } from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
-import { useMutate } from "@/lib/state/hooks/useMutation";
+import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { message, Modal } from "antd";
+import { Modal } from "antd";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { Resp } from "@/lib/constants/return.const";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -30,7 +30,18 @@ interface IBookProps {
 
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef();
-  const [uploading, setUploading] = useState<boolean>(false);
+
+  //==========>>  Steps   ==================>
+  // const [step, setStep] = useState<number>(1);
+  // const handleNext = () => {
+  //   setStep((pre) => pre + 1);
+  // };
+  // const handleSecondaryButtonAction = (e?: any) => {
+  //   if (step === 1) return onClose(e);
+  //   return setStep((pre) => pre - 1);
+  // };
+  // const secondaryButton = step === 1 ? "Cancel" : "Back";
+  //==========<<  !Steps   ==================>
 
   const [loading, setLoading] = useState(false);
   const {
@@ -63,67 +74,62 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   };
 
   const queryClient = useQueryClient();
-  const mutation = useMutate();
+  const makeReq = useMakeReq();
 
-  const operate = async (
-    url: string,
-    data: any,
-    method: MTD,
-    msgStr: string,
-  ) => {
-    try {
-      //@ts-ignore
-      const response = await mutation.mutateAsync({
-        url,
-        method: method,
-        body: data,
-      });
-      console.log("the resp-->>", response);
-      updateLocalData(
-        method,
-        KY.book,
-        queryClient,
-        reset,
-        response,
-        book?._id as string,
-      );
-
-      toast.success(`successfully ${msgStr} with name ${response?.title}`);
-    } catch (e: any) {
-      let resp = HandleAxiosErr(e);
-      toast.error(`${resp.Message}`);
-    }
+  const handleErr = (message: string, autoClose: number = 2500) => {
+    toast.error(`${message}`, { autoClose });
+    setLoading(false);
   };
 
   const onSubmit = async (data: IBook) => {
+    if (isUpdate && (!book || !("_id" in book)))
+      return handleErr("malformed update");
+    setLoading(true);
+    let resp: Resp<any>;
+    let id = "";
+    if (!isUpdate) {
+      resp = await makeReq(`${KY.book}`, data, MTD.POST);
+      if (!resp.ok) return handleErr(resp.message);
+      // console.log("resp", resp);
+      id = resp.body._id;
+    }
+    //===============================> Updating the File
     if (uploadRef.current) {
-      setLoading(true);
       //@ts-ignore
-      const uploadDto = await uploadRef.current.uploadAndReturnFileNames();
-      console.log("=>>>>>>UPLOAD DTO=", uploadDto); // Logs the array of file names
-      if (!uploadDto || !uploadDto?._id) {
-        toast.error("uploading failed");
-        setLoading(false);
-        return;
-      }
-      data.fileId = uploadDto._id;
-      modifiedData.fileId = uploadDto._id;
+      const uploadDto: Resp<any> = await uploadRef.current.uploadFiles("holla");
+      if (!uploadDto.ok) return handleErr(`upload Error${uploadDto.message}`);
+      data.fileId = uploadDto.body._id;
+      modifiedData.fileId = uploadDto.body._id;
+    } else {
+      return handleErr("NO uploadRef");
     }
     if (isUpdate && book && "_id" in book) {
-      if (Object.keys(modifiedData).length === 0) {
-        message.warning(`No data is modified`);
-        return;
-      }
-      await operate(`${KY.book}/${book._id}`, data, MTD.PATCH, "update");
-      setLoading(false);
-    } else if (!isUpdate) {
-      await operate(`${KY.book}`, data, MTD.POST, "create");
-      setLoading(false);
+      if (Object.keys(modifiedData).length === 0)
+        return handleErr(`No data is modified`);
+
+      resp = await makeReq(`${KY.book}/${book._id}`, data, MTD.PATCH);
+      if (!resp.ok) return handleErr(resp.message);
+    } else {
+      resp = await makeReq(`${KY.book}/${id}`, data, MTD.POST);
+      if (!resp.ok) return handleErr(resp.message);
       if (uploadRef.current) {
         //@ts-ignore
         uploadRef.current.resetData();
       }
     }
+    updateLocalData(
+      isUpdate ? MTD.PATCH : MTD.POST,
+      KY.book,
+      queryClient,
+      reset,
+      resp.body,
+      book?._id as string,
+    );
+    toast.success(
+      `successfully ${isUpdate ? "updated" : "created"} a book with title  ${resp.body?.title} `,
+    );
+
+    setLoading(false);
   };
 
   return (
@@ -184,12 +190,16 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 maxFileNo={3}
                 ref={uploadRef}
                 isUpdate={isUpdate}
-                isLoading={mutation.isPending}
+                isLoading={loading}
               />
-              <Submit
-                isLoading={mutation.isPending || loading}
-                update={isUpdate}
-              />
+              {/*<GenericButton*/}
+              {/*  type="button"*/}
+              {/*  className=" text-sm"*/}
+              {/*  onClick={() => handleSecondaryButtonAction()}*/}
+              {/*>*/}
+              {/*  {secondaryButton}*/}
+              {/*</GenericButton>*/}
+              <Submit isLoading={loading} update={isUpdate} />
             </div>
           </form>
         </AddEditLayout>

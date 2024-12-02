@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 
 export interface User {
   id: string;
@@ -26,11 +27,13 @@ const EmptyValue: AuthContextProps = {
     return { access_token: "", user_data: null };
   },
   logout: () => {},
-  refreshToken: async (): Promise<string> => {
-    return "";
+  refreshToken: async (): Promise<Resp<string>> => {
+    return { body: "", ok: false };
   },
   isTokenExpired: () => false,
-  getAccessToken: async (): Promise<string> => "",
+  getAccessToken: async (): Promise<Resp<string>> => {
+    return { body: "", ok: false };
+  },
   getUser: async (): Promise<User | null> => {
     return null;
   },
@@ -47,9 +50,9 @@ interface AuthContextProps {
   accessToken: string | null;
   login: (userName: string, password: string) => Promise<LoginResponse>;
   logout: () => void;
-  refreshToken: () => Promise<string>;
+  refreshToken: () => Promise<Resp<string>>;
   isTokenExpired: (token: string | null) => boolean;
-  getAccessToken: () => Promise<string>;
+  getAccessToken: () => Promise<Resp<string>>;
   getUser: () => Promise<User | null>;
   loading: boolean;
 }
@@ -111,7 +114,7 @@ export default function AuthProvider({
   //==================  Refresh the token==============
   //===========================================
 
-  const refreshToken = async (): Promise<string> => {
+  const refreshToken = async (): Promise<Resp<string>> => {
     if (refreshPromise) {
       console.log("Refresh in progress, waiting for result...");
       return refreshPromise;
@@ -127,13 +130,12 @@ export default function AuthProvider({
       setUser(user_data);
 
       refreshPromise = null;
-      return access_token;
+      return Succeed(access_token);
     } catch (error) {
       refreshPromise = null;
-      // setUser(null)
-      // setAccessToken(null);
+      let resp = HandleAxiosErr(error);
       console.error("**Failed to refresh token:", error);
-      throw error;
+      return FAIL(`"**Failed to refresh token:"${resp.Message}`);
     }
   };
 
@@ -151,25 +153,17 @@ export default function AuthProvider({
     }
   };
 
-  const getAccessToken = async () => {
+  const getAccessToken = async (): Promise<Resp<string>> => {
     console.log("get access token called -----");
     if (!accessToken) {
       console.log("no access token----");
-      const accessT = await refreshToken();
-      if (accessT) console.log("access token refreshed-", accessT);
-      else console.log("Failed TO Refresh");
-      return accessT;
+      return await refreshToken();
     }
-
     if (isTokenExpired(accessToken)) {
       console.log("Access token expired, refreshing...");
-      const accessT = await refreshToken();
-      if (accessT) return accessT;
-      console.log("Failed TO Refresh");
+      return await refreshToken();
     }
-
-    console.log("fetched token", accessToken);
-    return accessToken;
+    return Succeed(accessToken);
   };
 
   const getUser = async () => {

@@ -7,8 +7,8 @@ export enum CookieNames {
   User = "user",
 }
 
-export const AppHeaders = {
-  MULTIPART: {
+export const Headers = {
+  MULTI: {
     "Content-Type": "multipart/form-data",
   },
   JSON: {

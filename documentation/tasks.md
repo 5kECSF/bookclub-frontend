@@ -10,3 +10,10 @@
 - [ ] finish multi image upload component and create book
 - [ ] connect the genere crud app
 - [ ] integrate the frontend ui code
+- [] image with draft
+  - Backend
+    - [x] add status to the model & add the filter of status is active
+    - return the body
+    - [] add image name generator with jwt
+  - frontend
+    - refactor the operate function

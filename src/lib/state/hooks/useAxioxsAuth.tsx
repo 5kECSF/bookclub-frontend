@@ -10,14 +10,14 @@ export const axiosAuth = axios.create({
 });
 
 const useAxiosAuth = () => {
-  const { accessToken, getAccessToken, logout, refreshToken } = useAuth();
+  const { accessToken, getAccessToken, logout } = useAuth();
 
   useEffect(() => {
     const requestIntercept = axiosAuth.interceptors.request.use(
       async (config) => {
         if (!config.headers["Authorization"]) {
           const token = await getAccessToken();
-          config.headers["Authorization"] = `Bearer ${token}`;
+          config.headers["Authorization"] = `Bearer ${token.body}`;
         }
         return config;
       },
@@ -32,7 +32,11 @@ const useAxiosAuth = () => {
           console.log("axios error11111111 -----");
           prevRequest.sent = true;
           const token = await getAccessToken();
-          prevRequest.headers["Authorization"] = `Bearer ${token}`;
+          if (!token.ok) {
+            logout();
+            return;
+          }
+          prevRequest.headers["Authorization"] = `Bearer ${token.body}`;
           return axiosAuth(prevRequest);
           //TODO make this work
           // await refreshToken();
@@ -53,7 +57,7 @@ const useAxiosAuth = () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
       axiosAuth.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, getAccessToken, logout, refreshToken]);
+  }, [accessToken, getAccessToken, logout]);
 
   return axiosAuth;
 };

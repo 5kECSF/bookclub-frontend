@@ -5,13 +5,13 @@ import { Loader } from "lucide-react";
 
 const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
   return function AuthorizedPage(props: any) {
+    if (typeof window === "undefined") {
+      return null;
+    }
     const router = useRouter();
     const { user, loading } = useAuth();
-    // useEffect(() => {
-    //   setIsMounted(true);
-    // }, []);
+
     useEffect(() => {
-      // if (!isMounted || loading) return;
       if (!IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
@@ -21,13 +21,9 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     }
 
     if (!IsAuthorized(user, allowedRoles)) {
-      // console.log("userIN auth", user, allowedRoles);
-      // Redirect to the home page if unauthorized
       router.push("/");
       return null; // Render nothing during the redirect
     }
-
-    // Render the wrapped component if authorized
     return <WrappedComponent {...props} />;
   };
 };
