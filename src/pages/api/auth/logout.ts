@@ -14,6 +14,9 @@ export default async function (req: any, res: any) {
     res.status(405).json({ error: "Method Not Allowed" });
     return;
   }
+  const serialisedAccess = destroyCooke(CookieNames.AccessToken);
+  const serialisedRefresh = destroyCooke(CookieNames.RefreshToken);
+  const serialisedUser = destroyCooke(CookieNames.User);
 
   try {
     // Clear cookies by setting them to expire immediately
@@ -25,10 +28,6 @@ export default async function (req: any, res: any) {
     });
 
     console.log("logout response data==", response?.data);
-
-    const serialisedAccess = destroyCooke(CookieNames.AccessToken);
-    const serialisedRefresh = destroyCooke(CookieNames.RefreshToken);
-    const serialisedUser = destroyCooke(CookieNames.User);
 
     res.setHeader("Set-Cookie", [
       serialisedAccess,

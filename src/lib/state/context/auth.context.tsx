@@ -28,11 +28,11 @@ const EmptyValue: AuthContextProps = {
   },
   logout: () => {},
   refreshToken: async (): Promise<Resp<string>> => {
-    return { body: "", ok: false };
+    return { body: "", ok: false, message: "" };
   },
   isTokenExpired: () => false,
   getAccessToken: async (): Promise<Resp<string>> => {
-    return { body: "", ok: false };
+    return { body: "", ok: false, message: "" };
   },
   getUser: async (): Promise<User | null> => {
     return null;
@@ -135,6 +135,7 @@ export default function AuthProvider({
       refreshPromise = null;
       let resp = HandleAxiosErr(error);
       console.error("**Failed to refresh token:", error);
+      await logout();
       return FAIL(`"**Failed to refresh token:"${resp.Message}`);
     }
   };
