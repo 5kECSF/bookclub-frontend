@@ -77,27 +77,31 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const makeReq = useMakeReq();
 
   const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}`, { autoClose });
+    toast.error(`${message}: `, { autoClose });
     setLoading(false);
   };
 
   const onSubmit = async (data: IBook) => {
-    if (isUpdate && (!book || !("_id" in book)))
-      return handleErr("malformed update");
     setLoading(true);
     let resp: Resp<any>;
-    let id = "";
-    if (!isUpdate) {
+    let id: string;
+    if (isUpdate) {
+      if (!book || !("_id" in book)) return handleErr("malformed update");
+      id = book?._id as string;
+      resp = { ok: false, body: book, message: "" };
+    } else {
       resp = await makeReq(`${KY.book}`, data, MTD.POST);
       if (!resp.ok) return handleErr(resp.message);
-      // console.log("resp", resp);
       id = resp.body._id;
     }
     //===============================> Updating the File
     if (uploadRef.current) {
+      console.log("book", book);
       //@ts-ignore
-      const uploadDto: Resp<any> = await uploadRef.current.uploadFiles("holla");
-      if (!uploadDto.ok) return handleErr(`upload Error${uploadDto.message}`);
+      const uploadDto: Resp<any> = await uploadRef.current.uploadFiles(
+        resp.body ? resp.body?.fileId : book?.fileId,
+      );
+      if (!uploadDto.ok) return handleErr(`upload Error: ${uploadDto.message}`);
       data.fileId = uploadDto.body._id;
       modifiedData.fileId = uploadDto.body._id;
     } else {

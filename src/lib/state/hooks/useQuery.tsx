@@ -34,11 +34,11 @@ export const useFetch = (
       try {
         const queryString = buildQuery(defaultParams);
         const response = await axiosAuth.get(`${url}?${queryString}`);
-        console.log("||useQuery.get", response.data);
+        // console.log("||useQuery.get", response.data);
         return response.data;
       } catch (e: any) {
         let Err = HandleAxiosErr(e);
-        console.log("||useQueryErr.err", Err);
+        // console.log("||useQueryErr.err", Err);
 
         throw new Error(Err.Message);
         // return [];

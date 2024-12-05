@@ -87,7 +87,8 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     if (uploadRef.current) {
       //@ts-ignore
       const uploadResp: Resp<any> = await uploadRef.current.uploadSingle();
-      if (!uploadResp.ok) return handleErr(`upload Error${uploadResp.message}`);
+      if (!uploadResp.ok)
+        return handleErr(`upload Error: ${uploadResp.message}`);
 
       data.fileId = uploadResp.body._id;
       modifiedData.fileId = uploadResp.body._id;

@@ -160,8 +160,8 @@ export const FileWithCover = forwardRef(function UploadComp(
     setRemovedImages([]);
   };
   // for making post requests
-  const uploadImages = async (name: string): Promise<Resp<any>> => {
-    console.log("---- uploading images||", name);
+  const uploadImages = async (fileId: string): Promise<Resp<any>> => {
+    console.log("---- uploading images||", fileId);
     const formData = new FormData();
     if (!coverImage.length) return FAIL("the cover image is required");
 
@@ -181,14 +181,15 @@ export const FileWithCover = forwardRef(function UploadComp(
       formData.append("removedImages", img.name);
     });
     if (isUpdate) {
+      console.log("oldImg", oldImg);
       return makeReq(
-        `file/multi/${oldImg?._id}`,
+        `file/multi/${fileId}`,
         formData,
         MTD.PATCH,
         Headers.MULTI,
       );
     } else {
-      return makeReq("file/multi", formData, MTD.POST, Headers.MULTI);
+      return makeReq(`file/multi/${fileId}`, formData, MTD.POST, Headers.MULTI);
     }
   };
   useImperativeHandle(ref, () => ({

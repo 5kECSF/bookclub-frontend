@@ -34,7 +34,7 @@ export function IsAuthorized(
   user: User | null,
   allowedRoles: string[],
 ): boolean {
-  console.log("Current User ====>>", user);
+  // console.log("Current User ====>>", user);
 
   if (user == null) return false;
   if (!allowedRoles) return true;
