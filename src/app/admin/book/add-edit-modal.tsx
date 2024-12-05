@@ -96,14 +96,16 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     }
     //===============================> Updating the File
     if (uploadRef.current) {
-      console.log("book", book);
+      console.log("book", book, resp.body);
       //@ts-ignore
       const uploadDto: Resp<any> = await uploadRef.current.uploadFiles(
         resp.body ? resp.body?.fileId : book?.fileId,
       );
       if (!uploadDto.ok) return handleErr(`upload Error: ${uploadDto.message}`);
+      console.log("the uploadDto====", uploadDto);
       data.fileId = uploadDto.body._id;
       modifiedData.fileId = uploadDto.body._id;
+      // console.log("uploaded succesfully", uploadDto);
     } else {
       return handleErr("NO uploadRef");
     }
@@ -114,7 +116,12 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
       resp = await makeReq(`${KY.book}/${book._id}`, data, MTD.PATCH);
       if (!resp.ok) return handleErr(resp.message);
     } else {
-      resp = await makeReq(`${KY.book}/${id}`, data, MTD.POST);
+      // console.log("the data>>>", data);
+      resp = await makeReq(
+        `${KY.book}/${id}`,
+        { fileId: resp.body.fileId },
+        MTD.POST,
+      );
       if (!resp.ok) return handleErr(resp.message);
       if (uploadRef.current) {
         //@ts-ignore

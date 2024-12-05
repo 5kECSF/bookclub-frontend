@@ -181,15 +181,22 @@ export const FileWithCover = forwardRef(function UploadComp(
       formData.append("removedImages", img.name);
     });
     if (isUpdate) {
-      console.log("oldImg", oldImg);
-      return makeReq(
+      console.log("=====oldImg", oldImg, fileId);
+      return await makeReq(
         `file/multi/${fileId}`,
         formData,
         MTD.PATCH,
         Headers.MULTI,
       );
     } else {
-      return makeReq(`file/multi/${fileId}`, formData, MTD.POST, Headers.MULTI);
+      let res = await makeReq(
+        `file/multi/${fileId}`,
+        formData,
+        MTD.POST,
+        Headers.MULTI,
+      );
+      console.log("the response is", res);
+      return res;
     }
   };
   useImperativeHandle(ref, () => ({
