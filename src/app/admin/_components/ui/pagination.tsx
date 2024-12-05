@@ -14,7 +14,7 @@ export const Pagination = ({
   hasNext,
   setPage,
 }: IPagination) => {
-  console.log("placeHolder", isPlaceholderData, hasNext);
+  // console.log("placeHolder", isPlaceholderData, hasNext);
   return (
     <div className="flex items-center justify-center gap-3 py-4">
       {page > 1 && (

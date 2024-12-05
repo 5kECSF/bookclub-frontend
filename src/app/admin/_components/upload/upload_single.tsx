@@ -4,8 +4,8 @@ import {
   doesObjectExist,
   getBase64,
 } from "@/app/admin/_components/upload/image_util";
-import { AppHeaders, MTD, getImg } from "@/lib/constants";
-import { useMutate } from "@/lib/state/hooks/useMutation";
+import { Headers, MTD, getImg } from "@/lib/constants";
+import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { Modal, UploadFile, UploadProps, message } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import Image from "next/image";
@@ -16,6 +16,7 @@ import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
 import { RotateCcw } from "lucide-react";
 import { IUpload } from "@/types/upload";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 export const MultiFileUpload = forwardRef(function UploadComp(
   {
     isLoading,
@@ -135,13 +136,13 @@ export const MultiFileUpload = forwardRef(function UploadComp(
    * ==========================================================
    */
   const mutation = useMutate();
+  const makeReq = useMakeReq();
 
   // for making post requests
-  const uploadImages = async () => {
+  const uploadImages = async (): Promise<Resp<any>> => {
     const formData = new FormData();
-    if (!imgList.length) {
-      return message.error("at least one file is required");
-    }
+    if (!imgList.length) return FAIL("the cover image is required");
+
     imgList.forEach((file) => {
       if (!("url" in file)) {
         formData.append("file", file.originFileObj as Blob);
@@ -155,16 +156,14 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     if (formData.entries().next().done) {
       let newData: any = imgList[0];
       newData._id = newData.uid;
-      if (isUpdate) return imgList[0];
+      if (isUpdate) return Succeed(imgList[0]);
     }
-    let data: IUpload;
+    // let data: IUpload;
     if (isUpdate) {
-      data = await operate(`file/${fileId}`, formData, MTD.PATCH);
+      return makeReq(`file/${fileId}`, formData, MTD.PATCH, Headers.MULTI);
     } else {
-      data = await operate("file/single", formData, MTD.POST);
+      return makeReq("file/single", formData, MTD.POST, Headers.MULTI);
     }
-    console.log("UPDLOAD-data", data);
-    return data;
   };
   const operate = async (url: string, data: any, method: MTD) => {
     try {
@@ -173,7 +172,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
         url,
         method: method,
         body: data,
-        headers: AppHeaders.MULTIPART,
+        headers: Headers.MULTI,
       });
       return datas;
     } catch (e: any) {

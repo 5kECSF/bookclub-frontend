@@ -13,7 +13,6 @@ export const TableComponent = ({
 }) => {
   const { currentTheme, colorMode } = useTheme();
 
-  console.log("theme Mode", currentTheme);
   // useEffect(() => {
 
   // }, [currentTheme, colorMode]);

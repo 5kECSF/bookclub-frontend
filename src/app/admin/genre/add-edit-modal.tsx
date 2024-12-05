@@ -8,8 +8,7 @@ import {
 } from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
-import { useMutate } from "@/lib/state/hooks/useMutation";
-import { IUpload } from "@/types/upload";
+import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { message, Modal } from "antd";
@@ -18,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { Resp } from "@/lib/constants/return.const";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -28,7 +28,7 @@ interface IGenreProps {
 
 const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   const uploadRef = useRef();
-  const [uploading, setUploading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -52,6 +52,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
 
   const queryClient = useQueryClient();
   const mutation = useMutate();
+  const makeReq = useMakeReq();
 
   const operate = async (
     url: string,
@@ -59,48 +60,42 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     method: MTD,
     msgStr: string,
   ) => {
-    try {
-      //@ts-ignore
-      const response: IGenre = await mutation.mutateAsync({
-        url,
-        method: method,
-        body: data,
-      });
-      console.log("the resp-->>", response);
-      updateLocalData(
-        method,
-        KY.genre,
-        queryClient,
-        reset,
-        response,
-        genre?._id as string,
-      );
-      toast.success(`successfully ${msgStr} with id ${response?._id}`);
-    } catch (e: any) {
-      let resp = HandleAxiosErr(e);
-      toast.error(`${resp.Message}`);
+    const resp = await makeReq(url, data, MTD.POST);
+    if (!resp.ok) {
+      setLoading(false);
+      toast.error(`${resp.message}`);
+      return;
     }
+    updateLocalData(
+      method,
+      KY.genre,
+      queryClient,
+      reset,
+      resp.body,
+      genre?._id as string,
+    );
+    toast.success(`successfully ${msgStr} with name ${resp.body?.name}`);
+    setLoading(false);
+  };
+  const handleErr = (message: string, autoClose: number = 2500) => {
+    toast.error(`${message}`, { autoClose });
+    setLoading(false);
   };
 
   const onSubmit = async (data: IGenre) => {
+    setLoading(true);
     if (uploadRef.current) {
-      setUploading(true);
       //@ts-ignore
-      const fileNames: IUpload = await uploadRef.current.uploadSingle();
-      console.log("=>>>>>>UPLOAD RESULTS", fileNames); // Logs the array of file names
-      if (!fileNames) {
-        setUploading(false);
-        return;
-      }
-      setUploading(false);
-      data.fileId = fileNames._id;
-      modifiedData.fileId = fileNames._id;
+      const uploadResp: Resp<any> = await uploadRef.current.uploadSingle();
+      if (!uploadResp.ok)
+        return handleErr(`upload Error: ${uploadResp.message}`);
+
+      data.fileId = uploadResp.body._id;
+      modifiedData.fileId = uploadResp.body._id;
     }
     if (isUpdate && genre && "_id" in genre) {
-      if (Object.keys(modifiedData).length === 0) {
-        message.warning(`No data is modified`);
-        return;
-      }
+      if (Object.keys(modifiedData).length === 0)
+        handleErr(`No data is modified`);
       await operate(`${KY.genre}/${genre._id}`, data, MTD.PATCH, "update");
     } else if (!isUpdate) {
       await operate(`${KY.genre}`, data, MTD.POST, "create");
@@ -151,7 +146,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
                 fileId={genre?.upload?._id}
               />
               <Submit
-                isLoading={mutation.isPending || uploading}
+                isLoading={mutation.isPending || loading}
                 update={isUpdate}
               />
             </div>

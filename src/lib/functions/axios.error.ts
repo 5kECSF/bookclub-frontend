@@ -4,13 +4,13 @@ interface Msg {
 }
 
 export function HandleAxiosErr(e: any): Msg {
-  console.log(" `````````` `````````` error |||", e.message, e);
+  console.log(" `````````` `````````` error |||", e.message);
 
   if (e.response) {
     console.log(
       "--SERVER RESPONDED WITH ERROR",
       e.response.status,
-      e.response?.data?.message,
+      // e.response?.data?.message,
     );
     let msg: string;
     if (typeof e.response.data.message === "string") {
