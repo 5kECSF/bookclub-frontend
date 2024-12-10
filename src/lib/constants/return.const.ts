@@ -1,3 +1,8 @@
+export enum ReturnType {
+  NotModified = "NotModified",
+  Success = "Success",
+  Error = "Error",
+}
 export interface Resp<T> {
   ok: boolean;
   body: T;
@@ -5,6 +10,7 @@ export interface Resp<T> {
   error?: Error | null;
   errMessage?: string;
   code?: number;
+  respCode?: ReturnType;
 }
 
 export function FAIL(
@@ -21,6 +27,7 @@ export function FAIL(
     message: errMessage,
     errMessage,
     code,
+    respCode: ReturnType.Error,
   };
 }
 
@@ -30,5 +37,16 @@ export function Succeed<T>(val: T, message: string = "success"): Resp<T> {
     body: val,
     message: message,
     error: null,
+    respCode: ReturnType.Error,
+  };
+}
+
+export function NotModified<T>(val: T, message: string = "success"): Resp<T> {
+  return {
+    ok: true,
+    body: val,
+    message: message,
+    error: null,
+    respCode: ReturnType.NotModified,
   };
 }

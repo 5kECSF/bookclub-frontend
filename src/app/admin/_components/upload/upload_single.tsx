@@ -16,7 +16,7 @@ import { UploadButton } from "@/app/admin/_components/upload/upload_with_cover";
 import { RotateCcw } from "lucide-react";
 import { IUpload } from "@/types/upload";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { FAIL, NotModified, Resp, Succeed } from "@/lib/constants/return.const";
 export const MultiFileUpload = forwardRef(function UploadComp(
   {
     isLoading,
@@ -139,7 +139,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
   const makeReq = useMakeReq();
 
   // for making post requests
-  const uploadImages = async (): Promise<Resp<any>> => {
+  const uploadImages = async (id: string): Promise<Resp<any>> => {
     const formData = new FormData();
     if (!imgList.length) return FAIL("the cover image is required");
 
@@ -156,13 +156,13 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     if (formData.entries().next().done) {
       let newData: any = imgList[0];
       newData._id = newData.uid;
-      if (isUpdate) return Succeed(imgList[0]);
+      if (isUpdate) return NotModified(imgList[0]);
     }
     // let data: IUpload;
     if (isUpdate) {
-      return makeReq(`file/${fileId}`, formData, MTD.PATCH, Headers.MULTI);
+      return makeReq(`file/${id}`, formData, MTD.PATCH, Headers.MULTI);
     } else {
-      return makeReq("file/single", formData, MTD.POST, Headers.MULTI);
+      return makeReq(`file/${id}`, formData, MTD.POST, Headers.MULTI);
     }
   };
   const operate = async (url: string, data: any, method: MTD) => {

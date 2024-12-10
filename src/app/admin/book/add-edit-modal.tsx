@@ -19,7 +19,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
-import { Resp } from "@/lib/constants/return.const";
+import { Resp, ReturnType } from "@/lib/constants/return.const";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -30,18 +30,6 @@ interface IBookProps {
 
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef();
-
-  //==========>>  Steps   ==================>
-  // const [step, setStep] = useState<number>(1);
-  // const handleNext = () => {
-  //   setStep((pre) => pre + 1);
-  // };
-  // const handleSecondaryButtonAction = (e?: any) => {
-  //   if (step === 1) return onClose(e);
-  //   return setStep((pre) => pre - 1);
-  // };
-  // const secondaryButton = step === 1 ? "Cancel" : "Back";
-  //==========<<  !Steps   ==================>
 
   const [loading, setLoading] = useState(false);
   const {
@@ -96,32 +84,31 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     }
     //===============================> Updating the File
     if (uploadRef.current) {
-      console.log("book", book, resp.body);
+      // console.log("book", book, resp.body);
       //@ts-ignore
       const uploadDto: Resp<any> = await uploadRef.current.uploadFiles(
         resp.body ? resp.body?.fileId : book?.fileId,
       );
       if (!uploadDto.ok) return handleErr(`upload Error: ${uploadDto.message}`);
-      console.log("the uploadDto====", uploadDto);
-      data.fileId = uploadDto.body._id;
-      modifiedData.fileId = uploadDto.body._id;
-      // console.log("uploaded succesfully", uploadDto);
+      // console.log("the uploadDto====", uploadDto);
+      if (uploadDto.respCode != ReturnType.NotModified) {
+        setModifiedData((prevState) => ({
+          ...prevState,
+          fileId: uploadDto.body._id,
+        }));
+        data.fileId = uploadDto.body._id;
+      }
     } else {
       return handleErr("NO uploadRef");
     }
     if (isUpdate && book && "_id" in book) {
       if (Object.keys(modifiedData).length === 0)
         return handleErr(`No data is modified`);
-
       resp = await makeReq(`${KY.book}/${book._id}`, data, MTD.PATCH);
       if (!resp.ok) return handleErr(resp.message);
     } else {
-      // console.log("the data>>>", data);
-      resp = await makeReq(
-        `${KY.book}/${id}`,
-        { fileId: resp.body.fileId },
-        MTD.POST,
-      );
+      let body = { fileId: resp.body.fileId };
+      resp = await makeReq(`${KY.book}/${id}`, body, MTD.POST);
       if (!resp.ok) return handleErr(resp.message);
       if (uploadRef.current) {
         //@ts-ignore
@@ -139,7 +126,6 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     toast.success(
       `successfully ${isUpdate ? "updated" : "created"} a book with title  ${resp.body?.title} `,
     );
-
     setLoading(false);
   };
 

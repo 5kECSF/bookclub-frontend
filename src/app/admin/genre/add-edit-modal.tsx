@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { Resp } from "@/lib/constants/return.const";
+import { Resp, ReturnType } from "@/lib/constants/return.const";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -77,6 +77,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     toast.success(`successfully ${msgStr} with name ${resp.body?.name}`);
     setLoading(false);
   };
+
   const handleErr = (message: string, autoClose: number = 2500) => {
     toast.error(`${message}`, { autoClose });
     setLoading(false);
@@ -84,26 +85,55 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
 
   const onSubmit = async (data: IGenre) => {
     setLoading(true);
+    let resp: Resp<any>;
+    if (isUpdate) {
+      if (!genre || !("_id" in genre)) return handleErr("malformed update");
+      resp = { ok: false, body: genre, message: "" };
+    } else {
+      resp = await makeReq(`${KY.genre}/draft`, data, MTD.POST);
+      if (!resp.ok) return handleErr(resp.message);
+    }
     if (uploadRef.current) {
       //@ts-ignore
-      const uploadResp: Resp<any> = await uploadRef.current.uploadSingle();
+      const uploadResp: Resp<any> = await uploadRef.current.uploadSingle(
+        resp.body.fileId,
+      );
       if (!uploadResp.ok)
         return handleErr(`upload Error: ${uploadResp.message}`);
-
-      data.fileId = uploadResp.body._id;
-      modifiedData.fileId = uploadResp.body._id;
+      //TODO: do this if it is Update, check if this is correct
+      if (uploadResp.respCode != ReturnType.NotModified) {
+        setModifiedData((prevState) => ({
+          ...prevState,
+          fileId: uploadResp.body._id,
+        }));
+        data.fileId = uploadResp.body._id;
+      }
     }
     if (isUpdate && genre && "_id" in genre) {
       if (Object.keys(modifiedData).length === 0)
         handleErr(`No data is modified`);
-      await operate(`${KY.genre}/${genre._id}`, data, MTD.PATCH, "update");
+      resp = await makeReq(`${KY.genre}/${genre._id}`, data, MTD.PATCH);
+      if (!resp.ok) return handleErr(resp.message);
     } else if (!isUpdate) {
-      await operate(`${KY.genre}`, data, MTD.POST, "create");
+      resp = await makeReq(`${KY.genre}/${resp.body._id}`, data, MTD.POST);
+      if (!resp.ok) return handleErr(resp.message);
       if (uploadRef.current) {
         //@ts-ignore
         uploadRef.current.resetData();
       }
     }
+    updateLocalData(
+      isUpdate ? MTD.PATCH : MTD.POST,
+      KY.book,
+      queryClient,
+      reset,
+      resp.body,
+      genre?._id as string,
+    );
+    toast.success(
+      `successfully ${isUpdate ? "updated" : "created"} a genre with name  ${resp.body?.name} `,
+    );
+    setLoading(false);
   };
 
   return (
