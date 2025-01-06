@@ -2,7 +2,7 @@
 
 import { atom, useAtom, useSetAtom } from "jotai";
 
-import { User, LoginResponse } from "./auth.context";
+import { User, LoginResp } from "./auth.context";
 import axios, { AxiosResponse } from "axios";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
@@ -18,41 +18,10 @@ export const loadingAtom = atom<boolean>(false);
 loadingAtom.debugLabel = "loading";
 let refreshPromise: any = null;
 
-export const refreshTokenAtom = atom(null, async (get, set, _arg) => {
-  const accessToken = get(accessTokenAtom);
-  if (refreshPromise) {
-    console.log("Refresh in progress, waiting for result...");
-    return refreshPromise;
-  }
-  try {
-    set(loadingAtom, true);
-    refreshPromise = axios.post(`/api/auth/refresh`);
-    const response: AxiosResponse<LoginResponse> = await refreshPromise;
-    const { access_token, user_data } = response.data;
-
-    set(accessTokenAtom, access_token);
-    set(userAtom, user_data);
-    refreshPromise = null;
-    set(loadingAtom, false);
-
-    return Succeed(access_token);
-  } catch (error) {
-    console.error("**Failed to refresh token:", error);
-    refreshPromise = null;
-    set(loadingAtom, false);
-    // Clear user and token on failure
-    set(userAtom, null);
-    set(accessTokenAtom, null);
-    let resp = HandleAxiosErr(error);
-    return FAIL(`"**Failed to refresh token:"${resp.Message}`);
-  }
-});
-
 export const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [loading, setLoading] = useAtom(loadingAtom);
-  const refreshTokens = useSetAtom(refreshTokenAtom);
   const router = useRouter();
 
   const refreshToken = async (): Promise<Resp<string>> => {
@@ -64,7 +33,7 @@ export const useAuth = () => {
       setLoading(false);
       refreshPromise = axios.post(`/api/auth/refresh`);
 
-      const response: AxiosResponse<LoginResponse> = await refreshPromise;
+      const response: AxiosResponse<LoginResp> = await refreshPromise;
       const { access_token, user_data } = response?.data;
       setAccessToken(access_token);
       setUser(user_data);
@@ -93,7 +62,7 @@ export const useAuth = () => {
     }
   };
   const getAccessToken = async (): Promise<Resp<string>> => {
-    console.log("get access token called -----");
+    // console.log("get access token called -----");
     if (!accessToken) {
       console.log("no access token----");
       return await refreshToken();
@@ -104,12 +73,10 @@ export const useAuth = () => {
     }
     return Succeed(accessToken);
   };
-  const login = async (
-    credentials: LoginCred,
-  ): Promise<Resp<LoginResponse>> => {
+  const login = async (credentials: LoginCred): Promise<Resp<LoginResp>> => {
     try {
       setLoading(true);
-      const response: AxiosResponse<LoginResponse> = await axios.post(
+      const response: AxiosResponse<LoginResp> = await axios.post(
         `/api/auth/login`,
         { info_type: "m", ...credentials },
       );
@@ -133,7 +100,6 @@ export const useAuth = () => {
     setAccessToken,
     loading,
     refreshToken,
-    refreshTokens,
     logout,
     getAccessToken,
     login,

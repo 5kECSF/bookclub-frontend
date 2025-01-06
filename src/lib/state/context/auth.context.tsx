@@ -23,7 +23,7 @@ export interface User {
 const EmptyValue: AuthContextProps = {
   user: null,
   accessToken: null,
-  login: async (): Promise<LoginResponse> => {
+  login: async (): Promise<LoginResp> => {
     return { access_token: "", user_data: null };
   },
   logout: () => {},
@@ -40,7 +40,7 @@ const EmptyValue: AuthContextProps = {
   loading: false,
 };
 
-export interface LoginResponse {
+export interface LoginResp {
   access_token: string;
   user_data: User | null;
 }
@@ -48,7 +48,7 @@ export interface LoginResponse {
 interface AuthContextProps {
   user: User | null;
   accessToken: string | null;
-  login: (userName: string, password: string) => Promise<LoginResponse>;
+  login: (userName: string, password: string) => Promise<LoginResp>;
   logout: () => void;
   refreshToken: () => Promise<Resp<string>>;
   isTokenExpired: (token: string | null) => boolean;
@@ -81,10 +81,10 @@ export default function AuthProvider({
   const login = async (
     userName: string,
     password: string,
-  ): Promise<LoginResponse> => {
+  ): Promise<LoginResp> => {
     setLoading(true);
     try {
-      const response: AxiosResponse<LoginResponse> = await axios.post(
+      const response: AxiosResponse<LoginResp> = await axios.post(
         `/api/auth/login`,
         {
           info: userName,
@@ -123,7 +123,7 @@ export default function AuthProvider({
     try {
       refreshPromise = axios.post(`/api/auth/refresh`);
 
-      const response: AxiosResponse<LoginResponse> = await refreshPromise;
+      const response: AxiosResponse<LoginResp> = await refreshPromise;
       const { access_token, user_data } = response?.data;
       setAccessToken(access_token);
       setUser(user_data);

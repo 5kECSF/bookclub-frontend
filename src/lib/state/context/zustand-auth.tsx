@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import { LoginResponse, User } from "@/lib/state/context/auth.context";
+import { LoginResp, User } from "@/lib/state/context/auth.context";
 import axios, { AxiosResponse } from "axios";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, FAILT, Resp, Succeed } from "@/lib/constants/return.const";
@@ -12,7 +12,7 @@ export interface LoginCred {
 export interface AuthState {
   user: User | null;
   accessToken: string | null;
-  login: (credentials: LoginCred) => Promise<Resp<LoginResponse>>;
+  login: (credentials: LoginCred) => Promise<Resp<LoginResp>>;
   logout: () => Promise<Resp<any>>;
   refreshAccessToken: () => Promise<Resp<string>>;
   fetchAccessToken: () => Promise<Resp<string>>;
@@ -32,10 +32,10 @@ export const useAuthStore = create<AuthState>()(
           set((state) => ({ accessToken: state.accessToken + "1" })),
 
         // Log in action
-        login: async (credentials): Promise<Resp<LoginResponse>> => {
+        login: async (credentials): Promise<Resp<LoginResp>> => {
           try {
             set({ loading: true });
-            const response: AxiosResponse<LoginResponse> = await axios.post(
+            const response: AxiosResponse<LoginResp> = await axios.post(
               `/api/auth/login`,
               { info_type: "m", ...credentials },
             );
@@ -77,7 +77,7 @@ export const useAuthStore = create<AuthState>()(
             }
             const newPromise = axios.post(`/api/auth/refresh`);
             set({ refreshPromise: newPromise });
-            const response: AxiosResponse<LoginResponse> = await newPromise;
+            const response: AxiosResponse<LoginResp> = await newPromise;
 
             set({
               accessToken: response.data.access_token,
