@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const LoginValidator = z.object({
-  userName: z.string(),
+  info: z.string(),
   password: z
     .string()
     .min(6, { message: "password should be length of 6 or more" }),

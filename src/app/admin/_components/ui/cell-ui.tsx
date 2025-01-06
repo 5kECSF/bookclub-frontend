@@ -38,12 +38,12 @@ export function CellUiFull({
 }: CellUiProps) {
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const mutation = useMutate();
+  const { mutateAsync, isPending } = useMutate();
   const queryClient = useQueryClient();
   const onDelete = async () => {
     try {
       //@ts-ignore
-      const data = await mutation.mutateAsync({
+      const data = await mutateAsync({
         url: `${url}/${id}`,
         method: MTD.DELETE,
       });
@@ -78,7 +78,7 @@ export function CellUiFull({
       <AlertModal
         name={name}
         dataTest="delete-knowledge-modal"
-        loading={mutation.isPending}
+        loading={isPending}
         isOpen={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         onConfirm={onDelete}

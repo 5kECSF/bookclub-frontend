@@ -6,15 +6,20 @@ import {
   SubmitInput,
   UserNameInput,
 } from "@/app/(auth)/_components/inputs";
-import { useAuth } from "@/lib/state/context/auth.context";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { LoginValidator, TLoginSchema } from "../models";
+import useAuthStore from "@/lib/state/context/zustand-auth";
+import { useRouter } from "next/navigation";
+import { ReturnErrors } from "@/lib/functions/object";
 
 const SignIn: React.FC = () => {
   const { loading, login, refreshToken } = useAuth();
+  const authStore = useAuthStore((state) => state);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -33,13 +38,26 @@ const SignIn: React.FC = () => {
   };
 
   const onSubmit = async (input: TLoginSchema) => {
-    try {
-      const data = await login(input?.userName, input.password);
-      console.log("Login data ===", data);
-      toast.success(`Successfully logged In as ${data?.user_data?.email}`);
-    } catch (e: any) {
-      console.log("login error is ==", e.message);
+    const data = await login(input);
+    if (!data.ok) {
+      toast.error(`${data.message}`);
+      return;
     }
+    toast.success(`Successfully logged In as ${data.body.user_data?.email}`, {
+      delay: 2000,
+    });
+  };
+  const onSubmit2 = async (input: TLoginSchema) => {
+    const data = await authStore.login(input);
+    if (!data.ok) {
+      toast.error(`${data.message}`);
+      return;
+    }
+    console.log("Login data ===", data.body);
+    toast.success(`Successfully logged In as ${data?.body?.user_data?.email}`, {
+      delay: 2000,
+    });
+    router.push("/admin");
   };
 
   return (
@@ -47,8 +65,8 @@ const SignIn: React.FC = () => {
       <AuthLayout title={"Login"}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <UserNameInput
-            register={register("userName")}
-            error={errors.userName}
+            register={register("info")}
+            error={errors.info}
             placeholder={"Enter User Name"}
           />
           <Password
@@ -57,13 +75,14 @@ const SignIn: React.FC = () => {
             placeHolder={"Enter Password"}
             label={"Password"}
           />
-          <SubmitInput title={"Login"} loading={loading} />
+          <SubmitInput title={"Login"} loading={authStore.loading} />
           <button onClick={refresh}>refresh</button>
           <GoToLink
             path={"/signup"}
             text1={" Don’t have any account?"}
             text2="Sign Up"
           />
+          {ReturnErrors(errors)}
         </form>
       </AuthLayout>
     </>

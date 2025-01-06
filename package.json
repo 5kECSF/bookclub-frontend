@@ -21,6 +21,8 @@
     "clsx": "^2.1.0",
     "cookie": "^0.6.0",
     "flatpickr": "^4.6.13",
+    "jotai": "^2.11.0",
+    "jotai-devtools": "^0.10.1",
     "jsonwebtoken": "^9.0.2",
     "jsvectormap": "^1.5.3",
     "lucide-react": "^0.309.0",

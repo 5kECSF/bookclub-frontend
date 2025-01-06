@@ -4,19 +4,19 @@ import type {} from "@redux-devtools/extension"; // required for devtools typing
 
 interface BearState {
   bears: number;
-  increase: (by: number) => void;
+  increase: () => void;
 }
 
-const useBearStore = create<BearState>()(
+export const useBearStore = create<BearState>()(
   devtools(
-    persist(
-      (set) => ({
-        bears: 0,
-        increase: (by) => set((state) => ({ bears: state.bears + by })),
-      }),
-      {
-        name: "bear-storage",
-      },
-    ),
+    // persist(
+    (set) => ({
+      bears: 0,
+      increase: () => set((state) => ({ bears: state.bears + 1 })),
+    }),
+    //   {
+    //     name: "bear-storage",
+    //   },
+    // ),
   ),
 );

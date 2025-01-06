@@ -20,9 +20,12 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname()
-
   const trigger = useRef<any>(null)
   const sidebar = useRef<any>(null)
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   let storedSidebarExpanded = "true"
   const [sidebarExpanded, setSidebarExpanded] = useState(
@@ -46,6 +49,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   })
   // close if the esc key is pressed
   useEffect(() => {
+    if (!isMounted) return;
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!sidebarOpen || keyCode !== 27) return
       setSidebarOpen(false)
@@ -53,14 +57,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     document.addEventListener("keydown", keyHandler)
     return () => document.removeEventListener("keydown", keyHandler)
   })
+  //add expanded class
   useEffect(() => {
+    if (!isMounted) return;
     localStorage.setItem("sidebar-expanded", sidebarExpanded.toString())
     if (sidebarExpanded) {
       document.querySelector("body")?.classList.add("sidebar-expanded")
     } else {
       document.querySelector("body")?.classList.remove("sidebar-expanded")
     }
-  }, [sidebarExpanded])
+  }, [isMounted, sidebarExpanded])
 
   return (
       <aside ref={sidebar}
@@ -68,7 +74,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                  sidebarOpen ? "translate-x-0" : "-translate-x-full"
              }`}
       >
-        {/* <!-- SIDEBAR HEADER --> */}
+        {/* <!-- SIDEBAR HEADER1 --> */}
         {/*<SidebarHeader ref={trigger} onClick={() => setSidebarOpen(!sidebarOpen)} ariaExpanded={sidebarOpen} />*/}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
           <Link href="/">

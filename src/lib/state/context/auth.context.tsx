@@ -40,7 +40,7 @@ const EmptyValue: AuthContextProps = {
   loading: false,
 };
 
-interface LoginResponse {
+export interface LoginResponse {
   access_token: string;
   user_data: User | null;
 }
@@ -125,10 +125,8 @@ export default function AuthProvider({
 
       const response: AxiosResponse<LoginResponse> = await refreshPromise;
       const { access_token, user_data } = response?.data;
-
       setAccessToken(access_token);
       setUser(user_data);
-
       refreshPromise = null;
       return Succeed(access_token);
     } catch (error) {

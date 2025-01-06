@@ -86,6 +86,8 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   const onSubmit = async (data: IGenre) => {
     setLoading(true);
     let resp: Resp<any>;
+    //===============  Step 1: Create the draft item ===========
+    //==========================================================
     if (isUpdate) {
       if (!genre || !("_id" in genre)) return handleErr("malformed update");
       resp = { ok: false, body: genre, message: "" };
@@ -93,6 +95,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       resp = await makeReq(`${KY.genre}/draft`, data, MTD.POST);
       if (!resp.ok) return handleErr(resp.message);
     }
+    // Step 2:
     if (uploadRef.current) {
       //@ts-ignore
       const uploadResp: Resp<any> = await uploadRef.current.uploadSingle(

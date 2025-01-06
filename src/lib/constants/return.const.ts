@@ -30,6 +30,23 @@ export function FAIL(
     respCode: ReturnType.Error,
   };
 }
+export function FAILT<T>(
+  errMessage: string,
+  code = 400,
+  e: Error | null = null,
+): Resp<T | null> {
+  // logTrace('Error Response', errMessage, ColorEnums.BgMagenta, 3);
+
+  return {
+    ok: false,
+    body: null,
+    error: e,
+    message: errMessage,
+    errMessage,
+    code,
+    respCode: ReturnType.Error,
+  };
+}
 
 export function Succeed<T>(val: T, message: string = "success"): Resp<T> {
   return {
