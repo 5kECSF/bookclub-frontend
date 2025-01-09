@@ -2,7 +2,7 @@ export const getQueryFromUrl = () => {
   const defaultQuery = {
     page: 1,
     limit: 10,
-    tags: ["a", "b", "c"],
+    // tags: ["a", "b", "c"],
   };
   const params = new URLSearchParams(window.location.search);
   const query: Record<string, any> = {};

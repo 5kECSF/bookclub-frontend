@@ -7,6 +7,7 @@ import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { useRouter } from "next/navigation";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
+import { useEffect } from "react";
 
 export interface User {
   id: string;
@@ -42,6 +43,12 @@ export const useAuth = () => {
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [loading, setLoading] = useAtom(loadingAtom);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      refreshToken().then((r) => {});
+    }
+  }, [user]);
 
   const refreshToken = async (): Promise<Resp<string>> => {
     if (refreshPromise) {

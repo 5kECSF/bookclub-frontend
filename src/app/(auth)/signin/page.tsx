@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { LoginValidator, TLoginSchema } from "../models";
 import { useRouter } from "next/navigation";
-import { ReturnErrors } from "@/lib/functions/object";
+import { DisplayErrors } from "@/lib/functions/object";
 
 const SignIn: React.FC = () => {
   const { loading, login, refreshToken } = useAuth();
@@ -68,7 +68,7 @@ const SignIn: React.FC = () => {
             text1={" Don’t have any account?"}
             text2="Sign Up"
           />
-          {ReturnErrors(errors)}
+          {DisplayErrors(errors)}
         </form>
       </AuthLayout>
     </>

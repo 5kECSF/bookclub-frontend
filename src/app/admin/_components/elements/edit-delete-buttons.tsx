@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { useMutate } from "@/lib/state/hooks/useMutation";
+import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { useQueryClient } from "@tanstack/react-query";
 import { KY, MTD } from "@/lib/constants";
 import { message } from "antd";
@@ -15,7 +15,7 @@ interface CellUiProps {
   name: string;
   children: ReactNode;
   id?: string;
-  url: string;
+  url: KY;
 }
 
 export function EditDeleteButtons({
@@ -37,7 +37,7 @@ export function EditDeleteButtons({
         method: MTD.DELETE,
       });
       message.success(`delete ${url}: ${data?.name} success`);
-      updateAfterDelete(KY.genre, queryClient, id as string);
+      updateAfterDelete(url, queryClient, id as string);
       setDeleteOpen(false);
     } catch (e: any) {
       console.log(e);

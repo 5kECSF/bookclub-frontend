@@ -7,10 +7,10 @@ import {
 } from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
-import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
+import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { message, Modal } from "antd";
+import { Modal } from "antd";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ import { GenreValidator, IGenre, TGenreDto } from "./model";
 // import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
+import { DisplayErrors } from "@/lib/functions/object";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -35,7 +36,6 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     handleSubmit,
     formState: { errors },
     reset,
-    control,
   } = useForm<TGenreDto>({
     resolver: zodResolver(GenreValidator),
     defaultValues: isUpdate ? { ...genre } : {},
@@ -51,32 +51,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
   };
 
   const queryClient = useQueryClient();
-  const mutation = useMutate();
   const makeReq = useMakeReq();
-
-  const operate = async (
-    url: string,
-    data: any,
-    method: MTD,
-    msgStr: string,
-  ) => {
-    const resp = await makeReq(url, data, MTD.POST);
-    if (!resp.ok) {
-      setLoading(false);
-      toast.error(`${resp.message}`);
-      return;
-    }
-    updateLocalData(
-      method,
-      KY.genre,
-      queryClient,
-      reset,
-      resp.body,
-      genre?._id as string,
-    );
-    toast.success(`successfully ${msgStr} with name ${resp.body?.name}`);
-    setLoading(false);
-  };
 
   const handleErr = (message: string, autoClose: number = 2500) => {
     toast.error(`${message}`, { autoClose });
@@ -95,7 +70,8 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       resp = await makeReq(`${KY.genre}/draft`, data, MTD.POST);
       if (!resp.ok) return handleErr(resp.message);
     }
-    // Step 2:
+    //===============  Step 2: Upload the images ===========
+    //==========================================================
     if (uploadRef.current) {
       //@ts-ignore
       const uploadResp: Resp<any> = await uploadRef.current.uploadSingle(
@@ -112,6 +88,8 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
         data.fileId = uploadResp.body._id;
       }
     }
+    //===============  Step 3: Activate the Draft item ===========
+    //==========================================================
     if (isUpdate && genre && "_id" in genre) {
       if (Object.keys(modifiedData).length === 0)
         handleErr(`No data is modified`);
@@ -127,7 +105,7 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
     }
     updateLocalData(
       isUpdate ? MTD.PATCH : MTD.POST,
-      KY.book,
+      KY.genre,
       queryClient,
       reset,
       resp.body,
@@ -174,14 +152,12 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
                 maxFileNo={1}
                 ref={uploadRef}
                 isUpdate={isUpdate}
-                isLoading={mutation.isPending}
+                isLoading={loading}
                 fileId={genre?.upload?._id}
               />
-              <Submit
-                isLoading={mutation.isPending || loading}
-                update={isUpdate}
-              />
+              <Submit isLoading={loading} update={isUpdate} />
             </div>
+            {DisplayErrors(errors)}
           </form>
         </AddEditLayout>
       </Modal>

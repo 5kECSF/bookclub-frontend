@@ -12,11 +12,7 @@ interface IFilter {
 export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
   const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
   // Function to handle field changes
-  const handleChange = (fieldName: string, value: any) => {
-    // setQuery((prevData: any) => ({
-    //   ...prevData,
-    //   [fieldName]: value,
-    // }));
+  const handleLiveChange = (fieldName: string, value: any) => {
     setQuery((prevData: any) => {
       // If the value is empty, remove the key from the state
       if (value === "") {
@@ -47,12 +43,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
     });
     console.log("modifiedData", modifiedData);
   };
-  // const FinishFilter = () => {
-  //   setQuery((prevData: any) => ({
-  //     ...prevData,
-  //     ...modifiedData,
-  //   }));
-  // };
+
   const FinishFilter = () => {
     setQuery((prevData: any) => {
       // Clean up modifiedData by filtering out keys with empty string values
@@ -87,7 +78,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
             name={"q"}
             // errors={errors}
             // register={register}
-            changeFunc={handleChange}
+            changeFunc={handleLiveChange}
             placeholder={"write name"}
           />
           <SelectInput

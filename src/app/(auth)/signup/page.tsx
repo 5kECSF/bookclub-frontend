@@ -19,7 +19,7 @@ import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import axios from "axios";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { useRouter } from "next/navigation";
-import { ReturnErrors } from "@/lib/functions/object";
+import { DisplayErrors } from "@/lib/functions/object";
 
 const SignUp: React.FC = () => {
   const router = useRouter();
@@ -95,7 +95,7 @@ const SignUp: React.FC = () => {
             label={"Re-type Password"}
           />
           <SubmitInput title={"Create account"} />
-          {ReturnErrors(errors)}
+          {DisplayErrors(errors)}
           <GoToLink
             path={"/signin"}
             text1={"Already have an account?"}

@@ -8,12 +8,13 @@ import DataProvider from "@/app/DataProvider";
 import "react-toastify/dist/ReactToastify.min.css";
 import { DevTools } from "jotai-devtools";
 import "jotai-devtools/styles.css";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading } = useAuth();
 
   return (
     <html lang="en">

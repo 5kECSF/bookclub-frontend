@@ -3,7 +3,7 @@ export const isEmptyObject = (obj: Record<string, any>): boolean => {
 };
 
 //
-export const ReturnErrors = (obj: Record<string, any>) => {
+export const DisplayErrors = (obj: Record<string, any>) => {
   const data = Object.entries(obj).map(
     ([key, val]) => `${key}: ${val.message}`,
   );
