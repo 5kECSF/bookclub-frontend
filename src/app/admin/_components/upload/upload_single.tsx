@@ -117,7 +117,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
             "aria-labelledby": undefined,
             name: img?.fileName,
             response: undefined,
-            //FIXME this might change on other projects with no ID
+            //FIXME this might change on Elements projects with no ID
             uid: img._id as string,
             xhr: undefined,
             url: getImg(img),

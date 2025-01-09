@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 interface DecodedToken {
   exp?: number;
-  [key: string]: any; // If you have other claims, you can define them here
+  [key: string]: any; // If you have Elements claims, you can define them here
 }
 
 // Function to check if a token is expired
@@ -50,11 +50,11 @@ export const getExpiryDate = (token: string) => {
 
 // Function to get the remaining time until token expiry
 export const getRemainingTime = (token: string): number => {
- 
   const expiryTime = getExpiryDate(token);
   const currentTimeInMiliSeconds = Date.now();
   if (expiryTime !== null) {
-    const refreshTokenRemainingTime = expiryTime * 1000 - currentTimeInMiliSeconds;
+    const refreshTokenRemainingTime =
+      expiryTime * 1000 - currentTimeInMiliSeconds;
     return Math.max(refreshTokenRemainingTime, 0);
   }
 
@@ -71,7 +71,7 @@ export const haveTime = (token: string, minutes: number): boolean => {
     return expiryTime > minutesFromNow;
   }
 
-  return false;  // If token doesn't have expiry or is invalid, return false
+  return false; // If token doesn't have expiry or is invalid, return false
 };
 
 // Function to create a JWT token cookie
@@ -87,7 +87,11 @@ export const makeTokenCooke = (cookieName: string, token: string): string => {
 };
 
 // Function to create a data cookie
-export const makeDataCooke = (cookieName: string, data: any, time: any): string => {
+export const makeDataCooke = (
+  cookieName: string,
+  data: any,
+  time: any,
+): string => {
   return serialize(cookieName, data, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

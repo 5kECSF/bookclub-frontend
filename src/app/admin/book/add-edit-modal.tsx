@@ -1,7 +1,6 @@
 "use client";
 import { FileWithCover } from "@/app/admin/_components/upload/upload_with_cover";
 import {
-  AddEditLayout,
   InputField,
   MultiSelectWithName,
   SelectInput,
@@ -20,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
+import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
 
 interface IBookProps {
   isUpdate: boolean;

@@ -1,4 +1,3 @@
-import Chart from "@/components/other/Charts/page";
 import { Metadata } from "next";
 import React from "react";
 

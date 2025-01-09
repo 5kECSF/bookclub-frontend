@@ -9,17 +9,8 @@ import { toast } from "react-toastify";
 import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { LoginResp, User } from "@/lib/state/context/jotai-auth";
 
-export interface User {
-  id: string;
-  fName: string;
-  lName: string;
-  userName?: string;
-  email?: string;
-  avatar: string;
-  roleId: number;
-  role: string;
-}
 const EmptyValue: AuthContextProps = {
   user: null,
   accessToken: null,
@@ -39,11 +30,6 @@ const EmptyValue: AuthContextProps = {
   },
   loading: false,
 };
-
-export interface LoginResp {
-  access_token: string;
-  user_data: User | null;
-}
 
 interface AuthContextProps {
   user: User | null;

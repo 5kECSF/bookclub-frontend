@@ -2,7 +2,7 @@
 
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import { GenericButton } from "./genericButton";
+import { GenericButton } from "../ui/genericButton";
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -13,7 +13,7 @@ interface AlertModalProps {
   name?: string;
 }
 
-export const AlertModal: React.FC<AlertModalProps> = ({
+export const AlertDeleteModal: React.FC<AlertModalProps> = ({
   isOpen,
   onClose,
   onConfirm,

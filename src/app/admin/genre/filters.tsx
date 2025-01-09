@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TGenreDto } from "@/app/admin/genre/model";
-import { FilterDrawer } from "@/app/admin/_components/ui/FilterDrawer";
+import { FilterDrawer } from "@/app/admin/_components/elements/FilterDrawer";
 import { InputField, SelectInput } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
 

@@ -1,7 +1,6 @@
 "use client";
 import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
 import {
-  AddEditLayout,
   InputField,
   Submit,
   TextField,
@@ -16,8 +15,9 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { GenreValidator, IGenre, TGenreDto } from "./model";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
+// import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
+import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
 
 interface IGenreProps {
   isUpdate: boolean;
@@ -144,7 +144,6 @@ const AddEditGenre = ({ isUpdate, isOpen, onClose, genre }: IGenreProps) => {
       <Modal
         title={isUpdate ? `Update ${KY.genre}` : `Create ${KY.genre}`}
         open={isOpen}
-        onOk={handleSubmit(onSubmit)}
         onCancel={onClose}
         footer={[]}
       >

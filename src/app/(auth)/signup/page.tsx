@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "@/css/style.css";
+import "@/assets/css/style.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignupValidator, TSignupSchema } from "../models";
@@ -30,10 +30,10 @@ const SignUp: React.FC = () => {
     reset,
   } = useForm<TSignupSchema>({ resolver: zodResolver(SignupValidator) });
 
-  const [verify, setVerify] = useState<boolean>(false);
-  const navigateWithQuery = () => {
-    router.push("", {});
-  };
+  // const [verify, setVerify] = useState<boolean>(false);
+  // const navigateWithQuery = () => {
+  //   router.push("", {});
+  // };
 
   const onSubmit = async (data: TSignupSchema) => {
     try {

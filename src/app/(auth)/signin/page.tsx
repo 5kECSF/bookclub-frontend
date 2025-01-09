@@ -12,19 +12,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { LoginValidator, TLoginSchema } from "../models";
-import useAuthStore from "@/lib/state/context/zustand-auth";
 import { useRouter } from "next/navigation";
 import { ReturnErrors } from "@/lib/functions/object";
 
 const SignIn: React.FC = () => {
   const { loading, login, refreshToken } = useAuth();
-  const authStore = useAuthStore((state) => state);
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<TLoginSchema>({ resolver: zodResolver(LoginValidator) });
 
   const refresh = async (e: any) => {
@@ -46,17 +43,6 @@ const SignIn: React.FC = () => {
     toast.success(`Successfully logged In as ${data.body.user_data?.email}`, {
       delay: 2000,
     });
-  };
-  const onSubmit2 = async (input: TLoginSchema) => {
-    const data = await authStore.login(input);
-    if (!data.ok) {
-      toast.error(`${data.message}`);
-      return;
-    }
-    console.log("Login data ===", data.body);
-    toast.success(`Successfully logged In as ${data?.body?.user_data?.email}`, {
-      delay: 2000,
-    });
     router.push("/admin");
   };
 
@@ -75,7 +61,7 @@ const SignIn: React.FC = () => {
             placeHolder={"Enter Password"}
             label={"Password"}
           />
-          <SubmitInput title={"Login"} loading={authStore.loading} />
+          <SubmitInput title={"Login"} loading={loading} />
           <button onClick={refresh}>refresh</button>
           <GoToLink
             path={"/signup"}

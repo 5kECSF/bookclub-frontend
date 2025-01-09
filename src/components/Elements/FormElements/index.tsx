@@ -1,18 +1,18 @@
 "use client";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
-import CheckboxFive from "@/components/other/Checkboxes/CheckboxFive";
-import CheckboxFour from "@/components/other/Checkboxes/CheckboxFour";
-import CheckboxOne from "@/components/other/Checkboxes/CheckboxOne";
-import CheckboxThree from "@/components/other/Checkboxes/CheckboxThree";
-import CheckboxTwo from "@/components/other/Checkboxes/CheckboxTwo";
-import SwitcherFour from "@/components/other/Switchers/SwitcherFour";
-import SwitcherOne from "@/components/other/Switchers/SwitcherOne";
-import SwitcherThree from "@/components/other/Switchers/SwitcherThree";
-import SwitcherTwo from "@/components/other/Switchers/SwitcherTwo";
-import DatePickerTwo from "@/components/other/FormElements/DatePicker/DatePickerTwo";
-import DatePickerOne from "@/components/other/FormElements/DatePicker/DatePickerOne";
-import MultiSelect from "@/components/other/FormElements/MultiSelect";
-import SelectGroupTwo from "@/components/other/SelectGroup/SelectGroupTwo";
+import CheckboxFive from "@/components/Elements/Checkboxes/CheckboxFive";
+import CheckboxFour from "@/components/Elements/Checkboxes/CheckboxFour";
+import CheckboxOne from "@/components/Elements/Checkboxes/CheckboxOne";
+import CheckboxThree from "@/components/Elements/Checkboxes/CheckboxThree";
+import CheckboxTwo from "@/components/Elements/Checkboxes/CheckboxTwo";
+import SwitcherFour from "@/components/Elements/Switchers/SwitcherFour";
+import SwitcherOne from "@/components/Elements/Switchers/SwitcherOne";
+import SwitcherThree from "@/components/Elements/Switchers/SwitcherThree";
+import SwitcherTwo from "@/components/Elements/Switchers/SwitcherTwo";
+import DatePickerTwo from "@/components/Elements/FormElements/DatePicker/DatePickerTwo";
+import DatePickerOne from "@/components/Elements/FormElements/DatePicker/DatePickerOne";
+import MultiSelect from "@/components/Elements/FormElements/MultiSelect";
+import SelectGroupTwo from "@/components/Elements/SelectGroup/SelectGroupTwo";
 
 const FormElements = () => {
   return (

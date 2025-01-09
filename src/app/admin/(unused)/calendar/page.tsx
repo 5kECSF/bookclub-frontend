@@ -1,4 +1,4 @@
-import Calendar from "@/components/other/Calender";
+import Calendar from "@/components/Elements/Calender";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,9 +8,7 @@ export const metadata: Metadata = {
 };
 
 const CalendarPage = () => {
-  return (
-      <Calendar />
-  );
+  return <Calendar />;
 };
 
 export default CalendarPage;

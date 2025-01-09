@@ -1,5 +1,5 @@
 import React from "react";
-import FormElements from "@/components/other/FormElements";
+import FormElements from "@/components/Elements/FormElements";
 import { Metadata } from "next";
 import DefaultLayout from "@/app/admin/_components/Layouts/DefaultLayout";
 
@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 };
 
 const FormElementsPage = () => {
-  return (
-      <FormElements />
-  );
+  return <FormElements />;
 };
 
 export default FormElementsPage;

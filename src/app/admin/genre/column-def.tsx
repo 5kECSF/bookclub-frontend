@@ -4,8 +4,8 @@ import { IGenre } from "./model";
 import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY, MTD } from "@/lib/constants";
-import { CellUiFull } from "@/app/admin/_components/ui/cell-ui";
 import AddEditGenre from "@/app/admin/genre/add-edit-modal";
+import { EditDeleteButtons } from "@/app/admin/_components/elements/edit-delete-buttons";
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
@@ -43,7 +43,7 @@ export const agColumns = [
 const MiniAction = ({ row }: { row: IGenre }) => {
   const [editOpen, setEditOpen] = useState(false);
   return (
-    <CellUiFull
+    <EditDeleteButtons
       name={row.name}
       id={row._id}
       url={KY.genre}
@@ -55,6 +55,6 @@ const MiniAction = ({ row }: { row: IGenre }) => {
         onClose={() => setEditOpen(false)}
         isUpdate={true}
       />
-    </CellUiFull>
+    </EditDeleteButtons>
   );
 };

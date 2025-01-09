@@ -8,9 +8,9 @@ import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TableComponent } from "@/components/AgGrid";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
-import { TopButtons } from "@/app/admin/_components/ui/FilterDrawer";
-import QueryChips from "@/app/admin/_components/ui/chips";
-import { Pagination } from "@/app/admin/_components/ui/pagination";
+import { TopButtons } from "@/app/admin/_components/elements/FilterDrawer";
+import QueryChips from "@/app/admin/_components/elements/query-chips";
+import { Pagination } from "@/app/admin/_components/elements/pagination";
 import { Filters } from "./filters";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 

@@ -1,13 +1,10 @@
 import { useRouter } from "next/navigation";
-import { useAuth, User } from "@/lib/state/context/auth.context";
-import { useEffect, useState } from "react";
+import { useAuth, User } from "@/lib/state/context/jotai-auth";
+import { useEffect } from "react";
 import { Loader } from "lucide-react";
 
 const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
   return function AuthorizedPage(props: any) {
-    if (typeof window === "undefined") {
-      return null;
-    }
     const router = useRouter();
     const { user, loading } = useAuth();
 
@@ -15,7 +12,10 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
       if (!IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
-    }, [allowedRoles, router, loading, user]);
+    }, [router, loading, user]);
+    if (typeof window === "undefined") {
+      return null;
+    }
     if (loading) {
       return <Loader />;
     }

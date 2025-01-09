@@ -2,7 +2,7 @@
 import { BASE_URL } from "@/lib/constants";
 import axios from "axios";
 import { useEffect } from "react";
-import { useAuth } from "@/lib/state/context/auth.context";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 
 export const axiosAuth = axios.create({
   baseURL: BASE_URL,

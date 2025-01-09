@@ -1,14 +1,10 @@
 import { create } from "zustand";
-import { persist, devtools } from "zustand/middleware";
-import { LoginResp, User } from "@/lib/state/context/auth.context";
+import { devtools, persist } from "zustand/middleware";
 import axios, { AxiosResponse } from "axios";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, FAILT, Resp, Succeed } from "@/lib/constants/return.const";
+import { LoginCred, LoginResp, User } from "@/lib/state/context/jotai-auth";
 
-export interface LoginCred {
-  info: string;
-  password: string;
-}
 export interface AuthState {
   user: User | null;
   accessToken: string | null;

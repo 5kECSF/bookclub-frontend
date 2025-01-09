@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "@/css/style.css";
+import "@/assets/css/style.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CodeValidator, TCodeSchema } from "../../models";
@@ -16,14 +16,14 @@ import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import axios from "axios";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 interface Params {
   code: string;
 }
 
 const VerifyCode: React.FC<{ params: Params }> = ({ params }) => {
   const router = useRouter();
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ const VerifyCode: React.FC<{ params: Params }> = ({ params }) => {
 
   const onSubmit = async (data: TCodeSchema) => {
     try {
-      console.log("before Reg data==", data, params.code, "pathName", pathname);
+      // console.log("before Reg data==", data, params.code, "pathName", pathname);
       const datas = await axios.post(`${BASE_URL}/${API.activate}`, data); // mutation.mutateAsync({ url: API.register, body: data, method: MTD.POST })
       console.log("registration data==", datas);
       toast.success("Account Successfully Verified");

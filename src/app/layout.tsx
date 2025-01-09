@@ -1,6 +1,6 @@
 "use client";
 
-import "@/css/style.css";
+import "@/assets/css/style.css";
 import React, { useState } from "react";
 import Loader from "@/components/common/Loader";
 import { ToastContainer } from "react-toastify";

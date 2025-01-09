@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import AddEditGenre from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
-import { Pagination } from "@/app/admin/_components/ui/pagination";
-import { TopButtons } from "@/app/admin/_components/ui/FilterDrawer";
+import { Pagination } from "@/app/admin/_components/elements/pagination";
+import { TopButtons } from "@/app/admin/_components/elements/FilterDrawer";
 import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
 import { Filters } from "./filters";
-import QueryChips from "@/app/admin/_components/ui/chips";
+import QueryChips from "@/app/admin/_components/elements/query-chips";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
 const GenrePage = () => {

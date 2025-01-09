@@ -1,22 +1,41 @@
 "use client";
 
-import { atom, useAtom, useSetAtom } from "jotai";
+import { atom, useAtom } from "jotai";
 
-import { User, LoginResp } from "./auth.context";
 import axios, { AxiosResponse } from "axios";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { useRouter } from "next/navigation";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
-import { LoginCred } from "@/lib/state/context/zustand-auth";
+
+export interface User {
+  id: string;
+  fName: string;
+  lName: string;
+  userName?: string;
+  email?: string;
+  avatar: string;
+  roleId: number;
+  role: string;
+}
+
+export interface LoginResp {
+  access_token: string;
+  user_data: User | null;
+}
 
 export const userAtom = atom<User | null>(null);
-userAtom.debugLabel = "userAtom";
+userAtom.debugLabel = "user";
 export const accessTokenAtom = atom<string | null>(null);
 accessTokenAtom.debugLabel = "accessToken";
 export const loadingAtom = atom<boolean>(false);
 loadingAtom.debugLabel = "loading";
 let refreshPromise: any = null;
+
+export interface LoginCred {
+  info: string;
+  password: string;
+}
 
 export const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
@@ -51,7 +70,6 @@ export const useAuth = () => {
   const logout = async () => {
     try {
       const response = await axios.post(`/api/auth/logout`);
-
       setUser(null);
       setAccessToken(null);
       console.log("logout response");

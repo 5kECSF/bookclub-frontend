@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import Link from "next/link";
-import { DropDownSvg } from "./sidebarSvgs";
+import { DropDownSvg } from "../../../../../components/svgs/sidebarSvgs";
 
 interface SidebarLinkGroupProps {
   children: (handleClick: () => void, open: boolean) => ReactNode;
@@ -77,7 +77,7 @@ export const ChildItems = ({ pathname, path, name }: any) => {
       <Link
         href={path}
         className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-          pathname ===  path  && "text-white"
+          pathname === path && "text-white"
         }`}
       >
         {name}
