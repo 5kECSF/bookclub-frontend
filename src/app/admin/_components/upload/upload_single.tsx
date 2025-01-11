@@ -165,23 +165,6 @@ export const MultiFileUpload = forwardRef(function UploadComp(
       return makeReq(`file/${id}`, formData, MTD.POST, Headers.MULTI);
     }
   };
-  const operate = async (url: string, data: any, method: MTD) => {
-    try {
-      // @ts-ignore
-      const datas = await mutation.mutateAsync({
-        url,
-        method: method,
-        body: data,
-        headers: Headers.MULTI,
-      });
-      return datas;
-    } catch (e: any) {
-      let resp = HandleAxiosErr(e);
-      console.log("````````````````````error data", e);
-      toast.error(`Uploading file Error: ${resp.Message}`);
-      return null;
-    }
-  };
   const resetData = () => {
     setImgList([]);
     setRemovedImages([]);

@@ -1,6 +1,7 @@
 // export const BASE_URL = "https://fivekecsf.onrender.com"
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { IUpload } from "@/types/upload";
+
 export enum CookieNames {
   AccessToken = "access_token",
   RefreshToken = "refresh_token",
@@ -29,7 +30,6 @@ export enum KY {
   genre = "genre",
   book = "book",
   author = "author",
-  section = "section",
 }
 
 const projName = `aait-a3640.appspot.com`;
@@ -55,3 +55,9 @@ export const getImgUrl = (imgName: string, p: string): string => {
   const addon = paths[p || "p1"];
   return addon.prefix + imgName + addon.suffix;
 };
+
+export const ItemStatus = [
+  { name: "active" },
+  { name: "draft" },
+  { name: "deactivated" },
+];

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TGenreDto } from "@/app/admin/genre/model";
+import { TAuthorDto } from "@/app/admin/author/model";
 import { FilterDrawer } from "@/app/admin/_components/elements/FilterDrawer";
 import { InputField, SelectInput } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
@@ -15,7 +15,7 @@ interface IFilter {
   setQuery: any;
 }
 export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
-  const [modifiedData, setModifiedData] = useState<Partial<TGenreDto>>({});
+  const [modifiedData, setModifiedData] = useState<Partial<TAuthorDto>>({});
   // Function to handle field changes
   const handleLiveChange = (fieldName: string, value: any) => {
     setQuery((prevData: any) => {

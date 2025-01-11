@@ -1,7 +1,8 @@
-export const getQueryFromUrl = () => {
+export const getQueryFromUrl = (queries: any) => {
   const defaultQuery = {
     page: 1,
     limit: 10,
+    ...queries,
     // tags: ["a", "b", "c"],
   };
   const params = new URLSearchParams(window.location.search);

@@ -29,7 +29,7 @@ export const userAtom = atom<User | null>(null);
 userAtom.debugLabel = "user";
 export const accessTokenAtom = atom<string | null>(null);
 accessTokenAtom.debugLabel = "accessToken";
-export const loadingAtom = atom<boolean>(false);
+export const loadingAtom = atom<boolean | null>(null);
 loadingAtom.debugLabel = "loading";
 let refreshPromise: any = null;
 
@@ -56,7 +56,7 @@ export const useAuth = () => {
       return refreshPromise;
     }
     try {
-      setLoading(false);
+      setLoading(true);
       refreshPromise = axios.post(`/api/auth/refresh`);
 
       const response: AxiosResponse<LoginResp> = await refreshPromise;
@@ -64,6 +64,7 @@ export const useAuth = () => {
       setAccessToken(access_token);
       setUser(user_data);
       refreshPromise = null;
+      setLoading(false);
       return Succeed(access_token);
     } catch (error) {
       setLoading(false);

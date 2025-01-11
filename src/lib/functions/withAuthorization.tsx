@@ -9,6 +9,7 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     const { user, loading } = useAuth();
 
     useEffect(() => {
+      if (loading == null) return;
       if (!IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
@@ -16,7 +17,7 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     if (typeof window === "undefined") {
       return null;
     }
-    if (loading) {
+    if (loading || loading === null) {
       return <Loader />;
     }
 

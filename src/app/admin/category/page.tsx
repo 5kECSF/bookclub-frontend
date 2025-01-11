@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { KY } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { useEffect, useState } from "react";
-import AddEditGenre from "./add-edit-modal";
+import AddEditCategory from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { Pagination } from "@/app/admin/_components/elements/pagination";
@@ -14,7 +14,7 @@ import { Filters } from "./filters";
 import QueryChips from "@/app/admin/_components/elements/query-chips";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
-const GenrePage = () => {
+const CategoryPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 
@@ -27,8 +27,8 @@ const GenrePage = () => {
     setQuery({ ...query, page });
   };
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
-    [KY.genre, JSON.stringify(query)],
-    `${KY.genre}`,
+    [KY.category, JSON.stringify(query)],
+    `${KY.category}`,
     query,
   );
 
@@ -38,7 +38,7 @@ const GenrePage = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Genre" />
+      <Breadcrumb pageName="Category" />
       <div className="bg-blue h-full">
         <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
         <QueryChips query={query} setQuery={setQuery} />
@@ -59,7 +59,7 @@ const GenrePage = () => {
           </div>
         )}
 
-        <AddEditGenre
+        <AddEditCategory
           isOpen={modalOpen}
           onClose={(e: any) => setModalOpen(false)}
           isUpdate={false}
@@ -74,5 +74,5 @@ const GenrePage = () => {
   );
 };
 
-// export default GenrePage;
-export default withAuthorization(GenrePage, ["USER"]);
+// export default CategoryPage;
+export default withAuthorization(CategoryPage, ["USER"]);

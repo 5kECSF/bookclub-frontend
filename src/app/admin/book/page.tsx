@@ -18,7 +18,9 @@ const BookPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   //======================>  Query related
-  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl);
+  const [query, setQuery] = useState<Record<string, any>>(
+    getQueryFromUrl({ status: "active" }),
+  );
   const setPage = (page: number) => {
     setQuery({ ...query, page });
   };

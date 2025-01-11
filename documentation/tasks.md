@@ -19,6 +19,7 @@
     - refactor the operate function
 
 - [] author
+  - add the keys to filter
 - [] category
 - [] book
   - [] filter with page max min

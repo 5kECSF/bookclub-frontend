@@ -52,7 +52,7 @@ export const FilterDrawer = ({
               x
             </button>
             <div className="mt-15 flex flex-col gap-4">
-              <p>Drawer Content Goes Here</p>
+              {/*<p>Drawer Content Goes Here</p>*/}
               {children}
             </div>
           </div>
