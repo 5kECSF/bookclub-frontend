@@ -54,7 +54,7 @@ export function Succeed<T>(val: T, message: string = "success"): Resp<T> {
     body: val,
     message: message,
     error: null,
-    respCode: ReturnType.Error,
+    respCode: ReturnType.Success,
   };
 }
 

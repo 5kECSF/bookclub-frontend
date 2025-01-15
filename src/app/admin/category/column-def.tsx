@@ -5,7 +5,7 @@ import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY, MTD } from "@/lib/constants";
 import AddEditCategory from "@/app/admin/category/add-edit-modal";
-import { EditDeleteButtons } from "@/app/admin/_components/elements/edit-delete-buttons";
+import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.

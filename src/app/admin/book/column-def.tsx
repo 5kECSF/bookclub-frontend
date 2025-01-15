@@ -1,7 +1,7 @@
 "use client";
 
 import CellAction from "./cell-action";
-// import { FileList, MultiItem, Fileicon } from "@/app/admin/_components/cell-svgs";
+// import { FileList, MultiItem, Fileicon } from "@/components/admin/cell-svgs";
 import { IBook } from "./model";
 import { Avatar } from "antd";
 import React from "react";

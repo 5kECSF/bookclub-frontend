@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 interface DecodedToken {
   exp?: number;
-  [key: string]: any; // If you have Elements claims, you can define them here
+  [key: string]: any; // If you have unusedElements claims, you can define them here
 }
 
 // Function to check if a token is expired

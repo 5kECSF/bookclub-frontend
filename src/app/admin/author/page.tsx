@@ -7,14 +7,12 @@ import { useEffect, useState } from "react";
 import AddEditAuthor from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
-import { Pagination } from "@/app/admin/_components/elements/pagination";
-import { TopButtons } from "@/app/admin/_components/elements/FilterDrawer";
-import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
+import { Pagination } from "@/components/admin/crud/pagination";
+import { TopButtons } from "@/components/admin/crud/filter-wrapper";
+import { FetchError, Spinner } from "@/components/admin/ui/components";
 import { Filters } from "./filters";
-import QueryChips from "@/app/admin/_components/elements/query-chips";
+import QueryChips from "@/components/admin/crud/query-chips";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
-import { AddEditWrapper } from "@/app/admin/generic/generic";
-import { IAuthor, TAuthorDto } from "@/app/admin/author/model";
 
 const AuthorPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -60,9 +58,7 @@ const AuthorPage = () => {
             />
           </div>
         )}
-        {/*<AddEditWrapper<IAuthor, TAuthorDto> url={KY.author} isOpen={modalOpen} isUpdate={false}  onClose={(e: any) => setModalOpen(false)}>*/}
-        {/*  */}
-        {/*</AddEditWrapper>*/}
+
         <AddEditAuthor
           isOpen={modalOpen}
           onClose={(e: any) => setModalOpen(false)}
@@ -79,4 +75,4 @@ const AuthorPage = () => {
 };
 
 // export default AuthorPage;
-export default withAuthorization(AuthorPage, ["USER"]);
+export default withAuthorization(AuthorPage, ["ADMIN"]);

@@ -18,6 +18,11 @@
   - frontend
     - refactor the operate function
 
+
+Generic tasks
+- [] make deleting works on ctg
+- [] make updating work on ctg
+
 - [] author
   - add the keys to filter
 - [] category

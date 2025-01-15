@@ -1,7 +1,7 @@
 import "flatpickr/dist/flatpickr.min.css";
 
 // import "@/app/admin/css/satoshi.css";
-import DefaultLayout from "@/app/admin/_components/Layouts/DefaultLayout";
+import DefaultLayout from "@/components/admin/Layouts/DefaultLayout";
 import "@/assets/css/dashboard.css";
 import React from "react";
 

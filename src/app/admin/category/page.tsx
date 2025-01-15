@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import AddEditCategory from "./add-edit-modal";
 import { agColumns } from "./column-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
-import { Pagination } from "@/app/admin/_components/elements/pagination";
-import { TopButtons } from "@/app/admin/_components/elements/FilterDrawer";
-import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
+import { Pagination } from "@/components/admin/crud/pagination";
+import { TopButtons } from "@/components/admin/crud/filter-wrapper";
+import { FetchError, Spinner } from "@/components/admin/ui/components";
 import { Filters } from "./filters";
-import QueryChips from "@/app/admin/_components/elements/query-chips";
+import QueryChips from "@/components/admin/crud/query-chips";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
 const CategoryPage = () => {
@@ -20,9 +20,7 @@ const CategoryPage = () => {
 
   //======================>  Query related
 
-  const [query, setQuery] = useState<Record<string, any>>(
-    getQueryFromUrl({ status: "active" }),
-  );
+  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
   const setPage = (page: number) => {
     setQuery({ ...query, page });
   };
@@ -75,4 +73,4 @@ const CategoryPage = () => {
 };
 
 // export default CategoryPage;
-export default withAuthorization(CategoryPage, ["USER"]);
+export default withAuthorization(CategoryPage, ["ADMIN"]);

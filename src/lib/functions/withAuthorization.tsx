@@ -14,6 +14,7 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
         router.replace("/"); // or redirect("/") to force navigation
       }
     }, [router, loading, user]);
+
     if (typeof window === "undefined") {
       return null;
     }

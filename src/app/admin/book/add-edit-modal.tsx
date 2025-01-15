@@ -1,11 +1,9 @@
 "use client";
-import { FileWithCover } from "@/app/admin/_components/upload/upload_with_cover";
+import { FileWithCover } from "@/components/admin/upload/upload_with_cover";
 import {
   InputField,
-  MultiSelectWithName,
-  SelectInput,
   Submit,
-  TextField,
+  TextAreaField,
 } from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
@@ -19,7 +17,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
-import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
+import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
+import { SelectInput } from "@/components/forms/select";
+import { MultiSelectWithName } from "@/components/forms/multi-select";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -138,7 +138,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         onCancel={onClose}
         footer={[]}
       >
-        <AddEditLayout title={"Book"}>
+        <AddEditWrapper title={"Book"}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-6.5">
               <InputField
@@ -146,24 +146,23 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 name={"title"}
                 errors={errors}
                 register={register}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"write name"}
               />
 
               <SelectInput
                 data={category?.body}
                 register={register}
-                control={control}
+                errors={errors}
+                handleChange={handleChange}
                 idx={"_id"}
                 label={"Category"}
                 name={"categoryId"}
-                changeFunc={handleChange}
                 placeholder={"select categories"}
-                errors={errors}
               />
 
               <MultiSelectWithName
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 data={genre?.body || []}
                 label={"Genre"}
                 name={"genres"}
@@ -173,13 +172,13 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 placeholder={"select genres"}
               />
 
-              <TextField
+              <TextAreaField
                 label={"Description"}
                 name={"desc"}
                 errors={errors}
                 register={register}
                 req={false}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"Add the Description"}
               />
               <FileWithCover
@@ -199,7 +198,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
               <Submit isLoading={loading} update={isUpdate} />
             </div>
           </form>
-        </AddEditLayout>
+        </AddEditWrapper>
       </Modal>
     </>
   );

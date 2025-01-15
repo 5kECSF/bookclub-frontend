@@ -3,9 +3,9 @@
 import { IGenre } from "./model";
 import { Avatar } from "antd";
 import React, { useState } from "react";
-import { getImg, KY, MTD } from "@/lib/constants";
-import AddEditGenre from "@/app/admin/genre/add-edit-modal";
-import { EditDeleteButtons } from "@/app/admin/_components/elements/edit-delete-buttons";
+import { getImg, KY } from "@/lib/constants";
+import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+import { AddEditModal } from "@/app/admin/genre/add-edit-modal";
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
@@ -19,6 +19,11 @@ export const agColumns = [
     autoHeight: true,
     headerName: "Files",
     cellRenderer: (params: any) => <Avatar src={getImg(params.data?.upload)} />,
+  },
+  {
+    headerName: "Status",
+    field: "status",
+    filter: "agMultiColumnFilter",
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
@@ -49,11 +54,11 @@ const MiniAction = ({ row }: { row: IGenre }) => {
       url={KY.genre}
       onEditClick={() => setEditOpen(true)}
     >
-      <AddEditGenre
-        genre={row}
+      <AddEditModal
         isOpen={editOpen}
-        onClose={() => setEditOpen(false)}
+        onClose={setEditOpen}
         isUpdate={true}
+        genre={row}
       />
     </EditDeleteButtons>
   );

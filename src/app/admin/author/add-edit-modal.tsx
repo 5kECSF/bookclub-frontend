@@ -1,9 +1,9 @@
 "use client";
-import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
+import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import {
   InputField,
   Submit,
-  TextField,
+  TextAreaField,
 } from "@/components/forms/useFormInputs";
 import { KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { AuthorValidator, IAuthor, TAuthorDto } from "./model";
 // import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
-import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
+import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
 import { DisplayErrors } from "@/lib/functions/object";
 import { ZodSchema } from "zod";
 
@@ -126,7 +126,7 @@ const AddEditAuthor = ({ isUpdate, isOpen, onClose, author }: IAuthorProps) => {
         onCancel={onClose}
         footer={[]}
       >
-        <AddEditLayout title={"Author"}>
+        <AddEditWrapper title={"Author"}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-6.5">
               <InputField
@@ -134,17 +134,17 @@ const AddEditAuthor = ({ isUpdate, isOpen, onClose, author }: IAuthorProps) => {
                 name={"name"}
                 errors={errors}
                 register={register}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"write name"}
               />
 
-              <TextField
+              <TextAreaField
                 label={"Description"}
                 name={"desc"}
                 errors={errors}
                 register={register}
                 req={false}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"Add the Description"}
               />
               <MultiFileUpload
@@ -160,35 +160,10 @@ const AddEditAuthor = ({ isUpdate, isOpen, onClose, author }: IAuthorProps) => {
             </div>
             {DisplayErrors(errors)}
           </form>
-        </AddEditLayout>
+        </AddEditWrapper>
       </Modal>
     </>
   );
 };
 
 export default AddEditAuthor;
-
-function AuthorModal({ children, errors, register, handleChange }: any) {
-  return (
-    <>
-      <InputField
-        label={"Author Name"}
-        name={"name"}
-        errors={errors}
-        register={register}
-        changeFunc={handleChange}
-        placeholder={"write name"}
-      />
-      {children}
-      <TextField
-        label={"Description"}
-        name={"desc"}
-        errors={errors}
-        register={register}
-        req={false}
-        changeFunc={handleChange}
-        placeholder={"Add the Description"}
-      />
-    </>
-  );
-}

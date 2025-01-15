@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { FilterDrawer } from "@/app/admin/_components/elements/FilterDrawer";
-import { InputField, SelectInput } from "@/components/forms/cleanInputs";
+import { FilterWrapper } from "@/components/admin/crud/filter-wrapper";
+import { InputField } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
 import { TBookDto } from "@/app/admin/book/model";
+import {
+  CleanSelectInput,
+  CleanSelectProps,
+  SelectInput,
+} from "@/components/forms/select";
 
 interface IFilter {
   filterOpen: boolean;
@@ -66,18 +71,18 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
 
   return (
     <div>
-      <FilterDrawer isOpen={filterOpen} setIsOpen={setFilterOpen}>
+      <FilterWrapper isOpen={filterOpen} setIsOpen={setFilterOpen}>
         <div>
           <InputField
             label={"Search"}
             name={"q"}
             // errors={errors}
             // register={register}
-            changeFunc={handleLiveChange}
+            handleChange={handleLiveChange}
             placeholder={"write name"}
           />
-          <SelectInput
-            changeFunc={handleFilter}
+          <CleanSelectInput
+            handleChange={handleFilter}
             data={[{ name: "a" }, { name: "b" }]}
             name={"name"}
             idx={"name"}
@@ -93,7 +98,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
           <Filter className="h-5 w-5" />
           Filter
         </button>
-      </FilterDrawer>
+      </FilterWrapper>
     </div>
   );
 };

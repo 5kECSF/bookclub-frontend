@@ -7,10 +7,10 @@ import AddEditBook from "./add-edit-modal";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TableComponent } from "@/components/AgGrid";
 import withAuthorization from "@/lib/functions/withAuthorization";
-import { FetchError, Spinner } from "@/app/admin/_components/ui/components";
-import { TopButtons } from "@/app/admin/_components/elements/FilterDrawer";
-import QueryChips from "@/app/admin/_components/elements/query-chips";
-import { Pagination } from "@/app/admin/_components/elements/pagination";
+import { FetchError, Spinner } from "@/components/admin/ui/components";
+import { TopButtons } from "@/components/admin/crud/filter-wrapper";
+import QueryChips from "@/components/admin/crud/query-chips";
+import { Pagination } from "@/components/admin/crud/pagination";
 import { Filters } from "./filters";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
@@ -68,4 +68,4 @@ const BookPage = () => {
   );
 };
 
-export default withAuthorization(BookPage, ["USER"]);
+export default withAuthorization(BookPage, ["ADMIN"]);

@@ -1,9 +1,9 @@
 "use client";
-import { MultiFileUpload } from "@/app/admin/_components/upload/upload_single";
+import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import {
   InputField,
   Submit,
-  TextField,
+  TextAreaField,
 } from "@/components/forms/useFormInputs";
 import { ItemStatus, KY, MTD } from "@/lib/constants";
 import { updateLocalData } from "@/lib/functions/updateLocal";
@@ -17,9 +17,10 @@ import { toast } from "react-toastify";
 import { CategoryValidator, ICategory, TCategoryDto } from "./model";
 // import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
-import { AddEditLayout } from "@/app/admin/_components/elements/add-edit-layout";
+import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
 import { DisplayErrors } from "@/lib/functions/object";
-import { SelectInput } from "@/components/forms/cleanInputs";
+
+import { SelectInput } from "@/components/forms/select";
 
 interface ICategoryProps {
   isUpdate: boolean;
@@ -55,6 +56,7 @@ const AddEditCategory = ({
       [fieldName]: value,
     }));
   };
+  const updatedData: any = {};
 
   const queryClient = useQueryClient();
   const makeReq = useMakeReq();
@@ -87,19 +89,30 @@ const AddEditCategory = ({
       if (!uploadResp.ok)
         return handleErr(`upload Error: ${uploadResp.message}`);
       //TODO: do this if it is Update, check if this is correct
+      console.log("uploadResp--", uploadResp);
+      //the ReturnType.NotModified is when the file is not modified
       if (uploadResp.respCode != ReturnType.NotModified) {
-        setModifiedData((prevState) => ({
-          ...prevState,
+        console.log("uploadResp MOdified", uploadResp);
+        console.log("modified, data: 1", modifiedData);
+        setModifiedData({
+          ...modifiedData,
           fileId: uploadResp.body._id,
-        }));
+        });
+        updatedData["fileId"] = uploadResp.body._id;
+
         data.fileId = uploadResp.body._id;
       }
     }
     //===============  Step 3: Activate the Draft item ===========
     //==========================================================
     if (isUpdate && category && "_id" in category) {
-      if (Object.keys(modifiedData).length === 0)
-        handleErr(`No data is modified`);
+      console.log("modified, data2", modifiedData);
+
+      if (
+        Object.keys(modifiedData).length === 0 &&
+        Object.keys(updatedData).length === 0
+      )
+        return handleErr(`No data is modified`);
       resp = await makeReq(`${KY.category}/${category._id}`, data, MTD.PATCH);
       if (!resp.ok) return handleErr(resp.message);
     } else if (!isUpdate) {
@@ -132,7 +145,7 @@ const AddEditCategory = ({
         onCancel={onClose}
         footer={[]}
       >
-        <AddEditLayout title={"Category"}>
+        <AddEditWrapper title={"Category"}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-6.5">
               <InputField
@@ -140,27 +153,30 @@ const AddEditCategory = ({
                 name={"name"}
                 errors={errors}
                 register={register}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"write name"}
               />
 
-              <TextField
+              <TextAreaField
                 label={"Description"}
                 name={"desc"}
                 errors={errors}
                 register={register}
                 req={false}
-                changeFunc={handleChange}
+                handleChange={handleChange}
                 placeholder={"Add the Description"}
               />
               {isUpdate && (
                 <SelectInput
-                  changeFunc={handleChange}
                   data={ItemStatus}
-                  name={"status"}
+                  register={register}
+                  errors={errors}
+                  handleChange={handleChange}
                   idx={"name"}
+                  name={"status"}
                   dispIdx={"name"}
                   label={"status"}
+                  placeholder={"select status"}
                   req={false}
                 />
               )}
@@ -178,7 +194,7 @@ const AddEditCategory = ({
             </div>
             {DisplayErrors(errors)}
           </form>
-        </AddEditLayout>
+        </AddEditWrapper>
       </Modal>
     </>
   );
