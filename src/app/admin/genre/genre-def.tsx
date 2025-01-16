@@ -1,11 +1,31 @@
 "use client";
 
-import { IGenre } from "./model";
 import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { AddEditModal } from "@/app/admin/genre/add-edit-modal";
+import { z } from "zod";
+import { IUpload } from "@/types/upload";
+
+export interface IGenre {
+  _id?: string;
+  name: string;
+  slug?: string;
+  desc?: string;
+  fileId?: string;
+  body?: string;
+  upload?: IUpload;
+}
+
+export const GenreValidator = z.object({
+  name: z.string().min(2, { message: "min length is 2" }),
+  desc: z.string().min(3, { message: "min length is 2" }),
+});
+export type TGenreDto = z.infer<typeof GenreValidator>;
+
+// ====== =================  Column Defs for the table ==================
+// =====================================================================
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.

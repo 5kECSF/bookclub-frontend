@@ -1,8 +1,8 @@
 import { AddEditLayout } from "@/components/admin/crud/add-edit-layout";
 import { TextAreaField } from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants";
-import { GenreValidator, IGenre, TGenreDto } from "@/app/admin/genre/model";
 import { InputField } from "@/components/forms/useFormInputs";
+import { GenreValidator, IGenre, TGenreDto } from "@/app/admin/genre/genre-def";
 
 interface IGenreProps {
   isUpdate: boolean;

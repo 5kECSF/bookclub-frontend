@@ -1,17 +1,13 @@
 import { FilterLayout } from "@/components/admin/crud/filter-layout";
 import { CleanSelectInput } from "@/components/forms/select";
 import React from "react";
+import { ItemStatus } from "@/types/commonTypes";
 
 interface IFilterProps {
   filterOpen: boolean;
   setFilterOpen: any;
   setQuery: any;
 }
-const ItemStatus = [
-  { name: "active" },
-  { name: "draft" },
-  { name: "deactivated" },
-];
 export function FilterDrawer({
   filterOpen,
   setFilterOpen,
