@@ -7,8 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { toast } from "react-toastify";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
-import { updateLocalData } from "@/lib/functions/updateLocal";
-import { Modal } from "antd";
+import { Modal, message } from "antd";
 import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
 import { Submit } from "@/components/forms/useFormInputs";
 import { MultiFileUpload } from "@/components/admin/upload/upload_single";
@@ -51,7 +50,6 @@ export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
   });
   const [modifiedData, setModifiedData] = useState<Partial<T>>({});
   const handleChange = (fieldName: keyof TDto, value: string) => {
-    console.log("modified,", fieldName, value);
     setModifiedData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -118,20 +116,16 @@ export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
       //we are activating the draft, with id: we don't need body
       resp = await makeReq(`${url}/${resp.body._id}`, {}, MTD.POST);
       if (!resp.ok) return handleErr(resp.message);
-      if (uploadRef.current) {
-        //@ts-ignore
-        uploadRef.current.resetData();
-      }
     }
-    updateLocalData(
-      isUpdate ? MTD.PATCH : MTD.POST,
-      url,
-      queryClient,
-      reset,
-      resp.body,
-      data?._id as string,
-    );
-    toast.success(
+    reset();
+    if (uploadRef.current) {
+      //@ts-ignore
+      uploadRef.current.resetData();
+    }
+    onClose();
+    await queryClient.invalidateQueries({ queryKey: [url] });
+
+    message.success(
       `successfully ${isUpdate ? "updated" : "created"} ${url} with name  ${resp.body?.name} `,
     );
     setLoading(false);

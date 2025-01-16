@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { FilterWrapper } from "@/components/admin/crud/filter-wrapper";
 import { InputField } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
-import { CleanSelectInput } from "@/components/forms/select";
 
-const ItemStatus = [
-  { name: "active" },
-  { name: "draft" },
-  { name: "deactivated" },
-];
 interface IFilterProps {
   filterOpen: boolean;
   setFilterOpen: any;

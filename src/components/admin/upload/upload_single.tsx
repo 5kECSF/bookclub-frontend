@@ -191,7 +191,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
   const [previewTitle, setPreviewTitle] = useState("");
 
   const handlePreview = async (file: UploadFile) => {
-    console.log("--preview", file);
+    console.log("--preview", file.url);
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as RcFile);
     }

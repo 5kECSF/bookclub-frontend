@@ -1,25 +1,24 @@
 import { useRouter } from "next/navigation";
 import { useAuth, User } from "@/lib/state/context/jotai-auth";
 import { useEffect } from "react";
-import { Loader } from "lucide-react";
 
 const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
   return function AuthorizedPage(props: any) {
     const router = useRouter();
-    const { user, loading } = useAuth();
+    const { user, loading, loggedIn } = useAuth();
 
     useEffect(() => {
-      if (loading == null) return;
-      if (!IsAuthorized(user, allowedRoles)) {
+      if (loading === false && !IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
-    }, [router, loading, user]);
+    }, [loading, user]);
 
-    if (typeof window === "undefined") {
-      return null;
+    // Ensure consistent output during SSR
+    if (typeof window === "undefined" || loading === null) {
+      return <div style={{ visibility: "hidden" }}></div>; // Prevent mismatch
     }
-    if (loading || loading === null) {
-      return <Loader />;
+    if (loading || loggedIn === null) {
+      return <div>Loading...</div>;
     }
 
     if (!IsAuthorized(user, allowedRoles)) {

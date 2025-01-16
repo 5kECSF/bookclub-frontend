@@ -1,6 +1,9 @@
 
 # tasks
 
+
+## Generic tasks
+
 - [x] deploy the app
 - [x] finish auth
   - [x] connect the signup
@@ -10,19 +13,21 @@
 - [x] finish multi image upload component and create book
 - [x] connect the genere crud app
 - [x] integrate the frontend ui code
-- [] image with draft
-  - Backend
+- [ ] image with draft
+  - [ ] Backend
     - [x] add status to the model & add the filter of status is active
     - return the body
-    - [] add image name generator with jwt
-  - frontend
-    - refactor the operate function
-
-
-Generic tasks
-- [] make deleting works on ctg
-- [] make updating work on ctg
-
+    - [ ] add image name generator with jwt
+  - [ ] frontend
+    - [x] refactor the operate function
+- [x] made a generic Modal For models with image
+  - [x] made deleting work
+  - [x] made updating work
+  - [x] made updating images work
+  - [x] made a generic FilterDrawer for all models
+- [] write a documentation for code conventions
+  
+## Model completion Tasks
 - [] author
   - add the keys to filter
 - [] category

@@ -23,7 +23,6 @@ export const getQueryFromUrl = (queries: any) => {
       if (value) query[key] = value;
     }
   });
-  console.log("===+++++++++++quwey", query);
   return query;
 };
 export const setUrl = (newQuery: Record<string, any>) => {

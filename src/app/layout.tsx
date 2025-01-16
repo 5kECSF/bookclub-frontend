@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import DataProvider from "@/app/DataProvider";
 import "react-toastify/dist/ReactToastify.min.css";
 import { DevTools } from "jotai-devtools";
+import { Provider } from "jotai";
 import "jotai-devtools/styles.css";
 import { useAuth } from "@/lib/state/context/jotai-auth";
 export default function RootLayout({
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <DevTools />
-        <DataProvider>{loading ? <Loader /> : children}</DataProvider>
-        <ToastContainer />
+        <Provider>
+          <DevTools />
+          <DataProvider>{loading ? <Loader /> : children}</DataProvider>
+          <ToastContainer />
+        </Provider>
       </body>
     </html>
   );

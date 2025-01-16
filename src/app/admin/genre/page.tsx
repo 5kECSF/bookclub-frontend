@@ -1,7 +1,7 @@
 "use client";
 import { KY } from "@/lib/constants";
 import React, { useEffect, useState } from "react";
-import { agColumns } from "./genre-def";
+import { agColumns } from "./model-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import { AddEditModal } from "@/app/admin/genre/add-edit-modal";
