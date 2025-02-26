@@ -1,5 +1,5 @@
-import { useRouter } from "next/navigation";
 import { useAuth, User } from "@/lib/state/context/jotai-auth";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
@@ -42,3 +42,14 @@ export function IsAuthorized(
   if (user && allowedRoles.includes(user.role)) return true;
   return allowedRoles.length < 1;
 }
+
+// export function IsAuthor({children, roles }: {children: React.ReactNode, roles: ROLE[]}) {
+//   const {user}=useUser()
+
+//   return roles?.includes(user?.role as ROLE) ?<>{children}</>: null
+// }
+// export function IsAllowed({children, action }: {children: React.ReactNode, action: ModulePath,}) {
+//   const {user}=useUser()
+//   const roles= PathRoles[action]
+//   return roles?.includes(user?.role as ROLE) ?<>{children}</>: null
+// }

@@ -91,6 +91,9 @@ export const SelectInput = ({
             handleChange(name, e.target.value);
           }}
         >
+          <option className="text-red-500" key={""} value={""} >
+            ---
+          </option>
           {data?.length > 0 ? (
             data.map((domain: any) => (
               <option key={domain[idx]} value={domain[idx]}>
@@ -107,7 +110,7 @@ export const SelectInput = ({
           <FormSvg1 />
         </span>
       </div>
-      {errors[name] && <p className="text-red-500">{errors[name].message}</p>}
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
     </div>
   );
 };

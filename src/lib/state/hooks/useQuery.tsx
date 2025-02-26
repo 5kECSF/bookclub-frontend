@@ -28,6 +28,7 @@ export const useFetch = (
     dir: "desc",
     ...params,
   };
+  console.log(url, params,defaultParams )
   return useQuery({
     queryKey: queryKey,
     queryFn: async () => {
@@ -38,8 +39,6 @@ export const useFetch = (
         return response.data;
       } catch (e: any) {
         let Err = HandleAxiosErr(e);
-        // console.log("||useQueryErr.err", Err);
-
         throw new Error(Err.Message);
         // return [];
       }

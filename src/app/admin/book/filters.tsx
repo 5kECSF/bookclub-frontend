@@ -1,104 +1,72 @@
-import { useState } from "react";
-import { FilterWrapper } from "@/components/admin/crud/filter-wrapper";
-import { InputField } from "@/components/forms/cleanInputs";
-import { Filter } from "lucide-react";
-import { TBookDto } from "@/app/admin/book/model";
-import {
-  CleanSelectInput,
-  CleanSelectProps,
-  SelectInput,
-} from "@/components/forms/select";
+import { FilterLayout } from "@/components/admin/crud/filter-layout";
+import { CleanSelectInput } from "@/components/forms/select";
+import React from "react";
+import { ItemStatus } from "@/types/commonTypes";
+import {useFetch} from "@/lib/state/hooks/useQuery";
+import {KY} from "@/lib/constants";
+import {CleanMultiSelect} from "@/components/forms/multi-select";
 
-interface IFilter {
+interface IFilterProps {
   filterOpen: boolean;
   setFilterOpen: any;
   setQuery: any;
 }
-export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
-  const [modifiedData, setModifiedData] = useState<Partial<TBookDto>>({});
-  // Function to handle field changes
-  const handleLiveChange = (fieldName: string, value: any) => {
-    setQuery((prevData: any) => {
-      // If the value is empty, remove the key from the state
-      if (value === "") {
-        const { [fieldName]: _, ...rest } = prevData; // Remove the field
-        return rest;
-      }
-      // Otherwise, update the field with the new value
-      return {
-        ...prevData,
-        [fieldName]: value,
-      };
-    });
+export function FilterDrawer({
+                               filterOpen,
+                               setFilterOpen,
+                               setQuery,
+                             }: IFilterProps) {
 
-    console.log("modifiedData", modifiedData);
-  };
-  const handleFilter = (fieldName: string, value: any) => {
-    setModifiedData((prevData: any) => {
-      return {
-        ...prevData,
-        [fieldName]: value,
-      };
-    });
-    console.log("modifiedData", modifiedData);
-  };
-
-  const FinishFilter = () => {
-    setQuery((prevData: any) => {
-      // Clean up modifiedData by filtering out keys with empty string values
-      const cleanedData = Object.entries(modifiedData).reduce(
-        (acc: Record<string, any>, [key, value]) => {
-          // If value is not an empty string, keep the key-value pair
-          if (value !== "") {
-            acc[key] = value;
-          } else {
-            // If value is empty, remove key from the existing prevData
-            const { [key]: _, ...rest } = prevData; // Destructure to remove the key
-            prevData = rest; // Update prevData by removing the key
-          }
-          return acc;
-        },
-        {},
-      );
-
-      // Now merge cleanedData into prevData (which no longer contains empty string keys)
-      return {
-        ...prevData,
-        ...cleanedData,
-      };
-    });
-  };
-
+  const {  data: category } = useFetch(
+      [KY.category],
+      `${KY.category}`,
+  );
+    const {  data: genre } = useFetch(
+        [KY.genre, "100"],
+        `${KY.genre}`,{limit: 100}
+    );
+    const {  data: author } = useFetch(
+        [KY.author],
+        `${KY.author}`,
+    );
   return (
-    <div>
-      <FilterWrapper isOpen={filterOpen} setIsOpen={setFilterOpen}>
-        <div>
-          <InputField
-            label={"Search"}
-            name={"q"}
-            // errors={errors}
-            // register={register}
-            handleChange={handleLiveChange}
-            placeholder={"write name"}
-          />
+      <FilterLayout
+          filterOpen={filterOpen}
+          setFilterOpen={setFilterOpen}
+          setQuery={setQuery}
+      >
+        <CleanSelectInput
+            data={category?.body}
+            name={"categoryId"}
+            idx={"_id"}
+            dispIdx={"name"}
+            label={"Category"}
+            req={false}
+        />
           <CleanSelectInput
-            handleChange={handleFilter}
-            data={[{ name: "a" }, { name: "b" }]}
-            name={"name"}
+            data={author?.body}
+            name={"authorId"}
+            idx={"_id"}
+            dispIdx={"name"}
+            label={"Author"}
+            req={false}
+        />
+          <CleanMultiSelect
+            data={genre?.body}
+            name={"genres"}
             idx={"name"}
             dispIdx={"name"}
-            label={"items"}
+            label={"Genre"}
             req={false}
-          />
-        </div>
-        <button
-          onClick={FinishFilter}
-          className="mr-10 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white"
-        >
-          <Filter className="h-5 w-5" />
-          Filter
-        </button>
-      </FilterWrapper>
-    </div>
+        />
+        <CleanSelectInput
+            data={ItemStatus}
+            name={"status"}
+            idx={"name"}
+            dispIdx={"name"}
+            label={"status"}
+            req={false}
+        />
+      </FilterLayout>
   );
-};
+}

@@ -20,9 +20,11 @@ Books can be filtered via:
 
 export const BookValidator = z.object({
   title: z.string().min(2, { message: "min length is 2" }),
-  desc: z.string().min(3, { message: "min length is 2" }),
-  categoryId: z.string(),
-  genres: z.array(z.string()).min(1),
+  desc: z.string().min(3, { message: "min length is 3" }),
+  categoryId: z.string().min(3, { message: "category is required" }),
+  authorId: z.string(),
+  status: z.string(),
+  genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
 });
 
 export type TBookDto = z.infer<typeof BookValidator>;

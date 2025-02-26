@@ -75,7 +75,7 @@ export const FilterLayout = ({
   return (
     <div>
       <FilterWrapper isOpen={filterOpen} setIsOpen={setFilterOpen}>
-        <div>
+        <div className="h-[80%] overflow-y-auto">
           <InputField
             label={"Search"}
             name={"q"}

@@ -12,14 +12,16 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { Modal } from "antd";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BookValidator, IBook, TBookDto } from "./model";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
-import { SelectInput } from "@/components/forms/select";
+import {CleanSelectInput, SelectInput} from "@/components/forms/select";
 import { MultiSelectWithName } from "@/components/forms/multi-select";
+import {DisplayErrors} from "@/lib/functions/object";
+import {ItemStatus} from "@/types/commonTypes";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -43,11 +45,15 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     defaultValues: isUpdate ? { ...book } : {},
   });
 
-  const { isLoading: genreLoading, data: genre } = useFetch(
+  const {  data: genre } = useFetch(
     [KY.genre],
     `${KY.genre}`,
   );
-  const { isLoading: categoryLoading, data: category } = useFetch(
+  const {  data: author } = useFetch(
+    [KY.author],
+    `${KY.author}`,
+  );
+  const {  data: category } = useFetch(
     [KY.category],
     `${KY.category}`,
   );
@@ -70,6 +76,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   };
 
   const onSubmit = async (data: IBook) => {
+    if (!uploadRef.current) return handleErr("no upload ref");
     setLoading(true);
     let resp: Resp<any>;
     let id: string;
@@ -115,14 +122,8 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         uploadRef.current.resetData();
       }
     }
-    updateLocalData(
-      isUpdate ? MTD.PATCH : MTD.POST,
-      KY.book,
-      queryClient,
-      reset,
-      resp.body,
-      book?._id as string,
-    );
+    await queryClient.invalidateQueries({queryKey:[KY.book]})
+
     toast.success(
       `successfully ${isUpdate ? "updated" : "created"} a book with title  ${resp.body?.title} `,
     );
@@ -160,6 +161,16 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 name={"categoryId"}
                 placeholder={"select categories"}
               />
+              <SelectInput
+                register={register}
+                errors={errors}
+                handleChange={handleChange}
+                data={author?.body}
+                idx={"_id"}
+                label={"Author"}
+                name={"authorId"}
+                placeholder={"select Author"}
+              />
 
               <MultiSelectWithName
                 handleChange={handleChange}
@@ -181,6 +192,18 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 handleChange={handleChange}
                 placeholder={"Add the Description"}
               />
+              <SelectInput
+                  register={register}
+                  errors={errors}
+                  handleChange={handleChange}
+                  data={ItemStatus}
+                  idx={"name"}
+                  name={"status"}
+                  dispIdx={"name"}
+                  label={"status"}
+                  placeholder={"status"}
+                  req={false}
+              />
               <FileWithCover
                 oldImg={book?.upload}
                 maxFileNo={3}
@@ -197,7 +220,9 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
               {/*</GenericButton>*/}
               <Submit isLoading={loading} update={isUpdate} />
             </div>
+            {DisplayErrors(errors)}
           </form>
+
         </AddEditWrapper>
       </Modal>
     </>

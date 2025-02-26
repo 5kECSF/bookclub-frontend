@@ -40,7 +40,7 @@ export const InputField = ({
         placeholder={placeholder}
         className={CssCls.input}
       />
-      {errors[name] && <p className="text-red-500">{errors[name].message}</p>}
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
     </div>
   );
 };
@@ -66,7 +66,7 @@ export const TextAreaField = ({
         placeholder={placeholder}
         className={CssCls.input}
       />
-      {errors[name] && <p className="text-red-500">{errors[name].message}</p>}
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
     </div>
   );
 };

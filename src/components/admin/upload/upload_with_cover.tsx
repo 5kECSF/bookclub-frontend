@@ -13,7 +13,7 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
-import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import {FAIL, NotModified, Resp, Succeed} from "@/lib/constants/return.const";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {
@@ -179,6 +179,10 @@ export const FileWithCover = forwardRef(function UploadComp(
     removedImages.forEach((img) => {
       formData.append("removedImages", img.name);
     });
+    //if the image is not updated, don't call the image upload function
+    if (formData.entries().next().done) {
+      if (isUpdate) return NotModified(imgList[0]);
+    }
     if (isUpdate) {
       console.log("=====oldImg", oldImg, fileId);
       return await makeReq(

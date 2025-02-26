@@ -11,7 +11,7 @@ import { FetchError, Spinner } from "@/components/admin/ui/components";
 import { TopButtons } from "@/components/admin/crud/filter-wrapper";
 import QueryChips from "@/components/admin/crud/query-chips";
 import { Pagination } from "@/components/admin/crud/pagination";
-import { Filters } from "./filters";
+import { FilterDrawer } from "./filters";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 
 const BookPage = () => {
@@ -58,7 +58,7 @@ const BookPage = () => {
           onClose={(e) => setModalOpen(false)}
           isUpdate={false}
         />
-        <Filters
+        <FilterDrawer
           setQuery={setQuery}
           filterOpen={filterOpen}
           setFilterOpen={(e: any) => setFilterOpen(false)}

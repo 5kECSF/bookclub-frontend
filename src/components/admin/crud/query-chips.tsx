@@ -30,21 +30,23 @@ const QueryChips = ({ query, setQuery }: { query: any; setQuery: any }) => {
               <div key={key} className="flex flex-col ">
                 <span className="font-bold">{value.length > 0 && key}</span>
                 <div className="flex flex-col  space-y-2">
-                  {value.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center space-x-1 rounded-full bg-blue-500"
-                    >
-                      <span className="pl-2 text-white">{item}</span>
+                  {value
+                      .filter((item) => item.trim() !== "")
+                      .map((item) => (
+                          <div
+                              key={item}
+                              className="flex items-center space-x-1 rounded-full bg-blue-500"
+                          >
+                            <span className="pl-2 text-white">{item}</span>
 
-                      <button
-                        onClick={() => removeArrayItem(key, item)}
-                        className=" m-0 flex h-5 w-5 items-center justify-center rounded-full  text-slate-50"
-                      >
-                        &times;
-                      </button>
-                    </div>
-                  ))}
+                            <button
+                                onClick={() => removeArrayItem(key, item)}
+                                className="m-0 flex h-5 w-5 items-center justify-center rounded-full text-slate-50"
+                            >
+                              &times;
+                            </button>
+                          </div>
+                      ))}
                 </div>
               </div>
             );

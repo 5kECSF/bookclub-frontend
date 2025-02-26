@@ -7,7 +7,7 @@
 //   description: "This is Next.js Home for TailAdmin Dashboard Template",
 // };
 
-import { Child1, Child2, Parent } from "@/components/admin/crud/generic-test";
+import { Child1, Child2, Parent } from "@/components/admin/crud/tests/generic-test";
 
 export default function Home() {
   return (

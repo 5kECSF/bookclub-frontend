@@ -25,14 +25,17 @@
   - [x] made updating work
   - [x] made updating images work
   - [x] made a generic FilterDrawer for all models
-- [] write a documentation for code conventions
+  - 
+- [x] write a documentation for code conventions
   
 ## Model completion Tasks
 - [] author
   - add the keys to filter
-- [] category
+- [x] category
 - [] book
-  - [] filter with page max min
-  - [] filter with author
+  - [] draft multi image upload api(x), frontend()
+  - [x] multi image update:   api[x], frontend [x]
+  - [] filter with page max min: api[], frontend[]
+  - [] filter with author, api[], frontend[]
 - [] Donations
 - [] Borrow History

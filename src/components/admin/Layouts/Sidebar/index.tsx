@@ -144,25 +144,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   path={"/admin/category"}
                 />
                 <ChildItems
+                    name={"Authors"}
+                    pathname={pathname}
+                    path={"/admin/author"}
+                />
+                <ChildItems
                   name={"Books"}
                   pathname={pathname}
                   path={"/admin/book"}
                 />
                 <ChildItems
-                  name={"Authors"}
-                  pathname={pathname}
-                  path={"/admin/author"}
+                    name={"Donations"}
+                    pathname={pathname}
+                    path={"/admin/donation"}
                 />
                 <ChildItems
                   name={"Borrow History"}
                   pathname={pathname}
                   path={"/admin/borrow"}
                 />
-                <ChildItems
-                  name={"Donations"}
-                  pathname={pathname}
-                  path={"/admin/donation"}
-                />
+
               </ItemGroup>
 
               {/*======    Extra OPERATIONS   ========*/}

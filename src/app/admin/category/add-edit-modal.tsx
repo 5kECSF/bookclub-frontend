@@ -1,4 +1,4 @@
-import { AddEditLayout } from "@/components/admin/crud/add-edit-layout";
+import { AddEditLayoutWithFile } from "@/components/admin/crud/add-edit-layout";
 import { TextAreaField } from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants";
 import { InputField } from "@/components/forms/useFormInputs";
@@ -21,7 +21,7 @@ export function AddEditModal({
   category,
 }: ICategoryProps) {
   return (
-    <AddEditLayout<ICategory, TCategoryDto>
+    <AddEditLayoutWithFile<ICategory, TCategoryDto>
       isOpen={isOpen}
       url={KY.category}
       onClose={() => onClose(false)}
@@ -47,6 +47,6 @@ export function AddEditModal({
         // handleChange={handleChange}
         placeholder={"Add the Description"}
       />
-    </AddEditLayout>
+    </AddEditLayoutWithFile>
   );
 }

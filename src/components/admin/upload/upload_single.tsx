@@ -160,8 +160,6 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     });
     //TODO if the image is not updated, dont call the image upload function
     if (formData.entries().next().done) {
-      // let newData: any = imgList[0];
-      // newData._id = newData.uid;
       console.log("the image data is not updated");
       if (isUpdate) return NotModified(imgList[0]);
     }

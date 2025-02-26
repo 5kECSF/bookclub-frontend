@@ -28,7 +28,7 @@ type ShimProps<T extends Obj, TDto> = {
   onClose: (e?: any) => void;
   children: any;
 };
-export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
+export function AddEditLayoutWithFile<T extends Obj, TDto extends FieldValues>({
   isUpdate,
   data,
   schema,
