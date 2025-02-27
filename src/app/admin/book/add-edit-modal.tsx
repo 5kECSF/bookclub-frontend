@@ -156,9 +156,9 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 register={register}
                 errors={errors}
                 handleChange={handleChange}
-                idx={"_id"}
+                idx={"name"}
                 label={"Category"}
-                name={"categoryId"}
+                name={"categoryName"}
                 placeholder={"select categories"}
               />
               <SelectInput
@@ -166,9 +166,9 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                 errors={errors}
                 handleChange={handleChange}
                 data={author?.body}
-                idx={"_id"}
+                idx={"name"}
                 label={"Author"}
-                name={"authorId"}
+                name={"authorName"}
                 placeholder={"select Author"}
               />
 

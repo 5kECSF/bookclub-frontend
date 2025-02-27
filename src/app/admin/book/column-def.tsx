@@ -47,6 +47,8 @@ export const agColumns = [
     minWidth: 70, // Adjust based on typical status text length
     maxWidth: 100,
   },
+  { headerName: "Category", field: "categoryName", filter: "agMultiColumnFilter", minWidth: 100, },
+  { headerName: "Author", field: "authorName", filter: "agMultiColumnFilter", minWidth: 100, },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
   {

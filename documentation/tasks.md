@@ -33,7 +33,7 @@
   - add the keys to filter
 - [x] category
 - [] book
-  - [] draft multi image upload api(x), frontend()
+  - [] draft multi image upload api(x), frontend(x)
   - [x] multi image update:   api[x], frontend [x]
   - [] filter with page max min: api[], frontend[]
   - [] filter with author, api[], frontend[]

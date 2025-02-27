@@ -37,16 +37,16 @@ export function FilterDrawer({
       >
         <CleanSelectInput
             data={category?.body}
-            name={"categoryId"}
-            idx={"_id"}
+            name={"categoryName"}
+            idx={"name"}
             dispIdx={"name"}
             label={"Category"}
             req={false}
         />
           <CleanSelectInput
             data={author?.body}
-            name={"authorId"}
-            idx={"_id"}
+            name={"authorName"}
+            idx={"name"}
             dispIdx={"name"}
             label={"Author"}
             req={false}
