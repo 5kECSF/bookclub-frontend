@@ -3,6 +3,7 @@ import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useMutation } from "@tanstack/react-query";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { useState } from "react";
 // import axios from "axios"
 
 const errorCodes = ["ERR_BAD_REQUEST", "ERR_BAD_RESPONSE"];
@@ -70,4 +71,40 @@ export const useMakeReq = () => {
       return FAIL(Err.Message, Err.Status, e);
     }
   };
+};
+
+//this is the make req with states
+export const useMakeReqState = () => {
+  const axiosAuth = useAxiosAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const makeReq = async (
+      url: string,
+      body: any,
+      method: MTD,
+      headers?: any
+  ): Promise<Resp<any>> => {
+    setLoading(true);
+    setError(null); // Reset error before making a request
+
+    try {
+      const response = await axiosAuth.request({
+        url: `${url}`,
+        method: method,
+        headers: headers ? headers : AppHeaders.JSON,
+        data: body,
+      });
+
+      return Succeed(response?.data);
+    } catch (e: any) {
+      let Err = HandleAxiosErr(e);
+      setError(Err.Message);
+      return FAIL(Err.Message, Err.Status, e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { makeReq, loading, error };
 };

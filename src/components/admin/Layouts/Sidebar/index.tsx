@@ -154,6 +154,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   path={"/admin/book"}
                 />
                 <ChildItems
+                  name={"Users"}
+                  pathname={pathname}
+                  path={"/admin/user"}
+                />
+                <ChildItems
                     name={"Donations"}
                     pathname={pathname}
                     path={"/admin/donation"}

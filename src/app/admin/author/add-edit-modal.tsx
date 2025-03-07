@@ -1,4 +1,4 @@
-import { AddEditLayoutWithFile } from "@/components/admin/crud/add-edit-layout";
+import { AddEditWithFileLayout } from "@/components/admin/crud/add-edit-withFile-layout";
 import { TextAreaField } from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants";
 import { InputField } from "@/components/forms/useFormInputs";
@@ -21,7 +21,7 @@ export function AddEditModal({
   author,
 }: IAuthorProps) {
   return (
-    <AddEditLayoutWithFile<IAuthor, TAuthorDto>
+    <AddEditWithFileLayout<IAuthor, TAuthorDto>
       isOpen={isOpen}
       url={KY.author}
       onClose={() => onClose(false)}
@@ -41,6 +41,6 @@ export function AddEditModal({
         req={false}
         placeholder={"Add the Bio"}
       />
-    </AddEditLayoutWithFile>
+    </AddEditWithFileLayout>
   );
 }

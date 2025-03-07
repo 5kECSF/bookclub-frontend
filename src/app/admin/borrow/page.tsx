@@ -8,7 +8,7 @@ import { AddEditModal } from "./add-edit-modal";
 import { FilterDrawer } from "./filter-drawer";
 import { PageLayout } from "@/components/admin/crud/page-layout";
 
-const GenrePage = () => {
+const BorrowPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 
@@ -27,8 +27,8 @@ const GenrePage = () => {
         query={query}
         setModalOpen={setModalOpen}
         setFilterOpen={setFilterOpen}
-        pageName={"Genre"}
-        url={KY.genre}
+        pageName={"Borrow"}
+        url={KY.borrow}
         agColumns={agColumns}
       />
       <AddEditModal
@@ -45,5 +45,5 @@ const GenrePage = () => {
   );
 };
 
-// export default GenrePage;
-export default withAuthorization(GenrePage, ["ADMIN"]);
+// export default BorrowPage;
+export default withAuthorization(BorrowPage, ["ADMIN"]);

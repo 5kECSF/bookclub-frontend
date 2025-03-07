@@ -33,18 +33,11 @@ export const FilterLayout = ({
   };
   const handleChange = (fieldName: string, value: any) => {
     setModifiedData((prevData: any) => {
-      // If the value is empty, remove the key from the state
-      // if (value === "") {
-      //   const { [fieldName]: _, ...rest } = prevData; // Remove the field
-      //   return rest;
-      // }
-      // Otherwise, update the field with the new value
       return {
         ...prevData,
         [fieldName]: value,
       };
     });
-    // console.log("modifiedData", modifiedData);
   };
 
   const FinishFilter = () => {

@@ -23,8 +23,9 @@ const CellAction = ({ row }: { row: IBook }) => {
         url: `${KY.book}/${row._id}`,
         method: MTD.DELETE,
       });
-      message.success(`delete ${KY.book}: ${data?.body?.name} success`);
-      updateAfterDelete(KY.book, queryClient, row?._id as string);
+      message.success(`delete ${KY.book}: ${data?.title} success`);
+      console.log("data", data)
+      await queryClient.invalidateQueries({queryKey:[KY.book]})
       setDeleteOpen(false);
     } catch (e: any) {
       console.log(e.message);

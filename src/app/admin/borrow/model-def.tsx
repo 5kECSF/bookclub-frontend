@@ -4,11 +4,11 @@ import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import { AddEditModal } from "@/app/admin/category/add-edit-modal";
+import { AddEditModal } from "@/app/admin/borrow/add-edit-modal";
 import { z } from "zod";
 import { IUpload } from "@/types/upload";
 
-export interface ICategory {
+export interface IBorrow {
   _id?: string;
   name: string;
   slug?: string;
@@ -18,12 +18,12 @@ export interface ICategory {
   upload?: IUpload;
 }
 
-export const CategoryValidator = z.object({
+export const BorrowValidator = z.object({
   name: z.string().min(2, { message: "min length is 2" }),
   desc: z.string().min(3, { message: "min length is 2" }),
   status: z.string().optional(),
 });
-export type TCategoryDto = z.infer<typeof CategoryValidator>;
+export type TBorrowDto = z.infer<typeof BorrowValidator>;
 
 // ====== =================  Column Defs for the table ==================
 // =====================================================================
@@ -64,7 +64,7 @@ export const agColumns = [
 
   // 4 - Function - A function that returns a JSX element for display
   {
-    cellRenderer: (params: { data: ICategory }) => (
+    cellRenderer: (params: { data: IBorrow }) => (
       <MiniAction row={params.data} />
     ),
     cellStyle: { padding: "0.4em" },
@@ -74,20 +74,20 @@ export const agColumns = [
   },
 ];
 
-const MiniAction = ({ row }: { row: ICategory }) => {
+const MiniAction = ({ row }: { row: IBorrow }) => {
   const [editOpen, setEditOpen] = useState(false);
   return (
     <EditDeleteButtons
       name={row.name}
       id={row._id}
-      url={KY.category}
+      url={KY.borrow}
       onEditClick={() => setEditOpen(true)}
     >
       <AddEditModal
         isOpen={editOpen}
         onClose={setEditOpen}
         isUpdate={true}
-        category={row}
+        borrow={row}
       />
     </EditDeleteButtons>
   );

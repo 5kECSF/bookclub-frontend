@@ -4,38 +4,45 @@ import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import { AddEditModal } from "@/app/admin/category/add-edit-modal";
+import AddEdit from "@/app/admin/donation/add-edit";
 import { z } from "zod";
 import { IUpload } from "@/types/upload";
 
-export interface ICategory {
+export interface IDonation {
   _id?: string;
-  name: string;
-  slug?: string;
   desc?: string;
-  fileId?: string;
-  body?: string;
+  bookId: string;
+  donorId: string;
+  donorName?: string
+  bookName?:string
+  status?: bookStatus;
+  note?: string;
   upload?: IUpload;
 }
-
-export const CategoryValidator = z.object({
-  name: z.string().min(2, { message: "min length is 2" }),
-  desc: z.string().min(3, { message: "min length is 2" }),
-  status: z.string().optional(),
+export enum bookStatus {
+  Available = 'AVAILABLE',
+  NotAvailable = 'NOT_AVAILABLE', // if it is not borrowed but un available for another reason
+  Taken = 'TAKEN',
+  Reserved = 'RESERVED', // if it has been accepted to be borrowed
+}
+export const bookStatusList=[{name: bookStatus.Available}, {name:bookStatus.NotAvailable}, {name:bookStatus.Taken}, {name:bookStatus.Reserved}]
+export const DonationValidator = z.object({
+  note: z.string().min(3, { message: "min length is 2" }),
+  donorId: z.string().min(1, { message: "min length is 2" }),
+  bookId: z.string().min(1, { message: "min length is 2" }),
+  status: z.enum([bookStatus.Available, bookStatus.NotAvailable, bookStatus.Taken, bookStatus.Reserved]).optional(),
 });
-export type TCategoryDto = z.infer<typeof CategoryValidator>;
+export type TDonationDto = z.infer<typeof DonationValidator>;
 
 // ====== =================  Column Defs for the table ==================
 // =====================================================================
 
 export const agColumns = [
-  // 1 - undefined - Grid renders the value as a string.
   {
-    field: "name",
+    field: "bookName",
     filter: "agMultiColumnFilter",
-    maxWidth: 200,
+    minWidth: 150,
   },
-  // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
@@ -44,6 +51,11 @@ export const agColumns = [
     cellRenderer: (params: any) => (
       <Avatar size={60} src={getImg(params.data?.upload)} />
     ),
+  },
+  {
+    field: "donorName",
+    filter: "agMultiColumnFilter",
+    minWidth: 150,
   },
   {
     headerName: "Status",
@@ -56,15 +68,15 @@ export const agColumns = [
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
   {
-    headerName: "Description",
-    field: "desc",
+    headerName: "Note",
+    field: "note",
     filter: "agMultiColumnFilter",
   },
   // 3
 
   // 4 - Function - A function that returns a JSX element for display
   {
-    cellRenderer: (params: { data: ICategory }) => (
+    cellRenderer: (params: { data: IDonation }) => (
       <MiniAction row={params.data} />
     ),
     cellStyle: { padding: "0.4em" },
@@ -74,20 +86,20 @@ export const agColumns = [
   },
 ];
 
-const MiniAction = ({ row }: { row: ICategory }) => {
+const MiniAction = ({ row }: { row: IDonation }) => {
   const [editOpen, setEditOpen] = useState(false);
   return (
     <EditDeleteButtons
-      name={row.name}
+      name={row?.bookName as string}
       id={row._id}
-      url={KY.category}
+      url={KY.donation}
       onEditClick={() => setEditOpen(true)}
     >
-      <AddEditModal
+      <AddEdit
         isOpen={editOpen}
-        onClose={setEditOpen}
+        onClose={(e) => setEditOpen(false)}
         isUpdate={true}
-        category={row}
+        donation={row}
       />
     </EditDeleteButtons>
   );

@@ -64,5 +64,6 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
+    pinned: "right",
   },
 ];

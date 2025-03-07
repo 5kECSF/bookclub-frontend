@@ -5,7 +5,8 @@ export interface IBook {
   _id?: string;
   title: string;
   desc: string;
-  categoryId: string;
+  categoryName: string;
+  authorName?: string;
   slug?: string;
   fileId?: string;
   body?: string;

@@ -5,7 +5,7 @@ source_dir="genre"
 source_Cap="Genre"
 
 # Specify the list of destination directories
-destination_dirs=( "author" "category" )
+destination_dirs=( "user" "donation" "borrow" )
 
 
 # Iterate through the destination directories

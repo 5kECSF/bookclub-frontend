@@ -1,4 +1,6 @@
 import { Spinner } from "../spinner";
+import {EmailSvg, PassowrdSvg} from "@/components/svgs/auth-svg";
+import React, {HTMLInputTypeAttribute} from "react";
 
 export const CssCls = {
   input:
@@ -15,7 +17,7 @@ export interface InputProps {
   handleChange?: any;
   placeholder: string;
   req?: boolean;
-  inputType?: string;
+  inputType?: HTMLInputTypeAttribute;
   row?: number;
 }
 export const InputField = ({
@@ -44,6 +46,51 @@ export const InputField = ({
     </div>
   );
 };
+export function EmailField({ register, errors,name }: any) {
+  return (
+      <div className="mb-4">
+        <label className="mb-2.5 block font-medium text-black dark:text-white">
+          Email
+        </label>
+        <div className="relative">
+          <input
+              {...register(name)}
+              type="email"
+              placeholder="Enter your email"
+              className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+
+          <span className="absolute right-4 top-4">
+          <EmailSvg />
+        </span>
+          {errors[name] && <p className="text-red">{errors[name].message}</p>}
+        </div>
+      </div>
+  );
+}
+export function PasswordField({ register, errors, placeHolder, label,name }: any) {
+  return (
+      <div className="mb-4">
+        <label className="mb-2.5 block font-medium text-black dark:text-white">
+          {label}
+        </label>
+        <div className="relative">
+          <input
+              {...register(name)}
+              type="password"
+              required
+              placeholder={placeHolder}
+              className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+
+          <span className="absolute right-4 top-4">
+          <PassowrdSvg />
+        </span>
+          {errors[name] && <p className="text-red">{errors[name].message}</p>}
+        </div>
+      </div>
+  );
+}
 export const TextAreaField = ({
   label,
   name,
@@ -63,6 +110,31 @@ export const TextAreaField = ({
         {...register(name)}
         onChange={(e) => handleChange(name, e.target.value)}
         rows={row}
+        placeholder={placeholder}
+        className={CssCls.input}
+      />
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
+    </div>
+  );
+};
+export const DatePickerField = ({
+  label,
+  name,
+  register,
+  handleChange,
+  placeholder,
+  errors,
+  req = true,
+}: InputProps) => {
+  return (
+    <div className="mb-6">
+      <label className="mb-2.5 block text-black dark:text-white">
+        {label} {req && <span className="text-meta-1">*</span>}
+      </label>
+      <input
+          type="date"
+        {...register(name)}
+        onChange={(e) => handleChange(name, e.target.value)}
         placeholder={placeholder}
         className={CssCls.input}
       />

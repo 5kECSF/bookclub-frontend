@@ -30,6 +30,10 @@ export enum KY {
   genre = "genre",
   book = "book",
   author = "author",
+  user = "users",
+  borrow = "borrow",
+  donation = "donation",
+
 }
 
 const projName = `aait-a3640.appspot.com`;

@@ -28,7 +28,7 @@ export const useFetch = (
     dir: "desc",
     ...params,
   };
-  console.log(url, params,defaultParams )
+  // console.log(url, params,defaultParams )
   return useQuery({
     queryKey: queryKey,
     queryFn: async () => {

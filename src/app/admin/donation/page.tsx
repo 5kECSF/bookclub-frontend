@@ -4,16 +4,16 @@ import React, { useEffect, useState } from "react";
 import { agColumns } from "./model-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
-import { AddEditModal } from "./add-edit-modal";
+import AddEdit  from "./add-edit";
 import { FilterDrawer } from "./filter-drawer";
 import { PageLayout } from "@/components/admin/crud/page-layout";
 
-const GenrePage = () => {
+const DonationPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 
   const [query, setQuery] = useState<Record<string, any>>(
-    getQueryFromUrl({ status: "active" }),
+    getQueryFromUrl({ }),
   );
 
   useEffect(() => {
@@ -27,13 +27,13 @@ const GenrePage = () => {
         query={query}
         setModalOpen={setModalOpen}
         setFilterOpen={setFilterOpen}
-        pageName={"Genre"}
-        url={KY.genre}
+        pageName={"Donation"}
+        url={KY.donation}
         agColumns={agColumns}
       />
-      <AddEditModal
+      <AddEdit
         isOpen={modalOpen}
-        onClose={setModalOpen}
+        onClose={(e) => setModalOpen(false)}
         isUpdate={false}
       />
       <FilterDrawer
@@ -45,5 +45,5 @@ const GenrePage = () => {
   );
 };
 
-// export default GenrePage;
-export default withAuthorization(GenrePage, ["ADMIN"]);
+// export default DonationPage;
+export default withAuthorization(DonationPage, ["ADMIN"]);

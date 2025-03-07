@@ -2,35 +2,32 @@ import { AddEditWithFileLayout } from "@/components/admin/crud/add-edit-withFile
 import { TextAreaField } from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants";
 import { InputField } from "@/components/forms/useFormInputs";
-import {
-  CategoryValidator,
-  ICategory,
-  TCategoryDto,
-} from "@/app/admin/category/model-def";
+import { BorrowValidator, IBorrow, TBorrowDto } from "@/app/admin/borrow/model-def";
+import {AddEditLayout} from "@/components/admin/crud/add-edit-layout";
 
-interface ICategoryProps {
+interface IBorrowProps {
   isUpdate: boolean;
   isOpen: boolean;
   onClose: (e?: any) => void;
-  category?: ICategory;
+  borrow?: IBorrow;
 }
 export function AddEditModal({
   isOpen,
   onClose,
   isUpdate,
-  category,
-}: ICategoryProps) {
+  borrow,
+}: IBorrowProps) {
   return (
-    <AddEditWithFileLayout<ICategory, TCategoryDto>
+    <AddEditLayout<IBorrow, TBorrowDto>
       isOpen={isOpen}
-      url={KY.category}
+      url={KY.borrow}
       onClose={() => onClose(false)}
-      schema={CategoryValidator}
+      schema={BorrowValidator}
       isUpdate={isUpdate}
-      data={category}
+      data={borrow}
     >
       <InputField
-        label={"Category Name"}
+        label={"Borrow Name"}
         name={"name"}
         // errors={errors}
         // register={register}
@@ -47,6 +44,6 @@ export function AddEditModal({
         // handleChange={handleChange}
         placeholder={"Add the Description"}
       />
-    </AddEditWithFileLayout>
+    </AddEditLayout>
   );
 }

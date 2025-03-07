@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const QueryChips = ({ query, setQuery }: { query: any; setQuery: any }) => {
   // Function to remove a key from query

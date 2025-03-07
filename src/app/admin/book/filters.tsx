@@ -1,10 +1,11 @@
 import { FilterLayout } from "@/components/admin/crud/filter-layout";
 import { CleanSelectInput } from "@/components/forms/select";
-import React from "react";
+import React, {useState} from "react";
 import { ItemStatus } from "@/types/commonTypes";
 import {useFetch} from "@/lib/state/hooks/useQuery";
 import {KY} from "@/lib/constants";
-import {CleanMultiSelect} from "@/components/forms/multi-select";
+
+import {CleanMultiSearch, CleanMultiSelect, CleanSearch} from "@/components/forms/cleanInputs";
 
 interface IFilterProps {
   filterOpen: boolean;
@@ -17,17 +18,20 @@ export function FilterDrawer({
                                setQuery,
                              }: IFilterProps) {
 
-  const {  data: category } = useFetch(
-      [KY.category],
-      `${KY.category}`,
+    const [ctgQ, setCtgQ] = useState("")
+    const {  data: category } = useFetch(
+      [KY.category, ctgQ],
+      `${KY.category}`, {limit: 100, q: ctgQ}
   );
+    const [genQ, setGenQ] = useState("")
     const {  data: genre } = useFetch(
-        [KY.genre, "100"],
-        `${KY.genre}`,{limit: 100}
+        [KY.genre, "100", genQ],
+        `${KY.genre}`, {limit: 100, q: genQ}
     );
+    const [authorQ, setAuthorQ] = useState("")
     const {  data: author } = useFetch(
-        [KY.author],
-        `${KY.author}`,
+        [KY.author, authorQ],
+        `${KY.author}`,{limit: 100, q: authorQ}
     );
   return (
       <FilterLayout
@@ -35,30 +39,33 @@ export function FilterDrawer({
           setFilterOpen={setFilterOpen}
           setQuery={setQuery}
       >
-        <CleanSelectInput
-            data={category?.body}
-            name={"categoryName"}
-            idx={"name"}
-            dispIdx={"name"}
-            label={"Category"}
-            req={false}
-        />
-          <CleanSelectInput
-            data={author?.body}
-            name={"authorName"}
-            idx={"name"}
-            dispIdx={"name"}
-            label={"Author"}
-            req={false}
-        />
-          <CleanMultiSelect
-            data={genre?.body}
-            name={"genres"}
-            idx={"name"}
-            dispIdx={"name"}
-            label={"Genre"}
-            req={false}
-        />
+          <CleanSearch
+              handleSearch={(e: string)=>{setCtgQ(e)}}
+              data={category?.body || []}
+              name={"categoryName"}
+              idx={"name"}
+              dispIdx={"name"}
+              label={"Category"}
+              req={false}
+          />
+          <CleanMultiSearch
+              handleSearch={(e: string)=>{setGenQ(e)}}
+              data={genre?.body || []}
+              name={"genres"}
+              idx={"name"}
+              dispIdx={"name"}
+              label={"Genre"}
+              req={false}
+          />
+          <CleanSearch
+              handleSearch={(e: string)=>{setAuthorQ(e)}}
+              data={author?.body || []}
+              name={"authorName"}
+              idx={"name"}
+              dispIdx={"name"}
+              label={"Author"}
+              req={false}
+          />
         <CleanSelectInput
             data={ItemStatus}
             name={"status"}

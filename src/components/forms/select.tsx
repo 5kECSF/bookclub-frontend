@@ -13,7 +13,9 @@ export interface CleanSelectProps {
   //
   errors?: any;
   placeholder?: string;
+  handleSearch?: any
 }
+
 
 export const CleanSelectInput = ({
   idx = "name",
@@ -95,9 +97,9 @@ export const SelectInput = ({
             ---
           </option>
           {data?.length > 0 ? (
-            data.map((domain: any) => (
-              <option key={domain[idx]} value={domain[idx]}>
-                {domain[dispIdx]}
+            data.map((item: any) => (
+              <option key={item[idx]} value={item[idx]}>
+                {item[dispIdx]}
               </option>
             ))
           ) : (
