@@ -1,13 +1,10 @@
 import { FilterLayout } from "@/components/admin/crud/filter-layout";
 import { CleanSelectInput } from "@/components/forms/select";
-import React, {useMemo, useState} from "react";
-import { ItemStatus } from "@/types/commonTypes";
+import React, { useState} from "react";
 import {bookStatusList} from "@/app/admin/donation/model-def";
 import {useFetch} from "@/lib/state/hooks/useQuery";
 import {KY} from "@/lib/constants";
 import {CleanSearch} from "@/components/forms/cleanInputs";
-import {AutoComplete} from "antd";
-import type { AutoCompleteProps } from 'antd';
 interface IFilterProps {
   filterOpen: boolean;
   setFilterOpen: any;
@@ -19,12 +16,11 @@ export function FilterDrawer({
   setQuery,
 }: IFilterProps) {
   const [bookQ, setBookQ] = useState("")
-  const [userQ, setUserQ] = useState("")
   const {  data: book } = useFetch(
       [KY.book, bookQ],
       `${KY.book}`,{q: bookQ}
   );
-
+  const [userQ, setUserQ] = useState("")
   const {  data: user } = useFetch(
       [KY.user, userQ],
       `${KY.user}`,{q: userQ}
