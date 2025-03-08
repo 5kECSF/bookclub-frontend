@@ -7,7 +7,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", "class"],
+  darkMode: ["class"],
   theme: {
   	fontFamily: {
   		satoshi: [
@@ -296,7 +296,7 @@ const config: Config = {
   			'21/9': '21 / 9'
   		},
   		backgroundImage: {
-  			video: 'url('../images/video/video.png')'
+  			video: 'url("../images/video/video.png")'
   		},
   		content: {
   			'icon-copy': 'url("../images/icon/icon-copy-alt.svg")'
