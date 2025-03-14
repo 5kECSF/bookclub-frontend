@@ -85,7 +85,7 @@ const MiniAction = ({ row }: { row: IAuthor }) => {
     >
       <AddEditModal
         isOpen={editOpen}
-        onClose={setEditOpen}
+        onClose={(e) => setEditOpen(false)}
         isUpdate={true}
         author={row}
       />

@@ -13,6 +13,14 @@ export const agColumns = [
     field: "title",
     filter: "agMultiColumnFilter",
     suppressSizeToFit: false,
+  },  {
+    field: "instanceCnt",
+    filter: "agMultiColumnFilter",
+    suppressSizeToFit: false,
+  },  {
+    field: "availableCnt",
+    filter: "agMultiColumnFilter",
+    suppressSizeToFit: false,
   },
   // 2 - String - The name of a cell renderer registered with the grid.
   {

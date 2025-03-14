@@ -13,6 +13,7 @@ export interface IDonation {
   desc?: string;
   bookId: string;
   donorId: string;
+  uid?: string;
   donorName?: string
   bookName?:string
   status?: bookStatus;
@@ -42,6 +43,10 @@ export const agColumns = [
     field: "bookName",
     filter: "agMultiColumnFilter",
     minWidth: 150,
+  },{
+    field: "uid",
+    filter: "agMultiColumnFilter",
+    maxWidth: 150,
   },
   {
     cellStyle: { padding: "0.4em" },

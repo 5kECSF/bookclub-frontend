@@ -1,9 +1,21 @@
-import { AddEditWithFileLayout } from "@/components/admin/crud/add-edit-withFile-layout";
-import { TextAreaField } from "@/components/forms/useFormInputs";
-import { KY } from "@/lib/constants";
+import {Submit, TextAreaField} from "@/components/forms/useFormInputs";
+import {KY, MTD} from "@/lib/constants";
 import { InputField } from "@/components/forms/useFormInputs";
-import { BorrowValidator, IBorrow, TBorrowDto } from "@/app/admin/borrow/model-def";
+import {borrowStatusList, BorrowValidator, IBorrow, TBorrowDto} from "@/app/admin/borrow/model-def";
 import {AddEditLayout} from "@/components/admin/crud/add-edit-layout";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import React, {useState} from "react";
+import {useFetch} from "@/lib/state/hooks/useQuery";
+import {useQueryClient} from "@tanstack/react-query";
+import {useMakeReqState} from "@/lib/state/hooks/useMutation";
+import {toast} from "react-toastify";
+import {Resp} from "@/lib/constants/return.const";
+import {Modal} from "antd";
+import {AddEditWrapper} from "@/components/admin/crud/add-edit-wrapper";
+import {SingleSelectWithSearch} from "@/components/forms/multi-select";
+import {SelectInput} from "@/components/forms/select";
+import {DisplayErrors} from "@/lib/functions/object";
 
 interface IBorrowProps {
   isUpdate: boolean;
@@ -11,39 +23,171 @@ interface IBorrowProps {
   onClose: (e?: any) => void;
   borrow?: IBorrow;
 }
-export function AddEditModal({
-  isOpen,
-  onClose,
-  isUpdate,
-  borrow,
-}: IBorrowProps) {
-  return (
-    <AddEditLayout<IBorrow, TBorrowDto>
-      isOpen={isOpen}
-      url={KY.borrow}
-      onClose={() => onClose(false)}
-      schema={BorrowValidator}
-      isUpdate={isUpdate}
-      data={borrow}
-    >
-      <InputField
-        label={"Borrow Name"}
-        name={"name"}
-        // errors={errors}
-        // register={register}
-        // handleChange={handleChange}
-        placeholder={"write name"}
-      />
 
-      <TextAreaField
-        label={"Description"}
-        name={"desc"}
-        // errors={errors}
-        // register={register}
-        req={false}
-        // handleChange={handleChange}
-        placeholder={"Add the Description"}
-      />
-    </AddEditLayout>
+const AddEdit = ({ isUpdate, isOpen, onClose, borrow }: IBorrowProps) => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    reset
+  } = useForm<TBorrowDto>({
+    resolver: zodResolver(BorrowValidator),
+    defaultValues: isUpdate ? { ...borrow } : {},
+  });
+  const [bookQ, setBookQ] = useState("")
+  const [bookId, setBookId] = useState("")
+
+  const {  data: book } = useFetch(
+      [KY.book, bookQ],
+      `${KY.book}`,{q: bookQ}
   );
-}
+
+  const [userQ, setUserQ] = useState("")
+  const {  data: user } = useFetch(
+      [KY.user, userQ],
+      `${KY.user}`,{q: userQ}
+  )
+  const [donationQ, setDonationQ] = useState("")
+  const {  data: donation } = useFetch(
+      [KY.donation, donationQ, bookId],
+      `${KY.donation}`,{q: donationQ, bookId}
+  );
+
+
+
+  const [modifiedData, setModifiedData] = useState<Partial<IBorrow>>({});
+  // Function to handle field changes
+  const handleChange = (fieldName: keyof IBorrow, value: string) => {
+    setModifiedData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+  const handleBookChange = (fieldName: keyof IBorrow, value: string) => {
+    setModifiedData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+    setBookId(value)
+  };
+
+  const queryClient = useQueryClient();
+  const {makeReq, loading} = useMakeReqState();
+
+  const handleErr = (message: string, autoClose: number = 2500) => {
+    toast.error(`${message}: `, { autoClose });
+  };
+
+  const onSubmit = async (data: IBorrow) => {
+    let resp: Resp<any>;
+    if (isUpdate) {
+      if (!borrow || !("_id" in borrow)) return handleErr("malformed update");
+      resp = await makeReq(`${KY.borrow}/${borrow._id}`, modifiedData, MTD.PATCH);
+      if (!resp.ok) return handleErr(resp.message);
+    } else {
+      resp = await makeReq(`${KY.borrow}`, data, MTD.POST);
+      if (!resp.ok) return handleErr(resp.message);
+    }
+    await queryClient.invalidateQueries({queryKey:[KY.borrow]})
+    reset()
+    toast.success(
+        `successfully ${isUpdate ? "updated" : "created"} a Borrow of user ${resp.body.fullName} `,
+    );
+  };
+
+  return (
+      <>
+        <Modal
+            title={isUpdate ? `Update ${KY.book}` : `Create ${KY.book}`}
+            open={isOpen}
+            onOk={handleSubmit(onSubmit)}
+            onCancel={onClose}
+            footer={[]}
+        >
+          <AddEditWrapper title={"Borrow History"}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="p-6.5">
+                <SingleSelectWithSearch
+                    control={control}
+                    errors={errors}
+                    handleChange={handleBookChange}
+                    handleSearch={(e: string)=>{setBookQ(e)}}
+                    data={book?.body || []}
+                    idx={"_id"}
+                    dispIdx={"title"}
+                    label={"Book"}
+                    name={"bookId"}
+                    placeholder={"type title of Book"}
+                />
+                <SingleSelectWithSearch
+                    control={control}
+                    errors={errors}
+                    handleChange={handleChange}
+                    handleSearch={(e: string)=>{setDonationQ(e)}}
+                    data={donation?.body || []}
+                    idx={"_id"}
+                    dispIdx={"uid"}
+                    label={"Book Instances"}
+                    name={"instanceId"}
+                    placeholder={"Select the specific book instance"}
+                />
+                <SingleSelectWithSearch
+                    errors={errors}
+                    control={control}
+                    data={user?.body || []}
+                    handleChange={handleChange}
+                    handleSearch={(e: string)=>{setUserQ(e)}}
+                    idx={"_id"}
+                    dispIdx={"email"}
+                    label={"User"}
+                    name={"userId"}
+                    placeholder={"type name of  User"}
+                />
+
+                <TextAreaField
+                    register={register}
+                    errors={errors}
+                    handleChange={handleChange}
+                    label={"note"}
+                    name={"note"}
+                    req={false}
+                    placeholder={"Add the Description"}
+                />
+                <InputField
+                    register={register}
+                    errors={errors}
+                    handleChange={handleChange}
+                    label={"Taken Date"}
+                    name={"date"}
+                    req={false}
+                    inputType={"date"}
+                    placeholder={"Add the Description"}
+                />
+
+                <SelectInput
+                    register={register}
+                    errors={errors}
+                    handleChange={handleChange}
+                    data={borrowStatusList}
+                    idx={"name"}
+                    name={"status"}
+                    dispIdx={"name"}
+                    label={"status"}
+                    placeholder={"status"}
+                    req={false}
+                />
+
+                <Submit isLoading={loading} update={isUpdate} />
+              </div>
+              {DisplayErrors(errors)}
+            </form>
+
+          </AddEditWrapper>
+        </Modal>
+      </>
+  );
+};
+
+export default AddEdit;

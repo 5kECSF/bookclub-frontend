@@ -4,17 +4,40 @@ import React, { useEffect, useState } from "react";
 import { agColumns } from "./model-def";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
-import { AddEditModal } from "./add-edit-modal";
+import AddEditModal  from "./add-edit-modal";
 import { FilterDrawer } from "./filter-drawer";
-import { PageLayout } from "@/components/admin/crud/page-layout";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
+import {TopButtons} from "@/components/admin/crud/filter-wrapper";
+import QueryChips from "@/components/admin/crud/query-chips";
+import {FetchError, Spinner} from "@/components/admin/ui/components";
+import {TableComponent} from "@/components/AgGrid";
+import {Pagination} from "@/components/admin/crud/pagination";
+import {useFetch} from "@/lib/state/hooks/useQuery";
 const BorrowPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 
   const [query, setQuery] = useState<Record<string, any>>(
-    getQueryFromUrl({ status: "active" }),
+    getQueryFromUrl({ status: "BORROWED" }),
   );
+    const setPage = (page: number) => {
+        setQuery({ ...query, page });
+    };
+    const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
+        [KY.borrow, JSON.stringify(query)],
+        `${KY.borrow}`,
+        query,
+    );
+
+    // Array of tab data (you can customize this)
+    const tabs = [
+
+        { id: "WAITLIST", label: "Request Waitlist" },
+        { id: "ACCEPTED", label: "Request accepted Books" },
+        { id: "BORROWED", label: "Borrowed Books" },
+        { id: "RETURNED", label: "Returned Books" },
+        { id: "", label: "All" },
+    ];
 
   useEffect(() => {
     setUrl(query);
@@ -22,34 +45,48 @@ const BorrowPage = () => {
 
   return (
     <>
-        <Tabs defaultValue="account" className="w-[400px]">
-            <TabsList>
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account"><PageLayout
-                setQuery={setQuery}
-                query={query}
-                setModalOpen={setModalOpen}
-                setFilterOpen={setFilterOpen}
-                pageName={"Borrow"}
-                url={KY.borrow}
-                agColumns={agColumns}
-            /></TabsContent>
-            <TabsContent value="password"><PageLayout
-                setQuery={setQuery}
-                query={query}
-                setModalOpen={setModalOpen}
-                setFilterOpen={setFilterOpen}
-                pageName={"Borrow2"}
-                url={KY.borrow}
-                agColumns={agColumns}
-            /></TabsContent>
-        </Tabs>
+
+        <Breadcrumb pageName={"Borrow"} />
+        <div className="bg-blue h-full">
+            <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
+            <QueryChips query={query} setQuery={setQuery} />
+            <div className="flex space-x-2 border-b border-gray-200">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setQuery({ ...query, status:tab.id })}
+                        className={`px-4 py-2 text-sm font-medium rounded-t-md focus:outline-none transition-colors duration-200 ${
+                            query.status == tab.id || (tab.id==""&& !query.status)
+                                ? "bg-white text-blue-600 border-b-2 border-blue-600"
+                                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                        }`}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+            </div>
+            {isLoading ? (
+                <Spinner />
+            ) : isError ? (
+                <FetchError message={error?.message} />
+            ) : (
+                <div className="pt-8">
+                    <TableComponent colDefs={agColumns} rowData={data?.body || []} />
+                    <Pagination
+                        isPlaceholderData={isPlaceholderData}
+                        page={query.page}
+                        hasNext={data?.hasNext || false}
+                        setPage={setPage}
+                    />
+                </div>
+            )}
+        </div>
+
+
 
       <AddEditModal
         isOpen={modalOpen}
-        onClose={setModalOpen}
+        onClose={(e) => setModalOpen(false)}
         isUpdate={false}
       />
       <FilterDrawer

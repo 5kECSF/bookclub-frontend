@@ -4,24 +4,39 @@ import { Avatar } from "antd";
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import { AddEditModal } from "@/app/admin/borrow/add-edit-modal";
+import  AddEditModal  from "@/app/admin/borrow/add-edit-modal";
 import { z } from "zod";
-import { IUpload } from "@/types/upload";
 
 export interface IBorrow {
   _id?: string;
-  name: string;
-  slug?: string;
-  desc?: string;
-  fileId?: string;
-  body?: string;
-  upload?: IUpload;
+  bookId: string;
+  bookName?: string;
+  userId?: string;
+  userName?: string;
+  instanceId?: string;
+    instanceUid?: string;
+  takenDate?: Date;
+  dueDate?: Date;
+  returnedDate?: Date;
+  note?: string;
+  status?: borrowStatus
 }
-
+export enum borrowStatus {
+  Taken = 'BORROWED',
+  WaitList = 'WAITLIST',
+  Accepted = 'ACCEPTED',
+  Returned = 'RETURNED',
+}
+export const borrowStatusList=[{name: borrowStatus.Taken}, {name:borrowStatus.WaitList}, {name:borrowStatus.Accepted}, {name:borrowStatus.Returned}]
 export const BorrowValidator = z.object({
-  name: z.string().min(2, { message: "min length is 2" }),
-  desc: z.string().min(3, { message: "min length is 2" }),
-  status: z.string().optional(),
+  bookId: z.string().min(2, { message: "min length is 2" }),
+  userId: z.string().min(2, { message: "min length is 2" }),
+  instanceId: z.string().min(2, { message: "min length is 2" }),
+  takenDate: z.date().optional(),
+  dueDate: z.date().optional(),
+  returnedDate: z.date().optional(),
+  note: z.string().min(3, { message: "min length is 2" }),
+  status: z.enum([borrowStatus.Taken, borrowStatus.Returned, borrowStatus.WaitList, borrowStatus.Accepted]).optional(),
 });
 export type TBorrowDto = z.infer<typeof BorrowValidator>;
 
@@ -30,11 +45,7 @@ export type TBorrowDto = z.infer<typeof BorrowValidator>;
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
-  {
-    field: "name",
-    filter: "agMultiColumnFilter",
-    maxWidth: 200,
-  },
+  { field: "bookName",  filter: "agMultiColumnFilter",  maxWidth: 200},
   // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "0.4em" },
@@ -45,6 +56,8 @@ export const agColumns = [
       <Avatar size={60} src={getImg(params.data?.upload)} />
     ),
   },
+  { field: "instanceUid",  filter: "agMultiColumnFilter",  maxWidth: 200},
+  { field: "userName",  filter: "agMultiColumnFilter",  maxWidth: 200},
   {
     headerName: "Status",
     field: "status",
@@ -78,14 +91,14 @@ const MiniAction = ({ row }: { row: IBorrow }) => {
   const [editOpen, setEditOpen] = useState(false);
   return (
     <EditDeleteButtons
-      name={row.name}
+      name={row?.bookName as string}
       id={row._id}
       url={KY.borrow}
       onEditClick={() => setEditOpen(true)}
     >
       <AddEditModal
         isOpen={editOpen}
-        onClose={setEditOpen}
+        onClose={(e) => setEditOpen(false)}
         isUpdate={true}
         borrow={row}
       />

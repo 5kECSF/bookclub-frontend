@@ -33,7 +33,7 @@ const CategoryPage = () => {
       />
       <AddEditModal
         isOpen={modalOpen}
-        onClose={setModalOpen}
+        onClose={(e) => setModalOpen(false)}
         isUpdate={false}
       />
       <FilterDrawer

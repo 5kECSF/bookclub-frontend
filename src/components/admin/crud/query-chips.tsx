@@ -52,21 +52,24 @@ const QueryChips = ({ query, setQuery }: { query: any; setQuery: any }) => {
             );
           } else if (typeof value === "string" || typeof value === "number") {
             // If the value is not an array, just render the chip
-            return (
-              <div
-                key={key}
-                className="flex items-center space-x-1 rounded-full bg-blue-400"
-              >
+            return (value==""?"":
+                <>
+                  <div
+                      key={key}
+                      className="flex items-center space-x-1 rounded-full bg-blue-400"
+                  >
                 <span className=" py-1 pl-2 text-white">
                   {key}: {value}
                 </span>
-                <button
-                  onClick={() => removeQueryKey(key)}
-                  className="flex h-6 w-6 items-center justify-center rounded-full  text-slate-50"
-                >
-                  &times;
-                </button>
-              </div>
+                    <button
+                        onClick={() => removeQueryKey(key)}
+                        className="flex h-6 w-6 items-center justify-center rounded-full  text-slate-50"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </>
+
             );
           }
         })}
