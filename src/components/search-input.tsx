@@ -5,7 +5,7 @@ import qs from "query-string";
 import { FormEvent, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Button } from './ui/Button';
-
+import { Suspense } from 'react'
 
 const BookSearchInput = () => {
     const router = useRouter()
@@ -45,5 +45,11 @@ const BookSearchInput = () => {
     )
 
 }
-
-export default BookSearchInput
+export default function Searchbar() {
+    return (
+        // You could have a loading skeleton as the `fallback` too
+        <Suspense>
+            <BookSearchInput />
+        </Suspense>
+    )
+}
