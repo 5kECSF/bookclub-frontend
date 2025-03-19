@@ -1,11 +1,41 @@
 "use client";
 
-import CellAction from "./cell-action";
-// import { FileList, MultiItem, Fileicon } from "@/components/admin/cell-svgs";
-import { IBook } from "./model";
-import { Avatar } from "antd";
-import React from "react";
-import { getImg } from "@/lib/constants";
+import {Avatar} from "antd";
+import React, {useState} from "react";
+import {getImg, KY} from "@/lib/constants";
+import {EditDeleteButtons} from "@/components/admin/crud/edit-delete-buttons";
+import AddEditBook from "@/app/admin/book/add-edit-modal";
+import {z} from "zod";
+import {IUpload} from "@/types/upload";
+
+export interface IBook {
+  _id?: string;
+  title: string;
+  desc: string;
+  categoryName: string;
+  authorName?: string;
+  slug?: string;
+  fileId?: string;
+  body?: string;
+  genres?: string[];
+  upload?: IUpload;
+}
+
+export const BookValidator = z.object({
+  title: z.string().min(2, {message: "min length is 2"}),
+  desc: z.string().min(3, {message: "min length is 3"}),
+  categoryName: z.string().min(3, {message: "category is required"}),
+  authorName: z.string(),
+  status: z.string(),
+  genres: z.array(z.string()).min(1, {message: "select at least 1 genre"}),
+});
+export type TBookDto = z.infer<typeof BookValidator>;
+/*
+Books can be filtered via:
+- language(select), category(select), genres(multi-select), author(select),
+- queries: (instance count<gt,eq>), page<gt,eq>
+* */
+//============. Column Defs ==========
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
@@ -68,10 +98,28 @@ export const agColumns = [
 
   // 4 - Function - A function that returns a JSX element for display
   {
-    cellRenderer: (params: { data: IBook }) => <CellAction row={params.data} />,
+    cellRenderer: (params: { data: IBook }) => <MiniAction row={params.data} />,
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
     pinned: "right",
   },
 ];
+const MiniAction = ({ row }: { row: IBook }) => {
+  const [editOpen, setEditOpen] = useState(false);
+  return (
+      <EditDeleteButtons
+          name={row.title}
+          id={row._id}
+          url={KY.book}
+          onEditClick={() => setEditOpen(true)}
+      >
+        <AddEditBook
+            book={row}
+            isOpen={editOpen}
+            onClose={(e) => setEditOpen(false)}
+            isUpdate={true}
+        />
+      </EditDeleteButtons>
+  );
+};

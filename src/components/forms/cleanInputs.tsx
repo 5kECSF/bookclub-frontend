@@ -25,6 +25,7 @@ export const InputField = ({
     </div>
   );
 };
+//for searchs with out controlled element
 export const CleanSearch = ({
                                 idx = "name",
                                 dispIdx = "name",

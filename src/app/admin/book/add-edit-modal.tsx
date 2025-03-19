@@ -15,13 +15,13 @@ import { Modal } from "antd";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { BookValidator, IBook, TBookDto } from "./model";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
 import {CleanSelectInput, SelectInput} from "@/components/forms/select";
 import { MultiSelectWithName } from "@/components/forms/multi-select";
 import {DisplayErrors} from "@/lib/functions/object";
 import {ItemStatus} from "@/types/commonTypes";
+import {BookValidator, IBook, TBookDto} from "@/app/admin/book/model-def";
 
 interface IBookProps {
   isUpdate: boolean;

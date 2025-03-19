@@ -26,6 +26,7 @@ export enum MTD {
 
 export enum KY {
   //library modules
+  latestBooks = "latestBooks",
   category = "category",
   genre = "genre",
   book = "book",
@@ -70,3 +71,28 @@ export const ItemStatus = [
   { name: "draft" },
   { name: "deactivated" },
 ];
+
+
+export const routes = [
+  {
+    name: 'HOME',
+    href: '/'
+  },
+  {
+    name: 'ABOUT US',
+    href: '/about'
+  },
+  {
+    name: 'BOOKS',
+    href: '/books'
+  },
+  {
+    name: 'CONTACT US',
+    href: '/contact'
+  },
+  {
+    name: 'BLOG',
+    href: '/blog'
+  },
+
+]

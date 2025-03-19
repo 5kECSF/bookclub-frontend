@@ -4,7 +4,7 @@ import { setUrl } from "@/lib/functions/url";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TopButtons } from "@/components/admin/crud/filter-wrapper";
 import QueryChips from "@/components/admin/crud/query-chips";
-import { FetchError, Spinner } from "@/components/admin/ui/components";
+import { FetchError, Spinner } from "@/components/admin/ui/state-components";
 import { TableComponent } from "@/components/AgGrid";
 import { Pagination } from "@/components/admin/crud/pagination";
 import { KY } from "@/lib/constants";

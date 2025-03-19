@@ -64,9 +64,7 @@ export const agColumns = [
 
   // 4 - Function - A function that returns a JSX element for display
   {
-    cellRenderer: (params: { data: IGenre }) => (
-      <MiniAction row={params.data} />
-    ),
+    cellRenderer: (params: { data: IGenre }) => <MiniAction row={params.data} />,
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",

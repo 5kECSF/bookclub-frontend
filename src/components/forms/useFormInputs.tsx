@@ -143,7 +143,7 @@ export const DatePickerField = ({
   );
 };
 
-export function Submit({
+export function Submit2({
   isLoading,
   update,
 }: {
@@ -172,6 +172,39 @@ export function Submit({
       ) : (
         "Create"
       )}
+    </button>
+    // </div>
+  );
+}
+
+export function Submit({
+  isLoading,
+  update,
+    text
+}: {
+  isLoading: boolean;
+  update?: boolean;
+  text?:string
+}) {
+  return (
+    // <div className="mb-5">
+    <button
+      disabled={isLoading}
+      type="submit"
+      // value={
+      //
+      // }
+      className={
+        "mb-5 w-full cursor-pointer rounded border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90 disabled:bg-whiter disabled:hover:bg-opacity-100 dark:bg-black dark:disabled:bg-black "
+      }
+    >
+      {isLoading ? (
+        <div>
+          <Spinner />
+          {text? text: update ? "Updating" : "Creating"}
+        </div>
+      ) : text? text:update ? "Update" : "Create"
+      }
     </button>
     // </div>
   );

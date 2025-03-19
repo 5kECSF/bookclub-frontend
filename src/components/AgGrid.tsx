@@ -11,11 +11,8 @@ export const TableComponent = ({
   rowData: any;
   colDefs: any;
 }) => {
-  const { currentTheme, colorMode } = useTheme();
+  const { colorMode } = useTheme();
 
-  // useEffect(() => {
-
-  // }, [currentTheme, colorMode]);
   return (
     <div
       className={

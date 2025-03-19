@@ -1,5 +1,5 @@
-import { AlertDeleteModal } from "@/components/admin/crud/AlertDeleteModal";
-import { GenericButton } from "@/components/admin/ui/genericButton";
+
+import { Button } from "@/components/ui/Button";
 import { Avatar, Tag } from "antd";
 import {
   FileCode2,
@@ -9,71 +9,21 @@ import {
   FileType,
   Plus,
 } from "lucide-react";
-import React, { ReactNode } from "react";
+import React from "react";
 
 //==============  Deprecated
-export function CellUi({
-  onEditClick,
-  onDeleteClick,
-  onDeleteModalClose,
-  open,
-  name,
-  isPending,
-  children,
-  onConfirm,
-}: {
-  onEditClick: any;
-  onDeleteClick: any;
-  onConfirm: any;
-  onDeleteModalClose: any;
-  open: any;
-  name: string;
-  isPending: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <div>
-      {/* ----------   edit Delete buttons*/}
-      <div className="flex gap-2">
-        <GenericButton
-          onClick={onEditClick}
-          className="text-white [background:linear-gradient(161.68deg,_#3498db,_#2980b9)] "
-        >
-          Edit
-        </GenericButton>
-        <GenericButton
-          intent={"outline"}
-          data-type="delete-knowledge-btn"
-          onClick={onDeleteClick}
-          className=" text-white [background:linear-gradient(161.68deg,_#fa7c54,_#ec2c5a)]"
-        >
-          Delete
-        </GenericButton>
-      </div>
-      {/*-----------  delete modal*/}
-      <AlertDeleteModal
-        name={name}
-        dataTest="delete-knowledge-modal"
-        loading={isPending}
-        isOpen={open}
-        onClose={onDeleteModalClose}
-        onConfirm={onConfirm}
-      />
-      {children}
-    </div>
-  );
-}
+
 
 export function AddButton(props: { onClick: () => void }) {
   return (
     <div className="flex items-center justify-between px-8">
-      <GenericButton
+      <Button
         data-test="create-knowledge-button"
         onClick={props.onClick}
         className="text-white [background:linear-gradient(161.68deg,_#001f3f,_#003366)]"
       >
         <Plus className="mr-2 h-4 w-4" /> Add New
-      </GenericButton>
+      </Button>
     </div>
   );
 }

@@ -19,7 +19,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/admin/ui/Table";
-import { GenericButton } from "@/components/admin/ui/genericButton";
+
+import { Button } from "@/components/ui/Button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -93,22 +94,22 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="mr-4 flex items-center justify-end space-x-2 py-4">
-        <GenericButton
+        <Button
           // variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
-        </GenericButton>
-        <GenericButton
+        </Button>
+        <Button
           // variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           Next
-        </GenericButton>
+        </Button>
       </div>
     </div>
   );

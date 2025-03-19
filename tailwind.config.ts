@@ -39,7 +39,7 @@ const config: Config = {
   			},
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				// foreground: 'hsl(var(--secondary-foreground))'
   			},
   			stroke: '#E2E8F0',
   			gray: '#EFF4FB',
@@ -296,7 +296,10 @@ const config: Config = {
   			'21/9': '21 / 9'
   		},
   		backgroundImage: {
-  			video: 'url("../images/video/video.png")'
+  			video: 'url("../images/video/video.png")',
+			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+			'gradient-conic':
+				'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
   		},
   		content: {
   			'icon-copy': 'url("../images/icon/icon-copy-alt.svg")'

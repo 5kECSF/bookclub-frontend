@@ -1,6 +1,6 @@
-import { GenericButton } from "@/components/admin/ui/genericButton";
-import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
 
+import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 interface IPagination {
   isPlaceholderData: boolean;
   page: number;
@@ -18,17 +18,17 @@ export const Pagination = ({
   return (
     <div className="flex items-center justify-center gap-3 py-4">
       {page > 1 && (
-        <GenericButton
+        <Button
           onClick={() => setPage(Math.max(page - 1, 1))}
           className="flex gap-2 text-white [background:linear-gradient(161.68deg,_#001f3f,_#003366)]"
           disabled={page === 1}
         >
           <LucideArrowLeft /> Prev
-        </GenericButton>
+        </Button>
       )}
       <p className="text-bold text-l">page: {page}</p>
       {!isPlaceholderData && hasNext && (
-        <GenericButton
+        <Button
           onClick={() => {
             if (!isPlaceholderData && hasNext) {
               console.log("page", page);
@@ -40,7 +40,7 @@ export const Pagination = ({
           className="flex gap-2 text-white [background:linear-gradient(161.68deg,_#001f3f,_#003366)]"
         >
           Next <LucideArrowRight />
-        </GenericButton>
+        </Button>
       )}
     </div>
   );

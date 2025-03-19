@@ -2,7 +2,8 @@
 
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import { GenericButton } from "../ui/genericButton";
+
+import { Button } from "@/components/ui/Button";
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -44,22 +45,22 @@ export const AlertDeleteModal: React.FC<AlertModalProps> = ({
         data-test={dataTest}
         className="flex w-full items-center justify-end space-x-2 pt-6"
       >
-        <GenericButton
+        <Button
           data-test="close-btn"
           disabled={loading}
-          intent="outline"
+          variant="outline"
           onClick={onClose}
         >
           Cancel
-        </GenericButton>
-        <GenericButton
+        </Button>
+        <Button
           data-test="delete-btn"
           disabled={loading}
           className="bg-red-700 text-white"
           onClick={onConfirm}
         >
           Continue
-        </GenericButton>
+        </Button>
       </div>
     </Modal>
   );

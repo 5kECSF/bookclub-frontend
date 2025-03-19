@@ -2,12 +2,12 @@
 import { KY } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import React, { useEffect, useState } from "react";
-import { agColumns } from "./column-def";
+import { agColumns } from "./model-def";
 import AddEditBook from "./add-edit-modal";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
 import { TableComponent } from "@/components/AgGrid";
 import withAuthorization from "@/lib/functions/withAuthorization";
-import { FetchError, Spinner } from "@/components/admin/ui/components";
+import { FetchError, Spinner } from "@/components/admin/ui/state-components";
 import { TopButtons } from "@/components/admin/crud/filter-wrapper";
 import QueryChips from "@/components/admin/crud/query-chips";
 import { Pagination } from "@/components/admin/crud/pagination";

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { FilterWrapper } from "@/components/admin/crud/filter-wrapper";
 import { InputField } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
-import { TBookDto } from "@/app/admin/book/model";
 import {
     CleanSelectInput,
     CleanSelectProps,
     SelectInput,
 } from "@/components/forms/select";
+import {TBookDto} from "@/app/admin/book/model-def";
 
 interface IFilter {
     filterOpen: boolean;

@@ -1,11 +1,13 @@
 "use client";
 
-import { Avatar } from "antd";
+import {Avatar, message, Modal} from "antd";
 import React, { useState } from "react";
-import { getImg, KY } from "@/lib/constants";
+import {getImg, KY, MTD} from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import  AddEditModal  from "@/app/admin/borrow/add-edit-modal";
 import { z } from "zod";
+import {BorrowAction} from "@/app/admin/borrow/borrow-action";
+
 
 export interface IBorrow {
   _id?: string;
@@ -38,7 +40,9 @@ export const BorrowValidator = z.object({
   note: z.string().min(3, { message: "min length is 2" }),
   status: z.enum([borrowStatus.Taken, borrowStatus.Returned, borrowStatus.WaitList, borrowStatus.Accepted]).optional(),
 });
+
 export type TBorrowDto = z.infer<typeof BorrowValidator>;
+
 
 // ====== =================  Column Defs for the table ==================
 // =====================================================================
@@ -78,6 +82,15 @@ export const agColumns = [
   // 4 - Function - A function that returns a JSX element for display
   {
     cellRenderer: (params: { data: IBorrow }) => (
+      <BorrowAction row={params.data} />
+    ),
+    cellStyle: { padding: "0.4em" },
+    autoHeight: true,
+    headerName: "Borrow Actions",
+    pinned: "right",
+  },
+  {
+    cellRenderer: (params: { data: IBorrow }) => (
       <MiniAction row={params.data} />
     ),
     cellStyle: { padding: "0.4em" },
@@ -105,3 +118,6 @@ const MiniAction = ({ row }: { row: IBorrow }) => {
     </EditDeleteButtons>
   );
 };
+
+
+

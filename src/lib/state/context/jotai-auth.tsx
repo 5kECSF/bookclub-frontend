@@ -2,11 +2,11 @@
 
 import { atom, useAtom } from "jotai";
 
-import axios, { AxiosResponse } from "axios";
+import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
-import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { useEffect } from "react";
 
 export interface User {
@@ -94,12 +94,12 @@ export const useAuth = () => {
       setAccessToken(null);
       setLoggedIn(false);
       console.log("logout success", response.data);
-      router.push("/signin");
+      // router.push("/signin");
     } catch (err: any) {
       let resp = HandleAxiosErr(err);
       setLoggedIn(false);
       console.log("***logout.panic***", resp.Message);
-      router.push("/signin");
+      // router.push("/signin");
     }
   };
   const getAccessToken = async (): Promise<Resp<string>> => {
