@@ -25,7 +25,7 @@ import { Separator } from "../../../../components/ui/separator";
               <img
                 className="w-[244px] h-[20.04px]"
                 alt="Social media icons"
-                src="https://c.animaapp.com/2jBM5N30/img/social@2x.png"
+                src="/assets/imgsocial@2x.png"
               />
             </div>
           </div>

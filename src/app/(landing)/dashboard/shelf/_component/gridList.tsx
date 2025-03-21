@@ -12,7 +12,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/dontMakeMe.png",
+      "bookUrl": "/assets/anima/image/home/dontMakeMe.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -25,7 +25,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -38,7 +38,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -51,7 +51,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -64,7 +64,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -77,7 +77,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 
@@ -90,7 +90,7 @@ export default function BookList(
       "ratingTotal": "5",
       "catagory": "spritual",
       "autor": "Steve Krug",
-      "bookUrl": "/assets/image/home/designOfEvr.png",
+      "bookUrl": "/assets/anima/image/home/designOfEvr.png",
       "borrowedDate": "11 Mar 2023 09:00AM",
       "submissionDate": "14 Mar 2023"
 

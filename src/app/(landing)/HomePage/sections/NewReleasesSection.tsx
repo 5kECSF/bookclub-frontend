@@ -37,7 +37,7 @@ import {
             <img
               className="h-5"
               alt="Social media icons"
-              src="https://c.animaapp.com/G6uUiWA6/img/social@2x.png"
+              src="/assets/imgsocial@2x.png"
             />
           </div>
         </div>
@@ -51,7 +51,7 @@ import {
               <img
                 className="w-52 h-[45px]"
                 alt="Left logo"
-                src="https://c.animaapp.com/G6uUiWA6/img/left---logo.png"
+                src="/assets/imgleft---logo.png"
               />
             </div>
   

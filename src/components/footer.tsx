@@ -1,10 +1,9 @@
-import React from "react";
 import logo from "../../public/assets/image/home/homeFooterLogo.png";
 
-import Footer1 from "../../public/assets/image/home/footerImage1.png";
-import Footer2 from "../../public/assets/image/home/footerImgae2.png";
 import Image from "next/image";
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
+import Footer1 from "../../public/assets/image/home/footerImage1.png";
+import Footer2 from "../../public/assets/image/home/footerImgae2.png";
 export default function HomeFooter() {
   return (
     <footer className="border-t">

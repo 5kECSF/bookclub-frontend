@@ -34,7 +34,7 @@ import React from "react";
             <img
               className="h-5"
               alt="Social"
-              src={"https://c.animaapp.com/m8fyahqdpl45hJ/img/social.png"}
+              src={"/assets/imgsocial.png"}
               width={500}
             />
           </div>

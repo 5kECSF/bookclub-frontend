@@ -106,7 +106,7 @@ export const ContentSection = (): JSX.Element => {
                 <img
                   className="w-[450px] h-[421px]"
                   alt="Book cover"
-                  src="https://c.animaapp.com/m8fyahqdpl45hJ/img/rectangle-19.png"
+                  src="/assets/imgrectangle-19.png"
                 />
                 <div className="flex justify-center gap-6 mt-2">
                   <div className="flex flex-col items-center">
@@ -114,7 +114,7 @@ export const ContentSection = (): JSX.Element => {
                       <img
                         className="w-5 h-[18px]"
                         alt="Review"
-                        src="https://c.animaapp.com/m8fyahqdpl45hJ/img/g3702.png"
+                        src="/assets/imgg3702.png"
                       />
                     </div>
                     <span className="font-bold text-[#333333] text-[11px] leading-3">
@@ -126,7 +126,7 @@ export const ContentSection = (): JSX.Element => {
                       <img
                         className="w-[17px] h-[17px]"
                         alt="Notes"
-                        src="https://c.animaapp.com/m8fyahqdpl45hJ/img/group.png"
+                        src="/assets/imggroup.png"
                       />
                     </div>
                     <span className="font-bold text-[#333333] text-[11px] leading-3">
@@ -138,7 +138,7 @@ export const ContentSection = (): JSX.Element => {
                       <img
                         className="w-5 h-5"
                         alt="Share"
-                        src="https://c.animaapp.com/m8fyahqdpl45hJ/img/clip-path-group.png"
+                        src="/assets/imgclip-path-group.png"
                       />
                     </div>
                     <span className="font-bold text-[#333333] text-[11px] leading-3">
@@ -171,7 +171,7 @@ export const ContentSection = (): JSX.Element => {
                     {[...Array(5)].map((_, index) => (
                       <div
                         key={index}
-                        className="w-3.5 h-[13.22px] bg-[url(https://c.animaapp.com/m8fyahqdpl45hJ/img/union.svg)] bg-[100%_100%]"
+                        className="w-3.5 h-[13.22px] bg-[url(/assets/imgunion.svg)] bg-[100%_100%]"
                       />
                     ))}
                   </div>
@@ -199,7 +199,7 @@ export const ContentSection = (): JSX.Element => {
                         <img
                           className="w-[15px] h-[15px]"
                           alt="Check"
-                          src="https://c.animaapp.com/m8fyahqdpl45hJ/img/vector.svg"
+                          src="/assets/imgvector.svg"
                         />
                         <div className="font-normal text-[#4c4c4c] text-[15px]">
                           {option.type}
@@ -222,7 +222,7 @@ export const ContentSection = (): JSX.Element => {
                         <img
                           className="absolute w-3.5 h-[17px] top-0.5 left-[3px]"
                           alt="Location"
-                          src="https://c.animaapp.com/m8fyahqdpl45hJ/img/subtract.svg"
+                          src="/assets/imgsubtract.svg"
                         />
                       </div>
                       <div className="font-normal text-[#4c4c4c] text-[15px] leading-[22.5px]">
@@ -240,7 +240,7 @@ export const ContentSection = (): JSX.Element => {
                   <img
                     className="w-[17px] h-[9px] ml-2"
                     alt="Dropdown"
-                    src="https://c.animaapp.com/m8fyahqdpl45hJ/img/polygon-1.svg"
+                    src="/assets/imgpolygon-1.svg"
                   />
                 </Button>
               </div>
@@ -518,7 +518,7 @@ export const ContentSection = (): JSX.Element => {
                         <img
                           className="w-[88px] h-[101px]"
                           alt="Author"
-                          src="https://c.animaapp.com/m8fyahqdpl45hJ/img/rectangle-19-1.png"
+                          src="/assets/imgrectangle-19-1.png"
                         />
                       </div>
 
@@ -536,8 +536,8 @@ export const ContentSection = (): JSX.Element => {
                       </h3>
 
                       <div className="flex gap-4">
-                        <div className="w-[75px] h-[99px] rounded-[5px] border border-solid border-[#f1f1f1] bg-[url(https://c.animaapp.com/m8fyahqdpl45hJ/img/frame-52.png)] bg-cover" />
-                        <div className="w-[75px] h-[99px] rounded-[5px] border border-solid border-[#f1f1f1] bg-[url(https://c.animaapp.com/m8fyahqdpl45hJ/img/frame-53.png)] bg-cover" />
+                        <div className="w-[75px] h-[99px] rounded-[5px] border border-solid border-[#f1f1f1] bg-[url(/assets/imgframe-52.png)] bg-cover" />
+                        <div className="w-[75px] h-[99px] rounded-[5px] border border-solid border-[#f1f1f1] bg-[url(/assets/imgframe-53.png)] bg-cover" />
                       </div>
                     </CardContent>
                   </Card>

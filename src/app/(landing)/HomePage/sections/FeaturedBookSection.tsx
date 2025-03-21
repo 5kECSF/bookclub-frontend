@@ -1,5 +1,3 @@
-import { ArrowRightIcon } from "lucide-react";
-import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,6 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ArrowRightIcon } from "lucide-react";
 
 export const FeaturedBookSection = (): JSX.Element => {
   // Sample book data that would be displayed in the carousel
@@ -14,32 +13,32 @@ export const FeaturedBookSection = (): JSX.Element => {
     {
       id: 1,
       title: "Book 1",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book1.jpg",
+      image: "/assets/anima/book1.jpg",
     },
     {
       id: 2,
       title: "Book 2",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book2.jpg",
+      image: "/assets/anima/book2.jpg",
     },
     {
       id: 3,
       title: "Book 3",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book3.jpg",
+      image: "/assets/anima/book3.jpg",
     },
     {
       id: 4,
       title: "Book 4",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book4.jpg",
+      image: "/assets/anima/book4.jpg",
     },
     {
       id: 5,
       title: "Book 5",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book5.jpg",
+      image: "/assets/anima/book5.jpg",
     },
     {
       id: 6,
       title: "Book 6",
-      image: "https://c.animaapp.com/G6uUiWA6/img/book6.jpg",
+      image: "/assets/anima/book6.jpg",
     },
   ];
 

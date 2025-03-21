@@ -7,7 +7,7 @@ import React from "react";
 const books = [
   {
     id: 1,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/frame-19.png",
+    coverImage: "/assets/anima/frame-19.png",
     title: "",
     author: "",
     year: "",
@@ -16,7 +16,7 @@ const books = [
   },
   {
     id: 2,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12.png",
+    coverImage: "/assets/anima/rectangle-12.png",
     title: "The Design of Every..",
     author: "Don Norman",
     year: "1988",
@@ -25,7 +25,7 @@ const books = [
   },
   {
     id: 3,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-1.png",
+    coverImage: "/assets/anima/rectangle-12-1.png",
     title: "Sprint : How to solve...",
     author: "Jake Knapp",
     year: "2000",
@@ -34,7 +34,7 @@ const books = [
   },
   {
     id: 4,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-2.png",
+    coverImage: "/assets/anima/rectangle-12-2.png",
     title: "Learn UX : Design Gr...",
     author: "Jeff Gothelf",
     year: "2016",
@@ -43,7 +43,7 @@ const books = [
   },
   {
     id: 5,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-3.png",
+    coverImage: "/assets/anima/rectangle-12-3.png",
     title: "The Road to React",
     author: "Steve Krug",
     year: "2000",
@@ -52,7 +52,7 @@ const books = [
   },
   {
     id: 6,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-4.png",
+    coverImage: "/assets/anima/rectangle-12-4.png",
     title: "Rich Dad Poor Dad",
     author: "Robert T.Kiyosaki",
     year: "1997",
@@ -61,7 +61,7 @@ const books = [
   },
   {
     id: 7,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-5.png",
+    coverImage: "/assets/anima/rectangle-12-5.png",
     title: "Harry Potter and The...",
     author: "J.K. Rowling",
     year: "2002",
@@ -70,7 +70,7 @@ const books = [
   },
   {
     id: 8,
-    coverImage: "https://c.animaapp.com/G6uUiWA6/img/rectangle-12-6.png",
+    coverImage: "/assets/anima/rectangle-12-6.png",
     title: "You Don't Know JS: S..",
     author: "Kyle Simpson",
     year: "2014",

@@ -39,7 +39,7 @@ import {
               <img
                 className="w-[83px] h-[87px] object-cover"
                 alt="Sample logo"
-                src="https://c.animaapp.com/2jBM5N30/img/sample-logo-1@2x.png"
+                src="/assets/imgsample-logo-1@2x.png"
               />
               <p className="font-normal text-white text-lg tracking-[0.36px] leading-[34px]">
                 Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

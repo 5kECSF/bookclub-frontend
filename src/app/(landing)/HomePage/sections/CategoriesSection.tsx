@@ -1,6 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import React from "react";
 import { Button } from "@/components/ui/button";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 export const CategoriesSection = (): JSX.Element => {
   // Book data that can be mapped over if needed for multiple books
@@ -10,7 +9,7 @@ export const CategoriesSection = (): JSX.Element => {
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.",
     price: "45.00",
-    image: "https://c.animaapp.com/G6uUiWA6/img/book.png",
+    image: "/assets/anima/book.png",
   };
 
   // Pagination dots data

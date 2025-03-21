@@ -133,7 +133,7 @@ return (
       title: "Simple Way Of Piece Life",
       author: "Armor Ramsey",
       price: "40.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book5-4@2x.png",
+      image: "/assets/anima/book5-4@2x.png",
       featured: true,
     },
     {
@@ -141,35 +141,35 @@ return (
       title: "Great Travel At Desert",
       author: "Sanchit Howdy",
       price: "38.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book3-4@2x.png",
+      image: "/assets/anima/book3-4@2x.png",
     },
     {
       id: 3,
       title: "The Lady Beauty Scarlett",
       author: "Arthur Doyle",
       price: "45.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book16-1@2x.png",
+      image: "/assets/anima/book16-1@2x.png",
     },
     {
       id: 4,
       title: "The Lady Beauty Scarlett",
       author: "Arthur Doyle",
       price: "45.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book16-1-1@2x.png",
+      image: "/assets/anima/book16-1-1@2x.png",
     },
     {
       id: 5,
       title: "Great Travel At Desert",
       author: "Sanchit Howdy",
       price: "38.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book3-4-1@2x.png",
+      image: "/assets/anima/book3-4-1@2x.png",
     },
     {
       id: 6,
       title: "The Lady Beauty Scarlett",
       author: "Arthur Doyle",
       price: "45.00",
-      image: "https://c.animaapp.com/2jBM5N30/img/book16-1-2@2x.png",
+      image: "/assets/anima/book16-1-2@2x.png",
     },
   ];
 
@@ -185,22 +185,22 @@ return (
             <img
               className="w-4 h-4"
               alt="Vector"
-              src="https://c.animaapp.com/2jBM5N30/img/vector-2.svg"
+              src="/assets/anima/vector-2.svg"
             />
             <img
               className="w-[15px] h-4"
               alt="Vector"
-              src="https://c.animaapp.com/2jBM5N30/img/vector-3.svg"
+              src="/assets/anima/vector-3.svg"
             />
             <img
               className="w-[17px] h-3.5"
               alt="Vector"
-              src="https://c.animaapp.com/2jBM5N30/img/vector.svg"
+              src="/assets/anima/vector.svg"
             />
             <img
               className="w-3.5 h-3.5"
               alt="Vector"
-              src="https://c.animaapp.com/2jBM5N30/img/vector-4.svg"
+              src="/assets/anima/vector-4.svg"
             />
           </div>
 
@@ -271,12 +271,12 @@ return (
                 <img
                   className="w-[23px] h-[23px]"
                   alt="Grid view"
-                  src="https://c.animaapp.com/2jBM5N30/img/vector-8.svg"
+                  src="/assets/anima/vector-8.svg"
                 />
                 <img
                   className="w-[29px] h-[23px]"
                   alt="List view"
-                  src="https://c.animaapp.com/2jBM5N30/img/group-323@2x.png"
+                  src="/assets/anima/group-323@2x.png"
                 />
               </div>
             </div>

@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -22,7 +21,7 @@ export const RecommendedBooksSection = (): JSX.Element => {
       textColor: "#173f5f",
       borderColor: "#173f5f",
       active: true,
-      image: "https://c.animaapp.com/G6uUiWA6/img/mask-group.png",
+      image: "/assets/anima/mask-group.png",
     },
     {
       id: 2,
@@ -33,7 +32,7 @@ export const RecommendedBooksSection = (): JSX.Element => {
       textColor: "#393280",
       borderColor: "#393280",
       active: false,
-      image: "https://c.animaapp.com/G6uUiWA6/img/mask-group-1.png",
+      image: "/assets/anima/mask-group-1.png",
     },
   ];
 
@@ -42,17 +41,17 @@ export const RecommendedBooksSection = (): JSX.Element => {
     {
       id: 1,
       title: "Higher Education",
-      image: "https://c.animaapp.com/G6uUiWA6/img/rectangle-11.png",
+      image: "/assets/anima/rectangle-11.png",
     },
     {
       id: 2,
       title: "Management Books",
-      image: "https://c.animaapp.com/G6uUiWA6/img/rectangle-11-1.png",
+      image: "/assets/anima/rectangle-11-1.png",
     },
     {
       id: 3,
       title: "Engineering Books",
-      image: "https://c.animaapp.com/G6uUiWA6/img/rectangle-11-2.png",
+      image: "/assets/anima/rectangle-11-2.png",
     },
   ];
 
@@ -96,8 +95,8 @@ export const RecommendedBooksSection = (): JSX.Element => {
                           alt="Vector"
                           src={
                             item.id === 1
-                              ? "https://c.animaapp.com/G6uUiWA6/img/vector-5.svg"
-                              : "https://c.animaapp.com/G6uUiWA6/img/vector-13.svg"
+                              ? "/assets/anima/vector-5.svg"
+                              : "/assets/anima/vector-13.svg"
                           }
                         />
                       </Button>
@@ -132,7 +131,7 @@ export const RecommendedBooksSection = (): JSX.Element => {
             <img
               className="w-[19px] h-[11px]"
               alt="Previous"
-              src="https://c.animaapp.com/G6uUiWA6/img/vector-15.svg"
+              src="/assets/anima/vector-15.svg"
             />
           </CarouselPrevious>
 
@@ -140,7 +139,7 @@ export const RecommendedBooksSection = (): JSX.Element => {
             <img
               className="w-[19px] h-[11px] rotate-180"
               alt="Next"
-              src="https://c.animaapp.com/G6uUiWA6/img/vector-6.svg"
+              src="/assets/anima/vector-6.svg"
             />
           </CarouselNext>
         </Carousel>
@@ -168,14 +167,14 @@ export const RecommendedBooksSection = (): JSX.Element => {
                 <img
                   className="w-[19px] h-[11px]"
                   alt="Previous"
-                  src="https://c.animaapp.com/G6uUiWA6/img/vector-9.svg"
+                  src="/assets/anima/vector-9.svg"
                 />
               </Button>
               <Button className="w-[49px] h-[49px] rounded-[24.36px] p-0 bg-[#ed553b]">
                 <img
                   className="w-[22px] h-3.5"
                   alt="Next"
-                  src="https://c.animaapp.com/G6uUiWA6/img/vector-10.svg"
+                  src="/assets/anima/vector-10.svg"
                 />
               </Button>
             </div>
@@ -208,7 +207,7 @@ export const RecommendedBooksSection = (): JSX.Element => {
             <img
               className="ml-4 w-[13px] h-2.5"
               alt="Vector"
-              src="https://c.animaapp.com/G6uUiWA6/img/vector-11.svg"
+              src="/assets/anima/vector-11.svg"
             />
           </Button>
         </div>

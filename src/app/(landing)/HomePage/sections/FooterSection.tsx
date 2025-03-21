@@ -14,14 +14,14 @@ export const FooterSection = (): JSX.Element => {
   // Latest news data
   const latestNews = [
     {
-      image: "https://c.animaapp.com/G6uUiWA6/img/rectangle-22.png",
+      image: "/assets/imgrectangle-22.png",
       title: "Nostrud exercitation",
       description:
         "Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       date: "15 April 2022",
     },
     {
-      image: "https://c.animaapp.com/G6uUiWA6/img/rectangle-22-1.png",
+      image: "/assets/imgrectangle-22-1.png",
       title: "Nostrud exercitation",
       description:
         "Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -31,10 +31,10 @@ export const FooterSection = (): JSX.Element => {
 
   // Social media icons data
   const socialIcons = [
-    "https://c.animaapp.com/G6uUiWA6/img/mask-group-2@2x.png",
-    "https://c.animaapp.com/G6uUiWA6/img/mask-group-4@2x.png",
-    "https://c.animaapp.com/G6uUiWA6/img/mask-group-3@2x.png",
-    "https://c.animaapp.com/G6uUiWA6/img/mask-group-5@2x.png",
+    "/assets/imgmask-group-2@2x.png",
+    "/assets/imgmask-group-4@2x.png",
+    "/assets/imgmask-group-3@2x.png",
+    "/assets/imgmask-group-5@2x.png",
   ];
 
   return (
@@ -47,7 +47,7 @@ export const FooterSection = (): JSX.Element => {
               <img
                 className="w-[83px] h-[87px] object-cover"
                 alt="Sample logo"
-                src="https://c.animaapp.com/G6uUiWA6/img/sample-logo-1.png"
+                src="/assets/imgsample-logo-1.png"
               />
               <p className="mt-[95px] w-[368px] font-normal text-lg tracking-[0.36px] leading-[34px] text-[#173f5f] font-['Inter',Helvetica]">
                 Nostrud exercitation ullamco laboris nisi ut aliquip ex ea

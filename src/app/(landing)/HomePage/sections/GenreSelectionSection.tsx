@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const GenreSelectionSection = (): JSX.Element => {
@@ -7,36 +6,36 @@ export const GenreSelectionSection = (): JSX.Element => {
     {
       id: 1,
       name: "Prayer",
-      backgroundImage: "https://c.animaapp.com/G6uUiWA6/img/image@2x.png",
-      foregroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-1.png",
+      backgroundImage: "/assets/anima/image@2x.png",
+      foregroundImage: "/assets/anima/image-1.png",
     },
     {
       id: 2,
       name: "Leadership",
-      backgroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-2@2x.png",
-      foregroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-3.png",
+      backgroundImage: "/assets/anima/image-2@2x.png",
+      foregroundImage: "/assets/anima/image-3.png",
     },
     {
       id: 3,
       name: "Self-help",
-      backgroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-4@2x.png",
-      foregroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-5.png",
+      backgroundImage: "/assets/anima/image-4@2x.png",
+      foregroundImage: "/assets/anima/image-5.png",
     },
     {
       id: 4,
       name: "giving",
-      foregroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-6.png",
+      foregroundImage: "/assets/anima/image-6.png",
     },
     {
       id: 5,
       name: "",
-      backgroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-7@2x.png",
+      backgroundImage: "/assets/anima/image-7@2x.png",
     },
     {
       id: 6,
       name: "holispirit",
-      backgroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-8@2x.png",
-      foregroundImage: "https://c.animaapp.com/G6uUiWA6/img/image-9.png",
+      backgroundImage: "/assets/anima/image-8@2x.png",
+      foregroundImage: "/assets/anima/image-9.png",
     },
   ];
 

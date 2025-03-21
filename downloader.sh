@@ -11,7 +11,7 @@ mkdir -p "$ASSETS_DIR"
 FILES=$(find "$SRC_DIR" -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.ts" -o -name "*.tsx" -o -name "*.jsx" \) ! -path "*/node_modules/*" ! -path "*/public/assets/*")
 
 # URL pattern to match AnimaApp resources
-URL_PATTERN="http://c\.animaapp\.com/[^\s\"')]+"
+URL_PATTERN="https://c\.animaapp\.com/[^\s\"')]+"
 
 echo "Scanning for AnimaApp URLs in $SRC_DIR..."
 
@@ -36,7 +36,7 @@ for file in $FILES; do
             fi
 
             # Replace occurrences in the file
-            sed -i "s|$url|$nestjs_path|g" "$file"
+            sed -i "" "s|$url|$nestjs_path|g" "$file"
         done
     fi
 done
