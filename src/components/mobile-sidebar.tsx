@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { Button } from './ui/Button'
+import { Button } from './ui/button'
 
 const MobileSidebar = () => {
     const pathName = usePathname()

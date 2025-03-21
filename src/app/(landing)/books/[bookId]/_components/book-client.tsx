@@ -11,7 +11,7 @@ import BookDetail from "./bookDetail";
 import Commmunity from "./community";
 import About from "./about-author";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const BookClient = ({ bookId }: { bookId: string }) => {
     const { isLoading, data: book, isError, isSuccess, error, isFetching } = useFetch(

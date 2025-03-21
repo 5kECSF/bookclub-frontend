@@ -1,6 +1,6 @@
 
 import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 interface IPagination {
   isPlaceholderData: boolean;
   page: number;

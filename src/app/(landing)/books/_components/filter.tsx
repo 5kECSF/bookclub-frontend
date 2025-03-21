@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { KY } from '@/lib/constants';
 import { useFetch } from '@/lib/state/hooks/useQuery';
 import { ICategory, Igenre } from '@/types/db';

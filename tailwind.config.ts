@@ -38,8 +38,7 @@ const config: Config = {
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				// foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: 'hsl(var(--secondary))'
   			},
   			stroke: '#E2E8F0',
   			gray: '#EFF4FB',
@@ -297,9 +296,8 @@ const config: Config = {
   		},
   		backgroundImage: {
   			video: 'url("../images/video/video.png")',
-			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-			'gradient-conic':
-				'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+  			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
   		},
   		content: {
   			'icon-copy': 'url("../images/icon/icon-copy-alt.svg")'
@@ -434,6 +432,22 @@ const config: Config = {
   				'50%': {
   					transform: 'translateY(0)'
   				}
+  			},
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
   			}
   		},
   		animation: {
@@ -450,7 +464,9 @@ const config: Config = {
   			'spin-3': 'spin 3s linear infinite',
   			line1: 'line 10s infinite linear',
   			line2: 'line-revert 8s infinite linear',
-  			line3: 'line 7s infinite linear'
+  			line3: 'line 7s infinite linear',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

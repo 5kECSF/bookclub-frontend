@@ -25,7 +25,7 @@ const Genre = () => {
 
             {
                 isLoading ? <GenreLoader count={6} /> : error ? JSON.stringify(error) :
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6  ">
+                    <div className="grid grid-cols-2 flex-wrap sm:grid-cols-3 lg:grid-cols-6  ">
                         {displayedData?.map((gener: Igenre, i: number) => {
                             return (
                                 <Link href={`/books?genres=${gener.name}`} className="mx-auto" key={i} data-test='genre-list' >

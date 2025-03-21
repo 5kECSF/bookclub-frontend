@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/Input'
+import { Input } from '@/components/ui/input'
 import { MTD } from '@/lib/constants'
 import { passwordChangeType, passwordValidator } from '@/lib/validator/password'
 import { zodResolver } from '@hookform/resolvers/zod'

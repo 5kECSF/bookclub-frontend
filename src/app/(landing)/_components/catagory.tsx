@@ -56,7 +56,7 @@ export default function Categories() {
 
       {
         isLoading ? <CataroryLoader count={4} /> : error ? <Loader className='animate-spin' /> :
-          <div id='slider' className="  overflow-x-scroll whitespace-nowrap w-full gap-10 scroll-smooth" >
+          <div id='slider' className=" flex justify-center  overflow-x-scroll whitespace-nowrap w-full gap-10 scroll-smooth" >
             {displayedData?.map((cat: ICategory, i:number) => {
               return (
                 <Link key={i} data-test='category-list' className=" w-[400px] inline-flex gap-y-2 flex-col px-4  items-center cursor-pointer" href={`/books?categoryId=${cat._id}`}>

@@ -6,7 +6,7 @@ import { ReactNode, useState } from "react";
 
 
 import { AlertDeleteModal } from "@/components/admin/crud/AlertDeleteModal";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 /**
  -------------   -------------   Action Columns
  */

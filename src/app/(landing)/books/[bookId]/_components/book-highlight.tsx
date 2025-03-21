@@ -5,7 +5,7 @@ import { FaStickyNote } from 'react-icons/fa';
 import { IoLocationSharp } from 'react-icons/io5';
 import { IBook } from "@/types/db";
 import { getImg } from "@/lib/constants";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import BookBorrowModal from "./book-borrow-request";
 import { useState } from "react";
 

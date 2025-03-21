@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/Input';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { BookRequestType, BorrowRequestValidator } from '@/lib/validator/borrow-request';
 import { IBook } from '@/types/db';

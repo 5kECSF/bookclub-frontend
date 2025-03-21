@@ -1,10 +1,10 @@
 'use client'
-import { Input } from '@/components/ui/Input';
+import { Input } from '@/components/ui/input';
 import { useRouter, useSearchParams } from 'next/navigation';
 import qs from "query-string";
 import { FormEvent, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 import { Suspense } from 'react'
 
 const BookSearchInput = () => {

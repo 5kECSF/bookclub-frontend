@@ -1,7 +1,7 @@
 import { borrowStatus, IBorrow } from "@/app/admin/borrow/model-def";
 import { SingleSelectWithSearch } from "@/components/forms/multi-select";
 import { InputField, Submit } from "@/components/forms/useFormInputs";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { KY, MTD } from "@/lib/constants";
 import { DisplayErrors } from "@/lib/functions/object";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";

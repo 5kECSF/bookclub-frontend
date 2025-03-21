@@ -1,11 +1,11 @@
 "use client"
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/input";
 import ReaderCard from "./reader-card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from 'react-hook-form'
 import { UserUpdatetype, UserValidator } from "@/lib/validator/user";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { MTD} from "@/lib/constants";
 import Image from "next/image";
 import { useCallback, useState } from "react";

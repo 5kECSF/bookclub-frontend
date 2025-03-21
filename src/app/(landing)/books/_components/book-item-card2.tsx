@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { getImg } from '@/lib/constants'
 import { IBook } from '@/types/db'
 import Image from 'next/image'

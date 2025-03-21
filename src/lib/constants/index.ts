@@ -34,6 +34,7 @@ export enum KY {
   user = "users",
   borrow = "borrow",
   donation = "donation",
+  notification = "notification",
 
 }
 

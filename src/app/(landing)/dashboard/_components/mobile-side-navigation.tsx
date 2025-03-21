@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 
 import useMaxWidth from '@/lib/state/hooks/useScreeenQuery'
 import { Drawer } from 'antd'

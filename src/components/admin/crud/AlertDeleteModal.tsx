@@ -3,7 +3,7 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 interface AlertModalProps {
   isOpen: boolean;
