@@ -37,7 +37,7 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
   onClose,
   children,
 }: ShimProps<T, TDto>) {
-  const uploadRef = useRef();
+  const uploadRef = useRef(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const {
     register,

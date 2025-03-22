@@ -14,9 +14,10 @@ export interface Filter {
     sort?: string
 }
 interface BookPageProps {
-    searchParams: Filter
+    searchParams: Promise<Filter>
 }
-const BookPage = ({ searchParams }: BookPageProps) => {
+const BookPage = async (props: BookPageProps) => {
+    const searchParams = await props.searchParams;
 
     return (
         <div className=" h-full">

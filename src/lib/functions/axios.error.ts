@@ -30,7 +30,7 @@ export function HandleAxiosErr(e: any): Msg {
     }
     return { Status: e.response?.status, Message: msg };
   } else if (e.request) {
-    console.error("--|| Request Error:", e.message);
+    console.log("--|| Request Error:", e.message);
     return { Status: 503, Message: "could not reach the server" };
   } else {
     return { Status: 400, Message: "Request Format Error" };

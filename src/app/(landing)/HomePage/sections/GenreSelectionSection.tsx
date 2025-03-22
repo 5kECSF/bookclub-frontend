@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 
+import type { JSX } from "react";
+
 export const GenreSelectionSection = (): JSX.Element => {
   // Data for genre categories to enable mapping
   const genreCategories = [

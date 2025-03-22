@@ -1,12 +1,13 @@
 "use client";
 
-import { Avatar } from "antd";
-import React, { useState } from "react";
-import { getImg, KY } from "@/lib/constants";
-import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+
 import { AddEditModal } from "@/app/admin/category/add-edit-modal";
-import { z } from "zod";
+import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getImg, KY } from "@/lib/constants";
 import { IUpload } from "@/types/upload";
+import { useState } from "react";
+import { z } from "zod";
 
 export interface ICategory {
   _id?: string;
@@ -42,7 +43,11 @@ export const agColumns = [
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-      <Avatar size={60} src={getImg(params.data?.upload)} />
+
+      <Avatar>
+        <AvatarImage src={`${getImg(params.data?.upload)}`} />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
     ),
   },
   {

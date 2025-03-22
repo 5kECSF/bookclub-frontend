@@ -123,11 +123,11 @@ const DropdownNotification = () => {
 
         <ul className="flex h-auto flex-col overflow-y-auto">
           {/* Render New Notices */}
-          {latestNotices?.body?.map((notice: any) => {
+          {latestNotices?.body?.map((notice: any, i:any) => {
             let path = notice?.module_name;
-            let implant = notice?.implantId;
+
             return (
-                <NotificationList notifying={true} key={`latest-${notice?.id}`} notice={notice} implantId={implant} path={path}/>
+                <NotificationList notifying={true} key={`latest-${i}`} notice={notice} path={path}/>
             );
           })}
 
@@ -137,9 +137,9 @@ const DropdownNotification = () => {
           </h2>
           {oldNotices?.map((notice: any) => {
             let path = notice?.module_name;
-            let implant = notice?.implantId;
+
             return (
-                <NotificationList notifying={false} key={`old-${notice?.id}`} notice={notice} implantId={implant} path={path}/>
+                <NotificationList notifying={false} key={`old-${notice?.id}`} notice={notice}  path={path}/>
             );
           })}
         </ul>
@@ -150,7 +150,7 @@ const DropdownNotification = () => {
 
 export default DropdownNotification;
 
-export function NotificationList({notice, path, implantId, notifying}: { notice: any, path: string, implantId: string, notifying:boolean }) {
+export function NotificationList({notice, path, notifying}: { notice: any, path: string, notifying:boolean }) {
   return <li  className=" relative flex flex-row items-center justify-center bg-gray-2 mx-2 px-4  dark:border-form-input dark:bg-meta-4">
 
       <Link

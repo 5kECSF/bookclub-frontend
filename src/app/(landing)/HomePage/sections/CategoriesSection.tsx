@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
+import type { JSX } from "react";
+
 export const CategoriesSection = (): JSX.Element => {
   // Book data that can be mapped over if needed for multiple books
   const featuredBook = {

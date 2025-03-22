@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowRightIcon } from "lucide-react";
 
+import type { JSX } from "react";
+
 export const FeaturedBookSection = (): JSX.Element => {
   // Sample book data that would be displayed in the carousel
   const books = [

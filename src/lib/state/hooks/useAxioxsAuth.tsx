@@ -1,8 +1,8 @@
 "use client";
 import { BASE_URL } from "@/lib/constants";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 import axios from "axios";
 import { useEffect } from "react";
-import { useAuth } from "@/lib/state/context/jotai-auth";
 
 export const axiosAuth = axios.create({
   baseURL: BASE_URL,
@@ -28,7 +28,7 @@ const useAxiosAuth = () => {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        if (error?.response?.status === 401 && !prevRequest?.sent) {
+        if ((error?.response?.status === 401||error?.response?.status === 403) && !prevRequest?.sent) {
           console.log("axios error11111111 -----");
           prevRequest.sent = true;
           const token = await getAccessToken();
@@ -47,6 +47,9 @@ const useAxiosAuth = () => {
         } else if (error?.response?.status === 401 && prevRequest?.sent) {
           console.log("logging out-------------");
           logout();
+        }else if (error?.response?.status === 503 ){
+          console.log("======||||||->: no servee")
+          return Promise.reject(error);
         }
 
         return Promise.reject(error);

@@ -4,7 +4,7 @@ import {
     TwitterIcon,
     YoutubeIcon,
   } from "lucide-react";
-  import React from "react";
+  import React, { type JSX } from "react";
   
   // Define data for navigation links to make the code more maintainable
   const companyLinks = [

@@ -7,7 +7,7 @@ import {
     ShoppingCartIcon,
     UserIcon,
 } from "lucide-react";
-import React from "react";
+import React, { type JSX } from "react";
   export const HeaderSection = (): JSX.Element => {
     // Navigation links data
     const navLinks = [

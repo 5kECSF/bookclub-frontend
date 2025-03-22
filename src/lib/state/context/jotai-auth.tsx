@@ -33,6 +33,8 @@ export const loadingAtom = atom<boolean | null>(null);
 loadingAtom.debugLabel = "loading";
 export const loggedInAtom = atom<boolean | null>(null);
 loggedInAtom.debugLabel = "loggedIn";
+export const networkInAtom = atom<boolean | null>(null);
+networkInAtom.debugLabel = "networkStatus";
 
 let refreshPromise: any = null;
 
@@ -44,6 +46,7 @@ export interface LoginCred {
 export const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
   const [loggedIn, setLoggedIn] = useAtom(loggedInAtom);
+  const [noNetwork, setNoNetwork] = useAtom(networkInAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [loading, setLoading] = useAtom(loadingAtom);
   const router = useRouter();
@@ -60,6 +63,7 @@ export const useAuth = () => {
   }, [user]);
 
   const refreshToken = async (): Promise<Resp<string>> => {
+
     try {
       if (refreshPromise) {
         console.log("Refresh in progress, waiting for result...");
@@ -81,14 +85,16 @@ export const useAuth = () => {
       setLoading(false);
       refreshPromise = null;
       let resp = HandleAxiosErr(error);
-      console.error("***|refresh.Panic|***", resp.Message);
+      console.log("***|refresh.Panic|***", resp.Message);
       await logout();
       return FAIL(`"**Failed to refresh token:"${resp.Message}`);
     }
   };
   const logout = async () => {
+    if(noNetwork) return
     console.log("logout Called:");
     try {
+
       const response = await axios.post(`/api/auth/logout`);
       setUser(null);
       setAccessToken(null);
@@ -98,6 +104,7 @@ export const useAuth = () => {
     } catch (err: any) {
       let resp = HandleAxiosErr(err);
       setLoggedIn(false);
+      setNoNetwork(true);
       console.log("***logout.panic***", resp.Message);
       // router.push("/signin");
     }

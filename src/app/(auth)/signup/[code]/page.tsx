@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import "@/assets/css/style.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +21,8 @@ interface Params {
   code: string;
 }
 
-const VerifyCode: React.FC<{ params: Params }> = ({ params }) => {
+const VerifyCode: React.FC<{ params: Params }> = props => {
+  const params = use(props.params);
   const router = useRouter();
   // const pathname = usePathname();
   const {

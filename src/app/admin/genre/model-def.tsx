@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar } from "antd";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
@@ -42,7 +42,10 @@ export const agColumns = [
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-      <Avatar size={60} src={getImg(params.data?.upload)} />
+      <Avatar>
+             <AvatarImage src={`${getImg(params.data?.upload)}`} />
+             <AvatarFallback>CN</AvatarFallback>
+           </Avatar>
     ),
   },
   {

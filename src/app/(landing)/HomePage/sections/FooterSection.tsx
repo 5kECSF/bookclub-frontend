@@ -1,4 +1,5 @@
 
+import type { JSX } from "react";
 export const FooterSection = (): JSX.Element => {
   // Company navigation links data
   const companyLinks = [

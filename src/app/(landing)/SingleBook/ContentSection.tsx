@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/tabs";
 import { ArrowLeftIcon } from "lucide-react";
 
+import type { JSX } from "react";
+
 export const ContentSection = (): JSX.Element => {
   // Book metadata
   const bookInfo = {

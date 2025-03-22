@@ -9,6 +9,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+import type { JSX } from "react";
+
 export const RecommendedBooksSection = (): JSX.Element => {
   // Data for carousel slides
   const carouselItems = [

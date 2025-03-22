@@ -31,7 +31,7 @@ interface IBookProps {
 }
 
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
-  const uploadRef = useRef();
+  const uploadRef = useRef(undefined);
 
   const [loading, setLoading] = useState(false);
   const {
