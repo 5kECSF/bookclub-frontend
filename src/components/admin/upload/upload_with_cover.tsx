@@ -7,7 +7,7 @@ import {
 import { Headers, MTD, getImgUrl } from "@/lib/constants";
 import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { IUpload } from "@/types/upload";
-import { Modal, UploadFile, UploadProps, message } from "antd";
+import { Modal, UploadFile, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import { Plus } from "lucide-react";
 import Image from "next/image";

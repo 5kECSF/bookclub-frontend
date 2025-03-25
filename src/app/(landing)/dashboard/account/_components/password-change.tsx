@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { MTD } from '@/lib/constants'
 import { passwordChangeType, passwordValidator } from '@/lib/validator/password'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { message } from 'antd'
+import { toast } from "react-toastify";
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import {useMakeReqState} from "@/lib/state/hooks/useMutation";
@@ -31,9 +31,9 @@ const PasswordChange = () => {
             const resp= await makeReq("auth/changePassword", body, MTD.PATCH )
             if(!resp.ok){
                 console.log("````````````````````error data", resp.body);
-                message.error(resp.message);
+                toast.error(resp.message);
             }
-            message.success(`password update success`);
+            toast.success(`password update success`);
             form.reset()
 
         } catch (e: any) {

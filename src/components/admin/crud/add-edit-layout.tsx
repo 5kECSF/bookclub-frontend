@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMakeReqState} from "@/lib/state/hooks/useMutation";
 import { toast } from "react-toastify";
 import { Resp } from "@/lib/constants/return.const";
-import { Modal, message } from "antd";
+import { Modal } from "antd";
 import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
 import { Submit } from "@/components/forms/useFormInputs";
 import { DisplayErrors } from "@/lib/functions/object";
@@ -67,7 +67,7 @@ export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
         reset();
         onClose();
         await queryClient.invalidateQueries({ queryKey: [url] });
-        message.success(`successfully ${isUpdate ? "updated" : "created"} ${url}  `);
+        toast.success(`successfully ${isUpdate ? "updated" : "created"} ${url}  `);
     };
 
     return (

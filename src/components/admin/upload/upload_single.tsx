@@ -6,7 +6,7 @@ import {
 } from "@/components/admin/upload/image_util";
 import { Headers, MTD, getImg } from "@/lib/constants";
 import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
-import { Modal, UploadFile, UploadProps, message } from "antd";
+import { Modal, UploadFile, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";

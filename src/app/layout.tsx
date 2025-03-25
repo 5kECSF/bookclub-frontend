@@ -1,16 +1,16 @@
 "use client";
 
-import "@/assets/css/style.css";
-import React, { useState } from "react";
-import Loader from "@/components/common/Loader";
-// import { ToastContainer } from "react-toastify";
 import DataProvider from "@/app/DataProvider";
-
-import { DevTools } from "jotai-devtools";
-import { Provider } from "jotai";
-import "jotai-devtools/styles.css";
+import "@/assets/css/style.css";
+import Loader from "@/components/common/Loader";
+import { Toaster } from "@/components/ui/toaster";
 import { useAuth } from "@/lib/state/context/jotai-auth";
-import { Toaster } from "@/components/ui/toaster"
+import { Provider } from "jotai";
+import { DevTools } from "jotai-devtools";
+import "jotai-devtools/styles.css";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,7 +24,7 @@ export default function RootLayout({
         <Provider>
           <DevTools />
           <DataProvider>{loading ? <Loader /> : children}</DataProvider>
-
+          <ToastContainer />
           <Toaster />
         </Provider>
       </body>

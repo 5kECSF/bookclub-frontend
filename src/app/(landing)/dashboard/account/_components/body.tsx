@@ -12,10 +12,11 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { BsFillCloudArrowUpFill, } from "react-icons/bs";
 import  { AppHeaders, useMakeReqState } from "@/lib/state/hooks/useMutation";
-import { message } from "antd";
+
 import PasswordChange from "./password-change";
 import { useRouter } from "next/navigation";
 import {useAuth} from "@/lib/state/context/jotai-auth";
+import { toast } from "react-toastify";
 
 type image = File & {
   preview: string;
@@ -52,9 +53,9 @@ export default function Body({  }: { }) {
       const resp= await makeReq("profile", formData, MTD.PATCH, AppHeaders.MULTIPART )
       if(!resp.ok){
         console.log("````````````````````error data", resp.body);
-        message.error(resp.message);
+        toast.error(resp.message);
       }
-      message.success(`user update success`);
+      toast.success(`user update success`);
       router.refresh()
     } catch (e: any) {
       // console.log(e.messag

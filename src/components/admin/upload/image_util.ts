@@ -1,6 +1,6 @@
 import { message } from "antd";
 import type { RcFile } from "antd/es/upload";
-
+import { toast } from "react-toastify";
 export const isJpgOrPng = (file: any) => {
   return (
     file.type === "image/jpeg" ||
@@ -29,7 +29,7 @@ export const beforeUpload = (file: RcFile) => {
   try {
     const isLt30M = file.size / 1024 / 1024 < 50;
     if (!isLt30M) {
-      message.error("Image must smaller than 50MB!");
+      toast.error("Image must smaller than 50MB!");
     }
     return false;
   } catch (e: any) {
@@ -41,11 +41,11 @@ export const beforeImageUpload = (file: RcFile) => {
   try {
     const isImage = isJpgOrPng(file);
     if (!isImage) {
-      message.error("You can only upload JPG/PNG file!");
+      toast.error("You can only upload JPG/PNG file!");
     }
     const isLt10M = file.size / 1024 / 1024 < 10;
     if (!isLt10M) {
-      message.error("Image must smaller than 10MB!");
+      toast.error("Image must smaller than 10MB!");
     }
     return false;
   } catch (e: any) {
@@ -79,9 +79,4 @@ export const beforeImageUpload = (file: RcFile) => {
 // }
 //
 
-// const beforeUpload = (file) => {
-//   if (!isJpgOrPng(file)) {
-//     message.error("Book cover can only be JPG/PNG file!");
-//   }
-//   return false;
-// };
+

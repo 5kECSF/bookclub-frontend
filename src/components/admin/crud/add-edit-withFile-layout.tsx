@@ -1,21 +1,14 @@
 import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import { SelectInput } from "@/components/forms/select";
 import { Submit } from "@/components/forms/useFormInputs";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle
-} from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+
 import { ItemStatus, KY, MTD } from "@/lib/constants";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { DisplayErrors } from "@/lib/functions/object";
 import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { message } from "antd";
 import React, { useRef, useState } from "react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -132,7 +125,7 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
     onClose();
     await queryClient.invalidateQueries({ queryKey: [url] });
 
-    message.success(
+    toast.success(
       `successfully ${isUpdate ? "updated" : "created"} ${url} with name  ${resp.body?.name} `,
     );
     setLoading(false);
