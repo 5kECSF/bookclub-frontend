@@ -1,13 +1,13 @@
 
+import { Button } from "@/components/ui/button";
+import { getImg } from "@/lib/constants";
+import { IBook } from "@/types/db";
 import Image from "next/image";
+import { useState } from "react";
 import { BiSolidQuoteAltLeft, BiSolidShareAlt } from 'react-icons/bi';
 import { FaStickyNote } from 'react-icons/fa';
 import { IoLocationSharp } from 'react-icons/io5';
-import { IBook } from "@/types/db";
-import { getImg } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
 import BookBorrowModal from "./book-borrow-request";
-import { useState } from "react";
 
 export default function BackToResult({ book }: { book: IBook }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +19,7 @@ export default function BackToResult({ book }: { book: IBook }) {
           <div className="flex items-center justify-center">
             <Image
               className="object-contain w-[250px]"
-              src={book?.img ? getImg(book.img) : ''}
+              src={book?.img ? getImg(book.img) : '/dummy.png'}
               alt="Picture of the author"
               width={300}
               height={300}

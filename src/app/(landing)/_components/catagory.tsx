@@ -65,7 +65,7 @@ export default function Categories() {
                     alt=""
                     width={200}
                     height={200}
-                    src={cat?.img ? getImg(cat.img) : ''}
+                    src={cat?.img ? getImg(cat.img) : "/dummy.png"}
                   />
 
                   <div data-test='category-title' className="leading-[2rem] font-semibold ">

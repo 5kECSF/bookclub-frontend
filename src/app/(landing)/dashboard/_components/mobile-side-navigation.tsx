@@ -33,7 +33,7 @@ const MobileSidebar = () => {
             </Button>
             <Drawer placement="right" onClose={() => setOpen(false)} open={open}>
                 <div className='flex flex-col  h-full'>
-                    <Image className=" px-10 object-contain" src={`/assets/image/home/Logo.png`} alt="logo" />
+                    <Image className=" px-10 object-contain" src={`/assets/image/home/dummy.png`} alt="logo" />
                     <div className="flex flex-col  items-start mt-8 ">
                         {data.map((value, i) => {
                             return (

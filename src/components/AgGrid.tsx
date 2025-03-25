@@ -56,8 +56,8 @@ export const TableComponent = ({
   rowData,
   colDefs,
 }: {
-  rowData: RowData[] | undefined;
-  colDefs: ColumnDef[] | undefined;
+  rowData: RowData[] | any;
+  colDefs: ColumnDef[] | any;
 }) => {
   const { colorMode = "light" } = useTheme();
   const gridRef = useRef<any>(null); // Ref to access AG Grid API

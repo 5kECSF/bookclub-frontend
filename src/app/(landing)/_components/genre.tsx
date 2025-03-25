@@ -5,7 +5,6 @@ import { useFetch } from '@/lib/state/hooks/useQuery';
 import { Igenre } from '@/types/db';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
 
 const Genre = () => {
     const { isLoading, data, isError, isSuccess, error } = useFetch(
@@ -32,7 +31,7 @@ const Genre = () => {
                                     <Image
                                         className=" rounded-xl w-[100px] h-[100px] object-cover shadow-lg"
                                         alt=""
-                                        src={gener?.img ? getImg(gener.img) : ''}
+                                        src={gener?.img ? getImg(gener.img) : '/dummy.png'}
                                         width={500}
                                         height={500}
                                     />

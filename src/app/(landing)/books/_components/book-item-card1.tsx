@@ -20,7 +20,7 @@ export const BookItem = ({ book }: { book: IBook }) => {
 
                         <Image
                             className=" w-full object-contain h-[300px] "
-                            src={book?.img ? getImg(book.img) : ''}
+                            src={book?.img ? getImg(book.img) : '/dummy.png'}
                             height={300}
                             width={500}
                             alt='book cover'

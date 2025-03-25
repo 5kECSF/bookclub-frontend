@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 const lastNotificationAtom = atomWithStorage('last-notice', '')
-lastNotificationAtom.debugLabel = "last-notice";
+lastNotificationAtom.debugLabel = "last-notification";
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,7 +27,7 @@ const DropdownNotification = () => {
   } = useFetch(
     [KY.notification, latestDate],
     `${KY.notification}`,
-    { created_at: latestDate },
+    { createdAt: latestDate },
     10000,
   );
 
@@ -37,12 +37,12 @@ const DropdownNotification = () => {
     ?.filter(
       (notice: any) =>
         !latestNotices?.body?.some(
-          (latestNotice: any) => latestNotice.id === notice.id,
+          (latestNotice: any) => latestNotice._id === notice._id,
         ),
     )
     ?.sort(
       (a: any, b: any) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const DropdownNotification = () => {
     if (!dropdownOpen) {
       setNotifying(false);
       if (latestNotices?.body?.length > 0) {
-        setLatest(latestNotices.body[0].created_at);
+        setLatest(latestNotices.body[0].createdAt);
       }
     }
   }, [dropdownOpen]);
@@ -124,7 +124,7 @@ const DropdownNotification = () => {
         <ul className="flex h-auto flex-col overflow-y-auto">
           {/* Render New Notices */}
           {latestNotices?.body?.map((notice: any, i:any) => {
-            let path = notice?.module_name;
+            let path = notice?._id;
 
             return (
                 <NotificationList notifying={true} key={`latest-${i}`} notice={notice} path={path}/>
@@ -139,7 +139,7 @@ const DropdownNotification = () => {
             let path = notice?.module_name;
 
             return (
-                <NotificationList notifying={false} key={`old-${notice?.id}`} notice={notice}  path={path}/>
+                <NotificationList notifying={false} key={`old-${notice?._id}`} notice={notice}  path={path}/>
             );
           })}
         </ul>
@@ -167,7 +167,7 @@ export function NotificationList({notice, path, notifying}: { notice: any, path:
 
         </div>
         <p>{notice?.body}</p>
-        <p className="text-xs">{notice?.created_at}</p>
+        <p className="text-xs">{notice?.createdAt}</p>
       </Link>
       {notifying && (
         // <span  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-red text-xs text-white" />

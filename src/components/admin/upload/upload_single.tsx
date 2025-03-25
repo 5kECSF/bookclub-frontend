@@ -64,10 +64,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
 
   const onNewFileChange: UploadProps["onChange"] = (info) => {
     let newFileList = [...info.fileList];
-    // if (oldImgList.length >= maxFileNo) {
-    //   toast.warning("Maximum file Has Reached");
-    //   return;
-    // }
+
     newFileList = newFileList.map((file) => {
       if (file.response) {
         // Component will show file.url as link

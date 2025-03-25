@@ -4,7 +4,6 @@ import { getImg } from '@/lib/constants'
 import { IBook } from '@/types/db'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { AiFillCheckCircle, AiFillStar, AiOutlineArrowRight } from 'react-icons/ai'
 
 const BookCard2 = ({ book, category }: { book: IBook, category: string }) => {
@@ -14,7 +13,7 @@ const BookCard2 = ({ book, category }: { book: IBook, category: string }) => {
 
             <Image
                 className=" w-[100px] h-[80px] object-contain "
-                src={book?.img ? getImg(book.img) : ''}
+                src={book?.img ? getImg(book.img) : '/dummy.png'}
                 height={300}
                 width={500}
                 alt='book cover'

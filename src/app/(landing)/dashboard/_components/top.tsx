@@ -69,7 +69,7 @@ export default function Top({}) {
           <div className="  hidden md:flex px-4 gap-3 bg-textfield rounded-full  items-center justify-center  border border-gray-50 border-solid ml-auto">
             {/* <Image
               className=" w-[30px] h-[30px] rounded-full object-cover "
-              src={session?.user?.user?.avatar?.path ? getImg(session?.user?.user?.avatar) : ''}
+              src={session?.user?.user?.avatar?.path ? getImg(session?.user?.user?.avatar) : '/dummy.png'}
               height={300}
               width={500}
               alt='book cover'

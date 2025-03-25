@@ -1,13 +1,14 @@
 'use client'
-import Image from "next/image";
-import { useFetch } from "@/lib/state/hooks/useQuery";
-import { KY, getImg } from "@/lib/constants";
 
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import Image from "next/image";
+
+import LatestBookLoader from "@/components/loader/latest-book-loader";
 import { IBook, ICategory } from "@/types/db";
 import Link from "next/link";
-import LatestBookLoader from "@/components/loader/latest-book-loader";
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { KY } from "@/lib/constants";
 
 export default function LatestBook() {
 
@@ -74,7 +75,7 @@ export default function LatestBook() {
                                             <Image
                                                 className="rounded-8xs w-[7.69rem] h-[10.63rem] "
                                                 alt=""
-                                                src={release?.img ? getImg(release.img) : ''}
+                                                src={release?.img ? getImg(release.img) : '/dummy.png'}
                                                 height={300}
                                                 width={500}
                                             />

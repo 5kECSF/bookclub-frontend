@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import logo from "../../../../../public/assets/image/home/Logo.png";
-import { GiBookshelf } from "react-icons/gi";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { IconType } from "react-icons";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiDonateBlood, BiHomeAlt2 } from "react-icons/bi";
-import { IconType } from "react-icons";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { GiBookshelf } from "react-icons/gi";
 
 export interface ISidebar {
   name: string;
@@ -46,7 +45,7 @@ export default function SideNavigation() {
   console.log(activePage('/dashboard/shelf'))
   return (
     <div className="hidden bg-white top-10 left-10  w-[176px] bottom-10 py-6 md:flex md:fixed flex-col rounded-l ">
-      <Image className=" px-10 object-contain" src={logo} alt="logo" />
+      <Image className=" px-10 object-contain" src={"/Logo.png"} alt="logo" />
       <div className="flex flex-col gap-3 mt-8 pl-10">
         {data.map((value, i) => {
           return (

@@ -7,13 +7,14 @@ import {
 import { Headers, MTD, getImgUrl } from "@/lib/constants";
 import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
 import { IUpload } from "@/types/upload";
-import { Button, Modal, UploadFile, UploadProps, message } from "antd";
+import { Modal, UploadFile, UploadProps, message } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
 import {FAIL, NotModified, Resp, Succeed} from "@/lib/constants/return.const";
+import {Button} from "@/components/ui/button";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {
@@ -311,10 +312,11 @@ export const UploadButton = ({
 }) => (
   <div>
     <Button
-      icon={<Plus size={15} strokeWidth={1.75} />}
-      type="dashed"
+      // icon={}
+      // type="dashed"
       disabled={isLoading}
     >
+      <Plus size={15} strokeWidth={1.75} />
       {isLoading ? "...Loading" : txt}{" "}
     </Button>
   </div>

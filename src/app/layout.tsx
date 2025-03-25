@@ -3,13 +3,14 @@
 import "@/assets/css/style.css";
 import React, { useState } from "react";
 import Loader from "@/components/common/Loader";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import DataProvider from "@/app/DataProvider";
-import "react-toastify/dist/ReactToastify.min.css";
+
 import { DevTools } from "jotai-devtools";
 import { Provider } from "jotai";
 import "jotai-devtools/styles.css";
 import { useAuth } from "@/lib/state/context/jotai-auth";
+import { Toaster } from "@/components/ui/toaster"
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +24,8 @@ export default function RootLayout({
         <Provider>
           <DevTools />
           <DataProvider>{loading ? <Loader /> : children}</DataProvider>
-          <ToastContainer />
+
+          <Toaster />
         </Provider>
       </body>
     </html>

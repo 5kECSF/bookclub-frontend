@@ -1,18 +1,25 @@
-import { ZodSchema } from "zod";
+import { MultiFileUpload } from "@/components/admin/upload/upload_single";
+import { SelectInput } from "@/components/forms/select";
+import { Submit } from "@/components/forms/useFormInputs";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/components/ui/alert-dialog";
 import { ItemStatus, KY, MTD } from "@/lib/constants";
-import { DefaultValues, FieldValues, useForm } from "react-hook-form";
-import React, { useRef, useState } from "react";
+import { Resp, ReturnType } from "@/lib/constants/return.const";
+import { DisplayErrors } from "@/lib/functions/object";
+import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMakeReq } from "@/lib/state/hooks/useMutation";
+import { message } from "antd";
+import React, { useRef, useState } from "react";
+import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Resp, ReturnType } from "@/lib/constants/return.const";
-import { Modal, message } from "antd";
-import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
-import { Submit } from "@/components/forms/useFormInputs";
-import { MultiFileUpload } from "@/components/admin/upload/upload_single";
-import { DisplayErrors } from "@/lib/functions/object";
-import { SelectInput } from "@/components/forms/select";
+import { ZodSchema } from "zod";
 
 type Obj = {
   _id?: string;
@@ -133,13 +140,23 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
 
   return (
     <>
-      <Modal
+
+      {/* <Modal
         title={isUpdate ? `Update ${url}` : `Create ${url}`}
         open={isOpen}
         onCancel={onClose}
         footer={[]}
-      >
-        <AddEditWrapper title={url}>
+      > */}
+         <AlertDialog open={isOpen} onOpenChange={onClose}>
+         
+         <AlertDialogContent className="max-h-[80vh] overflow-y-auto mt-8">
+         <AlertDialogHeader>
+            <AlertDialogTitle>
+              {isUpdate ? `Update ${url}` : `Create ${url}`}
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+        
+        {/* <AddEditWrapper title={url}> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-6.5">
               {React.Children.map(children, (child) => {
@@ -183,8 +200,14 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
             </div>
             {DisplayErrors(errors)}
           </form>
-        </AddEditWrapper>
-      </Modal>
+        {/* </AddEditWrapper> */}
+        
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+        </AlertDialogFooter>
+        </AlertDialogContent>
+        </AlertDialog>
+      {/* </Modal> */}
     </>
   );
 }
