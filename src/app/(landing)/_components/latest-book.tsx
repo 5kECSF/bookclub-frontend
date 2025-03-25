@@ -7,8 +7,8 @@ import LatestBookLoader from "@/components/loader/latest-book-loader";
 import { IBook, ICategory } from "@/types/db";
 import Link from "next/link";
 
+import { getImg, KY } from "@/lib/constants";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { KY } from "@/lib/constants";
 
 export default function LatestBook() {
 

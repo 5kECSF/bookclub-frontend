@@ -1,28 +1,27 @@
 "use client";
-import React, { useState, use } from "react";
-import "@/assets/css/style.css";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CodeValidator, TCodeSchema } from "../../models";
-import { toast } from "react-toastify";
-import { BASE_URL, MTD } from "@/lib/constants";
-import { API } from "@/lib/constants/api-paths";
+import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import {
   GoToLink,
-  UserNameInput,
   SubmitInput,
+  UserNameInput,
 } from "@/app/(auth)/_components/inputs";
-import { AuthLayout } from "@/app/(auth)/_components/authLayout";
-import axios from "axios";
+import "@/assets/css/style.css";
+import { BASE_URL } from "@/lib/constants";
+import { API } from "@/lib/constants/api-paths";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { CodeValidator, TCodeSchema } from "../../models";
 // import { usePathname } from "next/navigation";
 interface Params {
   code: string;
 }
 
-const VerifyCode: React.FC<{ params: Params }> = props => {
-  const params = use(props.params);
+const VerifyCode=(params:any) => {
+  // const params = use(props.params);
   const router = useRouter();
   // const pathname = usePathname();
   const {

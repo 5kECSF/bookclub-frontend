@@ -1,9 +1,9 @@
 "use client"
-import Body from "./_components/body";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 import { redirect } from "next/navigation";
-import {useAuth} from "@/lib/state/context/jotai-auth";
+import Body from "./_components/body";
 
-export default async function Acccount() {
+export default function Acccount() {
   const {loggedIn}= useAuth()
   if (!loggedIn) return redirect('/')
   return (
