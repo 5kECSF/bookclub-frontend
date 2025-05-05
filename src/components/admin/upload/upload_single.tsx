@@ -5,7 +5,7 @@ import {
   getBase64,
 } from "@/components/admin/upload/image_util";
 import { Headers, MTD, getImg } from "@/lib/constants";
-import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
+import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { Modal, UploadFile, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import Image from "next/image";
@@ -13,11 +13,11 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
 
 import { UploadButton } from "@/components/admin/upload/upload_with_cover";
-import { RotateCcw } from "lucide-react";
-import { IUpload } from "@/types/upload";
 import { FAIL, NotModified, Resp } from "@/lib/constants/return.const";
-import { atom } from "jotai/index";
+import { IUpload } from "@/types/upload";
 import { useAtom } from "jotai";
+import { atom } from "jotai/index";
+import { RotateCcw } from "lucide-react";
 export const fileAtom = atom<UploadFile[]>([]);
 fileAtom.debugLabel = "files";
 
@@ -160,6 +160,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
       console.log("the image data is not updated");
       if (isUpdate) return NotModified(imgList[0]);
     }
+    console.log("=====>>>>>>>>>>FILE_ID......", id);
     // let data: IUpload;
     if (isUpdate) {
       return makeReq(`file/${id}`, formData, MTD.PATCH, Headers.MULTI);

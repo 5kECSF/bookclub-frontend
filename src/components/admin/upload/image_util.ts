@@ -1,4 +1,4 @@
-import { message } from "antd";
+
 import type { RcFile } from "antd/es/upload";
 import { toast } from "react-toastify";
 export const isJpgOrPng = (file: any) => {

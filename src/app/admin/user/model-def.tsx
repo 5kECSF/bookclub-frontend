@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar } from "antd";
+
 import React, { useState } from "react";
 import { getImg, KY } from "@/lib/constants";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";

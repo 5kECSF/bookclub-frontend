@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownMessage from "./DropdownMessage";
 import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
-import Image from "next/image";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -67,7 +67,7 @@ const Header = (props: {
         </div>
 
         <div className="hidden sm:block">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
+          <form  method="POST">
             <div className="relative">
               <button className="absolute left-0 top-1/2 -translate-y-1/2">
                 <svg

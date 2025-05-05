@@ -4,8 +4,10 @@ import {
   doesObjectExist,
   getBase64,
 } from "@/components/admin/upload/image_util";
+import { Button } from "@/components/ui/button";
 import { Headers, MTD, getImgUrl } from "@/lib/constants";
-import { useMakeReq, useMutate } from "@/lib/state/hooks/useMutation";
+import { FAIL, NotModified, Resp } from "@/lib/constants/return.const";
+import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { IUpload } from "@/types/upload";
 import { Modal, UploadFile, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
@@ -13,8 +15,6 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { toast } from "react-toastify";
-import {FAIL, NotModified, Resp, Succeed} from "@/lib/constants/return.const";
-import {Button} from "@/components/ui/button";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {
@@ -123,7 +123,7 @@ export const FileWithCover = forwardRef(function UploadComp(
         response: undefined,
         uid: "",
         xhr: undefined,
-        url: getImgUrl(oldImg.fileName, oldImg.pathId),
+        url: getImgUrl(oldImg?.url as string, oldImg.pathId),
       };
       setCoverImage([sImage]);
 
@@ -313,7 +313,7 @@ export const UploadButton = ({
   <div>
     <Button
       // icon={}
-      // type="dashed"
+      type="button"
       disabled={isLoading}
     >
       <Plus size={15} strokeWidth={1.75} />

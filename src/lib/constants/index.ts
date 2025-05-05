@@ -54,18 +54,19 @@ const paths: Record<string, imgAddon> = {
 };
 
 export const getImg = (image: IUpload): string => {
-  const addon: imgAddon = paths[image?.pathId || "p1"];
-  if (!addon) return image?.url as string
-  console.log(
-    "|GET_IMG-->",
-    image,
-    addon.prefix + image?.fileName + addon.suffix,
-  );
-  return addon.prefix + image?.fileName + addon.suffix;
+  // const addon: imgAddon = paths[image?.pathId || "p1"];
+  // if (!addon) return image?.url as string
+  // console.log(
+  //   "|GET_IMG-->",
+  //   image,
+  //   addon.prefix + image?.fileName + addon.suffix,
+  // );
+  return image?.url as string
 };
 export const getImgUrl = (imgName: string, p: string): string => {
-  const addon = paths[p || "p1"];
-  return addon.prefix + imgName + addon.suffix;
+  // const addon = paths[p || "p1"];
+  // return addon.prefix + imgName + addon.suffix;
+  return imgName
 };
 
 export const ItemStatus = [

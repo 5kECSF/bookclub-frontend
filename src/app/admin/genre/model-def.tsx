@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import React, { useState } from "react";
-import { getImg, KY } from "@/lib/constants";
-import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { AddEditModal } from "@/app/admin/genre/add-edit-modal";
-import { z } from "zod";
+import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getImg, KY } from "@/lib/constants";
 import { IUpload } from "@/types/upload";
+import { useState } from "react";
+import { z } from "zod";
 
 export interface IGenre {
   _id?: string;
@@ -37,12 +37,12 @@ export const agColumns = [
   },
   // 2 - String - The name of a cell renderer registered with the grid.
   {
-    cellStyle: { padding: "0.4em" },
-    autoHeight: true,
+    cellStyle: { padding: "2em" },
+    // autoHeight: true,
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-      <Avatar>
+      <Avatar className="w-10 h-10">
              <AvatarImage src={`${getImg(params.data?.upload)}`} />
              <AvatarFallback>CN</AvatarFallback>
            </Avatar>

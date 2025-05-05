@@ -8,10 +8,10 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     const { user, loading, loggedIn } = useAuth();
 
     useEffect(() => {
-      if (loading === false && !IsAuthorized(user, allowedRoles)) {
+      if (!loading && !IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
-    }, [loading, user]);
+    }, [loading, user, router]);
 
     // Ensure consistent output during SSR
     if (typeof window === "undefined" || loading === null) {
@@ -22,7 +22,6 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     }
 
     if (!IsAuthorized(user, allowedRoles)) {
-      router.push("/");
       return null; // Render nothing during the redirect
     }
     return <WrappedComponent {...props} />;

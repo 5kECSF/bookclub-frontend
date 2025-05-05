@@ -1,12 +1,13 @@
 "use client";
 
-import {Avatar} from "antd";
-import React, {useState} from "react";
-import {getImg, KY} from "@/lib/constants";
-import {EditDeleteButtons} from "@/components/admin/crud/edit-delete-buttons";
 import AddEditBook from "@/app/admin/book/add-edit-modal";
-import {z} from "zod";
-import {IUpload} from "@/types/upload";
+import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+import { MultiItem } from "@/components/admin/ui/cell-ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getImg, KY } from "@/lib/constants";
+import { IUpload } from "@/types/upload";
+import { useState } from "react";
+import { z } from "zod";
 
 export interface IBook {
   _id?: string;
@@ -42,39 +43,31 @@ export const agColumns = [
   {
     field: "title",
     filter: "agMultiColumnFilter",
-    suppressSizeToFit: false,
-  },  {
-    field: "instanceCnt",
-    filter: "agMultiColumnFilter",
-    suppressSizeToFit: false,
-  },  {
-    field: "availableCnt",
-    filter: "agMultiColumnFilter",
-    suppressSizeToFit: false,
-  },
+    minWidth: 150,
+
+    cellStyle: { padding: "0.4em" },
+    flex: 2,
+  },  
   // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
-    headerName: "Files",
-    cellRenderer: (params: any) => <Avatar src={getImg(params.data?.upload)} />,
+    headerName: "Image",
+    minWidth: 150,
+    cellRenderer: (params: any) => (
+      <Avatar  className="w-10 h-10">
+             <AvatarImage src={`${getImg(params.data?.upload)}`} />
+             <AvatarFallback>CN</AvatarFallback>
+           </Avatar>
+    ),
   },
   {
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Genres",
+    minWidth: 200,
     cellRenderer: (params: any) => (
-        <div className="flex flex-wrap gap-2">
-          {params.data?.genres?.length > 0 ? (
-              params.data.genres.map((genre: string, index: number) => (
-                  <span key={index} className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
-            {genre}
-          </span>
-              ))
-          ) : (
-              <span className="text-gray-500">No genres</span>
-          )}
-        </div>
+      <MultiItem list={params.data?.genres} />
     )
   },
   {
@@ -85,6 +78,19 @@ export const agColumns = [
     minWidth: 70, // Adjust based on typical status text length
     maxWidth: 100,
   },
+  {
+    field: "instanceCnt",
+    filter: "agMultiColumnFilter",
+    suppressSizeToFit: false,
+    minWidth: 100,
+    flex: 1,
+  },  {
+    field: "availableCnt",
+    filter: "agMultiColumnFilter",
+    suppressSizeToFit: false,
+    minWidth: 100,
+    flex: 1,
+  },
   { headerName: "Category", field: "categoryName", filter: "agMultiColumnFilter", minWidth: 100, },
   { headerName: "Author", field: "authorName", filter: "agMultiColumnFilter", minWidth: 100, },
 
@@ -93,6 +99,7 @@ export const agColumns = [
     headerName: "Description",
     field: "desc",
     filter: "agMultiColumnFilter",
+    minWidth: 200,
   },
   // 3
 

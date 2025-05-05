@@ -33,8 +33,8 @@ const useAxiosAuth = () => {
           prevRequest.sent = true;
           const token = await getAccessToken();
           if (!token.ok) {
-            logout();
-            return;
+            // logout();
+            // return;
           }
           prevRequest.headers["Authorization"] = `Bearer ${token.body}`;
           return axiosAuth(prevRequest);
@@ -66,8 +66,3 @@ const useAxiosAuth = () => {
 };
 
 export default useAxiosAuth;
-
-// if (prevRequest?.sent) {
-//     logout();
-//     return axiosAuth(prevRequest);
-// }

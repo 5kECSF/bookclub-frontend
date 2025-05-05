@@ -3,7 +3,7 @@ export interface IUpload {
   fileName: string;
   pathId: string;
   desc?: string;
-  url?: string;
+  url: string;
   uid?: string;
   images?: string[];
   model?: string;

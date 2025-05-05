@@ -1,14 +1,14 @@
 "use client";
 
-import {Avatar, message, Modal} from "antd";
-import React, { useState } from "react";
-import {getImg, KY, MTD} from "@/lib/constants";
+
+import AddEditModal from "@/app/admin/borrow/add-edit-modal";
+import { BorrowAction } from "@/app/admin/borrow/borrow-action";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import  AddEditModal  from "@/app/admin/borrow/add-edit-modal";
+import { getImg, KY } from "@/lib/constants";
+import { useState } from "react";
 import { z } from "zod";
-import {BorrowAction} from "@/app/admin/borrow/borrow-action";
 
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export interface IBorrow {
   _id?: string;
   bookId: string;
@@ -57,7 +57,10 @@ export const agColumns = [
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-      <Avatar size={60} src={getImg(params.data?.upload)} />
+      <Avatar className="w-10 h-10">
+             <AvatarImage src={`${getImg(params.data?.upload)}`} />
+             <AvatarFallback>CN</AvatarFallback>
+           </Avatar>
     ),
   },
   { field: "instanceUid",  filter: "agMultiColumnFilter",  maxWidth: 200},

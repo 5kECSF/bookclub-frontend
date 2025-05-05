@@ -65,6 +65,7 @@ export const useAuth = () => {
   const refreshToken = async (): Promise<Resp<string>> => {
 
     try {
+      if(loggedIn === false) return FAIL("User is not logged in");//to prevent refresh token when user is not logged in
       if (refreshPromise) {
         console.log("Refresh in progress, waiting for result...");
         return refreshPromise;
@@ -83,13 +84,19 @@ export const useAuth = () => {
       return Succeed(access_token);
     } catch (error) {
       setLoading(false);
+      setLoggedIn(false);
       refreshPromise = null;
       let resp = HandleAxiosErr(error);
       console.log("***|refresh.Panic|***", resp.Message);
-      await logout();
+      // await logout();//if it fails to refresh, it is not necessary to logout
       return FAIL(`"**Failed to refresh token:"${resp.Message}`);
     }
   };
+  const removeCredentials = async () => {
+    setUser(null);
+    setAccessToken(null);
+    setLoggedIn(false);
+  }
   const logout = async () => {
     if(noNetwork) return
     console.log("logout Called:");
@@ -106,7 +113,7 @@ export const useAuth = () => {
       setLoggedIn(false);
       setNoNetwork(true);
       console.log("***logout.panic***", resp.Message);
-      // router.push("/signin");
+      router.push("/signin");
     }
   };
   const getAccessToken = async (): Promise<Resp<string>> => {

@@ -1,7 +1,13 @@
 import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import { SelectInput } from "@/components/forms/select";
 import { Submit } from "@/components/forms/useFormInputs";
-import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import { ItemStatus, KY, MTD } from "@/lib/constants";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
@@ -80,7 +86,9 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
     }
     //===============  Step 2: Upload the images ===========
     //==========================================================
+
     if (uploadRef.current) {
+      console.log("file.body=====>>", resp.body);
       //@ts-ignore
       const uploadResp: Resp<any> = await uploadRef.current.uploadSingle(
         resp.body.fileId,
@@ -133,23 +141,21 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
 
   return (
     <>
-
       {/* <Modal
         title={isUpdate ? `Update ${url}` : `Create ${url}`}
         open={isOpen}
         onCancel={onClose}
         footer={[]}
       > */}
-         <AlertDialog open={isOpen} onOpenChange={onClose}>
-         
-         <AlertDialogContent className="max-h-[80vh] overflow-y-auto mt-8">
-         <AlertDialogHeader>
-            <AlertDialogTitle>
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="mt-8 max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
               {isUpdate ? `Update ${url}` : `Create ${url}`}
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-        
-        {/* <AddEditWrapper title={url}> */}
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* <AddEditWrapper title={url}> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-6.5">
               {React.Children.map(children, (child) => {
@@ -187,19 +193,15 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
                 ref={uploadRef}
                 isUpdate={isUpdate}
                 isLoading={loading}
-                fileId={data?.upload?._id}
+                fileId={data?.fileId}
               />
               <Submit isLoading={loading} update={isUpdate} />
             </div>
             {DisplayErrors(errors)}
           </form>
-        {/* </AddEditWrapper> */}
-        
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-        </AlertDialogFooter>
-        </AlertDialogContent>
-        </AlertDialog>
+          {/* </AddEditWrapper> */}
+        </DialogContent>
+      </Dialog>
       {/* </Modal> */}
     </>
   );

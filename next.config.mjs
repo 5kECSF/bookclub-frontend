@@ -28,14 +28,25 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "github.com",
         port: "",
         pathname: "/**",
       },
-
     ],
   },
-  transpilePackages: ['jotai-devtools'],
+  transpilePackages: ["jotai-devtools"],
 };
 
 export default nextConfig;
