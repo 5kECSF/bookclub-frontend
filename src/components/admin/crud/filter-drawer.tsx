@@ -16,7 +16,7 @@ export function TopButtons(props: { openModal: any; openDrawer: any }) {
   );
 }
 
-export const FilterWrapper = ({
+export const FilterDrawer = ({
   isOpen,
   setIsOpen,
   children,

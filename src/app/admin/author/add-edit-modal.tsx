@@ -1,12 +1,11 @@
-import { AddEditWithFileLayout } from "@/components/admin/crud/add-edit-withFile-layout";
-import { TextAreaField } from "@/components/forms/useFormInputs";
-import { KY } from "@/lib/constants";
-import { InputField } from "@/components/forms/useFormInputs";
 import {
   AuthorValidator,
   IAuthor,
   TAuthorDto,
 } from "@/app/admin/author/model-def";
+import { AddEditWithFileLayout } from "@/components/admin/crud/generic-add-edit-withFile";
+import { InputField, TextAreaField } from "@/components/forms/useFormInputs";
+import { KY } from "@/lib/constants";
 
 interface IAuthorProps {
   isUpdate: boolean;

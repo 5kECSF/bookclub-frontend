@@ -4,7 +4,7 @@ import {
   IBorrow,
   TBorrowDto,
 } from "@/app/admin/borrow/model-def";
-import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-wrapper";
+import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-modal";
 import { SingleSelectWithSearch } from "@/components/forms/react-select-single";
 import { SelectInput } from "@/components/forms/select";
 import {

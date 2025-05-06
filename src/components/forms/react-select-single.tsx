@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
-import { SearchProps } from "./multi-select";
+import { SearchProps } from "./antd-controlled-select";
 
 interface Item {
   _id: string; // Based on idx="_id"

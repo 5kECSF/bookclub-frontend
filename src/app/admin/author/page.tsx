@@ -1,12 +1,12 @@
 "use client";
-import { KY } from "@/lib/constants";
-import React, { useEffect, useState } from "react";
-import { agColumns } from "./model-def";
-import withAuthorization from "@/lib/functions/withAuthorization";
-import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import { AddEditModal } from "@/app/admin/author/add-edit-modal";
 import { FilterDrawer } from "@/app/admin/author/filter-drawer";
-import { PageLayout } from "@/components/admin/crud/page-layout";
+import { PageLayout } from "@/components/admin/crud/generic-page";
+import { KY } from "@/lib/constants";
+import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
+import withAuthorization from "@/lib/functions/withAuthorization";
+import { useEffect, useState } from "react";
+import { agColumns } from "./model-def";
 
 const AuthorPage = () => {
   const [modalOpen, setModalOpen] = useState(false);

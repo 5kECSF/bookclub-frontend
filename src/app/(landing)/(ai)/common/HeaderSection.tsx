@@ -8,15 +8,17 @@ import {
     UserIcon,
 } from "lucide-react";
 import React, { type JSX } from "react";
+import Link from "next/link";
+
   export const HeaderSection = (): JSX.Element => {
     // Navigation links data
     const navLinks = [
-      { name: "HOME", active: true },
-      { name: "ABOUT US", active: false },
-      { name: "BOOKS", active: false },
-      { name: "NEW RELEASE", active: false },
-      { name: "CONTACT US", active: false },
-      { name: "BLOG", active: false },
+      { name: "HOME", active: true, url:"/HomePage" },
+      { name: "BOOKS", active: false, url:"/ListingPage"  },
+      { name: "SingleBook", active: false, url:"/SingleBook"  },
+      { name: "NEW RELEASE", active: false , url:"/HomePage" },
+      { name: "ABOUT US", active: false, url:"/HomePage"  },
+      { name: "CONTACT US", active: false, url:"/HomePage"  },
     ];
   
     return (
@@ -47,7 +49,7 @@ import React, { type JSX } from "react";
             <div className="flex items-center">
               <div className="relative w-10 h-10 rounded-md [background:linear-gradient(90deg,rgba(41,121,255,1)_0%,rgba(76,88,158,1)_100%)]">
                 <div className="absolute w-10 h-10 -top-px left-0 font-bold text-white-100 text-[32px] text-center leading-9">
-                  S
+                  5k
                 </div>
               </div>
               <div className="ml-2 font-medium text-blue-100 text-4xl leading-9">
@@ -75,14 +77,14 @@ import React, { type JSX } from "react";
   
               <Separator orientation="vertical" className="h-4 bg-[#d1d1d1]" />
   
-              <div className="flex items-center gap-2">
-                <ShoppingCartIcon className="w-[11px] h-[13px] text-[#393280]" />
-                <span className="font-semibold text-[#393280] text-sm tracking-[1.68px]">
-                  CART:(0$)
-                </span>
-              </div>
+              {/*<div className="flex items-center gap-2">*/}
+              {/*  <ShoppingCartIcon className="w-[11px] h-[13px] text-[#393280]" />*/}
+              {/*  <span className="font-semibold text-[#393280] text-sm tracking-[1.68px]">*/}
+              {/*    CART:(0$)*/}
+              {/*  </span>*/}
+              {/*</div>*/}
   
-              <Separator orientation="vertical" className="h-4 bg-[#d1d1d1]" />
+              {/*<Separator orientation="vertical" className="h-4 bg-[#d1d1d1]" />*/}
   
               <div className="flex items-center gap-2">
                 <HeartIcon className="w-4 h-3.5 text-[#393280]" />
@@ -104,11 +106,12 @@ import React, { type JSX } from "react";
           <ul className="flex justify-center items-center gap-4 text-lg tracking-[0.39px]">
             {navLinks.map((link, index) => (
               <React.Fragment key={link.name}>
-                <li
+                <Link
+                    href={link.url}
                   className={`font-medium ${link.active ? "font-extrabold text-[#ed553b]" : "text-[#111111]"}`}
                 >
                   {link.name}
-                </li>
+                </Link>
                 {index < navLinks.length - 1 && (
                   <li className="text-[#d1d1d1]">|</li>
                 )}

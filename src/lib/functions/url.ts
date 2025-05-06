@@ -17,12 +17,14 @@ export const getQueryFromUrl = (queries: any) => {
       if (value) query[key] = value.includes(",") ? value.split(",") : value;
     }
   });
+  //set the default queries
   Object.entries(defaultQuery).forEach(([key, value]) => {
     if (key in query) {
     } else {
       if (value) query[key] = value;
     }
   });
+  console.log("current url query", query)
   return query;
 };
 export const setUrl = (newQuery: Record<string, any>) => {

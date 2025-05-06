@@ -1,6 +1,6 @@
 import React, { type JSX } from "react";
 import { ContentSection } from "./ContentSection";
-import { HeaderSection } from "./HeaderSection";
+import { HeaderSection } from "../common/HeaderSection";
 
  const SingleBook = (): JSX.Element => {
     return (

@@ -1,7 +1,5 @@
-import { FilterLayout } from "@/components/admin/crud/filter-layout";
+import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
-import React from "react";
-import { ItemStatus } from "@/types/commonTypes";
 
 interface IFilterProps {
   filterOpen: boolean;
@@ -20,7 +18,7 @@ export function FilterDrawer({
       setQuery={setQuery}
     >
       <CleanSelectInput
-        data={[{role: "ADMIN"},{role: "USER"}]}
+        data={[{ role: "ADMIN" }, { role: "USER" }]}
         name={"role"}
         idx={"role"}
         dispIdx={"role"}

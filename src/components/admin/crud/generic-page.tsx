@@ -1,4 +1,4 @@
-import { TopButtons } from "@/components/admin/crud/filter-wrapper";
+import { TopButtons } from "@/components/admin/crud/filter-drawer";
 import { Pagination } from "@/components/admin/crud/pagination";
 import QueryChips from "@/components/admin/crud/query-chips";
 import { FetchError, Spinner } from "@/components/admin/ui/state-components";

@@ -1,20 +1,18 @@
 "use client";
+import { PageLayout } from "@/components/admin/crud/generic-page";
 import { KY } from "@/lib/constants";
-import React, { useEffect, useState } from "react";
-import { agColumns } from "./model-def";
-import withAuthorization from "@/lib/functions/withAuthorization";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
+import withAuthorization from "@/lib/functions/withAuthorization";
+import { useEffect, useState } from "react";
 import { AddEditModal } from "./add-edit-modal";
 import { FilterDrawer } from "./filter-drawer";
-import { PageLayout } from "@/components/admin/crud/page-layout";
+import { agColumns } from "./model-def";
 
 const UserPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  const [query, setQuery] = useState<Record<string, any>>(
-    getQueryFromUrl({}),
-  );
+  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
 
   useEffect(() => {
     setUrl(query);

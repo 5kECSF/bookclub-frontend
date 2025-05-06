@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { FilterWrapper } from "@/components/admin/crud/filter-wrapper";
+import { FilterDrawer } from "@/components/admin/crud/filter-drawer";
 import { InputField } from "@/components/forms/cleanInputs";
 import { Filter } from "lucide-react";
+import React, { useState } from "react";
 
 interface IFilterProps {
   filterOpen: boolean;
@@ -67,7 +67,7 @@ export const FilterLayout = ({
   };
   return (
     <div>
-      <FilterWrapper isOpen={filterOpen} setIsOpen={setFilterOpen}>
+      <FilterDrawer isOpen={filterOpen} setIsOpen={setFilterOpen}>
         <div className="h-[80%] overflow-y-auto">
           <InputField
             label={"Search"}
@@ -104,7 +104,7 @@ export const FilterLayout = ({
           <Filter className="h-5 w-5" />
           Filter
         </button>
-      </FilterWrapper>
+      </FilterDrawer>
     </div>
   );
 };

@@ -1,24 +1,27 @@
 import { Separator } from "@/components/ui/separator";
 import { BookRecommendationsSection } from "./sections/BookRecommendationsSection";
-import { CategoriesSection } from "./sections/CategoriesSection";
-import { FeaturedBookSection } from "./sections/FeaturedBookSection";
-import { FooterSection } from "./sections/FooterSection";
+import { FeaturedBooksSection } from "./sections/FeaturedBooksSection";
+import { NewReleaseSection } from "./sections/NewReleaseSection";
+import { FooterSection } from "../common/FooterSection";
 import { GenreSelectionSection } from "./sections/GenreSelectionSection";
 import { HeroSection } from "./sections/HeroSection";
-import { NewReleasesSection } from "./sections/NewReleasesSection";
-import { RecommendedBooksSection } from "./sections/RecommendedBooksSection";
+import { HeaderSection } from "../common/HeaderSection";
+import { CarouselSection } from "./sections/CarouselSection";
 
 import type { JSX } from "react";
+import {CategoriesSection} from "@/app/(landing)/(ai)/HomePage/sections/CategoriesSection";
 
 const HomePage = (): JSX.Element => {
  return (
    <div className="bg-white flex flex-col items-center w-full">
      <div className="bg-white w-full max-w-[1440px] relative">
        {/* New Releases section */}
-       <NewReleasesSection />
+       <HeaderSection />
 
        {/* Recommended Books section */}
-       <RecommendedBooksSection />
+       <CarouselSection />
+       {/* Categories Section */}
+       <CategoriesSection/>
 
        {/* Genre Selection section with title */}
        <div className="w-full flex flex-col items-center mt-16">
@@ -29,7 +32,7 @@ const HomePage = (): JSX.Element => {
        </div>
 
        {/* Featured Book section */}
-       <FeaturedBookSection />
+       <NewReleaseSection />
 
        {/* Separator line */}
        <div className="w-full px-2.5 mt-8">
@@ -40,7 +43,7 @@ const HomePage = (): JSX.Element => {
        <BookRecommendationsSection />
 
        {/* Categories section with title */}
-       <CategoriesSection />
+       <FeaturedBooksSection />
 
        {/* Hero section */}
        <HeroSection />

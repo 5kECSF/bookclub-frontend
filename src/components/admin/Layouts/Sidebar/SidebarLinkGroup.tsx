@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from "react";
-import Link from "next/link";
 import { DropDownSvg } from "@/components/svgs/sidebarSvgs";
+import Link from "next/link";
+import React, { ReactNode, useState } from "react";
 
 interface SidebarLinkGroupProps {
   children: (handleClick: () => void, open: boolean) => ReactNode;
@@ -74,14 +74,14 @@ export const ItemGroup = ({
 export const ChildItems = ({ pathname, path, name }: any) => {
   return (
     <li>
-      <Link
+      <a
         href={path}
         className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
           pathname === path && "text-white"
         }`}
       >
         {name}
-      </Link>
+      </a>
     </li>
   );
 };
@@ -90,7 +90,8 @@ export const ItemWithSvg = ({ pathname, name, path, SVG }: any) => {
   return (
     <li>
       <Link
-        href={`/${path}`}
+        // href={`/${path}`}
+        href={{ pathname: `/${path}`, query: {} }}
         className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
           pathname.includes(path) && "bg-graydark dark:bg-meta-4"
         }`}

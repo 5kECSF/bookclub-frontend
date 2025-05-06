@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { BookValidator, IBook, TBookDto } from "@/app/admin/book/model-def";
-import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
+import { AddEditWrapper } from "@/components/admin/crud/add-edit-modal";
 import { ReactMultiSelect } from "@/components/forms/react-select-multi";
 import { SelectInput } from "@/components/forms/select";
 import {

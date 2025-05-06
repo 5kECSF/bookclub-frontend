@@ -1,6 +1,5 @@
-import { FilterLayout } from "@/components/admin/crud/filter-layout";
+import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
-import React from "react";
 import { ItemStatus } from "@/types/commonTypes";
 
 interface IFilterProps {

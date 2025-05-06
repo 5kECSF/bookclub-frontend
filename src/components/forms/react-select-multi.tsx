@@ -1,7 +1,7 @@
 import { DisplayError } from "@/lib/functions/object";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
-import { MultiSelectProps } from "./multi-select";
+import { MultiSelectProps } from "./antd-controlled-select";
 
 export const ReactMultiSelect = ({
   data,

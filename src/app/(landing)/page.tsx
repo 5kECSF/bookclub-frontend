@@ -1,8 +1,8 @@
 import MainBanner from "./_components/main-banner";
 import Categories from "./_components/catagory";
 import SubBanner from "./_components/sub-banner";
-import HomeFooter from "@/components/footer";
-import Header from "@/components/header";
+import HomeFooter from "@/components/home/footer";
+import Header from "@/components/home/header";
 import Genre from "./_components/genre";
 import LatestBook from "./_components/latest-book";
 

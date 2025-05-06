@@ -24,10 +24,7 @@ const BookClient = ({ searchParams }: { searchParams: Filter }) => {
         const query: Filter = {
             ...current,
             sort: `${isDescending ? '-' : ""}title`,
-
         };
-
-
         const url = qs.stringifyUrl({
             url: `${window.location.href}`,
             query: query as StringifiableRecord,

@@ -9,7 +9,7 @@ import { ArrowRightIcon } from "lucide-react";
 
 import type { JSX } from "react";
 
-export const FeaturedBookSection = (): JSX.Element => {
+export const NewReleaseSection = (): JSX.Element => {
   // Sample book data that would be displayed in the carousel
   const books = [
     {

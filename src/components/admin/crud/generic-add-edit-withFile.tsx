@@ -2,13 +2,6 @@ import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import { SelectInput } from "@/components/forms/select";
 import { Submit } from "@/components/forms/useFormInputs";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
 import { ItemStatus, KY, MTD } from "@/lib/constants";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { DisplayErrors } from "@/lib/functions/object";
@@ -19,6 +12,7 @@ import React, { useRef, useState } from "react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { ZodSchema } from "zod";
+import { AddEditModalWrapper } from "./add-edit-modal";
 
 type Obj = {
   _id?: string;
@@ -141,68 +135,56 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
 
   return (
     <>
-      {/* <Modal
-        title={isUpdate ? `Update ${url}` : `Create ${url}`}
-        open={isOpen}
-        onCancel={onClose}
-        footer={[]}
-      > */}
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="mt-8 max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>
-              {isUpdate ? `Update ${url}` : `Create ${url}`}
-            </DialogTitle>
-          </DialogHeader>
+      <AddEditModalWrapper
+        isOpen={isOpen}
+        onClose={onClose}
+        isUpdate={isUpdate}
+        title={url}
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="p-6.5">
+            {React.Children.map(children, (child) => {
+              // Ensure the child is a valid React element
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                  //@ts-ignore
+                  errors,
+                  register,
+                  handleChange,
+                });
+              }
+              return child;
+            })}
 
-          {/* <AddEditWrapper title={url}> */}
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="p-6.5">
-              {React.Children.map(children, (child) => {
-                // Ensure the child is a valid React element
-                if (React.isValidElement(child)) {
-                  return React.cloneElement(child, {
-                    //@ts-ignore
-                    errors,
-                    register,
-                    handleChange,
-                  });
-                }
-                return child;
-              })}
-
-              {isUpdate && (
-                <SelectInput
-                  data={ItemStatus}
-                  register={register}
-                  errors={errors}
-                  handleChange={handleChange}
-                  idx={"name"}
-                  name={"status"}
-                  dispIdx={"name"}
-                  label={"status"}
-                  placeholder={"select status"}
-                  req={false}
-                />
-              )}
-              {/*/>*/}
-              <MultiFileUpload
-                oldData={[data?.upload]}
-                imgOnly={false}
-                maxFileNo={1}
-                ref={uploadRef}
-                isUpdate={isUpdate}
-                isLoading={loading}
-                fileId={data?.fileId}
+            {isUpdate && (
+              <SelectInput
+                data={ItemStatus}
+                register={register}
+                errors={errors}
+                handleChange={handleChange}
+                idx={"name"}
+                name={"status"}
+                dispIdx={"name"}
+                label={"status"}
+                placeholder={"select status"}
+                req={false}
               />
-              <Submit isLoading={loading} update={isUpdate} />
-            </div>
-            {DisplayErrors(errors)}
-          </form>
-          {/* </AddEditWrapper> */}
-        </DialogContent>
-      </Dialog>
-      {/* </Modal> */}
+            )}
+            {/*/>*/}
+            <MultiFileUpload
+              oldData={[data?.upload]}
+              imgOnly={false}
+              maxFileNo={1}
+              ref={uploadRef}
+              isUpdate={isUpdate}
+              isLoading={loading}
+              fileId={data?.fileId}
+            />
+            <Submit isLoading={loading} update={isUpdate} />
+          </div>
+          {DisplayErrors(errors)}
+        </form>
+      </AddEditModalWrapper>
     </>
   );
 }

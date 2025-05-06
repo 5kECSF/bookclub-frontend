@@ -1,4 +1,4 @@
-import { FilterLayout } from "@/components/admin/crud/filter-layout";
+import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
 import { KY } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";

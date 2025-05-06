@@ -5,7 +5,7 @@ import {
   TDonationDto,
   bookStatusList,
 } from "@/app/admin/donation/model-def";
-import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-wrapper";
+import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-modal";
 import { SingleSelectWithSearch } from "@/components/forms/react-select-single";
 import { SelectInput } from "@/components/forms/select";
 import {
@@ -87,13 +87,6 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
 
   return (
     <>
-      {/* <Modal
-        title={isUpdate ? `Update ${KY.book}` : `Create ${KY.book}`}
-        open={isOpen}
-        onOk={handleSubmit(onSubmit)}
-        onCancel={onClose}
-        footer={[]}
-      > */}
       <AddEditModalWrapper
         isOpen={isOpen}
         onClose={onClose}
@@ -171,7 +164,6 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
           {DisplayErrors(errors)}
         </form>
       </AddEditModalWrapper>
-      {/* </Modal> */}
     </>
   );
 };

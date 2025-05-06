@@ -1,4 +1,4 @@
-import { KY, MTD } from "@/lib/constants";
+import { MTD } from "@/lib/constants";
 import { Resp } from "@/lib/constants/return.const";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,15 +7,9 @@ import React, { useState } from "react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import { ShimProps } from "@/components/admin/crud/add-edit-withFile-layout";
-import { AddEditWrapper } from "@/components/admin/crud/add-edit-wrapper";
+import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-modal";
+import { ShimProps } from "@/components/admin/crud/generic-add-edit-withFile";
 import { Submit } from "@/components/forms/useFormInputs";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { DisplayErrors } from "@/lib/functions/object";
 
 type Obj = {
@@ -77,36 +71,32 @@ export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
 
   return (
     <>
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="mt-8 max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>
-              {isUpdate ? `Update ${KY.borrow}` : `Create ${KY.borrow}`}
-            </DialogTitle>
-          </DialogHeader>
-          <AddEditWrapper title={url}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="p-6.5">
-                {React.Children.map(children, (child) => {
-                  // Ensure the child is a valid React element
-                  if (React.isValidElement(child)) {
-                    return React.cloneElement(child, {
-                      //@ts-ignore
-                      errors,
-                      register,
-                      handleChange,
-                    });
-                  }
-                  return child;
-                })}
+      <AddEditModalWrapper
+        isOpen={isOpen}
+        onClose={onClose}
+        isUpdate={isUpdate}
+        title={url}
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="p-6.5">
+            {React.Children.map(children, (child) => {
+              // Ensure the child is a valid React element
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                  //@ts-ignore
+                  errors,
+                  register,
+                  handleChange,
+                });
+              }
+              return child;
+            })}
 
-                <Submit isLoading={loading} update={isUpdate} />
-              </div>
-              {DisplayErrors(errors)}
-            </form>
-          </AddEditWrapper>
-        </DialogContent>
-      </Dialog>
+            <Submit isLoading={loading} update={isUpdate} />
+          </div>
+          {DisplayErrors(errors)}
+        </form>
+      </AddEditModalWrapper>
     </>
   );
 }

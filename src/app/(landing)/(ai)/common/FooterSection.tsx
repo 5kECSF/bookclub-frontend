@@ -29,7 +29,7 @@ import {
     { icon: YoutubeIcon, alt: "YouTube" },
   ];
   
-  export const FilterSection = (): JSX.Element => {
+  export const FooterSection = (): JSX.Element => {
     return (
       <footer className="w-full bg-[#ed553b] py-16">
         <div className="container mx-auto max-w-[1155px]">

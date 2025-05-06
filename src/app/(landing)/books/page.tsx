@@ -1,7 +1,7 @@
 
 import React from "react";
-import Header from "@/components/header";
-import HomeFooter from "@/components/footer";
+import Header from "@/components/home/header";
+import HomeFooter from "@/components/home/footer";
 
 import BookClient from "./_components/book-client";
 

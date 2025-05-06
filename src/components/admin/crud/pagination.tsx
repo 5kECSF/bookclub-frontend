@@ -1,6 +1,5 @@
-
-import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
 interface IPagination {
   isPlaceholderData: boolean;
   page: number;
@@ -14,7 +13,6 @@ export const Pagination = ({
   hasNext,
   setPage,
 }: IPagination) => {
-  // console.log("placeHolder", isPlaceholderData, hasNext);
   return (
     <div className="flex items-center justify-center gap-3 py-4">
       {page > 1 && (

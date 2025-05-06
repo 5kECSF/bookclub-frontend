@@ -3,11 +3,19 @@
 
 # current tasks
 
+- [x] stop the filter carry from one filter page to another
+- [] change the toast with sonner
+- [] Start Home page integrations
+  - [] use new home pages
+  - [] use titlebar of old & new rest etc
+  - [] finish & deploy by friday: tue-thurs,fri
+- [] landing page tasks
+  - [] 
 - Donations
   - [x] make the search filtering work for books & donors
 - Borrow History
-- [] create a borrowing request with api
-- [] create tabs to display different states of borrowing state
+- [x] create a borrowing request with api
+- [x] create tabs to display different states of borrowing state
 
 ## Generic tasks
 

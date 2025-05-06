@@ -1,12 +1,12 @@
-import { AddEditWithFileLayout } from "@/components/admin/crud/add-edit-withFile-layout";
-import {EmailField, PasswordField, TextAreaField} from "@/components/forms/useFormInputs";
+import { IUser, TUserDto, UserValidator } from "@/app/admin/user/model-def";
+import { AddEditLayout } from "@/components/admin/crud/generic-add-edit";
+import { SelectInput } from "@/components/forms/select";
+import {
+  EmailField,
+  InputField,
+  PasswordField,
+} from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants";
-import { InputField } from "@/components/forms/useFormInputs";
-import {UserValidator, IUser, TUserDto, RoleType} from "@/app/admin/user/model-def";
-import {AddEditLayout} from "@/components/admin/crud/add-edit-layout";
-import {EmailInput, Password} from "@/app/(auth)/_components/inputs";
-import React from "react";
-import {SelectInput} from "@/components/forms/select";
 
 interface IUserProps {
   isUpdate: boolean;
@@ -14,12 +14,7 @@ interface IUserProps {
   onClose: (e?: any) => void;
   user?: IUser;
 }
-export function AddEditModal({
-  isOpen,
-  onClose,
-  isUpdate,
-  user,
-}: IUserProps) {
+export function AddEditModal({ isOpen, onClose, isUpdate, user }: IUserProps) {
   return (
     <AddEditLayout<IUser, TUserDto>
       isOpen={isOpen}
@@ -29,14 +24,11 @@ export function AddEditModal({
       isUpdate={isUpdate}
       data={user}
     >
-      <EmailField
-          name={"email"}
-          placeholder={"email"}
-      />
+      <EmailField name={"email"} placeholder={"email"} />
       <PasswordField
-          placeHolder={"Enter Password"}
-          label={"Password"}
-          name={"password"}
+        placeHolder={"Enter Password"}
+        label={"Password"}
+        name={"password"}
       />
       <InputField
         label={"firstName"}
@@ -49,18 +41,16 @@ export function AddEditModal({
         placeholder={"write lastName"}
       />
       <SelectInput
-          // register={register}
-          // errors={errors}
-          // handleChange={handleChange}
-          data={[{role: "ADMIN"},{role: "USER"}]}
-          idx={"role"}
-          dispIdx={"role"}
-          label={"Role"}
-          name={"role"}
-          placeholder={"select Author"}
+        // register={register}
+        // errors={errors}
+        // handleChange={handleChange}
+        data={[{ role: "ADMIN" }, { role: "USER" }]}
+        idx={"role"}
+        dispIdx={"role"}
+        label={"Role"}
+        name={"role"}
+        placeholder={"select Author"}
       />
-
-
     </AddEditLayout>
   );
 }

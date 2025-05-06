@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CardDataStats from "../../CardDataStats";
+import CardDataStats from "../../admin/CardDataStats";
 import ChartOne from "../Charts/ChartOne";
 import ChartThree from "../Charts/ChartThree";
 import ChatCard from "../Chat/ChatCard";
