@@ -17,7 +17,7 @@ export interface Iauthor {
   count?: number;
 }
 
-export interface IBook {
+export interface OldIBook {
   _id?: string;
   title: string;
   slug?: string;

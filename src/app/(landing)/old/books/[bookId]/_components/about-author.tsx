@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { KY, getImg } from "@/lib/constants";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { IBook } from "@/types/db";
+import { OldIBook } from "@/types/db";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
@@ -58,7 +58,7 @@ export default function About({ authorName, authorid }: Iabout) {
         </div>
         <h3 className="text-mini my-3 font-bold ">Other Books</h3>
         <div className="grid grid-cols-3 gap-4 lg:grid-cols-5 ">
-          {displayedData?.map((book: IBook, i: number) => {
+          {displayedData?.map((book: OldIBook, i: number) => {
             if (book?._id === params?.bookId) return;
             return (
               <Link key={i} href={`/src/app/(landing)/old/books/${book?._id}`}>

@@ -1,9 +1,9 @@
 import { getImg } from "@/lib/constants";
-import { IBook } from "@/types/db";
+import { OldIBook } from "@/types/db";
 import Image from "next/image";
 import Link from "next/link";
 
-export const BookItem = ({ book }: { book: IBook }) => {
+export const BookItem = ({ book }: { book: OldIBook }) => {
   return (
     <div data-test="book-list">
       <div

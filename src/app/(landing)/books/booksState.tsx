@@ -12,6 +12,7 @@ import QueryChips from "@/components/admin/crud/query-chips";
 import { IBook } from "@/app/admin/book/model-def";
 import { BookCard } from "@/app/(landing)/books/_components/bookCard";
 import { PaginationComponent } from "@/app/(landing)/books/_components/paginationComponent";
+import BookCard2 from "@/app/(landing)/books/_components/book-item-card2";
 
 export const BooksState = ({
   urlParam,
@@ -71,11 +72,19 @@ export const BooksState = ({
         />
 
         {/* Book grid */}
-        <div className="m-6 mb-10 grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4">
-          {booksList.map((book: IBook, i: number) => (
-            <BookCard key={i} book={book} />
-          ))}
-        </div>
+        {isGrid ? (
+          <div className="m-6 mb-10 grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4">
+            {booksList.map((book: IBook, i: number) => (
+              <BookCard key={i} book={book} />
+            ))}
+          </div>
+        ) : (
+          <div className="mb-20 flex h-full w-full flex-col gap-4 rounded-lg bg-slate-200 px-4 py-8 md:px-10">
+            {booksList.map((book: IBook, i: number) => (
+              <BookCard2 key={i} book={book} />
+            ))}
+          </div>
+        )}
 
         <PaginationComponent
           count={data?.count}

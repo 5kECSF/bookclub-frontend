@@ -1,6 +1,5 @@
-
 import { Button } from "@/components/ui/button";
-import { Avatar, Tag } from "antd";
+import { Tag } from "antd";
 import {
   FileCode2,
   FileImage,
@@ -12,7 +11,6 @@ import {
 import React from "react";
 
 //==============  Deprecated
-
 
 export function AddButton(props: { onClick: () => void }) {
   return (
@@ -72,11 +70,6 @@ export const FileList = ({ files }: { files: any }) => {
       })}
     </div>
   );
-};
-
-//for genre column
-export const Fileicon = ({ files }: { files: any }) => {
-  return <Avatar src={files?.url} />;
 };
 
 export const MultiItem = ({ list }: { list: any }) => {

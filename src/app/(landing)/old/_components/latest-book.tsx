@@ -4,7 +4,7 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import Image from "next/image";
 
 import LatestBookLoader from "@/components/loader/latest-book-loader";
-import { IBook, ICategory } from "@/types/db";
+import { OldIBook, ICategory } from "@/types/db";
 import Link from "next/link";
 
 import { getImg, KY } from "@/lib/constants";
@@ -21,7 +21,7 @@ export default function LatestBook() {
   );
 
   const bookData = data?.body || [];
-  const category = (book: IBook) =>
+  const category = (book: OldIBook) =>
     bookData
       ? categoryData?.body?.find(
           (cat: ICategory) => cat._id === book?.categoryId,
@@ -77,7 +77,7 @@ export default function LatestBook() {
             id="slider2"
             className="  relative z-[100]  w-full gap-10 overflow-x-scroll scroll-smooth whitespace-nowrap"
           >
-            {bookData?.map((release: IBook, i: number) => {
+            {bookData?.map((release: OldIBook, i: number) => {
               return (
                 <Link
                   href={`/src/app/(landing)/old/books/${release._id}`}

@@ -1,12 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { getImg } from "@/lib/constants";
-import { IBook } from "@/types/db";
+import { OldIBook } from "@/types/db";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillCheckCircle, AiFillStar, AiTwotoneHeart } from "react-icons/ai";
 
-const BookCard2 = ({ book, category }: { book: IBook; category: string }) => {
+const BookCard2 = ({
+  book,
+  category,
+}: {
+  book: OldIBook;
+  category: string;
+}) => {
   return (
     <Link href={`/src/app/(landing)/old/books/${book._id}`}>
       <div className="grid h-[120px] grid-cols-4 items-center gap-10 rounded bg-white px-4 sm:grid-cols-5 md:grid-cols-5 md:px-0 lg:grid-cols-7">

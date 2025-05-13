@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/admin/ui/Table";
+} from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
 

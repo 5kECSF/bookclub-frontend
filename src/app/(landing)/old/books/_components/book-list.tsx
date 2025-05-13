@@ -4,7 +4,7 @@ import BookLoader from "@/components/loader/book-list-loader";
 import { KY } from "@/lib/constants";
 import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { IBook, ICategory } from "@/types/db";
+import { OldIBook, ICategory } from "@/types/db";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import qs from "query-string";
@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Filter } from "../page";
 import { BookItem } from "./book-item-card1";
-import BookCard2 from "../../../books/_components/book-item-card2";
 
 export default function GridView({
   searchParams,
@@ -78,7 +77,7 @@ export default function GridView({
       fetchNextPage();
     }
   }, [inView]);
-  const category = (book: IBook) =>
+  const category = (book: OldIBook) =>
     data
       ? categoryData?.data?.find(
           (cat: ICategory) => cat._id === book?.categoryId,
@@ -100,7 +99,7 @@ export default function GridView({
           {data?.pages?.map((page) => (
             <>
               {page?.length
-                ? page?.map((book: IBook, index: number) => {
+                ? page?.map((book: OldIBook, index: number) => {
                     if (index === page.length - 1) {
                       return (
                         <div key={book._id} ref={ref}>
@@ -120,21 +119,22 @@ export default function GridView({
           {data?.pages?.map((page) => (
             <>
               {page?.length
-                ? page?.map((book: IBook, index: number) => {
+                ? page?.map((book: OldIBook, index: number) => {
                     if (index === page.length - 1) {
                       return (
                         <div key={book._id} ref={ref}>
-                          <BookCard2 book={book} category={category(book)} />
+                          {/*<BookCard2 book={book} category={category(book)} />*/}
                         </div>
                       );
                     } else {
-                      return (
-                        <BookCard2
-                          key={index}
-                          book={book}
-                          category={category(book)}
-                        />
-                      );
+                      // return (
+                      //     <div></div>
+                      //   <BookCard2
+                      //     key={index}
+                      //     book={book}
+                      //     category={category(book)}
+                      //   />
+                      // );
                     }
                   })
                 : null}
