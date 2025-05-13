@@ -8,9 +8,11 @@ interface Query {
 interface QueryChipsProps {
   query: Query;
   setQuery: Dispatch<SetStateAction<Query>>;
+  removedKeys?: string[];
 }
 
-const QueryChips = ({ query, setQuery }: QueryChipsProps) => {
+const QueryChips = ({ query, setQuery, removedKeys }: QueryChipsProps) => {
+  const excludedKeys = [...(removedKeys || []), "page", "limit"];
   // Remove a key from query
   const removeQueryKey = (key: string) => {
     setQuery((prev) => {
@@ -30,9 +32,7 @@ const QueryChips = ({ query, setQuery }: QueryChipsProps) => {
   return (
     <div className="m-5 flex flex-wrap items-center justify-center gap-4">
       {Object.entries(query)
-        .filter(
-          ([key]) => key !== "page" && key !== "limit" && !key.startsWith("_"),
-        )
+        .filter(([key]) => !excludedKeys.includes(key) && !key.startsWith("_"))
         .map(([key, value]) => {
           if (Array.isArray(value)) {
             // Handle array values (e.g., tags)

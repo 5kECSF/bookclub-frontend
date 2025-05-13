@@ -20,7 +20,7 @@ const MobileSidebar = () => {
   if (isGreater) return;
 
   return (
-    <div>
+    <div className="ml-auto">
       <Button
         variant={"ghost"}
         onClick={showDrawer}

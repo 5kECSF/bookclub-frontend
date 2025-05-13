@@ -35,7 +35,6 @@ export enum KY {
   borrow = "borrow",
   donation = "donation",
   notification = "notification",
-
 }
 
 const projName = `aait-a3640.appspot.com`;
@@ -53,7 +52,7 @@ const paths: Record<string, imgAddon> = {
   },
 };
 
-export const getImg = (image: IUpload): string => {
+export const getImg = (image?: IUpload): string => {
   // const addon: imgAddon = paths[image?.pathId || "p1"];
   // if (!addon) return image?.url as string
   // console.log(
@@ -61,12 +60,12 @@ export const getImg = (image: IUpload): string => {
   //   image,
   //   addon.prefix + image?.fileName + addon.suffix,
   // );
-  return image?.url as string
+  return image?.url as string;
 };
 export const getImgUrl = (imgName: string, p: string): string => {
   // const addon = paths[p || "p1"];
   // return addon.prefix + imgName + addon.suffix;
-  return imgName
+  return imgName;
 };
 
 export const ItemStatus = [
@@ -75,27 +74,25 @@ export const ItemStatus = [
   { name: "deactivated" },
 ];
 
-
 export const routes = [
   {
-    name: 'HOME',
-    href: '/'
+    name: "HOME",
+    href: "/",
   },
   {
-    name: 'ABOUT US',
-    href: '/about'
+    name: "ABOUT US",
+    href: "/about",
   },
   {
-    name: 'BOOKS',
-    href: '/books'
+    name: "BOOKS",
+    href: "/books",
   },
   {
-    name: 'CONTACT US',
-    href: '/contact'
+    name: "CONTACT US",
+    href: "/contact",
   },
   {
-    name: 'BLOG',
-    href: '/blog'
+    name: "BLOG",
+    href: "/blog",
   },
-
-]
+];

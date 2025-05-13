@@ -73,6 +73,7 @@ export const CleanMultiSearch = ({
   handleChange,
   req = true,
   handleSearch,
+  filterOptions = false,
 }: CleanSelectProps) => {
   return (
     <div className="mb-4.5">
@@ -83,7 +84,7 @@ export const CleanMultiSearch = ({
         <Select
           showSearch
           mode={"multiple"}
-          filterOption={false}
+          filterOption={filterOptions}
           onSearch={handleSearch}
           style={{ width: "100%" }}
           placeholder="Search to Select"

@@ -16,6 +16,7 @@ interface DropdownProps {
   title: string;
   svg: any;
 }
+
 function DropDownItem({ href, title, svg }: DropdownProps) {
   return (
     <li>
@@ -106,7 +107,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <DropDownItem
             title={"My Profile"}
-            href={"/profile"}
+            href={"/author"}
             svg={<ProfileSvg />}
           />
           <DropDownItem

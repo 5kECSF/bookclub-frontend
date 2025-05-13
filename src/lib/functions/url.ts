@@ -5,7 +5,13 @@ export const getQueryFromUrl = (queries: any) => {
     ...queries,
     // tags: ["a", "b", "c"],
   };
-  const params = new URLSearchParams(window.location.search);
+  let params: URLSearchParams;
+  if (typeof window !== "undefined") {
+    params = new URLSearchParams(window.location.search);
+  } else {
+    // Fallback for server-side without serverQuery
+    params = new URLSearchParams();
+  }
   const query: Record<string, any> = {};
   params.forEach((value, key) => {
     if (key in query) {
@@ -24,7 +30,7 @@ export const getQueryFromUrl = (queries: any) => {
       if (value) query[key] = value;
     }
   });
-  console.log("current url query", query)
+  console.log("current url query", query);
   return query;
 };
 export const setUrl = (newQuery: Record<string, any>) => {

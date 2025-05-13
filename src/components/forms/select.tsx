@@ -13,9 +13,9 @@ export interface CleanSelectProps {
   //
   errors?: any;
   placeholder?: string;
-  handleSearch?: any
+  handleSearch?: any;
+  filterOptions?: boolean;
 }
-
 
 export const CleanSelectInput = ({
   idx = "name",
@@ -93,7 +93,7 @@ export const SelectInput = ({
             handleChange(name, e.target.value);
           }}
         >
-          <option className="text-red-500" key={""} value={""} >
+          <option className="text-red-500" key={""} value={""}>
             ---
           </option>
           {data?.length > 0 ? (

@@ -111,7 +111,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- ============ Dashboard --> */}
               <ItemGroup
                 name={"Dashboard"}
-                path={"dashboard"}
+                path={"account"}
                 pathname={pathname}
                 Svg={DashBoardSvg}
                 setSidebarExpanded={setSidebarExpanded}
@@ -144,9 +144,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   path={"/admin/category"}
                 />
                 <ChildItems
-                    name={"Authors"}
-                    pathname={pathname}
-                    path={"/admin/author"}
+                  name={"Authors"}
+                  pathname={pathname}
+                  path={"/admin/author"}
                 />
                 <ChildItems
                   name={"Books"}
@@ -159,16 +159,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   path={"/admin/user"}
                 />
                 <ChildItems
-                    name={"Donations"}
-                    pathname={pathname}
-                    path={"/admin/donation"}
+                  name={"Donations"}
+                  pathname={pathname}
+                  path={"/admin/donation"}
                 />
                 <ChildItems
                   name={"Borrow History"}
                   pathname={pathname}
                   path={"/admin/borrow"}
                 />
-
               </ItemGroup>
 
               {/*======    Extra OPERATIONS   ========*/}
@@ -199,7 +198,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <ItemWithSvg
                 SVG={ProfileSvg}
                 name={"Profile"}
-                path={"profile"}
+                path={"author"}
                 pathname={pathname}
               />
 

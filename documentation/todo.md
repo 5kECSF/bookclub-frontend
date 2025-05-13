@@ -8,6 +8,7 @@
 - [] Start Home page integrations
   - [] use new home pages
   - [] use titlebar of old & new rest etc
+    - [] make the underline & selected 
   - [] finish & deploy by friday: tue-thurs,fri
 - [] landing page tasks
   - [] 
@@ -16,6 +17,8 @@
 - Borrow History
 - [x] create a borrowing request with api
 - [x] create tabs to display different states of borrowing state
+
+
 
 ## Generic tasks
 

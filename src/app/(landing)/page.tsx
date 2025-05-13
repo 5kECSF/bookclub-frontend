@@ -1,53 +1,51 @@
-import MainBanner from "./_components/main-banner";
-import Categories from "./_components/catagory";
-import SubBanner from "./_components/sub-banner";
-import HomeFooter from "@/components/home/footer";
-import Header from "@/components/home/header";
-import Genre from "./_components/genre";
-import LatestBook from "./_components/latest-book";
+import { Separator } from "@/components/ui/separator";
+import { FeaturedBooksSection } from "@/app/(landing)/_components/sections/FeaturedBooksSection";
+import { NewReleaseSection } from "@/app/(landing)/_components/sections/NewReleaseSection";
+import { GenreSelectionSection } from "@/app/(landing)/_components/sections/GenreSelectionSection";
+import { HeroSection } from "@/app/(landing)/_components/sections/HeroSection";
+import { CarouselSection } from "@/app/(landing)/_components/sections/CarouselSection";
 
+import type { JSX } from "react";
+import { CategoriesSection } from "@/app/(landing)/_components/sections/CategoriesSection";
+import { AuthorsSection } from "@/app/(landing)/_components/sections/authors";
 
-export default function Home() {
+const HomePage = (): JSX.Element => {
   return (
-    <main className=" min-h-screen  w-full ">
-      {/*<Layout/>*/}
-      <Header />
-      <MainBanner />
-      <Categories />
-      <Genre />
-      <LatestBook />
-      <SubBanner />
-      <div className="flex m-10 justify-center items-center ">
-        <div className=" p-8">
-          <div className="flex justify-center">
-            <div className=" text-[2rem] tracking-[1.87px] font-semibold flex  justify-center items-center">
-              Still not sure?
-            </div>
-          </div>
+    <div className="flex w-full flex-col items-center bg-white">
+      <div className="relative w-full max-w-[1440px] bg-white">
+        {/* New Releases section */}
+        {/*<HeaderSection />*/}
 
-          <div className="flex m-6 justify-center">
-            <div className="tracking-[1.29px] leading-[1.88rem] md:w-[400px]  flex justify-center items-center">
-              Jump start your book reading by quickly check through the popular
-              book categories. 1000+ books are published by different authors
-              everyday. Buy your favourite books on TreeBooks Today.
-            </div>
+        {/* Recommended Books section */}
+        <CarouselSection />
+        {/* Categories Section */}
+        <CategoriesSection />
 
-          </div>
+        {/* Genre Selection section with title */}
+        <GenreSelectionSection />
 
-          <div className="flex justify-center">
-            <button className="cursor-pointer p-0 bg-[transparent]  rounded-6xs box-border w-[12.31rem] h-[3.81rem] border-[1px] border-solid border-darkslateblue-200 flex justify-center items-center">
+        {/* Featured Book section */}
+        <NewReleaseSection />
 
-              <div className=" text-[1rem] tracking-[0.1em] leading-[220%] uppercase font-body-normal-14 text-darkslateblue-200 text-left">
-                READ FAQ
-              </div>
-            </button>
-          </div>
+        {/* Separator line */}
+        <div className="mt-8 w-full px-2.5">
+          <Separator className="h-[3px] bg-[#e0e0e0]" />
         </div>
+
+        {/* Book Recommendations section */}
+        <AuthorsSection />
+
+        {/* Categories section with title */}
+        <FeaturedBooksSection />
+
+        {/* Hero section */}
+        <HeroSection />
+
+        {/* Footer section */}
+        <Separator className="h-[3px] bg-[#e0e0e0]" />
+        {/*<FooterSection />*/}
       </div>
-      <HomeFooter />
-
-
-    </main>
+    </div>
   );
-}
-
+};
+export default HomePage;

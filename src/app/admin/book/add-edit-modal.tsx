@@ -124,6 +124,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         uploadRef.current.resetData();
       }
     }
+    reset();
     await queryClient.invalidateQueries({ queryKey: [KY.book] });
 
     toast.success(

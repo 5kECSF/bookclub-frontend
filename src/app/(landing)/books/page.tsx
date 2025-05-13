@@ -1,31 +1,17 @@
+import { BreadCrumb } from "@/app/(landing)/books/_components/breadCrumb";
+import { BooksState } from "@/app/(landing)/books/booksState";
 
-import React from "react";
-import Header from "@/components/home/header";
-import HomeFooter from "@/components/home/footer";
+const ListingPage = async (props: any) => {
+  const searchParams = await props.searchParams;
+  console.log("searchParams", searchParams);
 
-import BookClient from "./_components/book-client";
-
-export interface Filter {
-    categoryId?: string
-    page?: number,
-    searchText?: string
-    language?: string,
-    genres?: string
-    sort?: string
-}
-interface BookPageProps {
-    searchParams: Promise<Filter>
-}
-const BookPage = async (props: BookPageProps) => {
-    const searchParams = await props.searchParams;
-
-    return (
-        <div className=" h-full">
-            <Header />
-            <BookClient searchParams={searchParams} />
-            <HomeFooter />
-        </div>
-    );
+  return (
+    <div className="relative w-full overflow-hidden  bg-white">
+      {/* Breadcrumb section */}
+      <BreadCrumb />
+      <BooksState urlParam={searchParams} />
+    </div>
+  );
 };
 
-export default BookPage;
+export default ListingPage;
