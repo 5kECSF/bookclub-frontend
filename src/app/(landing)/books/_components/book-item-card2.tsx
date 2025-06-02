@@ -1,14 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { getImg } from "@/lib/constants";
+import { IBook } from "@/types/libraryTypes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
-  AiFillCheckCircle,
-  AiFillStar,
-  AiOutlineArrowRight,
+    AiFillCheckCircle,
+    AiFillStar,
+    AiOutlineArrowRight,
 } from "react-icons/ai";
-import { IBook } from "@/app/admin/book/model-def";
 
 const BookCard2 = ({ book }: { book: IBook }) => {
   const router = useRouter();

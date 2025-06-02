@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState } from "react";
 
 import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";

@@ -1,6 +1,6 @@
 import { KY, MTD } from "@/lib/constants";
 import { QueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 // Define types for the data structure used in the query cache
 interface QueryData<T> {

@@ -1,24 +1,38 @@
 
 # tasks
 
-# current tasks
+## Goals
+
+- []
+
+## current tasks
+
+- [] make donations work
+- [] make users profile work
+- [] make Borrow requests if books availability count is greater than 1
+
+## fixes
+
+- [x] remove filter on select all on book borrow
+- [] update pagination component on admin
+-
+
+## finished tasks
 
 - [x] stop the filter carry from one filter page to another
-- [] change the toast with sonner
-- [] Start Home page integrations
-  - [] use new home pages
-  - [] use titlebar of old & new rest etc
-    - [] make the underline & selected 
-  - [] finish & deploy by friday: tue-thurs,fri
-- [] landing page tasks
-  - [] 
+- [x] change the toast with sonner
+- [] Home page integrations
+  - [x] use new home pages
+  - [x] use titlebar of old & new rest etc
+    - [x] make the underline & selected
+- [] books page tasks
+  - [x] finish filter, by: category, genres
+  - [ ] add language & availability to api & add filter on frontend
 - Donations
   - [x] make the search filtering work for books & donors
 - Borrow History
 - [x] create a borrowing request with api
 - [x] create tabs to display different states of borrowing state
-
-
 
 ## Generic tasks
 
@@ -46,7 +60,7 @@
   -
 - [x] write a documentation for code conventions
 
-## Model completion Tasks
+## Admin Side Tasks
 
 - [] author
   - add the keys to filter

@@ -2,7 +2,6 @@
 import { PageLayout } from "@/components/admin/crud/generic-page";
 import { KY } from "@/lib/constants";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
-import withAuthorization from "@/lib/functions/withAuthorization";
 import { useEffect, useState } from "react";
 import { AddEditModal } from "./add-edit-modal";
 import { FilterDrawer } from "./filter-drawer";
@@ -44,4 +43,5 @@ const UserPage = () => {
 };
 
 // export default UserPage;
-export default withAuthorization(UserPage, ["ADMIN"]);
+export default UserPage
+// export default withAuthorization(UserPage, [ RoleType.ADMIN, RoleType.USER]);

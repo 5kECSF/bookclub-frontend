@@ -11,7 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Modal } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { z } from "zod";
 //=========. Borrow accept validators
 export const acceptValidator = z.object({
@@ -52,8 +52,8 @@ export function BorrowAction({ row }: { row: IBorrow }) {
       [fieldName]: value,
     }));
   };
-  const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}: `, { autoClose });
+  const handleErr = (message: string, duration: number = 2500) => {
+    toast.error(`${message}: `, { duration });
   };
 
   const onSubmit = async (data: TAcceptDto) => {

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useRef, useState } from "react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { ZodSchema } from "zod";
 import { AddEditModalWrapper } from "./add-edit-modal";
 
@@ -59,8 +59,8 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
   const queryClient = useQueryClient();
   const makeReq = useMakeReq();
 
-  const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}`, { autoClose });
+  const handleErr = (message: string, duration: number = 2500) => {
+    toast.error(`${message}`, {duration});
     setLoading(false);
   };
 

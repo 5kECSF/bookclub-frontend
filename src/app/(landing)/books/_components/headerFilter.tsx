@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -7,8 +8,6 @@ import {
 } from "@/components/ui/select";
 import { LayoutGrid, List } from "lucide-react";
 import { BiFilter } from "react-icons/bi";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 interface HeaderFilterProps {
   isGrid: boolean;
@@ -73,8 +72,8 @@ export const HeaderFilter = ({
           <SelectContent>
             <SelectItem value="title-asc">Alphabetically, A-Z</SelectItem>
             <SelectItem value="title-desc">Alphabetically, Z-A</SelectItem>
-            <SelectItem value="_id-desc">Date, latest to oldest</SelectItem>
-            <SelectItem value="_id-asc">Date, oldest to latest</SelectItem>
+            <SelectItem value="createdAt-desc">Date, latest to oldest</SelectItem>
+            <SelectItem value="createdAt-asc">Date, oldest to latest</SelectItem>
           </SelectContent>
         </Select>
       </div>

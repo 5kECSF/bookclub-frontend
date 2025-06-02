@@ -2,9 +2,7 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+  PaginationLink
 } from "@/components/ui/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -21,7 +19,7 @@ export const PaginationComponent = ({
   count,
   limit,
   setPage,
-  page,
+  page=1,
   hasNext,
   hasPrev,
 }: IPaginationProps) => {

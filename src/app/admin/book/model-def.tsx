@@ -5,27 +5,9 @@ import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { MultiItem } from "@/components/admin/ui/cell-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getImg, KY } from "@/lib/constants";
-import { IUpload } from "@/types/upload";
+import { BookLanguage, IBook } from "@/types/libraryTypes";
 import { useState } from "react";
 import { z } from "zod";
-
-export interface IBook {
-  _id?: string;
-  title: string;
-  desc: string;
-  categoryName: string;
-  authorName?: string;
-  slug?: string;
-  fileId?: string;
-  body?: string;
-  page?: number;
-  featured?: boolean;
-  status?: string;
-  instanceCnt?: number;
-  availableCnt?: number;
-  genres?: string[];
-  upload?: IUpload;
-}
 
 export const BookValidator = z.object({
   title: z.string().min(2, { message: "min length is 2" }),
@@ -34,6 +16,7 @@ export const BookValidator = z.object({
   authorName: z.string(),
   status: z.string(),
   genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
+  language: z.enum([BookLanguage.English, BookLanguage.Amharic, BookLanguage.Tigrna, BookLanguage.AffanOrommo]).optional(),
 });
 export type TBookDto = z.infer<typeof BookValidator>;
 /*

@@ -1,13 +1,12 @@
-import { useState, type JSX } from "react";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
+import { CleanMultiSearch } from "@/components/forms/cleanInputs";
+import { CleanSelectInput } from "@/components/forms/select";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -16,17 +15,19 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { CleanSelectInput } from "@/components/forms/select";
-import { useFetch } from "@/lib/state/hooks/useQuery";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { KY } from "@/lib/constants";
-import { CleanMultiSearch } from "@/components/forms/cleanInputs";
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import { BookLanguage } from "@/types/libraryTypes";
+import { useState, type JSX } from "react";
 
 const language = [
   { value: "", label: "All languages" },
-  { value: "Amharic", label: "Amharic" },
-  { value: "AfanOromo", label: "AfanOromo" },
-  { value: "English", label: "English" },
-  { value: "Tigrna", label: "Tigrna" },
+  { value: BookLanguage.English, label: BookLanguage.English },
+  { value: BookLanguage.Amharic, label: BookLanguage.Amharic },
+  { value: BookLanguage.Tigrna, label: BookLanguage.Tigrna },
+  { value: BookLanguage.AffanOrommo, label: BookLanguage.AffanOrommo },
 ];
 export const SideBarFilter = ({ setQuery }: { setQuery: any }): JSX.Element => {
   return (
@@ -102,6 +103,10 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
     limit: 100,
     status: "active",
   });
+  const { data: author } = useFetch([KY.author], `${KY.author}`, {
+    limit: 100,
+    status: "active",
+  });
   const { data: genre } = useFetch([KY.genre, "100"], `${KY.genre}`, {
     limit: 100,
   });
@@ -154,6 +159,7 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
             />
           </AccordionContent>
         </AccordionItem>
+        
         {/* =========.  == BOOK Genre  ================*/}
         <AccordionItem value="genre" className="border-b border-[#e0e0e0]">
           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
@@ -175,25 +181,42 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
             />
           </AccordionContent>
         </AccordionItem>
-
-        <AccordionItem
-          value="availability"
-          className="border-b border-[#e0e0e0]"
-        >
+         {/* =========.  == Author   ================*/}
+        <AccordionItem value="author-name" className="border-b border-[#e0e0e0]">
           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
-            Availability
+            Author
           </AccordionTrigger>
           <AccordionContent>
-            {/* Availability filter content */}
+            <CleanSelectInput
+              data={author?.body || []}
+              name={"authorName"}
+              handleChange={handleChange}
+              idx={"name"}
+              dispIdx={"name"}
+              label={""}
+              req={false}
+            />
           </AccordionContent>
         </AccordionItem>
+
+        {/* <AccordionItem
+          value="availability"
+          className="border-b border-[#e0e0e0]"
+            >
+           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
+            Availability
+          </AccordionTrigger> 
+          <AccordionContent>
+          
+          </AccordionContent>
+        </AccordionItem> */}
 
         <AccordionItem value="language" className="border-b border-[#e0e0e0]">
           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
             language
           </AccordionTrigger>
           <AccordionContent className={"p-4"}>
-            <RadioGroup defaultValue="">
+            <RadioGroup defaultValue="" onValueChange={(value) => handleChange('language', value)}>
               {language.map((val, i) => {
                 return (
                   <div key={i} className="flex items-center space-x-2">

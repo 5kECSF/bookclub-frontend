@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { MTD } from '@/lib/constants'
 import { passwordChangeType, passwordValidator } from '@/lib/validator/password'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import {useMakeReqState} from "@/lib/state/hooks/useMutation";

@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { CodeValidator, TCodeSchema } from "../../models";
 // import { usePathname } from "next/navigation";
 interface Params {

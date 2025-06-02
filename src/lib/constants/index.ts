@@ -74,6 +74,11 @@ export const ItemStatus = [
   { name: "deactivated" },
 ];
 
+export enum ROUTES{
+  SignIn ="signin",
+  SignUp = "signup"
+}
+
 export const routes = [
   {
     name: "HOME",
@@ -94,5 +99,5 @@ export const routes = [
   {
     name: "BLOG",
     href: "/blog",
-  },
+  }
 ];

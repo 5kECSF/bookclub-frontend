@@ -1,6 +1,6 @@
 
 import type { RcFile } from "antd/es/upload";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 export const isJpgOrPng = (file: any) => {
   return (
     file.type === "image/jpeg" ||

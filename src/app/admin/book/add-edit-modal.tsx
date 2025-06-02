@@ -11,7 +11,7 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { BookValidator, IBook, TBookDto } from "@/app/admin/book/model-def";
+import { BookValidator, TBookDto } from "@/app/admin/book/model-def";
 import { AddEditWrapper } from "@/components/admin/crud/add-edit-modal";
 import { ReactMultiSelect } from "@/components/forms/react-select-multi";
 import { SelectInput } from "@/components/forms/select";
@@ -24,9 +24,10 @@ import {
 import { Resp, ReturnType } from "@/lib/constants/return.const";
 import { DisplayErrors } from "@/lib/functions/object";
 import { ItemStatus } from "@/types/commonTypes";
+import { IBook } from "@/types/libraryTypes";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -67,8 +68,8 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const queryClient = useQueryClient();
   const makeReq = useMakeReq();
 
-  const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}: `, { autoClose });
+  const handleErr = (message: string, duration: number = 2500) => {
+    toast.error(`${message}: `, { duration });
     setLoading(false);
   };
 

@@ -1,9 +1,10 @@
 "use client";
-import React, { JSX } from "react";
-import { LogIn, ShieldHalf, SignpostBig, UserIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ROUTES } from "@/lib/constants";
 import { useAuth } from "@/lib/state/context/jotai-auth";
+import { LogIn, ShieldHalf, SignpostBig, UserIcon } from "lucide-react";
 import Link from "next/link";
+import { JSX } from "react";
 
 function AccountItem({
   children,
@@ -34,32 +35,26 @@ export const AccountSection = (): JSX.Element => {
         <>
           <AccountItem
             href="/account"
-            name={"ACCOUNT"}
-            children={<UserIcon className="h-3.5 w-4 text-[#393280]" />}
-          />
+            name={"ACCOUNT"}><UserIcon className="h-3.5 w-4 text-[#393280]" /></AccountItem>
+            
           <Separator orientation="vertical" className="h-4 bg-[#d1d1d1]" />
 
           {user?.role === "ADMIN" && (
             <AccountItem
               href="/admin"
-              name={"MANAGE"}
-              children={<ShieldHalf className="h-3.5 w-4 text-[#393280]" />}
-            />
+              name={"MANAGE"}><ShieldHalf className="h-3.5 w-4 text-[#393280]" /></AccountItem>
           )}
         </>
       ) : (
         <>
           <AccountItem
-            href="/login"
-            name={"LOGIN"}
-            children={<LogIn className="h-3.5 w-4 text-[#393280]" />}
-          />
+            href={`/${ROUTES.SignIn}`}
+            name={"LOGIN"}><LogIn className="h-3.5 w-4 text-[#393280]" /></AccountItem>
 
           <AccountItem
-            href="/signup"
-            name={"SIGNUP"}
-            children={<SignpostBig className="h-3.5 w-4 text-[#393280]" />}
-          />
+            href={`/${ROUTES.SignUp}`}
+            name={"SIGNUP"}><SignpostBig className="h-3.5 w-4 text-[#393280]" /></AccountItem>
+
         </>
       )}
     </div>

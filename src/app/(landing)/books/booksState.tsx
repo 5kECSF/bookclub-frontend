@@ -1,18 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
-import { useFetch } from "@/lib/state/hooks/useQuery";
-import { KY } from "@/lib/constants";
+import BookCard2 from "@/app/(landing)/books/_components/book-item-card2";
+import { BookCard } from "@/app/(landing)/books/_components/bookCard";
+import { HeaderFilter } from "@/app/(landing)/books/_components/headerFilter";
+import { PaginationComponent } from "@/app/(landing)/books/_components/paginationComponent";
 import {
   DrawerElement,
   SideBarFilter,
 } from "@/app/(landing)/books/_components/sideBarFilter";
-import { HeaderFilter } from "@/app/(landing)/books/_components/headerFilter";
 import QueryChips from "@/components/admin/crud/query-chips";
-import { IBook } from "@/app/admin/book/model-def";
-import { BookCard } from "@/app/(landing)/books/_components/bookCard";
-import { PaginationComponent } from "@/app/(landing)/books/_components/paginationComponent";
-import BookCard2 from "@/app/(landing)/books/_components/book-item-card2";
+import { KY } from "@/lib/constants";
+import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import { IBook } from "@/types/libraryTypes";
+import { useEffect, useState } from "react";
 
 export const BooksState = ({
   urlParam,

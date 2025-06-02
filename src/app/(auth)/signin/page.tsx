@@ -6,14 +6,14 @@ import {
   SubmitInput,
   UserNameInput,
 } from "@/app/(auth)/_components/inputs";
+import { DisplayErrors } from "@/lib/functions/object";
 import { useAuth } from "@/lib/state/context/jotai-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { LoginValidator, TLoginSchema } from "../models";
-import { useRouter } from "next/navigation";
-import { DisplayErrors } from "@/lib/functions/object";
 
 const SignIn: React.FC = () => {
   const { loading, login, refreshToken } = useAuth();
@@ -40,9 +40,7 @@ const SignIn: React.FC = () => {
       toast.error(`${data.message}`);
       return;
     }
-    toast.success(`Successfully logged In as ${data.body.user_data?.email}`, {
-      delay: 2000,
-    });
+    toast.success(`Successfully logged In as ${data.body.user_data?.email}`, {duration: 2000});
     router.push("/admin");
   };
 

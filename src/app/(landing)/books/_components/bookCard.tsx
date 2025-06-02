@@ -1,12 +1,14 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { IBook } from "@/app/admin/book/model-def";
 import { getImg } from "@/lib/constants";
+import { IBook } from "@/types/libraryTypes";
+import Link from "next/link";
 
 export const BookCard = ({ book }: { book: IBook }) => {
   return (
     <div>
+      <Link href={`/SingleBook/${book._id}`}>
       <Card className="relative  w-full border-[#e9e7df] bg-white shadow-[0px_4px_10px_#00000026]">
         <CardContent className="relative h-full p-0">
           <img
@@ -39,6 +41,8 @@ export const BookCard = ({ book }: { book: IBook }) => {
           </div>
         </CardContent>
       </Card>
+      </Link>
+      
     </div>
   );
 };

@@ -1,25 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import "@/assets/css/style.css";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SignupValidator, TSignupSchema } from "../models";
-import { toast } from "react-toastify";
-import { BASE_URL, MTD } from "@/lib/constants";
-import { API } from "@/lib/constants/api-paths";
+import { AuthLayout } from "@/app/(auth)/_components/authLayout";
 import {
   EmailInput,
   GoToLink,
   NameInput,
   Password,
   SubmitInput,
-  UserNameInput,
 } from "@/app/(auth)/_components/inputs";
-import { AuthLayout } from "@/app/(auth)/_components/authLayout";
-import axios from "axios";
+import "@/assets/css/style.css";
+import { BASE_URL } from "@/lib/constants";
+import { API } from "@/lib/constants/api-paths";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { useRouter } from "next/navigation";
 import { DisplayErrors } from "@/lib/functions/object";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { SignupValidator, TSignupSchema } from "../models";
 
 const SignUp: React.FC = () => {
   const router = useRouter();

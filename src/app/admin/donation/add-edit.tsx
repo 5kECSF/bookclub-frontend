@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 interface IBookProps {
   isUpdate: boolean;
@@ -59,8 +59,8 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
   const queryClient = useQueryClient();
   const { makeReq, loading } = useMakeReqState();
 
-  const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}: `, { autoClose });
+  const handleErr = (message: string, duration: number = 2500) => {
+    toast.error(`${message}: `, {duration});
   };
 
   const onSubmit = async (data: IDonation) => {

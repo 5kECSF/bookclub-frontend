@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { DefaultValues, FieldValues, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-modal";
 import { ShimProps } from "@/components/admin/crud/generic-add-edit-withFile";
@@ -44,8 +44,8 @@ export function AddEditLayout<T extends Obj, TDto extends FieldValues>({
   const queryClient = useQueryClient();
   const { makeReq, loading } = useMakeReqState();
 
-  const handleErr = (message: string, autoClose: number = 2500) => {
-    toast.error(`${message}`, { autoClose });
+  const handleErr = (message: string, duration: number = 2500) => {
+    toast.error(`${message}`, { duration });
   };
 
   const onSubmit = async (submitData: TDto) => {

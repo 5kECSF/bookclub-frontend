@@ -1,7 +1,7 @@
 import { KY, MTD } from "@/lib/constants";
 import { useMutate } from "@/lib/state/hooks/useMutation";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { ReactNode, useState } from "react";
 
 

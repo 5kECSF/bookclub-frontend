@@ -14,7 +14,7 @@ import Upload, { RcFile } from "antd/es/upload";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 export const FileWithCover = forwardRef(function UploadComp(
   {

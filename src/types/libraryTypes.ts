@@ -1,0 +1,30 @@
+import { IUpload } from "./upload";
+
+
+export interface IBook {
+    title: string;
+    desc: string;
+    categoryName: string;
+    authorName?: string;
+    page?: number;
+    featured?: boolean;
+    status?: string;
+    body?: string;
+    genres?: string[];
+    language?: BookLanguage;
+    //non dto types
+    _id?: string;
+    slug?: string;
+    fileId?: string;
+    instanceCnt?: number;
+    availableCnt?: number;
+    upload?: IUpload;
+}
+
+export enum BookLanguage {
+  English = 'English',
+  Amharic = 'Amharic',
+  AffanOrommo = 'AfanOromo',
+  Tigrna = 'Tigrna'
+}
+

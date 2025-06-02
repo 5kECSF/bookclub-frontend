@@ -16,7 +16,7 @@ import  { AppHeaders, useMakeReqState } from "@/lib/state/hooks/useMutation";
 import PasswordChange from "./password-change";
 import { useRouter } from "next/navigation";
 import {useAuth} from "@/lib/state/context/jotai-auth";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 type image = File & {
   preview: string;

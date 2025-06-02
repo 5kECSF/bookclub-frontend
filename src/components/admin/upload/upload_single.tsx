@@ -10,7 +10,7 @@ import { Modal, UploadFile, UploadProps } from "antd";
 import Upload, { RcFile } from "antd/es/upload";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 import { UploadButton } from "@/components/admin/upload/upload_with_cover";
 import { FAIL, NotModified, Resp } from "@/lib/constants/return.const";
