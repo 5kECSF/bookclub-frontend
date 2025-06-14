@@ -1,12 +1,9 @@
 "use client";
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -17,12 +14,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useAuth } from "@/lib/state/context/jotai-auth";
-
+import { AvatarContent } from "@/components/ui_custom/avatar-user";
+import { LogoutButton } from "@/components/ui_custom/logout-button";
+import { useAuth, User } from "@/lib/state/context/jotai-auth";
+//Nav User for
 export function NavUser() {
-  const { user } = useAuth();
   const { isMobile } = useSidebar();
-
+  const { user } = useAuth();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -32,47 +30,49 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user?.avatar} alt={user?.fName} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
-                  {user?.fName + "" + user?.lName}
-                </span>
-                <span className="truncate text-xs">{user?.email}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
+              <AvatarContent user={user} />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user?.avatar} alt={user?.fName} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user?.fName}</span>
-                  <span className="truncate text-xs">{user?.email}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+          <DropDownContent user={user} isMobile={isMobile} />
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
+  );
+}
+
+export function DropDownContent({
+  user,
+  isMobile,
+}: {
+  user: User | null;
+  isMobile: boolean;
+}) {
+  const logout = () => {
+    console.log("logout clicked");
+  };
+  return (
+    <DropdownMenuContent
+      className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+      side={isMobile ? "bottom" : "right"}
+      align="end"
+      sideOffset={4}
+    >
+      <DropdownMenuLabel className="p-0 font-normal">
+        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+          <Avatar className="h-8 w-8 rounded-lg">
+            <AvatarImage src={user?.avatar} alt={user?.firstName} />
+            <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+          </Avatar>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-medium">{user?.firstName}</span>
+            <span className="truncate text-xs">{user?.email}</span>
+          </div>
+        </div>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+
+      <DropdownMenuSeparator />
+      <LogoutButton logout={logout} />
+    </DropdownMenuContent>
   );
 }

@@ -16,8 +16,8 @@ export const SignupValidator = z
     confirmPassword: z
       .string()
       .min(6, { message: "password should be length of 6 or more" }),
-    fName: z.string().min(3).max(20),
-    lName: z.string().min(3).max(20),
+      firstName: z.string().min(3).max(20),
+    lastName: z.string().min(3).max(20),
   })
   .refine((data) => data.password == data.confirmPassword, {
     message: " passwords must match ",

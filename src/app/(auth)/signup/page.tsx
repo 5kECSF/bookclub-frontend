@@ -62,15 +62,15 @@ const SignUp: React.FC = () => {
             <div className="flex flex-wrap gap-4">
               <div className="flex-1">
                 <NameInput
-                  register={register("fName")}
-                  error={errors.fName}
+                  register={register("firstName")}
+                  error={errors.firstName}
                   placeholder={"First Name"}
                 />
               </div>
               <div className="flex-1">
                 <NameInput
-                  register={register("lName")}
-                  error={errors.lName}
+                  register={register("lastName")}
+                  error={errors.lastName}
                   placeholder={"Last Name"}
                 />
               </div>

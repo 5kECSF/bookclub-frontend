@@ -1,20 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 import { ArrowRightIcon } from "lucide-react";
 
-import React, { JSX } from "react";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import React, { JSX } from "react";
 
-export const NewReleaseSection = (): JSX.Element => {
+export const NewArrivalSection = (): JSX.Element => {
   return (
     <section className="mx-auto w-full max-w-[1266px] py-12">
       <div className="flex flex-col items-center">
         <h2 className="text-center text-[32px] font-semibold tracking-[1.87px] text-[#173f5f]">
-          New Release Books
+          New Arrival Books
         </h2>
 
         <p className="mt-4 max-w-[647px] text-center text-lg font-normal leading-[30px] tracking-[1.29px] text-[#766f6f]">
-          1000+ books are published by different authors everyday.
+          We are adding new books to our library everyday.
         </p>
 
         <div className="mb-10 mt-6 flex items-center">
@@ -106,17 +107,10 @@ const books = [
 
 export const ScrollingBooks = (): JSX.Element => {
   return (
-    <ScrollArea className="h-[359px] w-full">
-      <div className="flex items-start gap-[39px] py-4">
+    <ScrollArea className="h-[359px] w-full ">
+      <div className="flex items-start gap-[39px] py-4 shadow-4">
         {books.map((book) => (
           <React.Fragment key={book.id}>
-            {/*{book.id === 1 ? (*/}
-            {/*  <img*/}
-            {/*    className="w-40 h-[260px]"*/}
-            {/*    alt="Frame"*/}
-            {/*    src={book.coverImage}*/}
-            {/*  />*/}
-            {/*) : (*/}
             <Card className="h-[260px] w-40 overflow-hidden rounded-[10px]">
               <CardContent className="relative h-full p-0">
                 <img

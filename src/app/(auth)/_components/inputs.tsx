@@ -1,7 +1,6 @@
-import { GoogleSvg, PassowrdSvg, EmailSvg } from "@/components/svgs/auth-svg";
-import React from "react";
+import { EmailSvg, GoogleSvg, PassowrdSvg } from "@/components/svgs/auth-svg";
+import { LucideUser } from "lucide-react";
 import Link from "next/link";
-import { LucideMail, LucideUser } from "lucide-react";
 
 export function GoogleSignin() {
   return (
@@ -24,7 +23,7 @@ export function GoToLink({ path, text1, text2 }: GoToLinkProps) {
     <div className="mt-6 text-center">
       <p>
         {text1}{" "}
-        <Link href={path} className="text-primary">
+        <Link href={path} className="text-blue-500 ">
           {text2}
         </Link>
       </p>

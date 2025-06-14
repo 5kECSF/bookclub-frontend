@@ -35,6 +35,7 @@ export enum KY {
   borrow = "borrow",
   donation = "donation",
   notification = "notification",
+  profile = "profile",
 }
 
 const projName = `aait-a3640.appspot.com`;

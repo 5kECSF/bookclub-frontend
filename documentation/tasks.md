@@ -17,20 +17,35 @@
   - [x] remove un used components
   - [ ] add move to single on click
 - [ ] single book page
-  - Display book info
-  - list authors books
-  - request to borrow book
-  - remove un used components
+  - [x] Display book info
+  - [] list authors books
+  - [x] request to borrow book
+  - [] remove un used components
+  - [] make Borrow requests if books availability count is greater than 1
 - [ ] users profile page
   - fix ui(create new ui)
     - [x] sidebar from shadncn(or from ai)
-    - [] books shelf page
-    - [] favorites page(fix it)
-    - [] add change pwd page
-  - see list of requested books
-  - cancle requested books
-  - see history of borrowed books
+    - [ ] sidebar highlight
   - remove un used components
+- [] account page
+  
+  - [] shelf
+    - [] books to return
+    - [] books requested
+      - [] cancle requested books
+    - [] books donated
+    - [] favorites
+  - [] notification
+    - [] book deadline reached
+    - [] general notification
+  - [] settings
+    - [] change profile info: name, team, dept, phone no
+    - [] id image
+    - [] hange pwd
+    - [] change email
+
+- [] admin approve users
+  - [] list of users pending approval
 - Generic
   - [] fix footer & navbar items(remove unused)
   - [] searching

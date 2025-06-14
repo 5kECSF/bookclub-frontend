@@ -44,9 +44,9 @@ export default function Frame(): JSX.Element {
   ];
 
   return (
-    <div className="relative bg-white rounded-[10px] p-6 w-full max-w-[1136px] min-h-[858px]">
+    <div className="relative min-h-[858px] w-full max-w-[1136px] rounded-[10px] bg-white p-6">
       {/* Edit button */}
-      <div className="absolute top-[287px] right-[25px] z-10">
+      <div className="absolute right-[25px] top-[287px] z-10">
         <Button
           variant="outline"
           size="icon"
@@ -58,15 +58,15 @@ export default function Frame(): JSX.Element {
 
       {/* Navigation tabs */}
       <Tabs defaultValue="account" className="w-full">
-        <TabsList className="flex gap-3 bg-transparent h-auto p-0 mb-8">
+        <TabsList className="mb-8 flex h-auto gap-3 bg-transparent p-0">
           {navTabs.map((tab) => (
             <div key={tab.id} className="flex flex-col items-center gap-[9px]">
               <TabsTrigger
                 value={tab.id}
-                className={`px-3 py-0 h-auto ${
+                className={`h-auto px-3 py-0 ${
                   tab.active
-                    ? "[font-family:'Inter-Bold',Helvetica] font-bold text-[#f4683c]"
-                    : "[font-family:'Inter-Medium',Helvetica] font-medium text-[#717b8c]"
+                    ? "font-bold text-[#f4683c] [font-family:'Inter-Bold',Helvetica]"
+                    : "font-medium text-[#717b8c] [font-family:'Inter-Medium',Helvetica]"
                 } text-xl`}
               >
                 {tab.label}
@@ -81,18 +81,18 @@ export default function Frame(): JSX.Element {
 
       {/* Profile section */}
       <div className="mb-8">
-        <p className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base mb-4">
+        <p className="mb-4 text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
           Your Profile Picture
         </p>
 
         <div className="flex items-start gap-8">
           {/* Profile picture */}
-          <div className="flex flex-col items-center gap-[13px] w-[116px]">
+          <div className="flex w-[116px] flex-col items-center gap-[13px]">
             <Avatar className="h-[100px] w-[100px] shadow-[0px_0px_10px_#ffffffa3]">
               <AvatarImage src="" alt="Profile" />
               <AvatarFallback className="bg-[url(/mask-group.png)] bg-cover"></AvatarFallback>
             </Avatar>
-            <p className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#909090] text-[10px] text-center tracking-[0] leading-6 underline">
+            <p className="text-center text-[10px] font-medium leading-6 tracking-[0] text-[#909090] underline [font-family:'Inter-Medium',Helvetica]">
               Upload New photo
             </p>
           </div>
@@ -102,16 +102,16 @@ export default function Frame(): JSX.Element {
             {statsCards.map((card) => (
               <Card
                 key={card.id}
-                className={`${card.bgColor} rounded-[10px] border-none w-[175px] h-[149px] relative`}
+                className={`${card.bgColor} relative h-[149px] w-[175px] rounded-[10px] border-none`}
               >
                 <CardContent className="p-0">
-                  <div className="absolute w-[54px] h-12 top-[21px] left-[15px] bg-white rounded-[10px] flex items-center justify-center">
+                  <div className="absolute left-[15px] top-[21px] flex h-12 w-[54px] items-center justify-center rounded-[10px] bg-white">
                     {card.icon}
                   </div>
-                  <div className="absolute w-[63px] top-6 left-[92px] [font-family:'Inter-Medium',Helvetica] font-medium text-white text-[32px] tracking-[0] leading-[36.0px]">
+                  <div className="absolute left-[92px] top-6 w-[63px] text-[32px] font-medium leading-[36.0px] tracking-[0] text-white [font-family:'Inter-Medium',Helvetica]">
                     {card.value}
                   </div>
-                  <div className="absolute top-[94px] left-[21px] [font-family:'Inter-Medium',Helvetica] font-medium text-white text-[25px] tracking-[0] leading-[28.1px]">
+                  <div className="absolute left-[21px] top-[94px] text-[25px] font-medium leading-[28.1px] tracking-[0] text-white [font-family:'Inter-Medium',Helvetica]">
                     {card.label}
                   </div>
                 </CardContent>
@@ -122,73 +122,73 @@ export default function Frame(): JSX.Element {
       </div>
 
       {/* Form fields */}
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="mb-8 grid grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base">
+          <label className="text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
             Full name
           </label>
           <Input
             defaultValue={userData.fullName}
-            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] [font-family:'Inter-Medium',Helvetica] font-medium text-[#8d98aa] text-sm"
+            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] text-sm font-medium text-[#8d98aa] [font-family:'Inter-Medium',Helvetica]"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base">
+          <label className="text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
             College ID
           </label>
           <Input
             defaultValue={userData.collegeId}
-            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] [font-family:'Inter-Medium',Helvetica] font-medium text-[#8d98aa] text-sm"
+            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] text-sm font-medium text-[#8d98aa] [font-family:'Inter-Medium',Helvetica]"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base">
+          <label className="text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
             Register Number
           </label>
           <Input
             defaultValue={userData.registerNumber}
-            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] [font-family:'Inter-Medium',Helvetica] font-medium text-[#8d98aa] text-sm"
+            className="h-[52px] rounded-lg border border-solid border-[#e0e4ec] text-sm font-medium text-[#8d98aa] [font-family:'Inter-Medium',Helvetica]"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base">
+          <label className="text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
             phone number
           </label>
-          <div className="flex h-[52px] rounded-lg border border-solid border-[#e0e4ec] overflow-hidden">
-            <div className="flex items-center px-3.5 [font-family:'Manrope-Medium',Helvetica] font-medium text-[#8d98aa] text-sm">
+          <div className="flex h-[52px] overflow-hidden rounded-lg border border-solid border-[#e0e4ec]">
+            <div className="flex items-center px-3.5 text-sm font-medium text-[#8d98aa] [font-family:'Manrope-Medium',Helvetica]">
               +91
             </div>
-            <div className="w-px h-[30px] my-2.5 bg-[#e0e4ec]"></div>
+            <div className="my-2.5 h-[30px] w-px bg-[#e0e4ec]"></div>
             <Input
               defaultValue={userData.phoneNumber}
-              className="border-none h-full [font-family:'Inter-Medium',Helvetica] font-medium text-[#8d98aa] text-sm"
+              className="h-full border-none text-sm font-medium text-[#8d98aa] [font-family:'Inter-Medium',Helvetica]"
             />
           </div>
         </div>
       </div>
 
       {/* Bio section */}
-      <div className="flex flex-col gap-2 mb-8">
-        <label className="[font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-base">
+      <div className="mb-8 flex flex-col gap-2">
+        <label className="text-base font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]">
           Bio
         </label>
         <Textarea
           defaultValue={userData.bio}
-          className="h-[158px] rounded-lg border border-solid border-[#e0e4ec] bg-[#fafbfc] [font-family:'Inter-Medium',Helvetica] font-medium text-[#8d98aa] text-sm p-3.5"
+          className="h-[158px] rounded-lg border border-solid border-[#e0e4ec] bg-[#fafbfc] p-3.5 text-sm font-medium text-[#8d98aa] [font-family:'Inter-Medium',Helvetica]"
         />
       </div>
 
       {/* Action buttons */}
       <div className="flex items-center gap-8">
-        <Button className="bg-[#f4683c] hover:bg-[#f4683c]/90 h-[49px] px-[35px] py-3 rounded-lg [font-family:'Inter-Bold',Helvetica] font-bold text-white text-lg">
+        <Button className="h-[49px] rounded-lg bg-[#f4683c] px-[35px] py-3 text-lg font-bold text-white [font-family:'Inter-Bold',Helvetica] hover:bg-[#f4683c]/90">
           Update Profile
         </Button>
         <Button
           variant="ghost"
-          className="h-auto p-0 [font-family:'Inter-Medium',Helvetica] font-medium text-[#4c535f] text-lg"
+          className="h-auto p-0 text-lg font-medium text-[#4c535f] [font-family:'Inter-Medium',Helvetica]"
         >
           Reset
         </Button>

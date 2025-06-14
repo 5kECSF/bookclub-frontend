@@ -60,7 +60,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
   const { makeReq, loading } = useMakeReqState();
 
   const handleErr = (message: string, duration: number = 2500) => {
-    toast.error(`${message}: `, {duration});
+    toast.error(`${message}: `, { duration });
   };
 
   const onSubmit = async (data: IDonation) => {
@@ -81,7 +81,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
     await queryClient.invalidateQueries({ queryKey: [KY.donation] });
     reset();
     toast.success(
-      `successfully ${isUpdate ? "updated" : "created"} a donation of user ${resp.body.fullName} `,
+      `successfully ${isUpdate ? "updated" : "created"} a donation of user ${resp.body.donorName} `,
     );
   };
 

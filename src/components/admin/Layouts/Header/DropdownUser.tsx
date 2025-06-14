@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { useAuth } from "@/lib/state/context/jotai-auth";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 import {
   ContactSvg,
@@ -74,7 +74,7 @@ const DropdownUser = () => {
         {/**/}
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {user?.email || ".."} {user?.lName || ".."}
+            {user?.email || ".."} {user?.lastName || ".."}
           </span>
           <span className="block text-xs">{user?.role || "no role"}</span>
         </span>

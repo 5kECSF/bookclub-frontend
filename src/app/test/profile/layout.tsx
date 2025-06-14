@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { FooterSection } from "@/app/(landing)/_components/common/FooterSection";
 import { JSX } from "react";
 import HeaderSection from "./HeaderSection";
 import { SideBar } from "./NavigationSection";
@@ -19,7 +18,7 @@ export default function MyShelf({ children }: any): JSX.Element {
             {/* Header section */}
             <HeaderSection />
             {children}
-            <FooterSection />
+            {/* <FooterSection /> */}
             {/* <div className="footer border-red-300 sticky h-8 w-full"></div> */}
           </div>
         </div>

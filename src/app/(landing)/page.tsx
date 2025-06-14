@@ -1,13 +1,13 @@
-import { Separator } from "@/components/ui/separator";
+import { CarouselSection } from "@/app/(landing)/_components/sections/CarouselSection";
 import { FeaturedBooksSection } from "@/app/(landing)/_components/sections/FeaturedBooksSection";
-import { NewReleaseSection } from "@/app/(landing)/_components/sections/NewReleaseSection";
 import { GenreSelectionSection } from "@/app/(landing)/_components/sections/GenreSelectionSection";
 import { HeroSection } from "@/app/(landing)/_components/sections/HeroSection";
-import { CarouselSection } from "@/app/(landing)/_components/sections/CarouselSection";
+import { NewArrivalSection } from "@/app/(landing)/_components/sections/NewArrivalSection";
+import { Separator } from "@/components/ui/separator";
 
-import type { JSX } from "react";
 import { CategoriesSection } from "@/app/(landing)/_components/sections/CategoriesSection";
 import { AuthorsSection } from "@/app/(landing)/_components/sections/authors";
+import type { JSX } from "react";
 
 const HomePage = (): JSX.Element => {
   return (
@@ -25,7 +25,7 @@ const HomePage = (): JSX.Element => {
         <GenreSelectionSection />
 
         {/* Featured Book section */}
-        <NewReleaseSection />
+        <NewArrivalSection />
 
         {/* Separator line */}
         <div className="mt-8 w-full px-2.5">

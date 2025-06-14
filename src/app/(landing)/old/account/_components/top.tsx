@@ -86,7 +86,7 @@ export default function Top({}) {
               width={500}
               alt='book cover'
             /> */}
-            <p>{user?.fName}</p>
+            <p>{user?.firstName}</p>
             <AiFillCaretDown />
           </div>
         </DropdownMenuTrigger>

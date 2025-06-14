@@ -7,15 +7,49 @@
 
 ## current tasks
 
-- [] make donations work
-- [] make users profile work
-- [] make Borrow requests if books availability count is greater than 1
+- [x] single page
+  - [x] make Borrow requests if books availability count is greater than 1
+- [] account page
+  - [x] sidebar highlight
+  - [ ] settings(profile & pwd)
+    - [] change profile info: name, team, dept, phone no
+      - [] make it work with zod
+    - [] id image: use drop zone
+    - [] hange pwd: test it with backend
+    - [] change email: test it with backend
+  - [] shelf
+    - [] make book contents one list with query param
+    - [] books to return
+    - [] books requested
+    - [] books donated
+    - [] favorite
+  - [] notification
+    - [] book deadline reached
+    - [] general notification
+    - [] fix the notification to not show seen notifications
+
+- [] admin 
+  - [] users
+    - [] list of users pending approval
+  - borrow
+    - [] make the books aproved
+- api tasks
+  - [] single book data: authors book data
+  - users read & donated count
 
 ## fixes
 
 - [x] remove filter on select all on book borrow
 - [] update pagination component on admin
 -
+
+## Cleanup tasks
+
+- make single about us & contuct us page: with mailTo link
+- also add a faq section
+- remove unused links:
+  - Blog, Faqs, Terms of service
+- cleanup footer
 
 ## finished tasks
 

@@ -13,12 +13,14 @@ export interface IBook {
     genres?: string[];
     language?: BookLanguage;
     //non dto types
-    _id?: string;
+    _id: string;
     slug?: string;
     fileId?: string;
     instanceCnt?: number;
     availableCnt?: number;
     upload?: IUpload;
+    //TODO
+    // year
 }
 
 export enum BookLanguage {

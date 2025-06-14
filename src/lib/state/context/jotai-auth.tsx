@@ -11,13 +11,17 @@ import { useEffect } from "react";
 
 export interface User {
   id: string;
-  fName: string;
-  lName: string;
+  firstName: string;
+  lastName: string;
   userName?: string;
   email?: string;
   avatar: string;
   roleId: number;
   role: string;
+  requestedBooks?: string[];
+  approvedBooks?: string[];
+  borrowedBooks?: string[];
+  returnedBooks?: string[];
 }
 
 export interface LoginResp {
@@ -63,9 +67,8 @@ export const useAuth = () => {
   }, [user]);
 
   const refreshToken = async (): Promise<Resp<string>> => {
-
     try {
-      if(loggedIn === false) return FAIL("User is not logged in");//to prevent refresh token when user is not logged in
+      if (loggedIn === false) return FAIL("User is not logged in"); //to prevent refresh token when user is not logged in
       if (refreshPromise) {
         console.log("Refresh in progress, waiting for result...");
         return refreshPromise;
@@ -96,12 +99,11 @@ export const useAuth = () => {
     setUser(null);
     setAccessToken(null);
     setLoggedIn(false);
-  }
+  };
   const logout = async () => {
-    if(noNetwork) return
+    if (noNetwork) return;
     console.log("logout Called:");
     try {
-
       const response = await axios.post(`/api/auth/logout`);
       setUser(null);
       setAccessToken(null);

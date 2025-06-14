@@ -1,5 +1,5 @@
-import SideNavigation from "@/app/(landing)/account/_components/side-navigation";
-import Top from "@/app/(landing)/account/_components/top";
+import SideNavigation from "@/app/(landing)/old/account/_components/side-navigation";
+import Top from "@/app/(landing)/old/account/_components/top";
 import Header from "@/components/home/header";
 import HomeFooter from "@/components/home/footer";
 import { HeaderSection } from "@/app/(landing)/_components/common/HeaderSection";

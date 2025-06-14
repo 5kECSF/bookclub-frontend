@@ -1,6 +1,6 @@
-import React, { type JSX } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { type JSX } from "react";
 
 export const HeroSection = (): JSX.Element => {
   return (
@@ -13,8 +13,8 @@ export const HeroSection = (): JSX.Element => {
 
           <p className="max-w-[808px] text-lg font-normal leading-[30px] tracking-[1.29px] text-[#173f5f]">
             Jump start your book reading by quickly check through the popular
-            book categories. Check our 1000+ books by different authors. Borrow
-            your favourite books on And Get Started.
+            book categories. Check our amazing book collection by different
+            authors. Borrow your favourite books on And Get Started.
           </p>
 
           <Button
