@@ -3,3 +3,11 @@ export const ItemStatus = [
   { name: "draft" },
   { name: "deactivated" },
 ];
+
+export interface PaginatedRes<T> {
+  count: number;
+  hasNext?: boolean;
+  hasPrev?: boolean;
+
+  body: T[];
+}

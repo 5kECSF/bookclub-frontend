@@ -18,7 +18,7 @@ const BorrowPage = () => {
   const [filterOpen, setFilterOpen] = useState(false);
 
   const [query, setQuery] = useState<Record<string, any>>(
-    getQueryFromUrl({ status: "BORROWED" }),
+    getQueryFromUrl({ status: "WAITLIST" }),
   );
   const setPage = (page: number) => {
     setQuery({ ...query, page });
@@ -31,7 +31,7 @@ const BorrowPage = () => {
 
   // Array of tab data (you can customize this)
   const tabs = [
-    { id: "WAITLIST", label: "Request Waitlist" },
+    { id: "WAITLIST", label: "Borrowing Requests" },
     { id: "ACCEPTED", label: "Request accepted Books" },
     { id: "BORROWED", label: "Borrowed Books" },
     { id: "RETURNED", label: "Returned Books" },

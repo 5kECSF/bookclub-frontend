@@ -1,8 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { ChildItems, ItemGroup, ItemWithSvg } from "./SidebarLinkGroup";
 import {
   AuthSvg,
   DashBoardSvg,
@@ -11,12 +6,25 @@ import {
   SettingsSvg,
   SvgButton,
 } from "@/components/svgs/sidebarSvgs";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import { ChildItems, ItemGroup, ItemWithSvg } from "./SidebarLinkGroup";
 
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
 }
-
+const sidebarLinks = [
+  { title: "Genres", url: "/admin/genre" },
+  { title: "Category", url: "/admin/category" },
+  { title: "Authors", url: "/admin/author" },
+  { title: "Books", url: "/admin/book" },
+  { title: "Users", url: "/admin/user" },
+  { title: "Donations", url: "/admin/donation" },
+  { title: "Book Borrowings", url: "/admin/borrow" },
+];
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
   const trigger = useRef<any>(null);
@@ -133,41 +141,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 setSidebarExpanded={setSidebarExpanded}
                 sidebarExpanded={sidebarExpanded}
               >
-                <ChildItems
-                  name={"Genres"}
-                  pathname={pathname}
-                  path={"/admin/genre"}
-                />
-                <ChildItems
-                  name={"Category"}
-                  pathname={pathname}
-                  path={"/admin/category"}
-                />
-                <ChildItems
-                  name={"Authors"}
-                  pathname={pathname}
-                  path={"/admin/author"}
-                />
-                <ChildItems
-                  name={"Books"}
-                  pathname={pathname}
-                  path={"/admin/book"}
-                />
-                <ChildItems
-                  name={"Users"}
-                  pathname={pathname}
-                  path={"/admin/user"}
-                />
-                <ChildItems
-                  name={"Donations"}
-                  pathname={pathname}
-                  path={"/admin/donation"}
-                />
-                <ChildItems
-                  name={"Borrow History"}
-                  pathname={pathname}
-                  path={"/admin/borrow"}
-                />
+                {sidebarLinks.map((item) => (
+                  <ChildItems
+                    key={item.title}
+                    name={item.title}
+                    pathname={pathname}
+                    path={item.url}
+                  />
+                ))}
               </ItemGroup>
 
               {/*======    Extra OPERATIONS   ========*/}

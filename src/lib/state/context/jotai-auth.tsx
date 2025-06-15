@@ -10,18 +10,19 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export interface User {
+  _id?: string;
   id: string;
   firstName: string;
   lastName: string;
   userName?: string;
   email?: string;
   avatar: string;
-  roleId: number;
   role: string;
   requestedBooks?: string[];
   approvedBooks?: string[];
   borrowedBooks?: string[];
   returnedBooks?: string[];
+  donatedCount: number;
 }
 
 export interface LoginResp {
