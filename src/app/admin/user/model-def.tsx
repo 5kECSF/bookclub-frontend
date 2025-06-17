@@ -42,6 +42,7 @@ export const agColumns = [
   { field: "fullName",  filter: "agMultiColumnFilter", maxWidth: 200},
   { field: "firstName",  filter: "agMultiColumnFilter", maxWidth: 200},
   { field: "lastName",  filter: "agMultiColumnFilter", maxWidth: 200},
+  { field: "donatedCount",  filter: "agMultiColumnFilter", maxWidth: 200},
   {
     field: "role",
     suppressSizeToFit: false, // Allows column to shrink to content size

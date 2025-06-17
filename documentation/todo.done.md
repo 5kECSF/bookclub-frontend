@@ -13,7 +13,6 @@
 - single book
   - [x] make Borrow requests button if books availability count is greater than 1
 
-
 ## profile page
 
 - [ ] shelf
@@ -33,8 +32,20 @@
   - [x] make the search filtering work for books & donors
 - Borrow History
   - [x] create a borrowing request with api
+  - [x] borrow transactions
+  - Admin accept borrow
+    - [x] update borrow model {status,uid,instanceId,instance No}
+    - [x] update donation model {status, borrower Id,borrowerName }
+    - [x] update book instance and book count
+    - [x] send notification to user with message {book Name, userId}
   - [x] create tabs to display different states of borrowing state
   - [x] remove filter on select all on book borrow
+  - [ ]Admin mark book Taken
+    - [x] update borrow model {taken date, duedate, note, status}
+    - [x] update book Instance {status}
+    - [x] send Notification To the User
+- author
+  - [x] make it use slug
 
 ## api Tasks
 
@@ -68,7 +79,7 @@
 
 
   
-### make generic templages
+### make generic templates
 
 - [x] page layout template : /components/admin/crud/page-layout.tsx
   - table
@@ -79,3 +90,7 @@
 - [x] add-edit-layout template
   
 
+
+- [x] authorization for profile page {cm:2025-06-17}
+  - [x] fix queries of requested, accepted,borrowed Returned
+  - [ ] fix content of cards, for each status {cm:2025-06-17}

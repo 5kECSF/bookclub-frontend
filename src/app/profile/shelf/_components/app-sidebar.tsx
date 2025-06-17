@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, Bot, GalleryVerticalEnd, Settings2 } from "lucide-react";
+import { BellDot, GalleryVerticalEnd, LibraryBig, UserPen } from "lucide-react";
 import * as React from "react";
 
 import {
@@ -22,19 +22,19 @@ import { NavUser } from "./nav-user";
 // This is sample data.
 const data = [
   {
-    title: "Shelf",
+    title: "My Profile",
     url: "/profile",
-    icon: BookOpen,
+    icon: UserPen,
+  },
+  {
+    title: "My Shelf",
+    url: "/profile/shelf",
+    icon: LibraryBig,
   },
   {
     title: "Reminders",
     url: "/profile/remainders",
-    icon: Bot,
-  },
-  {
-    title: "Settings",
-    url: "/profile/settings",
-    icon: Settings2,
+    icon: BellDot,
   },
 ];
 

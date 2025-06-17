@@ -1,4 +1,4 @@
-import { User } from "@/lib/state/context/jotai-auth";
+import { User } from "./user";
 
 export interface AuthToken {
   accessToken: string;

@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/sidebar";
 import { AvatarContent } from "@/components/ui_custom/avatar-user";
 import { LogoutButton } from "@/components/ui_custom/logout-button";
-import { useAuth, User } from "@/lib/state/context/jotai-auth";
+import { useAuth } from "@/lib/state/context/jotai-auth";
+import { User } from "@/types/user";
 //Nav User for
 export function NavUser() {
   const { isMobile } = useSidebar();

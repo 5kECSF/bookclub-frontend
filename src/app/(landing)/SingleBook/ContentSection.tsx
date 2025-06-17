@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { KY, MTD } from "@/lib/constants";
-import { User } from "@/lib/state/context/jotai-auth";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { IBook } from "@/types/libraryTypes";
+import { User } from "@/types/user";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { MapPinHouse, Share2 } from "lucide-react";

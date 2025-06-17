@@ -4,12 +4,13 @@ import axios, { AxiosResponse } from "axios";
 import React, { createContext, useContext, useState } from "react";
 
 import { isTokenExpired } from "@/lib/common/tokenExpires";
+import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { LoginResp } from "@/lib/state/context/jotai-auth";
+import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
+import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
-import { LoginResp, User } from "@/lib/state/context/jotai-auth";
 
 const EmptyValue: AuthContextProps = {
   user: null,
@@ -46,7 +47,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps>(EmptyValue);
 
 //this is the hook
-export function useAuth() {
+export function useOldAuth() {
   const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error("useAuth must be used within an AuthProvider");

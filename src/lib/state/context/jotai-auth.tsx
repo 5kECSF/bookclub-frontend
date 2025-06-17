@@ -5,25 +5,10 @@ import { atom, useAtom } from "jotai";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { User } from "@/types/user";
 import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-
-export interface User {
-  _id?: string;
-  id: string;
-  firstName: string;
-  lastName: string;
-  userName?: string;
-  email?: string;
-  avatar: string;
-  role: string;
-  requestedBooks?: string[];
-  approvedBooks?: string[];
-  borrowedBooks?: string[];
-  returnedBooks?: string[];
-  donatedCount: number;
-}
 
 export interface LoginResp {
   access_token: string;

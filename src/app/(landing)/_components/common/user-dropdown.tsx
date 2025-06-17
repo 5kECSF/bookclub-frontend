@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AvatarContent } from "@/components/ui_custom/avatar-user";
 import { LogoutButton } from "@/components/ui_custom/logout-button";
-import { User } from "@/lib/state/context/jotai-auth";
+import { User } from "@/types/user";
 import Link from "next/link";
 
 export function UserContent({ user }: { user: User | null }) {
@@ -30,13 +30,13 @@ export function UserContent({ user }: { user: User | null }) {
 
         <DropdownMenuSeparator />
         <Link href={"/profile"}>
-          <DropdownMenuItem>My Shelf</DropdownMenuItem>
+          <DropdownMenuItem>My Profile</DropdownMenuItem>
+        </Link>
+        <Link href={"/profile/shelf"}>
+          <DropdownMenuItem> My Shelf</DropdownMenuItem>
         </Link>
         <Link href={"/profile/remainders"}>
           <DropdownMenuItem>Remainders</DropdownMenuItem>
-        </Link>
-        <Link href={"/profile/settings"}>
-          <DropdownMenuItem> Account</DropdownMenuItem>
         </Link>
 
         <DropdownMenuSeparator />

@@ -1,9 +1,10 @@
+import { FAIL, FAILT, Resp, Succeed } from "@/lib/constants/return.const";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { LoginCred, LoginResp } from "@/lib/state/context/jotai-auth";
+import { User } from "@/types/user";
+import axios, { AxiosResponse } from "axios";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import axios, { AxiosResponse } from "axios";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { FAIL, FAILT, Resp, Succeed } from "@/lib/constants/return.const";
-import { LoginCred, LoginResp, User } from "@/lib/state/context/jotai-auth";
 
 export interface AuthState {
   user: User | null;

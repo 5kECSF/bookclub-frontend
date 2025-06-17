@@ -1,4 +1,5 @@
-import { useAuth, User } from "@/lib/state/context/jotai-auth";
+import { useAuth } from "@/lib/state/context/jotai-auth";
+import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -8,10 +9,14 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     const { user, loading, loggedIn } = useAuth();
 
     useEffect(() => {
+      if (loggedIn === false) {
+        router.replace("/");
+        return;
+      }
       if (!loading && !IsAuthorized(user, allowedRoles)) {
         router.replace("/"); // or redirect("/") to force navigation
       }
-    }, [loading, user, router]);
+    }, [loading, user, router, loggedIn]);
 
     // Ensure consistent output during SSR
     if (typeof window === "undefined" || loading === null) {
@@ -22,7 +27,7 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
     }
 
     if (!IsAuthorized(user, allowedRoles)) {
-      return null; // Render nothing during the redirect
+      return <div>You are not authorized to view this page.</div>;
     }
     return <WrappedComponent {...props} />;
   };
@@ -41,14 +46,3 @@ export function IsAuthorized(
   if (user && allowedRoles.includes(user.role)) return true;
   return allowedRoles.length < 1;
 }
-
-// export function IsAuthor({children, roles }: {children: React.ReactNode, roles: ROLE[]}) {
-//   const {user}=useUser()
-
-//   return roles?.includes(user?.role as ROLE) ?<>{children}</>: null
-// }
-// export function IsAllowed({children, action }: {children: React.ReactNode, action: ModulePath,}) {
-//   const {user}=useUser()
-//   const roles= PathRoles[action]
-//   return roles?.includes(user?.role as ROLE) ?<>{children}</>: null
-// }

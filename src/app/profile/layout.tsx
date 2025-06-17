@@ -1,8 +1,10 @@
+"use client";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-import { AccountHeader } from "./_components/app-header";
-import { AppSidebar } from "./_components/app-sidebar";
-export default function Page({
+import withAuthorization from "@/lib/functions/withAuthorization";
+import { AccountHeader } from "./shelf/_components/app-header";
+import { AppSidebar } from "./shelf/_components/app-sidebar";
+function Page({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -18,3 +20,5 @@ export default function Page({
     </SidebarProvider>
   );
 }
+
+export default withAuthorization(Page, []);

@@ -3,7 +3,7 @@
 import { ChevronsUpDown } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "@/lib/state/context/jotai-auth";
+import { User } from "@/types/user";
 
 export function AvatarContent({ user }: { user: User | null }) {
   return (

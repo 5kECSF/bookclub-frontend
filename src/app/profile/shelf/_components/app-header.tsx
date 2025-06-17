@@ -2,16 +2,15 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { NavUser } from "./nav-user";
-
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NavUser } from "./nav-user";
 
 export function AccountHeader() {
   const pathName = usePathname();
@@ -27,9 +26,11 @@ export function AccountHeader() {
         />
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">Account</BreadcrumbLink>
-            </BreadcrumbItem>
+            <Link href="/profile">
+              <BreadcrumbItem className="hidden md:block">
+                Account
+              </BreadcrumbItem>
+            </Link>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
               <BreadcrumbPage>{pathStr[pathStr?.length - 1]}</BreadcrumbPage>

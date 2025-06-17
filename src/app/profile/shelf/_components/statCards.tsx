@@ -1,17 +1,24 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { Card, CardContent } from "@/components/ui/card";
-import { useAuth } from "@/lib/state/depricated/auth.context";
-import { BookIcon, GiftIcon } from "lucide-react";
+import { useAuth } from "@/lib/state/context/jotai-auth";
+import { BookCheck, BookOpen, GiftIcon } from "lucide-react";
 import { JSX } from "react";
 
 const statsCards = [
   {
     id: "readings",
-    icon: <BookIcon className="h-[29px] w-[29px]" />,
+    icon: <BookOpen className="h-[29px] w-[29px]" />,
     value: "120",
     label: "Readings",
     bgColor: "bg-[#f27851]",
+  },
+  {
+    id: "contribution",
+    icon: <BookCheck className="h-[21px] w-[21px]" />,
+    value: "10",
+    label: "Read",
+    bgColor: "bg-[#2A7B9B]",
   },
   {
     id: "contribution",
@@ -20,21 +27,26 @@ const statsCards = [
     label: "Contribution",
     bgColor: "bg-[#926cff]",
   },
-  {
-    id: "contribution",
-    icon: <GiftIcon className="h-[21px] w-[21px]" />,
-    value: "10",
-    label: "Contribution",
-    bgColor: "bg-[#2A7B9B]",
-  },
 ];
 export function StatCards() {
   const { user } = useAuth();
   return (
     <div className="flex gap-6">
-      <StatCard card={{ ...statsCards[0], value: String(1) }} />
-      <StatCard card={{ ...statsCards[1], value: String(1) }} />
-      <StatCard card={{ ...statsCards[2], value: String(1) }} />
+      <StatCard
+        card={{
+          ...statsCards[0],
+          value: String(user?.borrowedBooks?.length || 0),
+        }}
+      />
+      <StatCard
+        card={{
+          ...statsCards[1],
+          value: String(user?.returnedBooks?.length || 0),
+        }}
+      />
+      <StatCard
+        card={{ ...statsCards[2], value: String(user?.donatedCount || 0) }}
+      />
     </div>
   );
 }

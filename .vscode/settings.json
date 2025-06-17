@@ -2,5 +2,9 @@
     "tabsColor.activeTab": {
     "backgroundColor": "brown",
     "fontColor": "black"
-    }
+    },
+    "todomd.defaultFile": "/Users/bk/Documents/3prog/proj/bookclub/bookclub-frontend/documentation/todo.md",
+    "todomd.defaultArchiveFile": "/Users/bk/Documents/3prog/proj/bookclub/bookclub-frontend/documentation/todo.done.md",
+    "todomd.defaultSomedayFile": "/Users/bk/Documents/3prog/proj/bookclub/bookclub-frontend/documentation/todo.later.md",
+    "todomd.autoArchiveTasks": true
 }

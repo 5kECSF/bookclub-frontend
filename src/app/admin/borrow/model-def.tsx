@@ -16,18 +16,24 @@ export interface IBorrow {
   userName?: string;
   instanceId?: string;
   instanceUid?: string;
-  takenDate?: Date;
-  dueDate?: Date;
-  returnedDate?: Date;
+
   note?: string;
   status?: borrowStatus;
   imgUrl?: string;
+  //dates
+  acceptedDate?: Date;
+  takenDate?: Date;
+  dueDate?: Date;
+  returnedDate?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 export enum borrowStatus {
   Taken = "BORROWED",
   WaitList = "WAITLIST",
   Accepted = "ACCEPTED",
   Returned = "RETURNED",
+  Donation = "donation",
 }
 export const borrowStatusList = [
   { name: borrowStatus.Taken },
@@ -82,7 +88,7 @@ export const agColumns = [
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
     minWidth: 70, // Adjust based on typical status text length
-    maxWidth: 100,
+    maxWidth: 200,
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
