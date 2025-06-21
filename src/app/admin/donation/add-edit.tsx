@@ -9,7 +9,7 @@ import { AddEditModalWrapper } from "@/components/admin/crud/add-edit-modal";
 import { SingleSelectWithSearch } from "@/components/forms/react-select-single";
 import { SelectInput } from "@/components/forms/select";
 import {
-  InputField,
+  DateInputField,
   Submit,
   TextAreaField,
 } from "@/components/forms/useFormInputs";
@@ -134,16 +134,16 @@ const AddEdit = ({ isUpdate, isOpen, onClose, donation }: IBookProps) => {
               // handleChange={handleChange}
               placeholder={"Add the Description"}
             />
-            <InputField
+            <DateInputField
               register={register}
               errors={errors}
               handleChange={handleChange}
-              label={"date"}
-              name={"date"}
+              label={"Donation date"}
+              name={"donatedDate"}
               req={false}
               inputType={"date"}
               // handleChange={handleChange}
-              placeholder={"Add the Description"}
+              placeholder={"Add the Date of the donation"}
             />
 
             <SelectInput

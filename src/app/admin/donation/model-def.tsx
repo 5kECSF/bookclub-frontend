@@ -16,9 +16,12 @@ export interface IDonation {
   uid?: string;
   donorName?: string;
   bookName?: string;
+  donatedDate?: Date;
   status?: bookStatus;
   note?: string;
   upload?: IUpload;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 export enum bookStatus {
   Available = "AVAILABLE",
@@ -36,6 +39,7 @@ export const DonationValidator = z.object({
   note: z.string().min(3, { message: "min length is 2" }),
   donorId: z.string().min(1, { message: "min length is 2" }),
   bookId: z.string().min(2, { message: "min length is 2" }),
+  donatedDate: z.date().optional(),
   status: z
     .enum([
       bookStatus.Available,
@@ -75,6 +79,11 @@ export const agColumns = [
   },
   {
     field: "donorName",
+    filter: "agMultiColumnFilter",
+    minWidth: 150,
+  },
+  {
+    field: "donatedDate",
     filter: "agMultiColumnFilter",
     minWidth: 150,
   },

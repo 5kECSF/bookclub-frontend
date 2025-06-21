@@ -5,7 +5,7 @@
 
 ## profile page tasks
 
-- [x] shelf {c}
+- [x] shelf
   - [x] fix content of cards
   - [x] fix img url of cards
   - [x] make cancle borrow reqest button

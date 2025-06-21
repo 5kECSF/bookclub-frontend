@@ -1,6 +1,6 @@
+import { EmailSvg, PassowrdSvg } from "@/components/svgs/auth-svg";
+import { HTMLInputTypeAttribute, useEffect } from "react";
 import { Spinner } from "../spinner";
-import {EmailSvg, PassowrdSvg} from "@/components/svgs/auth-svg";
-import React, {HTMLInputTypeAttribute} from "react";
 
 export const CssCls = {
   input:
@@ -46,49 +46,134 @@ export const InputField = ({
     </div>
   );
 };
-export function EmailField({ register, errors,name }: any) {
-  return (
-      <div className="mb-4">
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
-          Email
-        </label>
-        <div className="relative">
-          <input
-              {...register(name)}
-              type="email"
-              placeholder="Enter your email"
-              className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-          />
 
-          <span className="absolute right-4 top-4">
+export const IntInputField = ({
+  label,
+  name,
+  register,
+  handleChange,
+  placeholder,
+  errors,
+  req = true,
+  inputType = "text",
+}: InputProps) => {
+  useEffect(() => {
+    register(name, {
+      setValueAs: (value: any) => parseInt(value, 10),
+    });
+  }, [register, name]);
+  return (
+    <div className="mb-4.5">
+      <label className="mb-2.5 block text-black dark:text-white">
+        {label} {req && <span className="text-meta-1">*</span>}
+      </label>
+      <input
+        {...register(name)}
+        onChange={(e) => {
+          const intValue = parseInt(e.target.value, 10);
+          handleChange(name, intValue);
+        }}
+        type={inputType}
+        placeholder={placeholder}
+        className={CssCls.input}
+        required={req}
+      />
+      {console.log("errors:", errors)}
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
+    </div>
+  );
+};
+
+export const DateInputField = ({
+  label,
+  name,
+  register,
+  handleChange,
+  placeholder,
+  errors,
+  req = true,
+  inputType = "text",
+}: InputProps) => {
+  useEffect(() => {
+    register(name, {
+      setValueAs: (value: any) => {
+        if (!value) return null;
+        const date = new Date(value);
+        return isNaN(date.getTime()) ? null : date;
+      },
+    });
+  }, [register, name]);
+  return (
+    <div className="mb-4.5">
+      <label className="mb-2.5 block text-black dark:text-white">
+        {label} {req && <span className="text-meta-1">*</span>}
+      </label>
+      <input
+        {...register(name)}
+        onChange={(e) => {
+          const intValue = parseInt(e.target.value, 10);
+          handleChange(name, intValue);
+        }}
+        type={inputType}
+        placeholder={placeholder}
+        className={CssCls.input}
+        required={req}
+      />
+      {console.log("errors:", errors)}
+      {errors[name] && <p className="text-red">{errors[name].message}</p>}
+    </div>
+  );
+};
+
+export function EmailField({ register, errors, name }: any) {
+  return (
+    <div className="mb-4">
+      <label className="mb-2.5 block font-medium text-black dark:text-white">
+        Email
+      </label>
+      <div className="relative">
+        <input
+          {...register(name)}
+          type="email"
+          placeholder="Enter your email"
+          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+        />
+
+        <span className="absolute right-4 top-4">
           <EmailSvg />
         </span>
-          {errors[name] && <p className="text-red">{errors[name].message}</p>}
-        </div>
+        {errors[name] && <p className="text-red">{errors[name].message}</p>}
       </div>
+    </div>
   );
 }
-export function PasswordField({ register, errors, placeHolder, label,name }: any) {
+export function PasswordField({
+  register,
+  errors,
+  placeHolder,
+  label,
+  name,
+}: any) {
   return (
-      <div className="mb-4">
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
-          {label}
-        </label>
-        <div className="relative">
-          <input
-              {...register(name)}
-              type="password"
-              required
-              placeholder={placeHolder}
-              className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-          />
+    <div className="mb-4">
+      <label className="mb-2.5 block font-medium text-black dark:text-white">
+        {label}
+      </label>
+      <div className="relative">
+        <input
+          {...register(name)}
+          type="password"
+          required
+          placeholder={placeHolder}
+          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+        />
 
-          <span className="absolute right-4 top-4">
+        <span className="absolute right-4 top-4">
           <PassowrdSvg />
         </span>
-          {errors[name] && <p className="text-red">{errors[name].message}</p>}
-        </div>
+        {errors[name] && <p className="text-red">{errors[name].message}</p>}
       </div>
+    </div>
   );
 }
 export const TextAreaField = ({
@@ -132,7 +217,7 @@ export const DatePickerField = ({
         {label} {req && <span className="text-meta-1">*</span>}
       </label>
       <input
-          type="date"
+        type="date"
         {...register(name)}
         onChange={(e) => handleChange(name, e.target.value)}
         placeholder={placeholder}
@@ -180,11 +265,11 @@ export function Submit2({
 export function Submit({
   isLoading,
   update,
-    text
+  text,
 }: {
   isLoading: boolean;
   update?: boolean;
-  text?:string
+  text?: string;
 }) {
   return (
     // <div className="mb-5">
@@ -201,10 +286,15 @@ export function Submit({
       {isLoading ? (
         <div>
           <Spinner />
-          {text? text: update ? "Updating" : "Creating"}
+          {text ? text : update ? "Updating" : "Creating"}
         </div>
-      ) : text? text:update ? "Update" : "Create"
-      }
+      ) : text ? (
+        text
+      ) : update ? (
+        "Update"
+      ) : (
+        "Create"
+      )}
     </button>
     // </div>
   );

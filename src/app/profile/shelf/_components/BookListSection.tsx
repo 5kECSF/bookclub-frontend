@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { PaginationComponent } from "@/app/(landing)/books/_components/paginationComponent";
 import { borrowStatus, IBorrow } from "@/app/admin/borrow/model-def";
+import { IDonation } from "@/app/admin/donation/model-def";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -178,8 +179,12 @@ function formatCustom(rawDate: Date): string {
 
   return `${formatted || ""}`;
 }
-function GetFirstTxt(borrow: IBorrow | undefined): Disp {
+type BorrowDon = IBorrow | IDonation;
+function GetFirstTxt(borrow: BorrowDon | undefined): Disp {
   let data: Disp = { txt: "" };
+  if (borrow && borrow["donorId"] && borrow.donorName) {
+    return { txt: "Donated on", date: borrow?.donatedDate };
+  }
   if (borrow?.status == borrowStatus.WaitList)
     data = { txt: "requested on", date: borrow.createdAt };
   else if (borrow?.status == borrowStatus.Accepted)
@@ -194,6 +199,7 @@ function GetFirstTxt(borrow: IBorrow | undefined): Disp {
 
 function GetSecondTxt(borrow: IBorrow | undefined): Disp {
   let data: Disp = { txt: "" };
+
   if (borrow?.status == borrowStatus.WaitList) return { txt: "" };
   else if (borrow?.status == borrowStatus.Accepted)
     data = { txt: "accepted On", date: borrow.acceptedDate };
