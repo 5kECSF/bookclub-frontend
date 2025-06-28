@@ -5,9 +5,9 @@ import { IBook } from "@/types/libraryTypes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
-    AiFillCheckCircle,
-    AiFillStar,
-    AiOutlineArrowRight,
+  AiFillCheckCircle,
+  AiFillStar,
+  AiOutlineArrowRight,
 } from "react-icons/ai";
 
 const BookCard2 = ({ book }: { book: IBook }) => {
@@ -41,7 +41,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
       </div>
       {!book.availableCnt ? (
         <div className=" hidden md:flex">
-          <div className=" bg-red-500 w-fit rounded px-2 text-sm text-white">
+          <div className=" w-fit rounded bg-red px-2 text-sm text-white">
             <span>checked out</span>
           </div>
         </div>

@@ -1,14 +1,13 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, Loader } from "lucide-react";
-import { useFetch } from "@/lib/state/hooks/useQuery";
-import { getImg, KY } from "@/lib/constants";
 import CataroryLoader from "@/components/loader/catagory-loader";
+import { Card, CardContent } from "@/components/ui/card";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
+import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ICategory } from "@/types/db";
+import { Loader } from "lucide-react";
 import Link from "next/link";
 // import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import React from "react";
 import {
   Carousel,
   CarouselContent,

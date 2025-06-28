@@ -1,12 +1,12 @@
+import { AccountSection } from "@/app/(landing)/_components/common/AccountSection";
+import { NavList } from "@/app/(landing)/_components/common/NavList";
+import MobileSidebar from "@/components/home/mobile-sidebar";
+import { TopBar } from "@/components/home/topBar";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { SearchIcon } from "lucide-react";
-import React, { type JSX } from "react";
-import { TopBar } from "@/components/home/topBar";
-import MobileSidebar from "@/components/home/mobile-sidebar";
 import Image from "next/image";
-import { NavList } from "@/app/(landing)/_components/common/NavList";
-import { AccountSection } from "@/app/(landing)/_components/common/AccountSection";
+import { type JSX } from "react";
 
 export const HeaderSection = (): JSX.Element => {
   // Navigation links data
@@ -19,7 +19,7 @@ export const HeaderSection = (): JSX.Element => {
 
       {/* Main header with logo, search and account links */}
       <div className="container mx-auto py-5">
-        <div className="flex flex-wrap items-center justify-between gap-4 p-2  lg:gap-0">
+        <div className="md-gap-2 flex  flex-wrap items-center justify-between gap-4 p-2 lg:flex-nowrap  lg:gap-0">
           {/* Logo */}
           <div className="flex w-full items-center justify-between gap-4 lg:w-auto ">
             <div className="flex items-center">

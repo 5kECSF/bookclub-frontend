@@ -2,8 +2,9 @@ import { MultiFileUpload } from "@/components/admin/upload/upload_single";
 import { SelectInput } from "@/components/forms/select";
 import { Submit } from "@/components/forms/useFormInputs";
 
-import { ItemStatus, KY, MTD } from "@/lib/constants";
+import { ItemStatus, MTD } from "@/lib/constants";
 import { Resp, ReturnType } from "@/lib/constants/return.const";
+import { KY } from "@/lib/constants/routes";
 import { DisplayErrors } from "@/lib/functions/object";
 import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,7 +61,7 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
   const makeReq = useMakeReq();
 
   const handleErr = (message: string, duration: number = 2500) => {
-    toast.error(`${message}`, {duration});
+    toast.error(`${message}`, { duration });
     setLoading(false);
   };
 

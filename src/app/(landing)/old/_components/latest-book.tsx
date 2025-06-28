@@ -4,10 +4,11 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import Image from "next/image";
 
 import LatestBookLoader from "@/components/loader/latest-book-loader";
-import { OldIBook, ICategory } from "@/types/db";
+import { ICategory, OldIBook } from "@/types/db";
 import Link from "next/link";
 
-import { getImg, KY } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 export default function LatestBook() {

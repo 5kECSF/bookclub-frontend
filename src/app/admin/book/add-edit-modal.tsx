@@ -5,7 +5,8 @@ import {
   Submit,
   TextAreaField,
 } from "@/components/forms/useFormInputs";
-import { KY, MTD } from "@/lib/constants";
+import { MTD } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useMakeReq } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";

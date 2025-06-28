@@ -1,5 +1,5 @@
 "use client";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl } from "@/lib/functions/url";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ArrowLeftIcon } from "lucide-react";
@@ -25,7 +25,7 @@ export const bookInfo = {
 const SingleBook = (): JSX.Element => {
   const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
   const router = useRouter();
-  const { isLoading, data,  } = useFetch(
+  const { isLoading, data } = useFetch(
     [KY.book, query._bookId],
     `${KY.book}/${query._bookId}`,
     {},

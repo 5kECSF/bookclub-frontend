@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import { KY, getImg } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { OldIBook } from "@/types/db";
-import { useParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface Iabout {
   authorName?: string;

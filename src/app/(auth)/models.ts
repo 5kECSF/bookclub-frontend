@@ -7,6 +7,8 @@ export const LoginValidator = z.object({
     .min(6, { message: "password should be length of 6 or more" }),
 });
 
+export type TLoginSchema = z.infer<typeof LoginValidator>;
+
 export const SignupValidator = z
   .object({
     email: z.string().email("email must have correct format"),
@@ -24,6 +26,9 @@ export const SignupValidator = z
     path: ["confirmPassword"],
   });
 
+export type TSignupSchema = z.infer<typeof SignupValidator>;
+
+//===============  activate account code validator
 export const CodeValidator = z.object({
   code: z
     .string()
@@ -34,6 +39,40 @@ export const CodeValidator = z.object({
     .min(4, { message: "info must not be less than 4 characters" }),
 });
 
-export type TLoginSchema = z.infer<typeof LoginValidator>;
-export type TSignupSchema = z.infer<typeof SignupValidator>;
+
+
 export type TCodeSchema = z.infer<typeof CodeValidator>;
+
+
+//=========== forgot pwd validator
+
+export const ForgotPwdValidator = z
+  .object({
+    email: z.string().email("email must have correct format"),
+  })
+
+export type TForgotPwdSchema = z.infer<typeof ForgotPwdValidator>;
+
+//=========== Reset Passowrd Validator
+
+export const ResetPwdValidator = z.object({
+  code: z
+    .string()
+    .min(4, { message: "the code consists only 4 characters" })
+    .max(4, { message: "the code consists only 4 characters" }),
+  email: z
+    .string()
+    .min(4, { message: "info must not be less than 4 characters" }),
+    newPassword: z
+      .string()
+      .min(6, { message: "password should be length of 6 or more" }),
+    confirmPassword: z
+      .string()
+      .min(6, { message: "password should be length of 6 or more" })
+}).refine((data) => data.newPassword == data.confirmPassword, {
+  message: " passwords must match ",
+  path: ["confirmPassword"],
+});
+
+
+export type TResetPwdSchema = z.infer<typeof ResetPwdValidator>;

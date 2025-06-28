@@ -1,9 +1,9 @@
-import { KY, MTD } from "@/lib/constants";
+import { MTD } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useMutate } from "@/lib/state/hooks/useMutation";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { ReactNode, useState } from "react";
-
+import { toast } from "sonner";
 
 import { AlertDeleteModal } from "@/components/admin/crud/AlertDeleteModal";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ export function EditDeleteButtons({
       });
       //change the name to idx
       toast.success(`delete ${url}: ${data?.name} success`);
-      await queryClient.invalidateQueries({queryKey:[url]})
+      await queryClient.invalidateQueries({ queryKey: [url] });
       setDeleteOpen(false);
     } catch (e: any) {
       console.log(e);

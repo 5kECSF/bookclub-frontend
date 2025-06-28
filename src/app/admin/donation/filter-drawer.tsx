@@ -2,7 +2,7 @@ import { bookStatusList } from "@/app/admin/donation/model-def";
 import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSearch } from "@/components/forms/cleanInputs";
 import { CleanSelectInput } from "@/components/forms/select";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { useState } from "react";
 interface IFilterProps {

@@ -3,7 +3,8 @@
 import AddEditModal from "@/app/admin/borrow/add-edit-modal";
 import { BorrowAction } from "@/app/admin/borrow/borrow-action";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import { getImg, KY } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useState } from "react";
 import { z } from "zod";
 

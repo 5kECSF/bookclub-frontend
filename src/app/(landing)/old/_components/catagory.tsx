@@ -1,11 +1,12 @@
 "use client";
-import Image from "next/image";
-import { useFetch } from "@/lib/state/hooks/useQuery";
-import { KY, getImg } from "@/lib/constants";
-import { Loader } from "lucide-react";
-import { ICategory } from "@/types/db";
-import Link from "next/link";
 import CataroryLoader from "@/components/loader/catagory-loader";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import { ICategory } from "@/types/db";
+import { Loader } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 
 export default function Categories() {

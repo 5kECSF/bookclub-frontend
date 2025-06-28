@@ -5,17 +5,17 @@ import { atom, useAtom } from "jotai";
 import { isTokenExpired } from "@/lib/common/tokenExpires";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export interface LoginResp {
   access_token: string;
-  user_data: User | null;
+  user_data: IUser | null;
 }
 
-export const userAtom = atom<User | null>(null);
+export const userAtom = atom<IUser | null>(null);
 userAtom.debugLabel = "user";
 export const accessTokenAtom = atom<string | null>(null);
 accessTokenAtom.debugLabel = "accessToken";
@@ -95,11 +95,12 @@ export const useAuth = () => {
       setAccessToken(null);
       setLoggedIn(false);
       console.log("logout success", response.data);
-      // router.push("/signin");
+      router.push("/");
     } catch (err: any) {
       let resp = HandleAxiosErr(err);
       setLoggedIn(false);
       setNoNetwork(true);
+      setUser(null);
       console.log("***logout.panic***", resp.Message);
       router.push("/signin");
     }

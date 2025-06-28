@@ -3,16 +3,19 @@ import { Password } from "@/app/(auth)/_components/inputs";
 import { Button } from "@/components/ui/button";
 import { TabsContent } from "@/components/ui/tabs";
 import { MTD } from "@/lib/constants";
+import { API } from "@/lib/constants/routes";
 import { DisplayErrors } from "@/lib/functions/object";
+import { useAuth } from "@/lib/state/context/jotai-auth";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { passwordChangeType } from "@/lib/validator/password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { changePwdValidator, TChangePwdSchema } from "../models";
+import { changePwdValidator, TChangePwdSchema } from "./model";
 
 const PasswordChange = ({ value }: { value: string }) => {
   const { makeReq, loading } = useMakeReqState();
+  const { logout } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,22 +26,24 @@ const PasswordChange = ({ value }: { value: string }) => {
   const onSubmit = async (data: TChangePwdSchema) => {
     const body: passwordChangeType = {
       oldPassword: data.oldPassword,
-      newPassword: data.password,
+      newPassword: data.newPassword,
     };
 
-    const resp = await makeReq("auth/changePassword", body, MTD.PATCH);
+    const resp = await makeReq(API.changePwd, body, MTD.PATCH);
     if (!resp.ok) {
-      console.log("````````````````````error data", resp.body);
+      // console.log("````````````````````error data", resp.body);
       toast.error(resp.message);
+      return;
     }
     toast.success(`password update success`);
+    logout();
     reset();
   };
 
   return (
-    <TabsContent value={value} className="mt-6">
-      <div className="mt-8 flex max-w-lg flex-col gap-2">
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <TabsContent value={value} className="items-center justify-center p-6">
+      <div className="mt-8 flex flex-col items-center  justify-center  gap-2 dark:bg-boxdark-2">
+        <form className="w-full max-w-lg" onSubmit={handleSubmit(onSubmit)}>
           <Password
             register={register("oldPassword")}
             error={errors.oldPassword}
@@ -46,8 +51,8 @@ const PasswordChange = ({ value }: { value: string }) => {
             label={"Old Password"}
           />
           <Password
-            register={register("password")}
-            error={errors.password}
+            register={register("newPassword")}
+            error={errors.newPassword}
             placeHolder={"6+ Characters, 1 Capital letter"}
             label={"New Password"}
           />

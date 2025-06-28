@@ -1,13 +1,13 @@
 import { FAIL, FAILT, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { LoginCred, LoginResp } from "@/lib/state/context/jotai-auth";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 import axios, { AxiosResponse } from "axios";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 export interface AuthState {
-  user: User | null;
+  user: IUser | null;
   accessToken: string | null;
   login: (credentials: LoginCred) => Promise<Resp<LoginResp>>;
   logout: () => Promise<Resp<any>>;

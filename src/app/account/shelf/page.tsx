@@ -1,7 +1,7 @@
 "use client";
 import { borrowStatus } from "@/app/admin/borrow/model-def";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import { useAuth } from "@/lib/state/context/jotai-auth";
 import { useFetch } from "@/lib/state/hooks/useQuery";

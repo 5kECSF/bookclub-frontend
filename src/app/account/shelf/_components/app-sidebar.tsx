@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { UI_ROUTES } from "@/lib/constants/routes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavUser } from "./nav-user";
@@ -23,17 +24,17 @@ import { NavUser } from "./nav-user";
 const data = [
   {
     title: "My Profile",
-    url: "/profile",
+    url: UI_ROUTES.Profile,
     icon: UserPen,
   },
   {
     title: "My Shelf",
-    url: "/profile/shelf",
+    url: UI_ROUTES.MyShelf,
     icon: LibraryBig,
   },
   {
     title: "Reminders",
-    url: "/profile/remainders",
+    url: UI_ROUTES.Remainders,
     icon: BellDot,
   },
 ];

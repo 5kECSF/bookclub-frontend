@@ -5,7 +5,7 @@ import {
 } from "@/app/admin/category/model-def";
 import { AddEditWithFileLayout } from "@/components/admin/crud/generic-add-edit-withFile";
 import { InputField, TextAreaField } from "@/components/forms/useFormInputs";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 
 interface ICategoryProps {
   isUpdate: boolean;

@@ -1,12 +1,13 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 
-import type { JSX } from "react";
+import GenreLoader from "@/components/loader/genre-loader";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { getImg, KY } from "@/lib/constants";
 import { Igenre } from "@/types/db";
 import Link from "next/link";
-import GenreLoader from "@/components/loader/genre-loader";
+import type { JSX } from "react";
 
 export const GenreSelectionSection = (): JSX.Element => {
   // Data for genre categories to enable mapping

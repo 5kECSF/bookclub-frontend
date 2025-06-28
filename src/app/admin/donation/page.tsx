@@ -1,6 +1,6 @@
 "use client";
 import { PageLayout } from "@/components/admin/crud/generic-page";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { useEffect, useState } from "react";

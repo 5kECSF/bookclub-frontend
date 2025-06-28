@@ -1,8 +1,8 @@
 import { MTD } from "@/lib/constants";
-import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
-import { useMutation } from "@tanstack/react-query";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
+import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import useAxiosAuth, { axiosAuth } from "@/lib/state/hooks/useAxioxsAuth";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 // import axios from "axios"
 
@@ -26,11 +26,11 @@ export const useMutate = (
   onSuccess: () => void = () => {},
   onError: () => void = () => {},
 ) => {
-  const axiosAuth = useAxiosAuth();
+  const axiosAuthS = useAxiosAuth();
   return useMutation({
     mutationFn: async (data: MutationParam) => {
       try {
-        const response = await axiosAuth.request({
+        const response = await axiosAuthS.request({
           url: `${data.url}`,
           method: data.method,
           // headers: AppHeaders.JSON,
@@ -50,7 +50,7 @@ export const useMutate = (
 };
 
 export const useMakeReq = () => {
-  const axiosAuth = useAxiosAuth();
+  const axiosAuthS = useAxiosAuth();
 
   return async (
     url: string,
@@ -59,7 +59,7 @@ export const useMakeReq = () => {
     headers?: any,
   ): Promise<Resp<any>> => {
     try {
-      const response = await axiosAuth.request({
+      const response = await axiosAuthS.request({
         url: `${url}`,
         method: method,
         headers: headers ? headers : AppHeaders.JSON,
@@ -75,15 +75,49 @@ export const useMakeReq = () => {
 
 //this is the make req with states
 export const useMakeReqState = () => {
-  const axiosAuth = useAxiosAuth();
+  const axiosAuthS = useAxiosAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const makeReq = async (
-      url: string,
-      body: any,
-      method: MTD,
-      headers?: any
+    url: string,
+    body: any,
+    method: MTD,
+    headers?: any,
+  ): Promise<Resp<any>> => {
+    setLoading(true);
+    setError(null); // Reset error before making a request
+
+    try {
+      const response = await axiosAuthS.request({
+        url: `${url}`,
+        method: method,
+        headers: headers ? headers : AppHeaders.JSON,
+        data: body,
+      });
+
+      return Succeed(response?.data);
+    } catch (e: any) {
+      let Err = HandleAxiosErr(e);
+      setError(Err.Message);
+      return FAIL(Err.Message, Err.Status, e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { makeReq, loading, error };
+};
+//this is the make req with states
+export const useCleanReqState = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const makeReq = async (
+    url: string,
+    body: any,
+    method: MTD,
+    headers?: any,
   ): Promise<Resp<any>> => {
     setLoading(true);
     setError(null); // Reset error before making a request

@@ -5,6 +5,7 @@ interface IPagination {
   page: number;
   hasNext: boolean;
   setPage: any;
+  total?: number;
 }
 
 export const Pagination = ({
@@ -12,6 +13,7 @@ export const Pagination = ({
   page,
   hasNext,
   setPage,
+  total,
 }: IPagination) => {
   return (
     <div className="flex items-center justify-center gap-3 py-4">
@@ -24,7 +26,7 @@ export const Pagination = ({
           <LucideArrowLeft /> Prev
         </Button>
       )}
-      <p className="text-bold text-l">page: {page}</p>
+      {renderPageButtons(setPage, page, total || 0)}
       {!isPlaceholderData && hasNext && (
         <Button
           onClick={() => {
@@ -42,4 +44,78 @@ export const Pagination = ({
       )}
     </div>
   );
+};
+function calculatePages(totalItems: number, itemsPerPage: number): number {
+  // Check if inputs are valid numbers and greater than 0
+  if (
+    !Number.isInteger(totalItems) ||
+    !Number.isInteger(itemsPerPage) ||
+    totalItems < 0 ||
+    itemsPerPage <= 0
+  ) {
+    return 0;
+  }
+
+  // Calculate total pages using Math.ceil to round up
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  return totalPages;
+}
+const renderPageButtons = (setPage: any, page: number, total: number) => {
+  const totalPages = calculatePages(total, 10);
+  const range: number[] = [];
+  const visibleCount = 3;
+
+  if (totalPages <= visibleCount * 3) {
+    for (let i = 1; i <= totalPages; i++) {
+      range.push(i);
+    }
+  } else {
+    const start = [1, 2, 3];
+    const end = [totalPages - 2, totalPages - 1, totalPages];
+    const middle = [page - 1, page, page + 1].filter(
+      (p) => p > 3 && p < totalPages - 2,
+    );
+
+    const allPages = new Set([...start, ...middle, ...end]);
+    range.push(...Array.from(allPages).sort((a, b) => a - b));
+  }
+  const buttons: React.ReactNode[] = [];
+  let lastPage = 0;
+
+  for (let p of range) {
+    if (lastPage && p - lastPage > 1) {
+      buttons.push(
+        <span key={`ellipsis-${p}`} className="text-gray-500 px-1 text-lg">
+          ...
+        </span>,
+      );
+    }
+
+    buttons.push(
+      <Button
+        key={p}
+        variant={p === page ? "default" : "outline"}
+        className={`px-4 ${p === page ? "bg-blue-700 text-white" : ""}`}
+        onClick={() => setPage(p)}
+      >
+        {p}
+      </Button>,
+    );
+
+    lastPage = p;
+  }
+  if (!totalPages) {
+    buttons.push(
+      <Button
+        key={page}
+        variant={page === page ? "default" : "outline"}
+        className={`px-4 ${page === page ? "bg-blue-700 text-white" : ""}`}
+        onClick={() => setPage(page)}
+      >
+        {page}
+      </Button>,
+    );
+  }
+
+  return buttons;
 };

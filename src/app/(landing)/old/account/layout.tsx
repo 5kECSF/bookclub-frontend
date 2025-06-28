@@ -1,9 +1,5 @@
 import SideNavigation from "@/app/(landing)/old/account/_components/side-navigation";
 import Top from "@/app/(landing)/old/account/_components/top";
-import Header from "@/components/home/header";
-import HomeFooter from "@/components/home/footer";
-import { HeaderSection } from "@/app/(landing)/_components/common/HeaderSection";
-import { FooterSection } from "@/app/(landing)/_components/common/FooterSection";
 
 export default async function DashboardLayout({
   children,

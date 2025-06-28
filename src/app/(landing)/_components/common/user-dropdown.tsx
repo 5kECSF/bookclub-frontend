@@ -11,13 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AvatarContent } from "@/components/ui_custom/avatar-user";
 import { LogoutButton } from "@/components/ui_custom/logout-button";
-import { User } from "@/types/user";
+import { UI_ROUTES } from "@/lib/constants/routes";
+import { useAuth } from "@/lib/state/context/jotai-auth";
+import { IUser } from "@/types/user";
 import Link from "next/link";
 
-export function UserContent({ user }: { user: User | null }) {
-  const logout = () => {
-    console.log("logout clicked");
-  };
+export function UserContent({ user }: { user: IUser | null }) {
+  const { logout } = useAuth();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,13 +30,13 @@ export function UserContent({ user }: { user: User | null }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
-        <Link href={"/profile"}>
+        <Link href={UI_ROUTES.Profile}>
           <DropdownMenuItem>My Profile</DropdownMenuItem>
         </Link>
-        <Link href={"/profile/shelf"}>
+        <Link href={UI_ROUTES.MyShelf}>
           <DropdownMenuItem> My Shelf</DropdownMenuItem>
         </Link>
-        <Link href={"/profile/remainders"}>
+        <Link href={UI_ROUTES.Remainders}>
           <DropdownMenuItem>Remainders</DropdownMenuItem>
         </Link>
 

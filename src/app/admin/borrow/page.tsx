@@ -5,7 +5,7 @@ import QueryChips from "@/components/admin/crud/query-chips";
 import { FetchError, Spinner } from "@/components/admin/ui/state-components";
 import { TableComponent } from "@/components/AgGrid";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { useFetch } from "@/lib/state/hooks/useQuery";
@@ -71,6 +71,7 @@ const BorrowPage = () => {
           <div className="pt-8">
             <TableComponent colDefs={agColumns} rowData={data?.body || []} />
             <Pagination
+              total={data?.count}
               isPlaceholderData={isPlaceholderData}
               page={query.page}
               hasNext={data?.hasNext || false}

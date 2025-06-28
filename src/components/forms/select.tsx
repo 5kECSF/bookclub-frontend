@@ -79,16 +79,27 @@ export const SelectInput = ({
   handleChange,
   errors,
   req = true,
+  disabled = false,
 }: SelectProps) => {
   return (
     <div className="mb-4.5">
-      <label className="mb-2.5 block text-black dark:text-white">
+      <label
+        className={`mb-2.5 block text-base font-medium ${
+          disabled
+            ? "text-gray-400 dark:text-gray-600 cursor-not-allowed opacity-50"
+            : "text-black dark:text-white"
+        }`}
+      >
         {label} {req && <span className="text-meta-1">*</span>}
       </label>
       <div className="relative z-20 bg-transparent dark:bg-form-input">
         <select
+          disabled={disabled}
           {...register(name)}
-          className={CssCls.select}
+          className={`
+            ${CssCls.select}
+            ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed opacity-50" : "text-black dark:text-white"}
+          `}
           onChange={(e: any) => {
             handleChange(name, e.target.value);
           }}
@@ -108,7 +119,12 @@ export const SelectInput = ({
             </option>
           )}
         </select>
-        <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+        <span
+          className={`
+            absolute right-4 top-1/2 z-30 -translate-y-1/2
+            ${disabled ? "text-gray-500 opacity-50" : "text-black dark:text-white"}
+          `}
+        >
           <FormSvg1 />
         </span>
       </div>

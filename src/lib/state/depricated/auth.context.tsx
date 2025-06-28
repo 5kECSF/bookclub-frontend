@@ -8,7 +8,7 @@ import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
 import { LoginResp } from "@/lib/state/context/jotai-auth";
 import useLocalStorage from "@/lib/state/hooks/useLocalStorage";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -26,21 +26,21 @@ const EmptyValue: AuthContextProps = {
   getAccessToken: async (): Promise<Resp<string>> => {
     return { body: "", ok: false, message: "" };
   },
-  getUser: async (): Promise<User | null> => {
+  getUser: async (): Promise<IUser | null> => {
     return null;
   },
   loading: false,
 };
 
 interface AuthContextProps {
-  user: User | null;
+  user: IUser | null;
   accessToken: string | null;
   login: (userName: string, password: string) => Promise<LoginResp>;
   logout: () => void;
   refreshToken: () => Promise<Resp<string>>;
   isTokenExpired: (token: string | null) => boolean;
   getAccessToken: () => Promise<Resp<string>>;
-  getUser: () => Promise<User | null>;
+  getUser: () => Promise<IUser | null>;
   loading: boolean;
 }
 
@@ -60,7 +60,7 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useLocalStorage<User | null>("user", null); // useState<User | null>(null);
+  const [user, setUser] = useLocalStorage<IUser | null>("user", null); // useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();

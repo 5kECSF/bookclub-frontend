@@ -19,6 +19,7 @@ export interface InputProps {
   req?: boolean;
   inputType?: HTMLInputTypeAttribute;
   row?: number;
+  disabled?: boolean;
 }
 export const InputField = ({
   label,

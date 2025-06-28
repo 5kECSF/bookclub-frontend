@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, ReactNode } from "react";
-import Sidebar from "@/components/admin/Layouts/Sidebar";
 import Header from "@/components/admin/Layouts/Header";
+import Sidebar from "@/components/admin/Layouts/Sidebar";
+import React, { useState } from "react";
 
-export default function DefaultLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;

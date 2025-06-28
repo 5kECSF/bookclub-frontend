@@ -2,11 +2,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { KY, MTD } from "@/lib/constants";
+import { MTD } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { IBook } from "@/types/libraryTypes";
-import { User } from "@/types/user";
+import { ACCOUNT_STATUS, IUser } from "@/types/user";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { MapPinHouse, Share2 } from "lucide-react";
@@ -26,12 +27,9 @@ export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
   const { loading, makeReq } = useMakeReqState();
   const queryClient = useQueryClient();
 
-  const { isLoading, data, isError, error, isPlaceholderData } = useFetch<User>(
-    [KY.profile],
-    `${KY.profile}`,
-    {},
-  );
-  console.log(data);
+  const { isLoading, data, isError, error, isPlaceholderData } =
+    useFetch<IUser>([KY.profile], `${KY.profile}`, {});
+  // console.log(data);
   const RequestBook = async () => {
     const resp = await makeReq(
       `${KY.borrow}/request/${book._id}`,
@@ -145,7 +143,7 @@ export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
         {/* Action buttons */}
         <div className="mt-8 flex items-start gap-[38px]">
           <Button
-            disabled={!AllowedToBorrow(book, data as User) || loading}
+            disabled={!AllowedToBorrow(book, data as IUser) || loading}
             onClick={RequestBook}
             className="h-[61px] w-fit rounded-[5px] bg-[#f27851] px-3 text-xl font-semibold text-white"
           >
@@ -161,22 +159,28 @@ export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
   );
 };
 
-function AllowedToBorrow(book: IBook, user: User | undefined): boolean {
+function AllowedToBorrow(book: IBook, user: IUser | undefined): boolean {
   if (!HaveBook(book)) return false;
+  if (user?.accountStatus != ACCOUNT_STATUS.ACTIVE) return false;
   if (
     [
       ...(user?.requestedBooks || []),
       ...(user?.approvedBooks || []),
       ...(user?.borrowedBooks || []),
-    ].includes(book._id)
+    ].includes(book?._id as string)
   )
     return false;
   return true;
 }
-function ReturnTxt(book: IBook, user: User | undefined): string {
-  if (user?.requestedBooks?.includes(book._id)) return "Book Requested";
-  else if (user?.approvedBooks?.includes(book._id)) return "Request Approved";
-  else if (user?.borrowedBooks?.includes(book._id)) return "Book Taken";
+function ReturnTxt(book: IBook, user: IUser | undefined): string {
+  if (user?.accountStatus != ACCOUNT_STATUS.ACTIVE)
+    return "Your account is not Approved";
+  if (user?.requestedBooks?.includes(book?._id as string))
+    return "Book Requested";
+  else if (user?.approvedBooks?.includes(book?._id as string))
+    return "Request Approved";
+  else if (user?.borrowedBooks?.includes(book?._id as string))
+    return "Book Taken";
   else if (!HaveBook(book)) return "Currently Not Available";
   return "Request To BORROW";
 }

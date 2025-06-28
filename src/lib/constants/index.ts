@@ -24,20 +24,6 @@ export enum MTD {
   DELETE = "DELETE",
 }
 
-export enum KY {
-  //library modules
-  latestBooks = "latestBooks",
-  category = "category",
-  genre = "genre",
-  book = "book",
-  author = "author",
-  user = "users",
-  borrow = "borrow",
-  donation = "donation",
-  notification = "notification",
-  profile = "profile",
-}
-
 const projName = `aait-a3640.appspot.com`;
 const ToBeAdded = `https://firebasestorage.googleapis.com/v0/b/${projName}/o/`;
 
@@ -75,30 +61,4 @@ export const ItemStatus = [
   { name: "deactivated" },
 ];
 
-export enum ROUTES{
-  SignIn ="signin",
-  SignUp = "signup"
-}
 
-export const routes = [
-  {
-    name: "HOME",
-    href: "/",
-  },
-  {
-    name: "ABOUT US",
-    href: "/about",
-  },
-  {
-    name: "BOOKS",
-    href: "/books",
-  },
-  {
-    name: "CONTACT US",
-    href: "/contact",
-  },
-  {
-    name: "BLOG",
-    href: "/blog",
-  }
-];

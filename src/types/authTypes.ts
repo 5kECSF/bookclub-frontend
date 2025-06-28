@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { IUser } from "./user";
 
 export interface AuthToken {
   accessToken: string;
@@ -8,5 +8,5 @@ export interface AuthToken {
 }
 export interface TokenResponse {
   authToken: AuthToken;
-  userData: User;
+  userData: IUser;
 }

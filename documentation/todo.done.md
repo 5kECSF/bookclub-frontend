@@ -94,3 +94,16 @@
 - [x] authorization for profile page {cm:2025-06-17}
   - [x] fix queries of requested, accepted,borrowed Returned
   - [ ] fix content of cards, for each status {cm:2025-06-17}
+- [x] shelf {c} {cm:2025-06-22}
+  - [x] fix content of cards {cm:2025-06-22}
+  - [x] fix img url of cards {cm:2025-06-22}
+  - [x] make cancle borrow reqest button {cm:2025-06-22}
+  - [x] fix Stat cards {cm:2025-06-22}
+  - [x] fix display of donation card {cm:2025-06-22}
+  - [ ] change profile info: name, team, id no, dept, phone no {cm:2025-06-25}
+    - [] make it work with zod {cm:2025-06-25}
+  - [ ] change pwd: test it with backend {cm:2025-06-25}
+- [x] forgot pwd page {cm:2025-06-25}
+- settings(profile & pwd) {cm:2025-06-28}
+- [x] users {cm:2025-06-28}
+  - [x] list of users pending approval {cm:2025-06-28}

@@ -1,6 +1,6 @@
 import { destroyCooke } from "@/lib/common/tokenExpires";
 import { BASE_URL, CookieNames } from "@/lib/constants";
-import { API } from "@/lib/constants/api-paths";
+import { API } from "@/lib/constants/routes";
 import axios from "axios";
 import { parse } from "cookie";
 
@@ -24,7 +24,7 @@ export default async function (req: any, res: any) {
     const refreshToken = cookies[CookieNames.RefreshToken];
 
     const response = await axios.post(`${BASE_URL}/${API.logout}`, {
-      token: refreshToken,
+      refreshToken: refreshToken,
     });
 
     console.log("logout response data==", response?.data);
@@ -40,6 +40,12 @@ export default async function (req: any, res: any) {
     });
   } catch (e: any) {
     console.error("--| API:..logout:", e.message);
+    res.setHeader("Set-Cookie", [
+      serialisedAccess,
+      serialisedRefresh,
+      serialisedUser,
+    ]);
+
     const msg = HandleAxiosErr(e);
     res.status(msg.Status).json({ message: msg.Message, error: e.message });
   }

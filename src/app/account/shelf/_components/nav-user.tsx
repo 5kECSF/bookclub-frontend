@@ -17,7 +17,7 @@ import {
 import { AvatarContent } from "@/components/ui_custom/avatar-user";
 import { LogoutButton } from "@/components/ui_custom/logout-button";
 import { useAuth } from "@/lib/state/context/jotai-auth";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 //Nav User for
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -45,12 +45,11 @@ export function DropDownContent({
   user,
   isMobile,
 }: {
-  user: User | null;
+  user: IUser | null;
   isMobile: boolean;
 }) {
-  const logout = () => {
-    console.log("logout clicked");
-  };
+  const { logout } = useAuth();
+
   return (
     <DropdownMenuContent
       className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
@@ -73,7 +72,7 @@ export function DropDownContent({
       <DropdownMenuSeparator />
 
       <DropdownMenuSeparator />
-      <LogoutButton logout={logout} />
+      <LogoutButton logout={() => logout()} />
     </DropdownMenuContent>
   );
 }

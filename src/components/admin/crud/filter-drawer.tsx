@@ -1,17 +1,30 @@
 import { AddButton } from "@/components/admin/ui/cell-ui";
-import { Filter } from "lucide-react";
-
-export function TopButtons(props: { openModal: any; openDrawer: any }) {
+import { Filter, X } from "lucide-react";
+interface TopButtonProps {
+  add?: boolean;
+  filter?: boolean;
+  openModal: any;
+  openDrawer: any;
+}
+export function TopButtons({
+  add = true,
+  filter = true,
+  openModal,
+  openDrawer,
+}: TopButtonProps) {
   return (
     <div className="flex items-center justify-between">
-      <AddButton onClick={() => props.openModal(true)} />
-      <button
-        onClick={() => props.openDrawer(true)}
-        className="mr-10 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white"
-      >
-        <Filter className="h-5 w-5" />
-        Filter
-      </button>
+      <div>{add && <AddButton onClick={() => openModal(true)} />}</div>
+
+      {filter && (
+        <button
+          onClick={() => openDrawer(true)}
+          className="mr-10 flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          <Filter className="h-5 w-5" />
+          Filter
+        </button>
+      )}
     </div>
   );
 }
@@ -49,7 +62,7 @@ export const FilterDrawer = ({
               onClick={() => setIsOpen(false)}
               className="bg-red-500 hover:bg-red-600 absolute right-2 top-10 flex h-10 w-10 items-center justify-center rounded-full  text-red shadow-md"
             >
-              x
+              <X />
             </button>
             <div className="mt-15 flex flex-col gap-4">
               {/*<p>Drawer Content Goes Here</p>*/}

@@ -31,7 +31,7 @@ export function GoToLink({ path, text1, text2 }: GoToLinkProps) {
   );
 }
 
-export function EmailInput({ register, error }: any) {
+export function EmailInput({ register, error, placeholder }: any) {
   return (
     <div className="mb-4">
       <label className="mb-2.5 block font-medium text-black dark:text-white">
@@ -41,7 +41,7 @@ export function EmailInput({ register, error }: any) {
         <input
           {...register}
           type="email"
-          placeholder="Enter your email"
+          placeholder={placeholder}
           className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
         />
 
@@ -124,7 +124,7 @@ export function SubmitInput({ loading = false, title }: any) {
       <input
         disabled={loading}
         type="submit"
-        value={title}
+        value={loading ? "...loading" : title}
         className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
       />
     </div>

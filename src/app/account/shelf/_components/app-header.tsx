@@ -11,6 +11,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavUser } from "./nav-user";
+import { UI_ROUTES } from "@/lib/constants/routes";
 
 export function AccountHeader() {
   const pathName = usePathname();
@@ -26,7 +27,7 @@ export function AccountHeader() {
         />
         <Breadcrumb>
           <BreadcrumbList>
-            <Link href="/profile">
+            <Link href={UI_ROUTES.Profile}>
               <BreadcrumbItem className="hidden md:block">
                 Account
               </BreadcrumbItem>

@@ -13,8 +13,9 @@ import {
   TextAreaField,
 } from "@/components/forms/useFormInputs";
 
-import { KY, MTD } from "@/lib/constants";
+import { MTD } from "@/lib/constants";
 import { Resp } from "@/lib/constants/return.const";
+import { KY } from "@/lib/constants/routes";
 import { DisplayErrors } from "@/lib/functions/object";
 import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
@@ -76,7 +77,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, borrow }: IBorrowProps) => {
   const { makeReq, loading } = useMakeReqState();
 
   const handleErr = (message: string, duration: number = 2500) => {
-    toast.error(`${message}: `,{duration});
+    toast.error(`${message}: `, { duration });
   };
 
   const onSubmit = async (data: IBorrow) => {

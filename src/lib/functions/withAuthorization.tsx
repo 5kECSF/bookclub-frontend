@@ -1,5 +1,5 @@
 import { useAuth } from "@/lib/state/context/jotai-auth";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -10,10 +10,12 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
 
     useEffect(() => {
       if (loggedIn === false) {
+        console.log("logged in ===false");
         router.replace("/");
         return;
       }
-      if (!loading && !IsAuthorized(user, allowedRoles)) {
+      if (loading === false && !IsAuthorized(user, allowedRoles)) {
+        console.log("not authorized", user);
         router.replace("/"); // or redirect("/") to force navigation
       }
     }, [loading, user, router, loggedIn]);
@@ -36,7 +38,7 @@ const withAuthorization = (WrappedComponent: any, allowedRoles: string[]) => {
 export default withAuthorization;
 
 export function IsAuthorized(
-  user: User | null,
+  user: IUser | null,
   allowedRoles: string[],
 ): boolean {
   // console.log("Current User ====>>", user);

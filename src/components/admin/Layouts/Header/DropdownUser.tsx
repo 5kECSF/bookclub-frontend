@@ -10,6 +10,7 @@ import {
   ProfileSvg,
   SettingsSvg,
 } from "@/components/svgs/profile-svg";
+import { UI_ROUTES } from "@/lib/constants/routes";
 
 interface DropdownProps {
   href: string;
@@ -107,17 +108,17 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <DropDownItem
             title={"My Profile"}
-            href={"/author"}
+            href={UI_ROUTES.Profile}
             svg={<ProfileSvg />}
           />
           <DropDownItem
-            title={"My Contacts"}
-            href={"/contacts"}
+            title={"My Shelf"}
+            href={UI_ROUTES.MyShelf}
             svg={<ContactSvg />}
           />
           <DropDownItem
-            title={"Account Settings"}
-            href={"/settings"}
+            title={"Remainders "}
+            href={UI_ROUTES.Remainders}
             svg={<SettingsSvg />}
           />
         </ul>

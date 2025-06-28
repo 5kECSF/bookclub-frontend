@@ -4,6 +4,9 @@ import { Dispatch, SetStateAction } from "react";
 interface Query {
   [key: string]: string | number | string[] | undefined;
 }
+interface DisplayKeys {
+  [key: string]: string | number | string[] | undefined;
+}
 
 interface QueryChipsProps {
   query: Query;

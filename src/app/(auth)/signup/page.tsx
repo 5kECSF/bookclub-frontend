@@ -8,12 +8,11 @@ import {
   SubmitInput,
 } from "@/app/(auth)/_components/inputs";
 import "@/assets/css/style.css";
-import { BASE_URL } from "@/lib/constants";
-import { API } from "@/lib/constants/api-paths";
-import { HandleAxiosErr } from "@/lib/functions/axios.error";
+import { BASE_URL, MTD } from "@/lib/constants";
+import { API } from "@/lib/constants/routes";
 import { DisplayErrors } from "@/lib/functions/object";
+import { useCleanReqState } from "@/lib/state/hooks/useMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -29,26 +28,16 @@ const SignUp: React.FC = () => {
     reset,
   } = useForm<TSignupSchema>({ resolver: zodResolver(SignupValidator) });
 
-  // const [verify, setVerify] = useState<boolean>(false);
-  // const navigateWithQuery = () => {
-  //   router.push("", {});
-  // };
+  const { makeReq, loading } = useCleanReqState();
 
   const onSubmit = async (data: TSignupSchema) => {
-    try {
-      //Todo set signup email
-      const datas = await axios.post(`${BASE_URL}/${API.register}`, data); // mutation.mutateAsync({ url: API.register, body: data, method: MTD.POST })
-      console.log("registration data==", datas);
-      // toast.success("Successfully Registered");
-      reset();
-
-      router.push(`/signup/${data.email}`);
-      console.log("data====||", datas);
-    } catch (e: any) {
-      const resp = HandleAxiosErr(e);
-      console.log("---", resp);
-      toast.error(resp.Message);
+    const datas = await makeReq(`${BASE_URL}/${API.register}`, data, MTD.POST); // mutation.mutateAsync({ url: API.register, body: data, method: MTD.POST })
+    if (!datas.ok) {
+      toast.error(datas.message);
+      return;
     }
+    reset();
+    router.push(`/signup/${data.email}`);
   };
 
   return (
@@ -93,12 +82,17 @@ const SignUp: React.FC = () => {
             placeHolder={"Re-enter your password"}
             label={"Re-type Password"}
           />
-          <SubmitInput title={"Create account"} />
+          <SubmitInput loading={loading} title={"Create account"} />
           {DisplayErrors(errors)}
           <GoToLink
             path={"/signin"}
             text1={"Already have an account?"}
             text2="Sign In"
+          />
+          <GoToLink
+            path={"/resetPwd"}
+            text1={" Forgot Password?"}
+            text2="Reset Password"
           />
         </form>
       </AuthLayout>

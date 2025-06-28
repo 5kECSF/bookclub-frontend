@@ -3,7 +3,8 @@
 import AddEdit from "@/app/admin/donation/add-edit";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getImg, KY } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { IUpload } from "@/types/upload";
 import { useState } from "react";
 import { z } from "zod";

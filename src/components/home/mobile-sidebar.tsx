@@ -1,5 +1,6 @@
 "use client";
-import { routes } from "@/lib/constants";
+import { AccountSection } from "@/app/(landing)/_components/common/AccountSection";
+import { NavRoutes } from "@/lib/constants/routes";
 import useMaxWidth from "@/lib/state/hooks/useScreeenQuery";
 import { cn } from "@/lib/utils";
 import { Drawer } from "antd";
@@ -21,16 +22,21 @@ const MobileSidebar = () => {
 
   return (
     <div className="ml-auto">
-      <Button
-        variant={"ghost"}
-        onClick={showDrawer}
-        className="block lg:hidden "
-      >
-        <AiOutlineMenu className="mr-2 text-[20px]" />
-      </Button>
+      <div className="flex gap-8">
+        <AccountSection show={false} />
+        <Button
+          variant={"ghost"}
+          size={"lg"}
+          onClick={showDrawer}
+          className="block lg:hidden "
+        >
+          <AiOutlineMenu className="ml-4 mr-2 text-[40px]" />
+        </Button>
+      </div>
+
       <Drawer placement="right" onClose={() => setOpen(false)} open={open}>
         <div className=" flex w-full  flex-col items-start justify-center gap-2 text-[14px] tracking-[0.08em] ">
-          {routes.map((route, i) => {
+          {NavRoutes.map((route, i) => {
             return (
               <Link
                 key={i}

@@ -2,6 +2,7 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import withAuthorization from "@/lib/functions/withAuthorization";
+import { RoleType } from "@/types/user";
 import { AccountHeader } from "./shelf/_components/app-header";
 import { AppSidebar } from "./shelf/_components/app-sidebar";
 function Page({
@@ -21,4 +22,4 @@ function Page({
   );
 }
 
-export default withAuthorization(Page, []);
+export default withAuthorization(Page, [RoleType.ADMIN, RoleType.USER]);

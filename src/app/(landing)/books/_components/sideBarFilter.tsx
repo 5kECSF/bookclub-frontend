@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { BookLanguage } from "@/types/libraryTypes";
 import { useState, type JSX } from "react";
@@ -159,7 +159,7 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
             />
           </AccordionContent>
         </AccordionItem>
-        
+
         {/* =========.  == BOOK Genre  ================*/}
         <AccordionItem value="genre" className="border-b border-[#e0e0e0]">
           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
@@ -181,8 +181,11 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
             />
           </AccordionContent>
         </AccordionItem>
-         {/* =========.  == Author   ================*/}
-        <AccordionItem value="author-name" className="border-b border-[#e0e0e0]">
+        {/* =========.  == Author   ================*/}
+        <AccordionItem
+          value="author-name"
+          className="border-b border-[#e0e0e0]"
+        >
           <AccordionTrigger className="py-2 text-base font-bold text-[#393280]">
             Author
           </AccordionTrigger>
@@ -216,7 +219,10 @@ const FilterItems = ({ setQuery }: { setQuery: any }) => {
             language
           </AccordionTrigger>
           <AccordionContent className={"p-4"}>
-            <RadioGroup defaultValue="" onValueChange={(value) => handleChange('language', value)}>
+            <RadioGroup
+              defaultValue=""
+              onValueChange={(value) => handleChange("language", value)}
+            >
               {language.map((val, i) => {
                 return (
                   <div key={i} className="flex items-center space-x-2">

@@ -1,17 +1,22 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+"use client";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { KY } from "@/lib/constants/routes";
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import { IUser } from "@/types/user";
 import { JSX } from "react";
-import { ProfileUpdateSection } from "./_components/info-update";
-import PasswordChange from "./_components/password-change";
+import PasswordChange from "./profile/change-password";
+import ChangeEmail from "./profile/changeEmail/change-email";
+import { ProfileUpdateSection } from "./profile/profile-info";
 const navTabs = [
   { id: "profile", label: "My Profile", active: true },
   { id: "pwdChange", label: "Change Password", active: false },
   { id: "changeEmail", label: "Change Email", active: false },
-  { id: "idInfo", label: "Id Information", active: false },
+  // { id: "idInfo", label: "Id Information", active: false },
 ];
 
 export default function Frame(): JSX.Element {
   // Navigation tabs data
-
+  const { data } = useFetch<IUser>([KY.profile], `${KY.profile}`, {});
   return (
     <div className="relative min-h-[858px] w-full max-w-[1136px] rounded-[10px] bg-white p-6">
       {/* Edit button */}
@@ -33,8 +38,14 @@ export default function Frame(): JSX.Element {
             </div>
           ))}
         </TabsList>
-        <ProfileUpdateSection value="profile" />
+        <ProfileUpdateSection user={data as IUser} value="profile" />
         <PasswordChange value="pwdChange" />
+        <TabsContent
+          value="changeEmail"
+          className="mt-6 items-center justify-center"
+        >
+          <ChangeEmail />
+        </TabsContent>
       </Tabs>
 
       {/* Profile section */}

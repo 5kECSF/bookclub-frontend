@@ -8,7 +8,7 @@ import {
   SideBarFilter,
 } from "@/app/(landing)/books/_components/sideBarFilter";
 import QueryChips from "@/components/admin/crud/query-chips";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { IBook } from "@/types/libraryTypes";

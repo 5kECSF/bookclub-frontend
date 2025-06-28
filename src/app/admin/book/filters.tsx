@@ -1,6 +1,6 @@
 import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ItemStatus } from "@/types/commonTypes";
 import { useState } from "react";

@@ -1,10 +1,10 @@
 "use client";
 
-
 import { AddEditModal } from "@/app/admin/category/add-edit-modal";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getImg, KY } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { IUpload } from "@/types/upload";
 import { useState } from "react";
 import { z } from "zod";
@@ -43,7 +43,6 @@ export const agColumns = [
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-
       <Avatar>
         <AvatarImage src={`${getImg(params.data?.upload)}`} />
         <AvatarFallback>CN</AvatarFallback>

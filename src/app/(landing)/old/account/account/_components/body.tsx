@@ -68,6 +68,7 @@ export default function Body({}: {}) {
       if (!resp.ok) {
         console.log("````````````````````error data", resp.body);
         toast.error(resp.message);
+        return;
       }
       toast.success(`user update success`);
       router.refresh();

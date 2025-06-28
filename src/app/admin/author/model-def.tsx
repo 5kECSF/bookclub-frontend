@@ -2,9 +2,10 @@
 
 import { AddEditModal } from "@/app/admin/author/add-edit-modal";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
-import { getImg, KY } from "@/lib/constants";
-import { IUpload } from "@/types/upload";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
+import { IUpload } from "@/types/upload";
 import { useState } from "react";
 import { z } from "zod";
 
@@ -42,10 +43,10 @@ export const agColumns = [
     headerName: "Image",
     maxWidth: 120,
     cellRenderer: (params: any) => (
-      <Avatar className="w-10 h-10">
-             <AvatarImage src={`${getImg(params.data?.upload)}`} />
-             <AvatarFallback>CN</AvatarFallback>
-           </Avatar>
+      <Avatar className="h-10 w-10">
+        <AvatarImage src={`${getImg(params.data?.upload)}`} />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
     ),
   },
   {

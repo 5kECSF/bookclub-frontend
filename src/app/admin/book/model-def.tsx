@@ -4,7 +4,8 @@ import AddEditBook from "@/app/admin/book/add-edit-modal";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
 import { MultiItem } from "@/components/admin/ui/cell-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getImg, KY } from "@/lib/constants";
+import { getImg } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { BookLanguage, IBook } from "@/types/libraryTypes";
 import { useState } from "react";
 import { z } from "zod";
@@ -16,7 +17,14 @@ export const BookValidator = z.object({
   authorName: z.string(),
   status: z.string(),
   genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
-  language: z.enum([BookLanguage.English, BookLanguage.Amharic, BookLanguage.Tigrna, BookLanguage.AffanOrommo]).optional(),
+  language: z
+    .enum([
+      BookLanguage.English,
+      BookLanguage.Amharic,
+      BookLanguage.Tigrna,
+      BookLanguage.AffanOrommo,
+    ])
+    .optional(),
 });
 export type TBookDto = z.infer<typeof BookValidator>;
 /*

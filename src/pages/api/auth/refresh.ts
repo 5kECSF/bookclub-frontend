@@ -8,7 +8,7 @@ import {
   makeTokenCooke,
 } from "@/lib/common/tokenExpires";
 import { BASE_URL, CookieNames } from "@/lib/constants";
-import { API } from "@/lib/constants/api-paths";
+import { API } from "@/lib/constants/routes";
 import { TokenResponse } from "@/types/authTypes";
 import axios, { AxiosResponse } from "axios";
 import { parse } from "cookie";

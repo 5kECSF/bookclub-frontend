@@ -4,7 +4,7 @@ import QueryChips from "@/components/admin/crud/query-chips";
 import { FetchError, Spinner } from "@/components/admin/ui/state-components";
 import { TableComponent } from "@/components/AgGrid";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
-import { KY } from "@/lib/constants";
+import { KY } from "@/lib/constants/routes";
 import { setUrl } from "@/lib/functions/url";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import React, { useEffect } from "react";
@@ -17,6 +17,7 @@ interface PageLayoutProps {
   pageName: string;
   url: KY;
   agColumns: any;
+  add?: boolean;
 }
 
 export function PageLayout({
@@ -27,6 +28,7 @@ export function PageLayout({
   pageName,
   url,
   agColumns,
+  add = true,
 }: PageLayoutProps) {
   const setPage = (page: number) => {
     setQuery({ ...query, page });
@@ -45,7 +47,11 @@ export function PageLayout({
     <>
       <Breadcrumb pageName={pageName} />
       <div className="bg-blue h-full">
-        <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
+        <TopButtons
+          add={add}
+          openModal={setModalOpen}
+          openDrawer={setFilterOpen}
+        />
         <QueryChips query={query} setQuery={setQuery} />
         {isLoading ? (
           <Spinner />
@@ -55,6 +61,7 @@ export function PageLayout({
           <div className="pt-8">
             <TableComponent colDefs={agColumns} rowData={data?.body || []} />
             <Pagination
+            total={data?.count}
               isPlaceholderData={isPlaceholderData}
               page={query.page}
               hasNext={data?.hasNext || false}

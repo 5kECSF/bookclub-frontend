@@ -1,36 +1,28 @@
 
 # tasks
 
--
-
 ## profile page tasks
 
-- [x] shelf
-  - [x] fix content of cards
-  - [x] fix img url of cards
-  - [x] make cancle borrow reqest button
-  - [x] fix Stat cards
-  - [x] fix display of donation card
-
-- settings(profile & pwd)
-  - [ ] change profile info: name, team, dept, phone no {c}
-    - [] make it work with zod
+- [] settings(profile & pwd) 
+  - [x] update email: test it with backend
   - [ ] id image: use drop zone
-  - [ ] change pwd: test it with backend
-  - [ ] change email: test it with backend
 - reminders {c}
   - []
 
 ## admin page tasks
 
-- [] notification {c}
+- admin generic {c}
+  - [] update the logo
+  - [x] update the dropdown links {cm:2025-06-28}
+  - [x] update pagination component on admin {cm:2025-06-28}
+  - [ ] update notification to work
+  - [] list of over due books
+
+- [] admin notification {c}
   - [] book deadline reached
-  - [] general notification
+  - [] send general notification
   - [] fix the notification to not show seen notifications
-- [] users {c}
-  - [] list of users pending approval
-- generic {c}
-  - [ ] update pagination component on admin
+  
 
 ## landing page takss
 
@@ -43,7 +35,8 @@
 - listing page {c}
   - [] add move to single on click
 - single page tasks
-  - []
+  - [] cleanup
+  - [] book cleanup
 - generic tasks
   - []remove the still not sure page:
   - [] fix footer & navbar items(remove unused)
@@ -63,7 +56,7 @@
 ## api tasks
 
 - [] single book data: authors book data
-- [ ] url for borrow
+- [x] url for borrow
 
 ## Later Tasks
 

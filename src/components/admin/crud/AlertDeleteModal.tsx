@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "antd";
+import { Modal } from "@/components/ui_custom/modal";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -35,9 +35,8 @@ export const AlertDeleteModal: React.FC<AlertModalProps> = ({
   return (
     <Modal
       title={`Are you sure you want to delete ${name}?`}
-      open={isOpen}
-      onCancel={onClose}
-      footer={[]}
+      isOpen={isOpen}
+      onClose={onClose}
     >
       <p>item with name {name} will be deleted.</p>
       <div>This action is cant be undone</div>
@@ -56,7 +55,7 @@ export const AlertDeleteModal: React.FC<AlertModalProps> = ({
         <Button
           data-test="delete-btn"
           disabled={loading}
-          className="bg-red-700 text-white"
+          className="bg-red text-white"
           onClick={onConfirm}
         >
           Continue

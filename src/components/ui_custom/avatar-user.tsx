@@ -3,9 +3,9 @@
 import { ChevronsUpDown } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "@/types/user";
+import { IUser } from "@/types/user";
 
-export function AvatarContent({ user }: { user: User | null }) {
+export function AvatarContent({ user }: { user: IUser | null }) {
   return (
     <>
       <Avatar className="h-8 w-8 rounded-lg">
