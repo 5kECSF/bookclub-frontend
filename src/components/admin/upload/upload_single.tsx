@@ -131,7 +131,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
         setRemovedImages([]);
       }
     }
-  }, [isUpdate, oldData]);
+  }, [isUpdate, oldData, setImgList]);
 
   /**==================================================================
    * ==---------------->    Http Functions

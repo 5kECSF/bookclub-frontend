@@ -80,7 +80,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, borrow }: IBorrowProps) => {
     toast.error(`${message}: `, { duration });
   };
 
-  const onSubmit = async (data: IBorrow) => {
+  const onSubmit = async (data: TBorrowDto) => {
     let resp: Resp<any>;
     if (isUpdate) {
       if (!borrow || !("_id" in borrow)) return handleErr("malformed update");

@@ -56,7 +56,6 @@ export const IntInputField = ({
   placeholder,
   errors,
   req = true,
-  inputType = "text",
 }: InputProps) => {
   useEffect(() => {
     register(name, {
@@ -74,7 +73,7 @@ export const IntInputField = ({
           const intValue = parseInt(e.target.value, 10);
           handleChange(name, intValue);
         }}
-        type={inputType}
+        type="number"
         placeholder={placeholder}
         className={CssCls.input}
         required={req}

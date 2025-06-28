@@ -183,7 +183,7 @@ function formatCustom(rawDate: Date): string {
 type BorrowDon = IBorrow | IDonation;
 function GetFirstTxt(borrow: BorrowDon | undefined): Disp {
   let data: Disp = { txt: "" };
-  if (borrow && borrow["donorId"] && borrow.donorName) {
+  if (borrow && borrow["donatedDate"] && borrow.donatedDate) {
     return { txt: "Donated on", date: borrow?.donatedDate };
   }
   if (borrow?.status == borrowStatus.WaitList)

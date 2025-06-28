@@ -2,9 +2,11 @@
 
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const options: ApexOptions = {
   colors: ["#3C50E0", "#80CAEE"],
@@ -56,9 +58,7 @@ const options: ApexOptions = {
     fontFamily: "Satoshi",
     fontWeight: 500,
     fontSize: "14px",
-    markers: {
-      radius: 99,
-    },
+    markers: {},
   },
   fill: {
     opacity: 1,
@@ -77,7 +77,7 @@ interface ChartTwoState {
   }[];
 }
 
-const ChartTwo= () => {
+const ChartTwo = () => {
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
@@ -160,4 +160,3 @@ const ChartTwo= () => {
 };
 
 export default ChartTwo;
-

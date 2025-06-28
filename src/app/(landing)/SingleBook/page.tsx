@@ -7,20 +7,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, type JSX } from "react";
 import { ContentSection } from "./ContentSection";
 import { BottomTabsSection } from "./bookBottomTabs";
-export const bookInfo = {
-  title: "Don't Make Me Think",
-  author: "Steve Krug",
-  year: "2000",
-  edition: "Second Edition",
-  rating: "5.0",
-  currentlyReading: "25",
-  haveRead: "119",
-  publishDate: "2000",
-  publisher: "New Riders Press",
-  language: "English",
-  pages: "216",
-  location: "CS A-15",
-};
 
 const SingleBook = (): JSX.Element => {
   const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
@@ -52,7 +38,7 @@ const SingleBook = (): JSX.Element => {
 
             <div className="flex flex-col gap-6">
               <ContentSection book={data || {}} />
-              <BottomTabsSection bookInfo={bookInfo} />
+              <BottomTabsSection book={data||{}} />
             </div>
           </div>
         </div>

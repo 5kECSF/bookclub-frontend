@@ -2,6 +2,7 @@
 import { FileWithCover } from "@/components/admin/upload/upload_with_cover";
 import {
   InputField,
+  IntInputField,
   Submit,
   TextAreaField,
 } from "@/components/forms/useFormInputs";
@@ -196,6 +197,22 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   req={false}
                   handleChange={handleChange}
                   placeholder={"Add the Description"}
+                />
+                <IntInputField
+                  label={"Page Numbers"}
+                  name={"page"}
+                  errors={errors}
+                  register={register}
+                  handleChange={handleChange}
+                  placeholder={"books page number"}
+                />
+                <IntInputField
+                  label={"Published Year"}
+                  name={"publishDate"}
+                  errors={errors}
+                  register={register}
+                  handleChange={handleChange}
+                  placeholder={"Published Year"}
                 />
                 <SelectInput
                   register={register}

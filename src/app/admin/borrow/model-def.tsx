@@ -10,13 +10,13 @@ import { z } from "zod";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export interface IBorrow {
-  _id?: string;
   bookId: string;
   bookName?: string;
-  userId?: string;
+  userId: string;
   userName?: string;
   instanceId?: string;
   instanceUid?: string;
+  _id?: string;
 
   note?: string;
   status?: borrowStatus;
@@ -28,6 +28,8 @@ export interface IBorrow {
   returnedDate?: Date;
   createdAt?: Date;
   updatedAt?: Date;
+  //for type saftey only
+  donatedDate?: Date;
 }
 export enum borrowStatus {
   Taken = "BORROWED",
@@ -49,15 +51,8 @@ export const BorrowValidator = z.object({
   takenDate: z.date().optional(),
   dueDate: z.date().optional(),
   returnedDate: z.date().optional(),
-  note: z.string().min(3, { message: "min length is 2" }),
-  status: z
-    .enum([
-      borrowStatus.Taken,
-      borrowStatus.Returned,
-      borrowStatus.WaitList,
-      borrowStatus.Accepted,
-    ])
-    .optional(),
+  note: z.string().min(3, { message: "min length is 2" }).optional(),
+  status: z.string().optional(),
 });
 
 export type TBorrowDto = z.infer<typeof BorrowValidator>;

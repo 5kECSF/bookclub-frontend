@@ -38,7 +38,7 @@ const Genre = () => {
                 <Image
                   className=" h-[100px] w-[100px] rounded-xl object-cover shadow-lg"
                   alt=""
-                  src={gener?.img ? getImg(gener.img) : "/dummy.png"}
+                  src={gener?.upload ? getImg(gener.upload) : "/dummy.png"}
                   width={500}
                   height={500}
                 />

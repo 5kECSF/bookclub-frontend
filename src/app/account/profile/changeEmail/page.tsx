@@ -24,14 +24,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { ChangeEmailValidator, TChangeEmailSchema } from "../model";
-interface Params {
-  url: string;
-}
+
 const otpStyle = {
   box: "h-12 w-12   text-lg  sm:text-xl",
 };
 
-const VerifyCodeComponent = ({ url }: Params) => {
+const VerifyCodeComponent = () => {
   // const params = use(props.params);
   const router = useRouter();
 

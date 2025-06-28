@@ -10,6 +10,7 @@ export interface IBook {
     featured?: boolean;
     status?: string;
     body?: string;
+    publishDate?: number;
     genres?: string[];
     language?: BookLanguage;
     //non dto types

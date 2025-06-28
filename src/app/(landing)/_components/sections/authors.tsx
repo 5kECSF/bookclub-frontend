@@ -47,7 +47,7 @@ export const AuthorsSection = (): JSX.Element => {
     <section className="mx-auto w-full max-w-[1266px] py-12">
       <div className="flex flex-col items-center">
         <h2 className="text-center text-[32px] font-semibold tracking-[1.87px] text-[#173f5f]">
-          Book Author's
+          Book Author&apos;s
         </h2>
 
         <p className="mt-4 max-w-[647px] text-center text-lg font-normal leading-[30px] tracking-[1.29px] text-[#766f6f]">
