@@ -32,7 +32,7 @@ export const CategoriesSection = () => {
   //
   // const slideRight = () => {
   //   const slider = document.getElementById("slider");
-  //   // console.log(slider?.scrollLeft);
+
   //   if (typeof slider?.scrollLeft === "number" && slider?.scrollLeft >= 0) {
   //     slider.scrollLeft = slider.scrollLeft + 500;
   //   }

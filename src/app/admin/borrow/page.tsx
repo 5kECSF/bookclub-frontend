@@ -12,7 +12,8 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import { useEffect, useState } from "react";
 import AddEditModal from "./add-edit-modal";
 import { FilterDrawer } from "./filter-drawer";
-import { agColumns } from "./model-def";
+import { agColumns, tabs } from "./model-def";
+
 const BorrowPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -28,16 +29,6 @@ const BorrowPage = () => {
     `${KY.borrow}`,
     query,
   );
-
-  // Array of tab data (you can customize this)
-  const tabs = [
-    { id: "WAITLIST", label: "Borrowing Requests" },
-    { id: "ACCEPTED", label: "Request accepted Books" },
-    { id: "BORROWED", label: "Borrowed Books" },
-    { id: "RETURNED", label: "Returned Books" },
-    { id: "", label: "All" },
-  ];
-
   useEffect(() => {
     setUrl(query);
   }, [query]);
@@ -49,12 +40,26 @@ const BorrowPage = () => {
         <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
         <QueryChips query={query} setQuery={setQuery} />
         <div className="border-gray-200 flex space-x-2 border-b">
+          <button
+            onClick={() =>
+              setQuery({ ...query, status: "BORROWED", overDue: true })
+            }
+            className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
+              query.overDue == true
+                ? "border-b-2 border-red bg-white text-red"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            Over Due
+          </button>
           {tabs.map((tab) => (
             <button
-              key={tab.id}
-              onClick={() => setQuery({ ...query, status: tab.id })}
+              key={tab.name}
+              onClick={() =>
+                setQuery({ ...query, status: tab.name, overDue: false })
+              }
               className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
-                query.status == tab.id || (tab.id == "" && !query.status)
+                query.status == tab.name || (tab.name == "" && !query.status)
                   ? "border-b-2 border-blue-600 bg-white text-blue-600"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}

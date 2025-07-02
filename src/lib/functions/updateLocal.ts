@@ -42,11 +42,11 @@ export const updateLocalData = <T extends Identifiable>(
   id?: T["_id"],
 ) => {
   try {
-    console.log("local data", newData);
+
 
     if (method == MTD.POST) {
       queryClient.setQueryData<QueryData<T>>([key], (prevData: any) => {
-        console.log("prev Data", prevData);
+
         let count = prevData?.count || 0;
         let data = prevData?.body || [];
         return {
@@ -72,7 +72,7 @@ export const updateLocalData = <T extends Identifiable>(
       });
     }
   } catch (e: any) {
-    console.log("===>>>//", e);
+
     toast.error(e.message);
   }
 };

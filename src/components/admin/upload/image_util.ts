@@ -33,7 +33,6 @@ export const beforeUpload = (file: RcFile) => {
     }
     return false;
   } catch (e: any) {
-    console.log(e.details);
     return false;
   }
 };

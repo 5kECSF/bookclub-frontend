@@ -111,7 +111,7 @@ export const MultiFileUpload = forwardRef(function UploadComp(
     if (isUpdate && oldData) {
       if (oldData && oldData.length > 0) {
         let list: UploadFile[] = [];
-        // console.log("oldData", oldData);
+
         oldData?.forEach((img: IUpload) => {
           //@ts-ignore
           let sImage: UploadFile = {
@@ -127,7 +127,6 @@ export const MultiFileUpload = forwardRef(function UploadComp(
           list.push(sImage);
         });
         setImgList(list);
-        // console.log("the old data i---}", list);
         setRemovedImages([]);
       }
     }

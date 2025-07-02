@@ -6,6 +6,7 @@ import { ItemStatus } from "@/types/commonTypes";
 import { useState } from "react";
 
 import { CleanMultiSearch, CleanSearch } from "@/components/forms/cleanInputs";
+import { MetaDatas } from "./add-edit-modal";
 
 interface IFilterProps {
   filterOpen: boolean;
@@ -58,6 +59,17 @@ export function FilterDrawer({
         idx={"name"}
         dispIdx={"name"}
         label={"Genre"}
+        req={false}
+      />
+      <CleanMultiSearch
+        handleSearch={(e: string) => {
+          setGenQ(e);
+        }}
+        data={MetaDatas}
+        name={"meta"}
+        idx={"name"}
+        dispIdx={"name"}
+        label={"Meta"}
         req={false}
       />
       <CleanSearch

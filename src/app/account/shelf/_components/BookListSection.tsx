@@ -131,7 +131,7 @@ const BorrowCard = ({ borrow, cancleReq, loading }: CardProp) => {
         <div className="absolute left-[163px] top-[141px] h-10 w-[125px]">
           <div
             className={`flex h-10 w-full items-center justify-center rounded-[5px] align-middle  ${
-              borrow.status == borrowStatus.Taken || borrowStatus.Accepted
+              borrow.status == borrowStatus.Borrowed || borrowStatus.Accepted
                 ? "bg-[#a9d8ae]"
                 : "bg-[#a0a0a0]"
             }`}
@@ -190,7 +190,7 @@ function GetFirstTxt(borrow: BorrowDon | undefined): Disp {
     data = { txt: "requested on", date: borrow.createdAt };
   else if (borrow?.status == borrowStatus.Accepted)
     data = { txt: "requested on", date: borrow.acceptedDate };
-  else if (borrow?.status == borrowStatus.Taken)
+  else if (borrow?.status == borrowStatus.Borrowed)
     data = { txt: "Borrowed on", date: borrow.takenDate };
   else if (borrow?.status == borrowStatus.Returned)
     data = { txt: "Borrowed On", date: borrow.takenDate };
@@ -204,7 +204,7 @@ function GetSecondTxt(borrow: IBorrow | undefined): Disp {
   if (borrow?.status == borrowStatus.WaitList) return { txt: "" };
   else if (borrow?.status == borrowStatus.Accepted)
     data = { txt: "accepted On", date: borrow.acceptedDate };
-  else if (borrow?.status == borrowStatus.Taken)
+  else if (borrow?.status == borrowStatus.Borrowed)
     data = { txt: "Return Date", date: borrow.dueDate };
   else if (borrow?.status == borrowStatus.Returned)
     data = { txt: "Borrowed on", date: borrow.returnedDate };

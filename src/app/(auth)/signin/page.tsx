@@ -29,9 +29,8 @@ const SignIn: React.FC = () => {
   //   e.preventDefault();
   //   try {
   //     const data = await refreshToken();
-  //     console.log("the refreshed data ===", data);
+
   //   } catch (e: any) {
-  //     console.log("err-=", e.message);
   //   }
   // };
 

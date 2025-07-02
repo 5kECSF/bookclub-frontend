@@ -20,6 +20,7 @@ export interface InputProps {
   inputType?: HTMLInputTypeAttribute;
   row?: number;
   disabled?: boolean;
+  cssCls?: string;
 }
 export const InputField = ({
   label,
@@ -30,9 +31,10 @@ export const InputField = ({
   errors,
   req = true,
   inputType = "text",
+  cssCls: className,
 }: InputProps) => {
   return (
-    <div className="mb-4.5">
+    <div className={"mb-4.5 " + className}>
       <label className="mb-2.5 block text-black dark:text-white">
         {label} {req && <span className="text-meta-1">*</span>}
       </label>
@@ -56,6 +58,7 @@ export const IntInputField = ({
   placeholder,
   errors,
   req = true,
+  cssCls,
 }: InputProps) => {
   useEffect(() => {
     register(name, {
@@ -63,7 +66,7 @@ export const IntInputField = ({
     });
   }, [register, name]);
   return (
-    <div className="mb-4.5">
+    <div className={"mb-4.5 " + cssCls}>
       <label className="mb-2.5 block text-black dark:text-white">
         {label} {req && <span className="text-meta-1">*</span>}
       </label>
@@ -78,7 +81,7 @@ export const IntInputField = ({
         className={CssCls.input}
         required={req}
       />
-      {console.log("errors:", errors)}
+
       {errors[name] && <p className="text-red">{errors[name].message}</p>}
     </div>
   );

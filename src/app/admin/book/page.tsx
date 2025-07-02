@@ -9,11 +9,13 @@ import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { useFetch } from "@/lib/state/hooks/useQuery";
+import { ItemStatus } from "@/types/commonTypes";
 import { useEffect, useState } from "react";
 import AddEditBook from "./add-edit-modal";
 import { FilterDrawer } from "./filters";
 import { agColumns } from "./model-def";
 
+const tabs = [...ItemStatus, { name: "", label: "All" }];
 const BookPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -38,6 +40,33 @@ const BookPage = () => {
       <div className="bg-blue h-full">
         <TopButtons openModal={setModalOpen} openDrawer={setFilterOpen} />
         <QueryChips query={query} setQuery={setQuery} />
+        <div className="border-gray-200 flex space-x-2 border-b">
+          <button
+            onClick={() =>
+              setQuery({ ...query, status: "", meta: ["featured"] })
+            }
+            className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
+              query?.meta && query.meta.length > 0
+                ? "border-b-2 border-red bg-white text-red"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            Featured
+          </button>
+          {tabs.map((tab) => (
+            <button
+              key={tab.name}
+              onClick={() => setQuery({ ...query, status: tab.name, meta: [] })}
+              className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
+                query.status == tab.name || (tab.name == "" && !query.status)
+                  ? "border-b-2 border-blue-600 bg-white text-blue-600"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
         {isLoading ? (
           <Spinner />
         ) : isError ? (

@@ -66,7 +66,7 @@ export function BorrowAction({ row }: { row: IBorrow }) {
     } else if (row.status === borrowStatus.Accepted) {
       url = `${KY.borrow}/markTaken/${row._id}`;
       message = "the book has been marked as taken by the user";
-    } else if (row.status === borrowStatus.Taken) {
+    } else if (row.status === borrowStatus.Borrowed) {
       url = `${KY.borrow}/markReturned/${row._id}`;
       message = "the book has been marked as Returned by the user";
     }
@@ -103,7 +103,7 @@ export function BorrowAction({ row }: { row: IBorrow }) {
             Mark as Taken
           </Button>
         )}
-        {row.status === borrowStatus.Taken && (
+        {row.status === borrowStatus.Borrowed && (
           <Button
             onClick={() => setModalOpen(true)}
             className="text-white [background:linear-gradient(161.68deg,_#3498db,_#2980b9)] "
@@ -175,7 +175,7 @@ export function BorrowAction({ row }: { row: IBorrow }) {
                   placeholder={"When IS the Due date to return the book"}
                 />
               )}
-              {row.status === borrowStatus.Taken && (
+              {row.status === borrowStatus.Borrowed && (
                 <InputField
                   register={register}
                   errors={errors}

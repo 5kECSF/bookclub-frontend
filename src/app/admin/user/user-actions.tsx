@@ -47,7 +47,7 @@ export const MiniAction = ({ row }: { row: IUser }) => {
       MTD.PATCH,
     );
     if (!resp.ok) {
-      // console.log("````````````````````error data", resp.body);
+
       toast.error(resp.message);
       return;
     }

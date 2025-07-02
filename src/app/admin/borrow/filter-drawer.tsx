@@ -1,6 +1,6 @@
 import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
-import { ItemStatus } from "@/types/commonTypes";
+import { borrowStatusList } from "./model-def";
 
 interface IFilterProps {
   filterOpen: boolean;
@@ -19,7 +19,7 @@ export function FilterDrawer({
       setQuery={setQuery}
     >
       <CleanSelectInput
-        data={ItemStatus}
+        data={borrowStatusList}
         name={"status"}
         idx={"name"}
         dispIdx={"name"}

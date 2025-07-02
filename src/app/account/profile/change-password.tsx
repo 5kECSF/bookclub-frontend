@@ -31,7 +31,7 @@ const PasswordChange = ({ value }: { value: string }) => {
 
     const resp = await makeReq(API.changePwd, body, MTD.PATCH);
     if (!resp.ok) {
-      // console.log("````````````````````error data", resp.body);
+
       toast.error(resp.message);
       return;
     }

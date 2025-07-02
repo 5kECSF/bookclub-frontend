@@ -31,7 +31,7 @@ function TabItem({
 const tabList = [
   { status: borrowStatus.WaitList, lable: "Requested Books" },
   { status: borrowStatus.Accepted, lable: "Accepted Requests" },
-  { status: borrowStatus.Taken, lable: "Borrowed Books" },
+  { status: borrowStatus.Borrowed, lable: "Borrowed Books" },
   { status: borrowStatus.Returned, lable: "Read Books" },
 ];
 export default function MyShelf(): JSX.Element {
@@ -90,7 +90,7 @@ export default function MyShelf(): JSX.Element {
               setPage={setPage}
             />
             <BooksList
-              value={borrowStatus.Taken}
+              value={borrowStatus.Borrowed}
               data={data}
               query={query}
               setPage={setPage}

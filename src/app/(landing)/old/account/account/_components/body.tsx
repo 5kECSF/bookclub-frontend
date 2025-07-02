@@ -58,23 +58,18 @@ export default function Body({}: {}) {
       formData.append("file", data.avater);
     }
 
-    try {
-      const resp = await makeReq(
-        "profile",
-        formData,
-        MTD.PATCH,
-        AppHeaders.MULTIPART,
-      );
-      if (!resp.ok) {
-        console.log("````````````````````error data", resp.body);
-        toast.error(resp.message);
-        return;
-      }
-      toast.success(`user update success`);
-      router.refresh();
-    } catch (e: any) {
-      // console.log(e.messag
+    const resp = await makeReq(
+      "profile",
+      formData,
+      MTD.PATCH,
+      AppHeaders.MULTIPART,
+    );
+    if (!resp.ok) {
+      toast.error(resp.message);
+      return;
     }
+    toast.success(`user update success`);
+    router.refresh();
   };
 
   const onDrop = useCallback((acceptedFiles: any, rejectedFiles: any) => {

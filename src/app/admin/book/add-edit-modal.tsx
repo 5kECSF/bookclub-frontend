@@ -8,7 +8,7 @@ import {
 } from "@/components/forms/useFormInputs";
 import { MTD } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
-import { useMakeReq } from "@/lib/state/hooks/useMutation";
+import { useMakeReqState } from "@/lib/state/hooks/useMutation";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
@@ -37,11 +37,15 @@ interface IBookProps {
   onClose: (e?: any) => void;
   book?: IBook;
 }
-
+export const MetaDatas = [
+  { name: "featured", label: "Featured" },
+  { name: "recomended", label: "recomended" },
+  { name: "trending", label: "trending" },
+];
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef(undefined);
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -68,17 +72,15 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   };
 
   const queryClient = useQueryClient();
-  const makeReq = useMakeReq();
+  const { makeReq, loading } = useMakeReqState();
 
   const handleErr = (message: string, duration: number = 2500) => {
     toast.error(`${message}: `, { duration });
-    setLoading(false);
   };
 
   const onSubmit = async (data: IBook) => {
     console.log("the creating ", data);
     if (!uploadRef.current) return handleErr("no upload ref");
-    setLoading(true);
     let resp: Resp<any>;
     let id: string;
     if (isUpdate) {
@@ -100,7 +102,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         resp.body ? resp.body?.fileId : book?.fileId,
       );
       if (!uploadDto.ok) return handleErr(`upload Error: ${uploadDto.message}`);
-      // console.log("the uploadDto====", uploadDto);
+
       if (uploadDto.respCode != ReturnType.NotModified) {
         setModifiedData((prevState) => ({
           ...prevState,
@@ -118,6 +120,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         return handleErr(`No data is modified`);
       resp = await makeReq(`${KY.book}/${book._id}`, data, MTD.PATCH);
       if (!resp.ok) return handleErr(resp.message);
+      console.log("succesfully updated", resp.message);
     } else {
       let body = { fileId: resp.body.fileId };
       resp = await makeReq(`${KY.book}/${id}`, body, MTD.POST);
@@ -127,19 +130,19 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
         uploadRef.current.resetData();
       }
     }
+    console.log("here");
     reset();
     await queryClient.invalidateQueries({ queryKey: [KY.book] });
 
     toast.success(
       `successfully ${isUpdate ? "updated" : "created"} a book with title  ${resp.body?.title} `,
     );
-    setLoading(false);
   };
 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="mt-8 max-h-[80vh] overflow-y-auto">
+        <DialogContent className="mt-8 max-h-[80vh] min-w-[50%] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
               {isUpdate ? `Update ${KY.book}` : `Create ${KY.book}`}
@@ -156,17 +159,80 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   handleChange={handleChange}
                   placeholder={"write name"}
                 />
+                <div className=" mb-8 mt-8 flex justify-around gap-2 ">
+                  <SelectInput
+                    data={category?.body}
+                    register={register}
+                    errors={errors}
+                    handleChange={handleChange}
+                    idx={"name"}
+                    label={"Category"}
+                    name={"categoryName"}
+                    placeholder={"select categories"}
+                    cssCls="w-1/2"
+                  />
+                  <ReactMultiSelect
+                    handleChange={(e: any) => handleChange("genres", e)}
+                    data={genre?.body || []}
+                    label={"genre"}
+                    name={"genres"}
+                    errors={errors}
+                    idx={"name"}
+                    control={control}
+                    placeholder={"select genres"}
+                    cssCls="w-1/2"
+                  />
+                </div>
 
-                <SelectInput
-                  data={category?.body}
-                  register={register}
-                  errors={errors}
-                  handleChange={handleChange}
-                  idx={"name"}
-                  label={"Category"}
-                  name={"categoryName"}
-                  placeholder={"select categories"}
-                />
+                <div className="mb-8 flex justify-around gap-2 ">
+                  <IntInputField
+                    label={"Page Numbers"}
+                    name={"page"}
+                    errors={errors}
+                    register={register}
+                    handleChange={handleChange}
+                    placeholder={"books page number"}
+                    cssCls="w-[1/2]"
+                  />
+                  <IntInputField
+                    label={"Published Year"}
+                    name={"publishDate"}
+                    errors={errors}
+                    register={register}
+                    handleChange={handleChange}
+                    placeholder={"Published Year"}
+                    cssCls="w-[1/2]"
+                    req={false}
+                  />
+                </div>
+                <div className="mb-8 flex justify-around gap-2">
+                  <SelectInput
+                    register={register}
+                    errors={errors}
+                    handleChange={handleChange}
+                    data={ItemStatus}
+                    idx={"name"}
+                    name={"status"}
+                    dispIdx={"name"}
+                    label={"status"}
+                    placeholder={"status"}
+                    req={false}
+                    cssCls="w-1/2"
+                  />
+                  <ReactMultiSelect
+                    handleChange={(e: any) => handleChange("meta", e)}
+                    data={MetaDatas}
+                    label={"Meta"}
+                    name={"meta"}
+                    errors={errors}
+                    idx={"name"}
+                    control={control}
+                    req={false}
+                    placeholder={"select Metadata"}
+                    cssCls="w-1/2"
+                  />
+                </div>
+
                 <SelectInput
                   register={register}
                   errors={errors}
@@ -178,17 +244,6 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   placeholder={"select Author"}
                 />
 
-                <ReactMultiSelect
-                  handleChange={(e: any) => handleChange("genres", e)}
-                  data={genre?.body || []}
-                  label={"genre"}
-                  name={"genres"}
-                  errors={errors}
-                  idx={"name"}
-                  control={control}
-                  placeholder={"select genres"}
-                />
-
                 <TextAreaField
                   label={"Description"}
                   name={"desc"}
@@ -198,34 +253,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   handleChange={handleChange}
                   placeholder={"Add the Description"}
                 />
-                <IntInputField
-                  label={"Page Numbers"}
-                  name={"page"}
-                  errors={errors}
-                  register={register}
-                  handleChange={handleChange}
-                  placeholder={"books page number"}
-                />
-                <IntInputField
-                  label={"Published Year"}
-                  name={"publishDate"}
-                  errors={errors}
-                  register={register}
-                  handleChange={handleChange}
-                  placeholder={"Published Year"}
-                />
-                <SelectInput
-                  register={register}
-                  errors={errors}
-                  handleChange={handleChange}
-                  data={ItemStatus}
-                  idx={"name"}
-                  name={"status"}
-                  dispIdx={"name"}
-                  label={"status"}
-                  placeholder={"status"}
-                  req={false}
-                />
+
                 <FileWithCover
                   oldImg={book?.upload}
                   maxFileNo={3}

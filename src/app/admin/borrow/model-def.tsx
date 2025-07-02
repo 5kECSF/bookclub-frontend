@@ -32,18 +32,19 @@ export interface IBorrow {
   donatedDate?: Date;
 }
 export enum borrowStatus {
-  Taken = "BORROWED",
+  Borrowed = "BORROWED",
   WaitList = "WAITLIST",
   Accepted = "ACCEPTED",
   Returned = "RETURNED",
   Donation = "donation",
 }
 export const borrowStatusList = [
-  { name: borrowStatus.Taken },
-  { name: borrowStatus.WaitList },
-  { name: borrowStatus.Accepted },
-  { name: borrowStatus.Returned },
+  { name: borrowStatus.WaitList, label: "Borrowing Requests" },
+  { name: borrowStatus.Accepted, label: "Request accepted Books" },
+  { name: borrowStatus.Borrowed, label: "Borrowed Books" },
+  { name: borrowStatus.Returned, label: "Returned Books" },
 ];
+export const tabs = [...borrowStatusList, { name: "", label: "All" }];
 export const BorrowValidator = z.object({
   bookId: z.string().min(2, { message: "min length is 2" }),
   userId: z.string().min(2, { message: "min length is 2" }),

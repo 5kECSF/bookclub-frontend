@@ -1,7 +1,7 @@
 export const ItemStatus = [
-  { name: "active" },
-  { name: "draft" },
-  { name: "deactivated" },
+  { name: "active", label: "Active" },
+  { name: "draft", label: "Draft" },
+  { name: "deactivated", label: "Deactivated" },
 ];
 
 export interface PaginatedRes<T> {

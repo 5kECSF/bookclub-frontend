@@ -80,9 +80,10 @@ export const SelectInput = ({
   errors,
   req = true,
   disabled = false,
+  cssCls,
 }: SelectProps) => {
   return (
-    <div className="mb-4.5">
+    <div className={"mb-4.5 " + cssCls}>
       <label
         className={`mb-2.5 block text-base font-medium ${
           disabled

@@ -4,7 +4,7 @@ interface Msg {
 }
 
 export function HandleAxiosErr(e: any): Msg {
-  console.log(" `````````` `````````` error |||", e.message);
+
 
   if (e.response) {
     console.log(

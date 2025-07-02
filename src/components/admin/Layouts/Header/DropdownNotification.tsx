@@ -24,7 +24,7 @@ const DropdownNotification = () => {
   const { data: latestNotices } = useFetch(
     [KY.notification, latestDate],
     `${KY.notification}`,
-    { createdAt: latestDate },
+    { after: latestDate },
     10000,
   );
 
@@ -86,7 +86,7 @@ const DropdownNotification = () => {
         setLatest(latestNotices.body[0].createdAt);
       }
     }
-  }, [dropdownOpen]);
+  }, [dropdownOpen, latestNotices, setLatest]);
   return (
     <div className="relative">
       <Link
@@ -132,7 +132,7 @@ const DropdownNotification = () => {
             let path = notice?._id;
 
             return (
-              <NotificationList
+              <NotificationComponent
                 notifying={true}
                 key={`latest-${i}`}
                 notice={notice}
@@ -146,10 +146,10 @@ const DropdownNotification = () => {
             ------ seen ---------
           </h2>
           {oldNotices?.map((notice: any) => {
-            let path = notice?.module_name;
+            let path = notice?._id;
 
             return (
-              <NotificationList
+              <NotificationComponent
                 notifying={false}
                 key={`old-${notice?._id}`}
                 notice={notice}
@@ -165,7 +165,7 @@ const DropdownNotification = () => {
 
 export default DropdownNotification;
 
-export function NotificationList({
+export function NotificationComponent({
   notice,
   path,
   notifying,

@@ -22,7 +22,6 @@ export default async function (req: any, res: any) {
       req.body,
     );
     const { authToken, userData } = response?.data;
-    console.log("login response data--", response.data);
 
     const serialisedAccess = makeTokenCooke(
       CookieNames.AccessToken,

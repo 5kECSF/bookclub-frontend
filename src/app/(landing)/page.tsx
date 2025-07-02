@@ -13,10 +13,7 @@ const HomePage = (): JSX.Element => {
   return (
     <div className="flex w-full flex-col items-center bg-white">
       <div className="relative w-full max-w-[1440px] bg-white">
-        {/* New Releases section */}
-        {/*<HeaderSection />*/}
-
-        {/* Recommended Books section */}
+        {/* Banner section */}
         <CarouselSection />
         {/* Categories Section */}
         <CategoriesSection />
@@ -24,7 +21,7 @@ const HomePage = (): JSX.Element => {
         {/* Genre Selection section with title */}
         <GenreSelectionSection />
 
-        {/* Featured Book section */}
+        {/* New Releases section */}
         <NewArrivalSection />
 
         {/* Separator line */}
@@ -35,7 +32,7 @@ const HomePage = (): JSX.Element => {
         {/* Book Recommendations section */}
         <AuthorsSection />
 
-        {/* Categories section with title */}
+        {/* Featured Book section */}
         <FeaturedBooksSection />
 
         {/* Hero section */}

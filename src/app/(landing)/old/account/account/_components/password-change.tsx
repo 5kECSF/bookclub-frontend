@@ -34,18 +34,14 @@ const PasswordChange = () => {
       newPassword: data.newPassword,
     };
 
-    try {
-      const resp = await makeReq("auth/changePassword", body, MTD.PATCH);
-      if (!resp.ok) {
-        console.log("````````````````````error data", resp.body);
-        toast.error(resp.message);
-        return;
-      }
-      toast.success(`password update success`);
-      form.reset();
-    } catch (e: any) {
-      // console.log(e.message);
+    const resp = await makeReq("auth/changePassword", body, MTD.PATCH);
+    if (!resp.ok) {
+      console.log("````````````````````error data", resp.body);
+      toast.error(resp.message);
+      return;
     }
+    toast.success(`password update success`);
+    form.reset();
   };
 
   return (

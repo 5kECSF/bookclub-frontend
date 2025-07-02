@@ -49,17 +49,16 @@ const VerifyCodeComponent = () => {
       toast.warning("The Email is not populated");
       return;
     }
-    // console.log("before Reg data==", data);
+
     const datas = await makeReq(`${BASE_URL}/${API.resetPwd}`, data, MTD.POST);
     if (!datas.ok) {
       toast.error(datas.message);
       return;
     }
-    //   console.log("registration data==", datas);
+
     toast.success(" Verification Successful");
     form.reset();
     router.push(`/signin`);
-    // console.log("data====||", datas);
   };
 
   return (

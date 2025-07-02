@@ -29,7 +29,7 @@ export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
 
   const { isLoading, data, isError, error, isPlaceholderData } =
     useFetch<IUser>([KY.profile], `${KY.profile}`, {});
-  // console.log(data);
+
   const RequestBook = async () => {
     const resp = await makeReq(
       `${KY.borrow}/request/${book._id}`,

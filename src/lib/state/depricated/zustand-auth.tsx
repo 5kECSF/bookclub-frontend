@@ -36,7 +36,7 @@ export const useAuthStore = create<AuthState>()(
               `/api/auth/login`,
               { info_type: "m", ...credentials },
             );
-            console.log("login response--", response.data);
+
             set({
               user: response.data.user_data,
               accessToken: response.data.access_token,
@@ -58,7 +58,7 @@ export const useAuthStore = create<AuthState>()(
             return Succeed(response.data);
           } catch (err: any) {
             const resp = HandleAxiosErr(err);
-            console.log("logout Error", err.message);
+
             set({ user: null, accessToken: null });
             // router.push("/signin");
             return FAILT(resp.Message);

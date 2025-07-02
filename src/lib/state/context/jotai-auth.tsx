@@ -46,7 +46,7 @@ export const useAuth = () => {
       refreshToken()
         .then((r) => {})
         .catch((e) => {
-          console.log("|** useEffect-refresh-panic**|", e.message);
+          console.log("***| useEffect-refresh-panic**|", e.message);
           setLoggedIn(false);
         });
     }
@@ -56,7 +56,6 @@ export const useAuth = () => {
     try {
       if (loggedIn === false) return FAIL("User is not logged in"); //to prevent refresh token when user is not logged in
       if (refreshPromise) {
-        console.log("Refresh in progress, waiting for result...");
         return refreshPromise;
       }
       // == refresh logic starts here
@@ -88,13 +87,12 @@ export const useAuth = () => {
   };
   const logout = async () => {
     if (noNetwork) return;
-    console.log("logout Called:");
+
     try {
       const response = await axios.post(`/api/auth/logout`);
       setUser(null);
       setAccessToken(null);
       setLoggedIn(false);
-      console.log("logout success", response.data);
       router.push("/");
     } catch (err: any) {
       let resp = HandleAxiosErr(err);
@@ -106,13 +104,10 @@ export const useAuth = () => {
     }
   };
   const getAccessToken = async (): Promise<Resp<string>> => {
-    // console.log("get access token called -----");
     if (!accessToken) {
-      console.log("no access token----");
       return await refreshToken();
     }
     if (isTokenExpired(accessToken)) {
-      console.log("Access token expired, refreshing...");
       return await refreshToken();
     }
     return Succeed(accessToken);
@@ -124,7 +119,7 @@ export const useAuth = () => {
         `/api/auth/login`,
         { info_type: "m", ...credentials },
       );
-      console.log("login response--", response.data);
+
       const { access_token, user_data } = response?.data;
       setAccessToken(access_token);
       setUser(user_data);

@@ -28,14 +28,14 @@ export const useFetch = <T = any,>(
     dir: "desc",
     ...params,
   };
-  // console.log(url, params,defaultParams )
+
   return useQuery<T, Error>({
     queryKey: queryKey,
     queryFn: async () => {
       try {
         const queryString = buildQuery(defaultParams);
         const response = await axiosAuth.get(`${url}?${queryString}`);
-        // console.log("||useQuery.get", response.data);
+
         return response.data;
       } catch (e: any) {
         let Err = HandleAxiosErr(e);

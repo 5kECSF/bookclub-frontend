@@ -79,7 +79,7 @@ export default function AuthProvider({
           info_type: "m",
         },
       );
-      console.log("login response--", response.data);
+
       const { access_token, user_data } = response.data;
 
       setUser(user_data);
@@ -103,7 +103,6 @@ export default function AuthProvider({
 
   const refreshToken = async (): Promise<Resp<string>> => {
     if (refreshPromise) {
-      console.log("Refresh in progress, waiting for result...");
       return refreshPromise;
     }
 
@@ -131,22 +130,20 @@ export default function AuthProvider({
 
       setUser(null);
       setAccessToken(null);
-      console.log("logout response");
       router.push("/signin");
     } catch (err: any) {
-      console.log("logout Error", err.message);
       router.push("/signin");
     }
   };
 
   const getAccessToken = async (): Promise<Resp<string>> => {
-    console.log("get access token called -----");
+
     if (!accessToken) {
-      console.log("no access token----");
+
       return await refreshToken();
     }
     if (isTokenExpired(accessToken)) {
-      console.log("Access token expired, refreshing...");
+
       return await refreshToken();
     }
     return Succeed(accessToken);

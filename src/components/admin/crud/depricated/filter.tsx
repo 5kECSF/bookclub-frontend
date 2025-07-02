@@ -27,7 +27,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
       };
     });
 
-    console.log("modifiedData", modifiedData);
+
   };
   const handleFilter = (fieldName: string, value: any) => {
     setModifiedData((prevData: any) => {
@@ -36,7 +36,7 @@ export const Filters = ({ filterOpen, setFilterOpen, setQuery }: IFilter) => {
         [fieldName]: value,
       };
     });
-    // console.log("modifiedData", modifiedData);
+
   };
 
   const FinishFilter = () => {

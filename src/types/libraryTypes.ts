@@ -12,6 +12,7 @@ export interface IBook {
     body?: string;
     publishDate?: number;
     genres?: string[];
+    meta?: string[];
     language?: BookLanguage;
     //non dto types
     _id?: string;

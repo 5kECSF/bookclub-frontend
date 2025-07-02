@@ -1,13 +1,13 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import Link from "next/link";
 
 export const navLinks = [
   { name: "HOME", active: true, url: "/" },
   { name: "BOOKS", active: false, url: "/books" },
-  { name: "SingleBook", active: false, url: "/SingleBook" },
-  { name: "NEW RELEASE", active: false, url: "/#new-release" },
+  // { name: "SingleBook", active: false, url: `${UI_ROUTES.SingleBook}` },
+  // { name: "NEW RELEASE", active: false, url: "/#new-release" },
   { name: "ABOUT US", active: false, url: "/#about" },
   { name: "CONTACT US", active: false, url: "/#contact-us" },
 ];

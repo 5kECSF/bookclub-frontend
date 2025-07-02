@@ -19,6 +19,7 @@ export const BookValidator = z.object({
   page: z.number().optional(),
   publishDate: z.number().optional(),
   genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
+  meta: z.array(z.string()).optional(),
   language: z
     .enum([
       BookLanguage.English,
@@ -41,7 +42,7 @@ export const agColumns = [
   {
     field: "title",
     filter: "agMultiColumnFilter",
-    minWidth: 150,
+    minWidth: 200,
 
     cellStyle: { padding: "0.4em" },
     flex: 2,
@@ -71,34 +72,41 @@ export const agColumns = [
     field: "status",
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
-    minWidth: 70, // Adjust based on typical status text length
+    minWidth: 100, // Adjust based on typical status text length
     maxWidth: 100,
+  },
+  {
+    cellStyle: { padding: "0.4em" },
+    autoHeight: true,
+    headerName: "Metadata",
+    minWidth: 200,
+    cellRenderer: (params: any) => <MultiItem list={params.data?.meta} />,
   },
   {
     field: "instanceCnt",
     filter: "agMultiColumnFilter",
     suppressSizeToFit: false,
-    minWidth: 100,
+    minWidth: 150,
     flex: 1,
   },
   {
     field: "availableCnt",
     filter: "agMultiColumnFilter",
     suppressSizeToFit: false,
-    minWidth: 100,
+    minWidth: 150,
     flex: 1,
   },
   {
     headerName: "Category",
     field: "categoryName",
     filter: "agMultiColumnFilter",
-    minWidth: 100,
+    minWidth: 150,
   },
   {
     headerName: "Author",
     field: "authorName",
     filter: "agMultiColumnFilter",
-    minWidth: 100,
+    minWidth: 150,
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
@@ -117,6 +125,7 @@ export const agColumns = [
     autoHeight: true,
     headerName: "Action",
     pinned: "right",
+    minWidth: 200,
   },
 ];
 const MiniAction = ({ row }: { row: IBook }) => {

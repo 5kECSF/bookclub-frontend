@@ -55,7 +55,6 @@ export const SingleSelectWithSearch = ({
               onSearch={handleSearch}
               onChange={(e) => {
                 field.onChange(e);
-                // console.log("---", e)
                 handleChange(name, e);
               }}
               options={data.map((item: any) => ({
@@ -104,7 +103,7 @@ export const MultiSelectWithSlug = ({
               placeholder={placeholder}
               onChange={(e) => {
                 field.onChange(e);
-                // console.log("---", e)
+
                 handleChange(name, e);
               }}
               options={data.map((item: any) => ({
@@ -151,7 +150,7 @@ export const MultiSelectWithName = ({
               placeholder={placeholder}
               onChange={(e) => {
                 field.onChange(e);
-                // console.log("---", e)
+
                 handleChange(name, e);
               }}
               options={data.map((item: any) => ({

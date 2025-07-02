@@ -86,12 +86,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/*<SidebarHeader ref={trigger} onClick={() => setSidebarOpen(!sidebarOpen)} ariaExpanded={sidebarOpen} />*/}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <Link href="/">
-          <Image
-            width={176}
-            height={32}
-            src={"/images/logo/logo.svg"}
-            alt="Logo"
-          />
+          <div className="flex items-center">
+            <div className="relative h-15 w-15 rounded-md p-0 [background:linear-gradient(90deg,rgba(41,121,255,1)_0%,rgba(76,88,158,1)_100%)]">
+              <Image
+                src="/assets/logo/logo2.png"
+                alt="Logo"
+                className="rounded-md object-cover"
+                fill
+                priority
+              />
+              {/*</div>*/}
+            </div>
+
+            <div className="ml-2 text-4xl font-medium leading-9 text-blue-100">
+              Home
+            </div>
+          </div>
         </Link>
 
         <button

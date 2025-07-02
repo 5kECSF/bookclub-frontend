@@ -55,7 +55,7 @@ const VerifyCodeComponent = () => {
     toast.success(" Verification Successful");
     form.reset();
     router.push(`/signin`);
-    // console.log("data====||", datas);
+
   };
 
   return (

@@ -28,8 +28,11 @@ const useAxiosAuth = () => {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        if ((error?.response?.status === 401||error?.response?.status === 403) && !prevRequest?.sent) {
-          console.log("axios error11111111 -----");
+        if (
+          (error?.response?.status === 401 ||
+            error?.response?.status === 403) &&
+          !prevRequest?.sent
+        ) {
           prevRequest.sent = true;
           const token = await getAccessToken();
           if (!token.ok) {
@@ -45,10 +48,9 @@ const useAxiosAuth = () => {
           //     "Authorization"
           //     ] = `${accessToken}`;
         } else if (error?.response?.status === 401 && prevRequest?.sent) {
-          console.log("logging out-------------");
           logout();
-        }else if (error?.response?.status === 503 ){
-          console.log("======||||||->: no servee")
+        } else if (error?.response?.status === 503) {
+          console.log("***->: no server");
           return Promise.reject(error);
         }
 
