@@ -107,3 +107,36 @@
 - settings(profile & pwd) {cm:2025-06-28}
 - [x] users {cm:2025-06-28}
   - [x] list of users pending approval {cm:2025-06-28}
+- home page tasks {cm:2025-07-03}
+  - [x] fix the authors section {cm:2025-07-03}
+  - [x] new arrival books: when a new book is Donated(books sorted by created at) {cm:2025-07-03}
+  - [x] featured section: makr books as featured {cm:2025-07-03} {c}
+    - [x] mark book as featured #api {cm:2025-07-03}
+- listing page {cm:2025-07-03}
+  - [x] add move to single on click {cm:2025-07-03}
+- [x] remove unused links: {cm:2025-07-03}
+  - Blog, Faqs, Terms of service {cm:2025-07-03}
+- [x] cleanup footer {cm:2025-07-03}
+- admin generic {cm:2025-07-03}
+  - [x] list of over due books: borrow & donation {cm:2025-07-03}
+    - [x] overdue api {cm:2025-07-03}
+  - [x] books: featured, new arrival {cm:2025-07-03}
+  - [x] update the logo {cm:2025-07-01}
+  - [x] update the dropdown links {cm:2025-06-28}
+  - [x] update pagination component on admin {cm:2025-06-28}
+  - [x] update notification to work {cm:2025-07-03}
+- [x] fix notification icon on the admin side {cm:2025-07-03}
+- [x] fix footer & navbar items(remove unused) {cm:2025-07-03}
+  - [x] cleanup {cm:2025-07-03}
+- generic tasks {cm:2025-07-03}
+  - []remove the still not sure pages: {cm:2025-07-03}
+- [x] url for borrow {cm:2025-07-03}
+- single book page tasks {cm:2025-07-03}
+  - [x] book bottom tabs cleanup {cm:2025-07-03}
+  - [x] fetching related books via category and genres {cm:2025-07-03}
+  - [x] about author from api & authors books {cm:2025-07-03}
+    - [x] filter out the current book {cm:2025-07-03}
+  - [x] request to borrow for unlogged in users {cm:2025-07-03}
+  - [x] make the share feature {cm:2025-07-03}
+- [x] make search feature work {cm:2025-07-03}
+- [x] single book data: authors book data {cm:2025-07-03}

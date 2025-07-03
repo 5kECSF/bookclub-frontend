@@ -8,9 +8,9 @@ const BookLoader = ({ count }: { count: number }) => {
                     return (
                         <div key={i} role="status"
                             className="flex flex-col rounded  animate-pulse  w-full items-center " >
-                            <div className="rounded-3xs  w-full  h-[385.83px] object-cover border-gray-200 bg-gray-200 mb-4" />
-                            <div className="h-2.5 bg-gray-200 rounded-full  w-32 my-2"></div>
-                            <div className="h-2.5 bg-gray-200 rounded-full  w-32 mb-2"></div>
+                            <div className="rounded-3xs  w-full  h-[385.83px] object-cover border-gray-200 bg-slate-400 mb-4" />
+                            <div className="h-2.5 bg-slate-400 rounded-full  w-32 my-2"></div>
+                            <div className="h-2.5 bg-slate-400 rounded-full  w-32 mb-2"></div>
                         </div>
                     )
                 })

@@ -1,5 +1,5 @@
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
+import useAxiosAuth from "@/lib/state/context/useAxioxsAuth";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 const buildQuery = (params: Record<string, any>) => {
   const queryParams = new URLSearchParams();

@@ -25,10 +25,10 @@ export default function Nav() {
               <Link
                 key={i}
                 className={cn(
-                  `${pathName === route.href ? `border-b` : null}`,
+                  `${pathName === route.url ? `border-b` : null}`,
                   ` px-2`,
                 )}
-                href={route.href}
+                href={route.url}
               >
                 {route.name}
               </Link>

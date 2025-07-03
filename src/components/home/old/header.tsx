@@ -2,13 +2,13 @@
 import { BiHeart, BiUser } from "react-icons/bi";
 
 import Link from "next/link";
-import BookSearchInput from "../search-input";
-import MobileSidebar from "./mobile-sidebar";
+import BookSearchInput from "../../search-input";
+import MobileSidebar from "../mobile-sidebar";
 import Nav from "./nav";
 
+import { TopBar } from "@/components/home/topBar";
 import { useAuth } from "@/lib/state/context/jotai-auth";
 import { RiLoginCircleFill } from "react-icons/ri";
-import { TopBar } from "@/components/home/topBar";
 
 const Header = () => {
   const { user } = useAuth();

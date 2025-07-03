@@ -1,7 +1,7 @@
 import { MTD } from "@/lib/constants";
 import { FAIL, Resp, Succeed } from "@/lib/constants/return.const";
 import { HandleAxiosErr } from "@/lib/functions/axios.error";
-import useAxiosAuth, { axiosAuth } from "@/lib/state/hooks/useAxioxsAuth";
+import useAxiosAuth, { axiosAuth } from "@/lib/state/context/useAxioxsAuth";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 // import axios from "axios"

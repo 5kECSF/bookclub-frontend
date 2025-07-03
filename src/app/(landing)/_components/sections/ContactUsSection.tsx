@@ -2,9 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { type JSX } from "react";
 
-export const HeroSection = (): JSX.Element => {
+export const ContactUsSection = (): JSX.Element => {
   return (
-    <section className="mx-auto w-full max-w-[808px] py-16 text-center">
+    <section
+      id="contact-us"
+      className="mx-auto w-full max-w-[808px] py-16 text-center"
+    >
       <Card className="border-none shadow-none">
         <CardContent className="flex flex-col items-center gap-8 p-0">
           <h2 className="text-[32px] font-semibold tracking-[1.87px] text-[#173f5f]">
@@ -21,7 +24,9 @@ export const HeroSection = (): JSX.Element => {
             variant="outline"
             className="h-[55px] w-[202px] rounded-[3px] border-[#173f5f] text-xl font-semibold tracking-[1.17px] text-[#173f5f]"
           >
-            Read FAQ
+            <a href="https://t.me/" aria-label="telegram">
+              Contact Us
+            </a>
           </Button>
         </CardContent>
       </Card>

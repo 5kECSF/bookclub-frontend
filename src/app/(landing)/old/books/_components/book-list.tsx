@@ -1,8 +1,8 @@
 "use client";
-import Empty from "@/components/home/empty";
+import Empty from "@/components/home/old/empty";
 import BookLoader from "@/components/loader/book-list-loader";
 import { KY } from "@/lib/constants/routes";
-import useAxiosAuth from "@/lib/state/hooks/useAxioxsAuth";
+import useAxiosAuth from "@/lib/state/context/useAxioxsAuth";
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ICategory, OldIBook } from "@/types/db";
 import { useInfiniteQuery } from "@tanstack/react-query";

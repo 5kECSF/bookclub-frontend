@@ -21,7 +21,29 @@ export const availabilityOptions = [
   { type: "E - Book", available: true },
   { type: "Audio book", available: true },
 ];
+const handleShare = async (book: IBook) => {
+  const shareUrl = `http://localhost:3002/books/${encodeURIComponent(book?._id as string)}`;
+  const shareData = {
+    title: book.title,
+    text: `Check out "${book.title}" by ${book.authorName}!`,
+    url: shareUrl,
+  };
 
+  try {
+    if (navigator.share && navigator.canShare(shareData)) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success("Link copied to clipboard!", {
+        description: "Share this link with others.",
+      });
+    }
+  } catch (error) {
+    toast.error("Failed to share book", {
+      description: "Please try copying the link manually.",
+    });
+  }
+};
 //
 export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
   const { loading, makeReq } = useMakeReqState();
@@ -55,14 +77,18 @@ export const ContentSection = ({ book }: { book: IBook }): JSX.Element => {
           />
           <div className="mt-2 flex justify-center gap-6">
             {/* <CommentedOut/> */}
-            <div className="flex flex-col items-center">
+            <Button
+              onClick={() => handleShare(book)}
+              variant="ghost"
+              className="flex  flex-col items-center"
+            >
               <div className="flex h-8 w-8 items-center justify-center">
                 <Share2 />
               </div>
               <span className="text-[11px] font-bold leading-3 text-[#333333]">
                 Share
               </span>
-            </div>
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -173,8 +199,11 @@ function AllowedToBorrow(book: IBook, user: IUser | undefined): boolean {
   return true;
 }
 function ReturnTxt(book: IBook, user: IUser | undefined): string {
-  if (user?.accountStatus != ACCOUNT_STATUS.ACTIVE)
+  if (user && user?.accountStatus != ACCOUNT_STATUS.ACTIVE)
     return "Your account is not Approved";
+  if (!user) {
+    return "login to Request";
+  }
   if (user?.requestedBooks?.includes(book?._id as string))
     return "Book Requested";
   else if (user?.approvedBooks?.includes(book?._id as string))

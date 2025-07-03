@@ -23,6 +23,12 @@ export enum KY {
   notification = "notification",
   profile = "profile"
 }
+export enum PlaceHolder{
+  Dummy= "/assets/placeholder/dummy.png",
+  Avatar= "/assets/placeholder/ava.png",
+  BCLogoTransparent="/assets/bookClubLogo/logo.png",
+  BCLogoFull="/assets/bookClubLogo/logo1.png"
+}
 export enum UI_ROUTES{
   //auth 
   SignIn = "/signin",
@@ -42,26 +48,13 @@ export enum UI_ROUTES{
 }
 
 export const NavRoutes = [
-  {
-    name: "HOME",
-    href: "/",
-  },
-  {
-    name: "ABOUT US",
-    href: "/about",
-  },
-  {
-    name: "BOOKS",
-    href: "/books",
-  },
-  {
-    name: "CONTACT US",
-    href: "/contact",
-  },
-  {
-    name: "BLOG",
-    href: "/blog",
-  }
+  { name: "HOME", active: true, url: "/" },
+  { name: "NEW ARRIVAL", url: "/#newArrival" },
+  { name: "Featured", url: "/#featured" },
+  { name: "BOOKS", active: false, url: "/books" },
+  // { name: "SingleBook", active: false, url: `${UI_ROUTES.SingleBook}` },
+  // { name: "ABOUT US", active: false, url: "/#about" },
+  { name: "CONTACT US", active: false, url: "/#contact-us" },
 ];
 
 

@@ -1,33 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  FacebookIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  YoutubeIcon,
-} from "lucide-react";
+import { UI_ROUTES } from "@/lib/constants/routes";
 import { type JSX } from "react";
+import { SocialMediaIcons } from "./SocialIcons";
 
 // Define data for navigation links to make the code more maintainable
 const companyLinks = [
-  { title: "HOME", href: "#" },
-  { title: "ABOUT US", href: "#" },
-  { title: "BOOKS", href: "#" },
-  { title: "NEW RELEASE", href: "#" },
-  { title: "CONTACT US", href: "#" },
-  { title: "BLOG", href: "#" },
+  { title: "HOME", href: "/" },
+  { title: "NEW ARRIVAL", href: "/#newArrival" },
+  { title: "Featured", href: "/#featured" },
+  { title: "BOOKS", href: "/books" },
+  { title: "CONTACT US", href: "/#contact-us" },
+  // { title: "BLOG", href: "#" },
 ];
 
 const importantLinks = [
-  { title: "Privacy Policy", href: "#" },
-  { title: "FAQs", href: "#" },
-  { title: "Terms of Service", href: "#" },
-];
-
-const socialIcons = [
-  { icon: FacebookIcon, alt: "Facebook" },
-  { icon: TwitterIcon, alt: "Twitter" },
-  { icon: LinkedinIcon, alt: "LinkedIn" },
-  { icon: YoutubeIcon, alt: "YouTube" },
+  { title: "My Profile", href: UI_ROUTES.Profile },
+  { title: "My Shelf", href: UI_ROUTES.MyShelf },
+  { title: "My Remainders", href: UI_ROUTES.Remainders },
 ];
 
 export const FooterSection = (): JSX.Element => {
@@ -39,36 +28,21 @@ export const FooterSection = (): JSX.Element => {
           <div className="flex flex-col gap-6">
             <img
               className="h-[87px] w-[83px] object-cover"
-              alt="Sample logo"
-              src="/assets/imgsample-logo-1@2x.png"
+              alt="Book club logo"
+              src="/assets/logo/logo2.png"
             />
             <p className="text-lg font-normal leading-[34px] tracking-[0.36px] text-white">
-              Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
+              Follow us on Different social media.
             </p>
 
             {/* Social media icons */}
-            <div className="mt-4 flex gap-6">
-              {socialIcons.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <a
-                    key={index}
-                    href="#"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white"
-                    aria-label={social.alt}
-                  >
-                    <IconComponent className="text-[#ed553b]" size={24} />
-                  </a>
-                );
-              })}
-            </div>
+            <SocialMediaIcons />
           </div>
 
           {/* Company links column */}
           <div className="flex flex-col gap-4">
             <h3 className="text-2xl font-semibold tracking-[0.48px] text-white">
-              COMPANY
+              Navigate
             </h3>
             <nav className="mt-4 flex flex-col gap-[15px]">
               {companyLinks.map((link, index) => (
@@ -86,7 +60,7 @@ export const FooterSection = (): JSX.Element => {
           {/* Important links column */}
           <div className="flex flex-col gap-4">
             <h3 className="text-2xl font-semibold tracking-[0.48px] text-white">
-              IMPORTENT LINKS
+              ACCOUNT LINKS
             </h3>
             <nav className="mt-4 flex flex-col gap-[15px]">
               {importantLinks.map((link, index) => (
@@ -105,16 +79,16 @@ export const FooterSection = (): JSX.Element => {
         {/* Footer bottom */}
         <div className="mt-16 flex flex-col items-center justify-between border-t border-white/20 pt-4 md:flex-row">
           <p className="text-lg font-normal tracking-[0.36px] text-white">
-            © 2022 Arihant. All Rights Reserved.
+            © {new Date().getFullYear()} 5kilo Fellowship Bookclub.
           </p>
           <div className="text-lg font-bold tracking-[0.36px] text-white">
-            <a href="#" className="hover:underline">
+            {/* <a href="#" className="hover:underline">
               Privacy
             </a>{" "}
             |{" "}
             <a href="#" className="hover:underline">
               Terms of Service
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

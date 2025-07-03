@@ -10,7 +10,7 @@ import Link from "next/link";
 export const BookCard = ({ book }: { book: IBook }) => {
   return (
     <div>
-      <Link href={`${UI_ROUTES.SingleBook}?_bookId=${book._id}`}>
+      <Link href={`${UI_ROUTES.BooksListing}/${book._id}`}>
         <Card className="relative  w-full border-[#e9e7df] bg-white shadow-[0px_4px_10px_#00000026]">
           <CardContent className="relative h-full p-0">
             <img

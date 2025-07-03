@@ -1,7 +1,7 @@
 import {PhoneIcon} from "lucide-react";
 import React from "react";
 
-const TopBar2 = () => {
+export const TopBar2 = () => {
     return (<div className="w-full h-14 bg-[#393280]">
         <div className="container mx-auto flex justify-between items-center h-full px-[62px]">
             <div className="flex items-center gap-2">

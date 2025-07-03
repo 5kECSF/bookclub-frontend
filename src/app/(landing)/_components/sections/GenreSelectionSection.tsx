@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -11,7 +12,7 @@ import type { JSX } from "react";
 
 export const GenreSelectionSection = (): JSX.Element => {
   // Data for genre categories to enable mapping
-  const { isLoading, data, isError, isSuccess, error } = useFetch(
+  const { isLoading, data, isError, error } = useFetch(
     [KY.genre],
     `${KY.genre}`,
   );

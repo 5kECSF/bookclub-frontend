@@ -1,19 +1,21 @@
 "use client";
 import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl } from "@/lib/functions/url";
+
 import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ArrowLeftIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, type JSX } from "react";
-import { ContentSection } from "./ContentSection";
-import { BottomTabsSection } from "./bookBottomTabs";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ContentSection } from "../../SingleBook/ContentSection";
+import { BottomTabsSection } from "../../SingleBook/bookBottomTabs";
 
-const SingleBook = (): JSX.Element => {
-  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
+export default function BookPage() {
   const router = useRouter();
+  const param = useParams(); // Extract bookId from /books/[id]
+  const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));
   const { isLoading, data } = useFetch(
-    [KY.book, query._bookId],
-    `${KY.book}/${query._bookId}`,
+    [KY.book, `${param?.id}`],
+    `${KY.book}/${param?.id}`,
     {},
   );
   console.log(data);
@@ -45,5 +47,4 @@ const SingleBook = (): JSX.Element => {
       </div>
     </div>
   );
-};
-export default SingleBook;
+}

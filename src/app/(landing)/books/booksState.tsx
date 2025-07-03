@@ -8,9 +8,11 @@ import {
   SideBarFilter,
 } from "@/app/(landing)/books/_components/sideBarFilter";
 import QueryChips from "@/components/admin/crud/query-chips";
+import BookLoader from "@/components/loader/book-list-loader";
 import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import { useFetch } from "@/lib/state/hooks/useQuery";
+import { useSearch } from "@/lib/state/hooks/useSearch";
 import { IBook } from "@/types/libraryTypes";
 import { useEffect, useState } from "react";
 
@@ -20,22 +22,21 @@ export const BooksState = ({
   urlParam: Record<string, string>;
 }) => {
   // Book data for the listing
+
   const [isGrid, setIsGrid] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { searchTerm } = useSearch();
   const [query, setQuery] = useState<Record<string, any>>(
     getQueryFromUrl({ status: "active", ...urlParam }),
   );
 
-  // const [page, setPageNo] = useState(1);
-  // const [limit, setLimit] = useState(1);
   const setPage = (page: number) => {
     setQuery({ ...query, page });
-    // setPageNo(page);
   };
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
-    [KY.book, JSON.stringify(query)],
+    [KY.book, JSON.stringify(query), searchTerm],
     `${KY.book}`,
-    query,
+    { ...query, q: searchTerm },
   );
   const booksList = data?.body || [];
   useEffect(() => {
@@ -66,13 +67,19 @@ export const BooksState = ({
           query={query}
         />
         <QueryChips
-          query={query}
+          query={{ ...query, q: searchTerm }}
           setQuery={setQuery}
           removedKeys={["status"]}
         />
 
         {/* Book grid */}
-        {isGrid ? (
+        {isLoading ? (
+          <BookLoader count={8} />
+        ) : isError ? (
+          <div className="font-mono flex h-[400px] items-center justify-center text-[30px] font-bold">
+            {"Something went wrong"}
+          </div>
+        ) : isGrid ? (
           <div className="m-6 mb-10 grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4">
             {booksList.map((book: IBook, i: number) => (
               <BookCard key={i} book={book} />

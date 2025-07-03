@@ -159,6 +159,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   handleChange={handleChange}
                   placeholder={"write name"}
                 />
+                {/* ===========  Gneres & category  ====== */}
                 <div className=" mb-8 mt-8 flex justify-around gap-2 ">
                   <SelectInput
                     data={category?.body}
@@ -205,6 +206,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                     req={false}
                   />
                 </div>
+                {/* ============  Meta & status ========== */}
                 <div className="mb-8 flex justify-around gap-2">
                   <SelectInput
                     register={register}

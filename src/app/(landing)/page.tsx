@@ -1,7 +1,7 @@
 import { CarouselSection } from "@/app/(landing)/_components/sections/CarouselSection";
 import { FeaturedBooksSection } from "@/app/(landing)/_components/sections/FeaturedBooksSection";
 import { GenreSelectionSection } from "@/app/(landing)/_components/sections/GenreSelectionSection";
-import { HeroSection } from "@/app/(landing)/_components/sections/HeroSection";
+import { ContactUsSection } from "@/app/(landing)/_components/sections/ContactUsSection";
 import { NewArrivalSection } from "@/app/(landing)/_components/sections/NewArrivalSection";
 import { Separator } from "@/components/ui/separator";
 
@@ -36,7 +36,7 @@ const HomePage = (): JSX.Element => {
         <FeaturedBooksSection />
 
         {/* Hero section */}
-        <HeroSection />
+        <ContactUsSection />
 
         {/* Footer section */}
         <Separator className="h-[3px] bg-[#e0e0e0]" />
