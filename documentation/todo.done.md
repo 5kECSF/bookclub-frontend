@@ -140,3 +140,7 @@
   - [x] make the share feature {cm:2025-07-03}
 - [x] make search feature work {cm:2025-07-03}
 - [x] single book data: authors book data {cm:2025-07-03}
+
+- [x] remainders
+  - [x] fetching overdue books & requested books {cm:2025-07-04}
+  - [x] fetching notifications for the user {cm:2025-07-04}

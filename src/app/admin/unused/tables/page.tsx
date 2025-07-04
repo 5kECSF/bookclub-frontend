@@ -1,5 +1,5 @@
+import TableOne from "@/components/admin/stats/TableOne";
 import Breadcrumb from "@/components/common/Breadcrumbs/Breadcrumb";
-import TableOne from "@/components/unusedElements/Tables/TableOne";
 import TableThree from "@/components/unusedElements/Tables/TableThree";
 import TableTwo from "@/components/unusedElements/Tables/TableTwo";
 

@@ -1,18 +1,20 @@
 
 # tasks
 
-## profile page tasks
 
-- [x] remainders
-  - [x] fetching overdue books & requested books {cm:2025-07-04}
-  - [x] fetching notifications for the user {cm:2025-07-04}
+
+
+## profile page tasks
 
 ## admin page tasks
 
 - [ ] create tabs for donations: available, taken
-- [ ] clean up the admin template: remove unused
-  - Logo, search, msg, sidebar: profile, settings, auth
-  
+- [x] clean up the admin template: remove unused
+  - [x] Logo, search, msg, sidebar: profile, settings, auth
+- [ ] creae stat endpoints 
+  - [ ] count of books, donations, users, borrowed books
+  - [ ] top reader
+
 ## landing page tasks
 
 - [] banner update: content & images(use meta or use static)
@@ -28,7 +30,6 @@
 --------------------------------------------------
 
 ## Later Tasks
-
 
 - [ ] add image uploading
 - [ ] also add a faq section
@@ -56,6 +57,15 @@
   - pagination for the notifications
 - [ ] add image name generator with jwt
 - fav for users
+
+## stats
+
+- Borrowing Trends Over Time: Track borrowing volume by month or year to identify seasonal patterns.
+- number of book borrowed each month(borrowed, returned ratio)
+- book's at stock: 
+- most read & unread books
+- most requested book
+
 
 -------------------------------------------;
 

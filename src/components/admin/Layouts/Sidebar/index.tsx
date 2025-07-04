@@ -1,5 +1,4 @@
 import {
-  AuthSvg,
   DashBoardSvg,
   FormSvg,
   ProfileSvg,
@@ -162,7 +161,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </ItemGroup>
 
               {/*======    Extra OPERATIONS   ========*/}
-              <ItemGroup
+              {/* <ItemGroup
                 name={"Extra Operations"}
                 path={"admin"}
                 pathname={pathname}
@@ -180,7 +179,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   pathname={pathname}
                   path={"/admin/feedback"}
                 />
-              </ItemGroup>
+              </ItemGroup> */}
 
               {/*======    Extra OPERATIONS   ========*/}
 
@@ -189,7 +188,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <ItemWithSvg
                 SVG={ProfileSvg}
                 name={"Profile"}
-                path={"author"}
+                path={"account"}
+                pathname={pathname}
+              />
+              <ItemWithSvg
+                SVG={SettingsSvg}
+                name={"Remainders"}
+                path={"account/remainders"}
                 pathname={pathname}
               />
 
@@ -204,13 +209,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/*</ItemGroup>*/}
 
               {/*<ItemWithSvg SVG={SvgTables} name={"Tables"} path={"tables"} pathname={pathname} />*/}
-
-              <ItemWithSvg
-                SVG={SettingsSvg}
-                name={"Settings"}
-                path={"settings"}
-                pathname={pathname}
-              />
             </ul>
           </div>
 
@@ -231,7 +229,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/*  <ChildItems name={"Buttons"} pathname={pathname}*/}
               {/*              path={"/svgs/buttons"} />*/}
               {/*</ItemGroup>*/}
-              <ItemGroup
+              {/* <ItemGroup
                 name={"Authentication"}
                 path={"auth"}
                 pathname={pathname}
@@ -249,7 +247,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   pathname={pathname}
                   path={"/signup"}
                 />
-              </ItemGroup>
+              </ItemGroup> */}
             </ul>
           </div>
         </nav>
