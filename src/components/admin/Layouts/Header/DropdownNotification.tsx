@@ -1,9 +1,7 @@
 "use client";
 
 import { NotificationSvg } from "@/components/svgs/header-svgs";
-import { KY } from "@/lib/constants/routes";
-import { useFetch } from "@/lib/state/hooks/useQuery";
-import { useAtom } from "jotai";
+import { useUserNotification } from "@/lib/state/context/notification.context";
 import { atomWithStorage } from "jotai/utils";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -13,47 +11,25 @@ lastNotificationAtom.debugLabel = "last-notification";
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [notifying, setNotifying] = useState(false);
-  const [count, setCount] = useState<number | null>(null);
-
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-
-  const [latestDate, setLatest] = useAtom(lastNotificationAtom);
-
-  const { data: latestNotices } = useFetch(
-    [KY.notification, latestDate],
-    `${KY.notification}`,
-    { after: latestDate },
-    10000,
-  );
-
-  const { data: allNotices } = useFetch(
-    [KY.notification],
-    `${KY.notification}`,
-    {},
-    100000,
-  );
-
-  const oldNotices = allNotices?.body
-    ?.filter(
-      (notice: any) =>
-        !latestNotices?.body?.some(
-          (latestNotice: any) => latestNotice._id === notice._id,
-        ),
-    )
-    ?.sort(
-      (a: any, b: any) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-    );
-
+  const {
+    unseenNotifications,
+    setLatest,
+    count,
+    setNotifying,
+    notifying,
+    oldNotifications,
+  } = useUserNotification();
+  //effects related to notification
   useEffect(() => {
-    if (latestNotices?.body?.length > 0) {
-      console.log("latest", latestNotices);
-      setNotifying(true);
-      setCount(latestNotices?.count);
+    if (!dropdownOpen) {
+      setNotifying(false);
+      if (unseenNotifications?.body?.length > 0) {
+        setLatest(unseenNotifications.body[0].createdAt);
+      }
     }
-  }, [latestNotices]);
+  }, [dropdownOpen, unseenNotifications, setLatest, setNotifying]);
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -79,14 +55,7 @@ const DropdownNotification = () => {
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
   });
-  useEffect(() => {
-    if (!dropdownOpen) {
-      setNotifying(false);
-      if (latestNotices?.body?.length > 0) {
-        setLatest(latestNotices.body[0].createdAt);
-      }
-    }
-  }, [dropdownOpen, latestNotices, setLatest]);
+
   return (
     <div className="relative">
       <Link
@@ -120,7 +89,7 @@ const DropdownNotification = () => {
           <h5 className="text-md font-medium text-bodydark2">Notifications</h5>
         </div>
 
-        {latestNotices?.count <= 0 && (
+        {unseenNotifications?.count <= 0 && (
           <p className="border-t border-stroke px-4.5 py-3 dark:border-strokedark">
             No New Notification
           </p>
@@ -128,7 +97,7 @@ const DropdownNotification = () => {
 
         <ul className="flex h-auto flex-col overflow-y-auto">
           {/* Render New Notices */}
-          {latestNotices?.body?.map((notice: any, i: any) => {
+          {unseenNotifications?.body?.map((notice: any, i: any) => {
             let path = notice?._id;
 
             return (
@@ -145,7 +114,7 @@ const DropdownNotification = () => {
           <h2 className="border-t border-stroke py-2 text-center text-xl dark:border-strokedark">
             ------ seen ---------
           </h2>
-          {oldNotices?.map((notice: any) => {
+          {oldNotifications?.map((notice: any) => {
             let path = notice?._id;
 
             return (

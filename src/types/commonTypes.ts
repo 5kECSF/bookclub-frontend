@@ -11,3 +11,24 @@ export interface PaginatedRes<T> {
 
   body: T[];
 }
+
+export enum NotificationEnum {
+  General = 'General',
+  Individual = 'Individual',
+}
+
+export enum ToEnum {
+  Admin = 'ADMIN',
+  USERS = 'USERS',
+}
+export interface INotification {
+
+  readonly _id: string;
+  title: string;
+  body?: string;
+  type?: NotificationEnum; //general, single user
+  to?: ToEnum; //admin, users
+  userId: string;
+
+  createdAt:Date
+}

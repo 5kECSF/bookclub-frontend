@@ -1,17 +1,11 @@
 
 # tasks
 
-## landing page tasks
-
-- [] banner update: content & images(use meta or use static)
-- when creting book use wysing for description
-- wysing for book description
-
 ## profile page tasks
 
-- remainders
-  - fetching overdue books & requested books
-  - fetching notifications for the user
+- [x] remainders
+  - [x] fetching overdue books & requested books {cm:2025-07-04}
+  - [x] fetching notifications for the user {cm:2025-07-04}
 
 ## admin page tasks
 
@@ -19,24 +13,30 @@
 - [ ] clean up the admin template: remove unused
   - Logo, search, msg, sidebar: profile, settings, auth
   
+## landing page tasks
+
+- [] banner update: content & images(use meta or use static)
+- when creting book use wysing for description
+- wysing for book description
+
 ### Generic tasks
 
 - if user is logged in remove from auth page
 
 ## api tasks
 
-
 --------------------------------------------------
 
 ## Later Tasks
 
-- add image uploading
+
+- [ ] add image uploading
 - [ ] also add a faq section
 - [ ] make single about us & contuct us page: with mailTo link
 
-## admin page tasks
+## admin page
 
-- [] admin notification {c}
+- [] admin notification
   - [ ] send general notification
   - [ ] send notification to specific users
     - [ ] on account page, fetch notifications sent to the user & general notifications
@@ -47,16 +47,17 @@
   - [] filter with page max min: api[], frontend[]
   - [] filter with author
   
-## profile page tasks
+## profile page
 
 - [] settings(profile & pwd)
   - [x] update email: test it with backend
   - [ ] id image: use drop zone
 - reminder listing {c}
-  - []
-
+  - pagination for the notifications
 - [ ] add image name generator with jwt
 - fav for users
+
+-------------------------------------------;
 
 ## Tasks on deployment
 

@@ -6,11 +6,11 @@
   - [x] use new home pages
   - [x] use titlebar of old & new rest etc
     - [x] make the underline & selected
-- [] books listing page tasks
+- [x] books listing page tasks
   - [x] fix sort by _id to createdAt
   - [x] finish filter, by: category, genres
   - [ ] add language & availability to api & add filter on frontend
-- single book
+- [x] single book
   - [x] make Borrow requests button if books availability count is greater than 1
 
 ## profile page

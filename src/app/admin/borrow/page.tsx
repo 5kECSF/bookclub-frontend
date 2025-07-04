@@ -56,7 +56,7 @@ const BorrowPage = () => {
             <button
               key={tab.name}
               onClick={() =>
-                setQuery({ ...query, status: tab.name, overDue: false })
+                setQuery({ ...query, status: tab.name, overDue: null })
               }
               className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
                 query.status == tab.name || (tab.name == "" && !query.status)

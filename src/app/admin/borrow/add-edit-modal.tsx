@@ -81,7 +81,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, borrow }: IBorrowProps) => {
   };
 
   const onSubmit = async (data: TBorrowDto) => {
-    let resp: Resp<any>;
+    let resp: Resp<IBorrow>;
     if (isUpdate) {
       if (!borrow || !("_id" in borrow)) return handleErr("malformed update");
       resp = await makeReq(
@@ -97,7 +97,7 @@ const AddEdit = ({ isUpdate, isOpen, onClose, borrow }: IBorrowProps) => {
     await queryClient.invalidateQueries({ queryKey: [KY.borrow] });
     reset();
     toast.success(
-      `successfully ${isUpdate ? "updated" : "created"} a Borrow of user ${resp.body.fullName} `,
+      `successfully ${isUpdate ? "updated" : "created"} a Borrow of user ${resp.body.userName} `,
     );
   };
 

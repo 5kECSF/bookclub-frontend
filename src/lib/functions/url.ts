@@ -44,3 +44,29 @@ export const setUrl = (newQuery: Record<string, any>) => {
   });
   window.history.replaceState(null, "", `?${params.toString()}`);
 };
+
+
+export function GetDateStr(date: any): string{
+  if (date instanceof Date) {
+    return date.toDateString()
+  }else if (typeof date === 'string') {
+    return new Date(date).toDateString();
+  }
+  else return ""
+}
+
+export function GetDateVal(date: any): Date| null{
+  if (date instanceof Date) {
+    return date
+  }else if (typeof date === 'string') {
+    return new Date(date)
+  }
+  else return null
+}
+export function IsOverdue(dueDate: Date | null): boolean {
+  const givenDate=GetDateVal(dueDate)
+  if(!givenDate) return false
+  const currentDate = new Date();
+
+  return givenDate < currentDate;
+}

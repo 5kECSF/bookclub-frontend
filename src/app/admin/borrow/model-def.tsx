@@ -90,8 +90,8 @@ export const agColumns = [
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
   {
-    headerName: "Description",
-    field: "desc",
+    headerName: "note",
+    field: "note",
     filter: "agMultiColumnFilter",
   },
   // 3
