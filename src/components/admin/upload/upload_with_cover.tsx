@@ -123,7 +123,7 @@ export const FileWithCover = forwardRef(function UploadComp(
         response: undefined,
         uid: "",
         xhr: undefined,
-        url: getImgUrl(oldImg?.url as string, oldImg.pathId),
+        url: getImgUrl(oldImg?.url as string, oldImg?.pathId as string),
       };
       setCoverImage([sImage]);
 
@@ -137,7 +137,7 @@ export const FileWithCover = forwardRef(function UploadComp(
             response: undefined,
             uid: "",
             xhr: undefined,
-            url: getImgUrl(imgName, oldImg.pathId),
+            url: getImgUrl(imgName, oldImg?.pathId as string),
           };
           list.push(sImage);
         });
