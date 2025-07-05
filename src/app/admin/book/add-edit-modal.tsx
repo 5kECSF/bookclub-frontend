@@ -37,10 +37,17 @@ interface IBookProps {
   onClose: (e?: any) => void;
   book?: IBook;
 }
+export enum Metas {
+  Featured = "featured",
+  Banner = "banner",
+  Recommended = "recommended",
+  Trending = "trending",
+}
 export const MetaDatas = [
-  { name: "featured", label: "Featured" },
-  { name: "recomended", label: "recomended" },
-  { name: "trending", label: "trending" },
+  { name: Metas.Featured, label: "Featured" },
+  { name: Metas.Banner, label: "Banner" },
+  // { name: "recomended", label: "recomended" },
+  // { name: "trending", label: "trending" },
 ];
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef(undefined);

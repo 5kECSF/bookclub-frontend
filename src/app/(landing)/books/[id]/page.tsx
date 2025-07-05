@@ -6,8 +6,8 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ArrowLeftIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ContentSection } from "../../SingleBook/ContentSection";
-import { BottomTabsSection } from "../../SingleBook/bookBottomTabs";
+import { ContentSection } from "./ContentSection";
+import { BottomTabsSection } from "./bookBottomTabs";
 
 export default function BookPage() {
   const router = useRouter();

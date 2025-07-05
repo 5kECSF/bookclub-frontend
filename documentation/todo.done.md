@@ -144,3 +144,8 @@
 - [x] remainders
   - [x] fetching overdue books & requested books {cm:2025-07-04}
   - [x] fetching notifications for the user {cm:2025-07-04}
+- [x] clean up the admin template: remove unused {cm:2025-07-05}
+  - [x] Logo, search, msg, sidebar: profile, settings, auth {cm:2025-07-05}
+  - [x] count of books, donations, users, borrowed books {cm:2025-07-05}
+- [x] creae stat endpoints {c} {cm:2025-07-05}
+  - [ ] top donor {cm:2025-07-05}

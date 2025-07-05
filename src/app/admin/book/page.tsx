@@ -42,17 +42,30 @@ const BookPage = () => {
         <QueryChips query={query} setQuery={setQuery} />
         <div className="border-gray-200 flex space-x-2 border-b">
           <button
-            onClick={() =>
-              setQuery({ ...query, status: "", meta: ["featured"] })
-            }
+            onClick={() => setQuery({ ...query, status: "", meta: ["banner"] })}
             className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
               query?.meta && query.meta.length > 0
                 ? "border-b-2 border-red bg-white text-red"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
+            Banner
+          </button>
+          <button
+            onClick={() =>
+              setQuery({ ...query, status: "", meta: ["featured"] })
+            }
+            className={`rounded-t-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none ${
+              query?.meta &&
+              query.meta.length > 0 &&
+              query.meta.includes("featured")
+                ? "border-b-2 border-red bg-white text-red"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
             Featured
           </button>
+
           {tabs.map((tab) => (
             <button
               key={tab.name}

@@ -116,7 +116,7 @@ export const FeaturedItem = ({ featuredBook }: { featuredBook: IBook }) => {
           </h3>
 
           <p className="text-base font-normal leading-[33.3px] tracking-[0.32px] text-[#7a7a7a] [font-family:'Inter',Helvetica]">
-            {featuredBook.body}
+            {featuredBook.desc}
           </p>
 
           {/* <div className="text-[23px] font-bold text-[#ed553b] [font-family:'Inter',Helvetica]">

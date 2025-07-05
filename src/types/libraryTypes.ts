@@ -9,7 +9,6 @@ export interface IBook {
     page?: number;
     featured?: boolean;
     status?: string;
-    body?: string;
     publishDate?: number;
     genres?: string[];
     meta?: string[];

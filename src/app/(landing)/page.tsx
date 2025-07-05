@@ -1,7 +1,7 @@
-import { CarouselSection } from "@/app/(landing)/_components/sections/CarouselSection";
+import { BannerSection } from "@/app/(landing)/_components/sections/CarouselSection";
+import { ContactUsSection } from "@/app/(landing)/_components/sections/ContactUsSection";
 import { FeaturedBooksSection } from "@/app/(landing)/_components/sections/FeaturedBooksSection";
 import { GenreSelectionSection } from "@/app/(landing)/_components/sections/GenreSelectionSection";
-import { ContactUsSection } from "@/app/(landing)/_components/sections/ContactUsSection";
 import { NewArrivalSection } from "@/app/(landing)/_components/sections/NewArrivalSection";
 import { Separator } from "@/components/ui/separator";
 
@@ -14,7 +14,7 @@ const HomePage = (): JSX.Element => {
     <div className="flex w-full flex-col items-center bg-white">
       <div className="relative w-full max-w-[1440px] bg-white">
         {/* Banner section */}
-        <CarouselSection />
+        <BannerSection />
         {/* Categories Section */}
         <CategoriesSection />
 

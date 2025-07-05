@@ -4,37 +4,61 @@ import React from "react";
 // import ChartOne from "../Charts/ChartOne";//will be used
 // import ChartThree from "../Charts/ChartThree";//will be used
 import TableOne from "@/components/admin/stats/TableOne";
+import { Resp } from "@/lib/constants/return.const";
+import { KY, UI_ROUTES } from "@/lib/constants/routes";
+import { useFetch } from "@/lib/state/hooks/useQuery";
+import { IUser } from "@/types/user";
 import { Album, BookCopy, LibraryBig, Users } from "lucide-react";
+interface LibraryStats {
+  totalBooks: number;
+  totalDonations: number;
+  totalUsers: number;
+  activeBorrows: number;
+}
 
 const ECommerce: React.FC = () => {
+  const { data } = useFetch<LibraryStats>([KY.Stats], `${KY.Stats}`);
+  const { data: usersData } = useFetch<Resp<IUser[]>>(
+    [KY.Stats, "donors"],
+    `${KY.Stats}/donors`,
+    {
+      sort: "donatedCount",
+      _sortDir: "desc",
+    },
+  );
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
           title="Total Unique Books"
-          total="$3.456K"
-          rate="0.43%"
+          total={`${data?.totalBooks}`}
+          path={UI_ROUTES.ManageBooks}
           levelUp
         >
           <BookCopy />
         </CardDataStats>
         <CardDataStats
           title="Total Books In Library"
-          total="$45,2K"
-          rate="4.35%"
+          total={`${data?.totalDonations}`}
+          path={UI_ROUTES.ManageDonations}
           levelUp
         >
           <LibraryBig />
         </CardDataStats>
         <CardDataStats
           title="Total Borrowed"
-          total="2.450"
-          rate="2.59%"
+          total={`${data?.activeBorrows}`}
+          path={UI_ROUTES.ManageBorrow}
           levelUp
         >
           <Album />
         </CardDataStats>
-        <CardDataStats title="Total Users" total="3.456" rate="0.95%" levelDown>
+        <CardDataStats
+          title="Total Users"
+          total={`${data?.totalUsers}`}
+          path={UI_ROUTES.ManageUsers}
+          levelDown
+        >
           <Users />
         </CardDataStats>
       </div>
@@ -44,7 +68,7 @@ const ECommerce: React.FC = () => {
         {/* <ChartTwo /> */}
         {/* <ChartThree /> */}
         <div className="col-span-12 xl:col-span-8">
-          <TableOne />
+          <TableOne users={usersData?.body || []} />
         </div>
         {/* <ChatCard /> */}
       </div>

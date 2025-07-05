@@ -5,8 +5,8 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type JSX } from "react";
-import { ContentSection } from "./ContentSection";
-import { BottomTabsSection } from "./bookBottomTabs";
+import { ContentSection } from "../books/[id]/ContentSection";
+import { BottomTabsSection } from "../books/[id]/bookBottomTabs";
 
 const SingleBook = (): JSX.Element => {
   const [query, setQuery] = useState<Record<string, any>>(getQueryFromUrl({}));

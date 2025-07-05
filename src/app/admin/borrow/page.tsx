@@ -21,18 +21,18 @@ const BorrowPage = () => {
   const [query, setQuery] = useState<Record<string, any>>(
     getQueryFromUrl({ status: "WAITLIST" }),
   );
+  useEffect(() => {
+    setUrl(query);
+  }, [query]);
   const setPage = (page: number) => {
     setQuery({ ...query, page });
   };
+  
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
     [KY.borrow, JSON.stringify(query)],
     `${KY.borrow}`,
     query,
   );
-  useEffect(() => {
-    setUrl(query);
-  }, [query]);
-
   return (
     <>
       <Breadcrumb pageName={"Borrow"} />

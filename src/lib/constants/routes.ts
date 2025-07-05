@@ -18,6 +18,7 @@ export enum KY {
   book = "book",
   author = "author",
   user = "users",
+  Stats = "stats",
   borrow = "borrow",
   donation = "donation",
   notification = "notification",
@@ -45,6 +46,9 @@ export enum UI_ROUTES{
   Admin ="/admin",
   ManageBooks ="/admin/book",
   ManageAuthor ="/admin/author",
+  ManageDonations ="/admin/donation",
+  ManageBorrow ="/admin/borrow",
+  ManageUsers ="/admin/user",
 }
 
 export const NavRoutes = [

@@ -31,11 +31,12 @@ export enum bookStatus {
   Reserved = "RESERVED", // if it has been accepted to be borrowed
 }
 export const bookStatusList = [
-  { name: bookStatus.Available },
-  { name: bookStatus.NotAvailable },
-  { name: bookStatus.Taken },
-  { name: bookStatus.Reserved },
+  { name: bookStatus.Available, label: "Available" },
+  { name: bookStatus.NotAvailable, label: "Not Available" },
+  { name: bookStatus.Taken, label: "Borrowed" },
+  { name: bookStatus.Reserved, label: "Reserved" },
 ];
+export const tabs = [...bookStatusList, { name: "", label: "All" }];
 export const DonationValidator = z.object({
   note: z.string().min(3, { message: "min length is 2" }),
   donorId: z.string().min(1, { message: "min length is 2" }),

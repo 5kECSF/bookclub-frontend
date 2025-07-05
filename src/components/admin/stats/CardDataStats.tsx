@@ -1,9 +1,10 @@
+import Link from "next/link";
 import React, { ReactNode } from "react";
 
 interface CardDataStatsProps {
   title: string;
   total: string;
-  rate: string;
+  path: string;
   levelUp?: boolean;
   levelDown?: boolean;
   children: ReactNode;
@@ -12,7 +13,7 @@ interface CardDataStatsProps {
 const CardDataStats: React.FC<CardDataStatsProps> = ({
   title,
   total,
-  rate,
+  path,
   levelUp,
   levelDown,
   children,
@@ -30,13 +31,15 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
           <span className="text-sm font-medium">{title}</span>
         </div>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-8 w-8 cursor-pointer fill-black hover:fill-primary dark:fill-white"
-        viewBox="0 0 320 512"
-      >
-        <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
-      </svg>
+      <Link href={path}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8 cursor-pointer fill-black hover:fill-primary dark:fill-white"
+          viewBox="0 0 320 512"
+        >
+          <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+        </svg>
+      </Link>
     </div>
   );
 };
