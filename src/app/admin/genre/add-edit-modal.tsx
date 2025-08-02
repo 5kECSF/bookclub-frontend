@@ -36,7 +36,6 @@ export function AddEditModal({
         placeholder={"write name"}
       />
       <SelectInput
-        
         // register={register}
         // errors={errors}
         // handleChange={handleChange}
