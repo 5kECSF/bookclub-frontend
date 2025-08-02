@@ -36,7 +36,7 @@ export const agColumns = [
   {
     field: "name",
     filter: "agMultiColumnFilter",
-    maxWidth: 200,
+    minWidth: 200,
   },
 
   // 2 - String - The name of a cell renderer registered with the grid.
@@ -44,7 +44,7 @@ export const agColumns = [
     cellStyle: { padding: "2em" },
     // autoHeight: true,
     headerName: "Image",
-    maxWidth: 120,
+    minWidth: 120,
     cellRenderer: (params: any) => (
       <Avatar className="h-10 w-10">
         <AvatarImage src={`${getImg(params.data?.upload)}`} />
@@ -55,7 +55,7 @@ export const agColumns = [
     {
     field: "category",
     filter: "agMultiColumnFilter",
-    maxWidth: 200,
+    minWidth: 200,
   },
   {
     headerName: "Status",
@@ -63,7 +63,7 @@ export const agColumns = [
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
     minWidth: 70, // Adjust based on typical status text length
-    maxWidth: 100,
+    maxWidth: 150,
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
@@ -71,6 +71,7 @@ export const agColumns = [
     headerName: "Description",
     field: "desc",
     filter: "agMultiColumnFilter",
+    minWidth: 200,
   },
   // 3
 

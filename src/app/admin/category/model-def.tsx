@@ -34,7 +34,7 @@ export const agColumns = [
   {
     field: "name",
     filter: "agMultiColumnFilter",
-    maxWidth: 200,
+    minWidth: 120,
   },
   // 2 - String - The name of a cell renderer registered with the grid.
   {
@@ -63,6 +63,7 @@ export const agColumns = [
     headerName: "Description",
     field: "desc",
     filter: "agMultiColumnFilter",
+    minWidth: 200,
   },
   // 3
 
@@ -75,6 +76,7 @@ export const agColumns = [
     autoHeight: true,
     headerName: "Action",
     pinned: "right",
+
   },
 ];
 

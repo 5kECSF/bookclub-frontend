@@ -32,9 +32,9 @@ function Loading() {
 }
 export const AuthorsSection = (): JSX.Element => {
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
-    [KY.author, "newArrival"],
+    [KY.author, ""],
     `${KY.author}`,
-    {},
+    {status: "active",}
   );
   const newArrival = data?.body || [];
   // Sample book data that would be displayed in the carousel

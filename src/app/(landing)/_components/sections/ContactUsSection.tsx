@@ -24,7 +24,7 @@ export const ContactUsSection = (): JSX.Element => {
             variant="outline"
             className="h-[55px] w-[202px] rounded-[3px] border-[#173f5f] text-xl font-semibold tracking-[1.17px] text-[#173f5f]"
           >
-            <a href="https://t.me/" aria-label="telegram">
+            <a href="https://t.me/myfellow" aria-label="telegram">
               Contact Us
             </a>
           </Button>
