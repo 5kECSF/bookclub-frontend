@@ -1,5 +1,7 @@
 import { FilterLayout } from "@/components/admin/crud/generic-filter";
 import { CleanSelectInput } from "@/components/forms/select";
+import { KY } from "@/lib/constants/routes";
+import { useFetch } from "@/lib/state/hooks/useQuery";
 import { ItemStatus } from "@/types/commonTypes";
 
 interface IFilterProps {
@@ -12,6 +14,7 @@ export function FilterDrawer({
   setFilterOpen,
   setQuery,
 }: IFilterProps) {
+  const { data: category } = useFetch([KY.category], `${KY.category}`);
   return (
     <FilterLayout
       filterOpen={filterOpen}
@@ -24,6 +27,14 @@ export function FilterDrawer({
         idx={"name"}
         dispIdx={"name"}
         label={"status"}
+        req={false}
+      />
+      <CleanSelectInput
+       data={category?.body}
+        idx={"name"}
+        label={"Category"}
+        name={"category"}
+        dispIdx={"name"}
         req={false}
       />
     </FilterLayout>

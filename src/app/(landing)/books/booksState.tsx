@@ -71,6 +71,7 @@ export const BooksState = ({
           setQuery={setQuery}
           removedKeys={["status"]}
         />
+        {/* TODO: add genres here based on the category */}
 
         {/* Book grid */}
         {isLoading ? (

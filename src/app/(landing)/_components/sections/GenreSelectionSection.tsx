@@ -22,7 +22,7 @@ export const GenreSelectionSection = (): JSX.Element => {
   return (
     <div className="mt-16 flex w-full flex-col items-center gap-5">
       <h2 className="mb-8 text-center font-['Inter',Helvetica] text-[32px] font-semibold tracking-[1.87px] text-[#173f5f]">
-        Select Books by Genres
+        Check Out Top Genres
       </h2>
       <section className="flex w-full flex-wrap justify-center gap-[35px] py-8 align-baseline">
         {isLoading ? (

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import CataroryLoader from "@/components/loader/catagory-loader";
 import { Card, CardContent } from "@/components/ui/card";

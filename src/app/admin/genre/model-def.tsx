@@ -12,6 +12,7 @@ import { z } from "zod";
 export interface IGenre {
   _id?: string;
   name: string;
+  category?: string;
   slug?: string;
   desc?: string;
   fileId?: string;
@@ -21,6 +22,7 @@ export interface IGenre {
 
 export const GenreValidator = z.object({
   name: z.string().min(2, { message: "min length is 2" }),
+  category: z.string().min(2, { message: "min length is 2" }),
   desc: z.string().min(3, { message: "min length is 2" }),
   status: z.string().optional(),
 });
@@ -36,6 +38,7 @@ export const agColumns = [
     filter: "agMultiColumnFilter",
     maxWidth: 200,
   },
+
   // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "2em" },
@@ -48,6 +51,11 @@ export const agColumns = [
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
     ),
+  },
+    {
+    field: "category",
+    filter: "agMultiColumnFilter",
+    maxWidth: 200,
   },
   {
     headerName: "Status",

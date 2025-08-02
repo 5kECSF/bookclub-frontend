@@ -16,8 +16,8 @@ interface SidebarProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 const sidebarLinks = [
-  { title: "Genres", url: "/admin/genre" },
   { title: "Category", url: "/admin/category" },
+  { title: "Genres", url: "/admin/genre" },
   { title: "Authors", url: "/admin/author" },
   { title: "Books", url: "/admin/book" },
   { title: "Users", url: "/admin/user" },
