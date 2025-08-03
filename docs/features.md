@@ -1,12 +1,7 @@
 # Features built in this app
 
 
-## Polising tasks
 
-- make it to show only active items for category and genres selection
-- finish the categories page
-- fix the categories page to show at least 10 items
-- remove the limit from landing page categories & genres
 
 > these are general app features that are available in the application
 >

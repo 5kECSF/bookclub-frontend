@@ -52,7 +52,7 @@ export const MetaDatas = [
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
   const uploadRef = useRef(undefined);
 
-  // const [loading, setLoading] = useState(false);
+  const [loadingState, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -83,10 +83,12 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
 
   const handleErr = (message: string, duration: number = 2500) => {
     toast.error(`${message}: `, { duration });
+    setLoading(false)
   };
 
   const onSubmit = async (data: IBook) => {
-    console.log("the creating ", data);
+    // console.log("the creating ", data);
+    setLoading(true)
     if (!uploadRef.current) return handleErr("no upload ref");
     let resp: Resp<any>;
     let id: string;
@@ -139,6 +141,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     }
     console.log("here");
     reset();
+    setLoading(false)
     await queryClient.invalidateQueries({ queryKey: [KY.book] });
 
     toast.success(
@@ -271,7 +274,7 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
                   isLoading={loading}
                 />
 
-                <Submit isLoading={loading} update={isUpdate} />
+                <Submit isLoading={loading || loadingState} update={isUpdate} />
               </div>
               {DisplayErrors(errors)}
             </form>

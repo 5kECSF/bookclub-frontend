@@ -1,6 +1,16 @@
 
 # tasks
 
+## Polising tasks
+
+- make it to show only active items for category and genres selection
+- finish the categories page
+- fix the categories page to show at least 10 items
+- remove the limit from landing page categories & genres
+- remove requirement for meta from the api
+- make loading & disabled button for create book
+
+
 ## profile page tasks
 
 ## admin page tasks
