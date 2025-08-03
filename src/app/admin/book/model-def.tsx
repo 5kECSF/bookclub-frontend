@@ -19,7 +19,7 @@ export const BookValidator = z.object({
   page: z.number().optional(),
   publishDate: z.number().optional(),
   genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
-  meta: z.array(z.string()).optional(),
+  meta: z.array(z.string().optional()).optional(),
   language: z
     .enum([
       BookLanguage.English,

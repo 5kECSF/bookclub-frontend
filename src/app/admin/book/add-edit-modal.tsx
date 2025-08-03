@@ -44,9 +44,9 @@ export enum Metas {
   Trending = "trending",
 }
 export const MetaDatas = [
+  { name: "none", label: "none" },
   { name: Metas.Featured, label: "Featured" },
   { name: Metas.Banner, label: "Banner" },
-  // { name: "recomended", label: "recomended" },
   // { name: "trending", label: "trending" },
 ];
 const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
@@ -64,9 +64,9 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     defaultValues: isUpdate ? { ...book } : {},
   });
 
-  const { data: genre } = useFetch([KY.genre], `${KY.genre}`,{status:"active"});
-  const { data: author } = useFetch([KY.author], `${KY.author}`,{status:"active"});
-  const { data: category } = useFetch([KY.category], `${KY.category}`, {status:"active"});
+  const { data: genre } = useFetch([KY.genre], `${KY.genre}`,{status:"active", limit: 50});
+  const { data: author } = useFetch([KY.author], `${KY.author}`,{status:"active", limit: 50});
+  const { data: category } = useFetch([KY.category], `${KY.category}`, {status:"active", limit: 50});
 
   const [modifiedData, setModifiedData] = useState<Partial<IBook>>({});
   // Function to handle field changes
