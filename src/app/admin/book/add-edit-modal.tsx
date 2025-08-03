@@ -64,9 +64,9 @@ const AddEditBook = ({ isUpdate, isOpen, onClose, book }: IBookProps) => {
     defaultValues: isUpdate ? { ...book } : {},
   });
 
-  const { data: genre } = useFetch([KY.genre], `${KY.genre}`);
-  const { data: author } = useFetch([KY.author], `${KY.author}`);
-  const { data: category } = useFetch([KY.category], `${KY.category}`);
+  const { data: genre } = useFetch([KY.genre], `${KY.genre}`,{status:"active"});
+  const { data: author } = useFetch([KY.author], `${KY.author}`,{status:"active"});
+  const { data: category } = useFetch([KY.category], `${KY.category}`, {status:"active"});
 
   const [modifiedData, setModifiedData] = useState<Partial<IBook>>({});
   // Function to handle field changes

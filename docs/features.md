@@ -1,5 +1,13 @@
 # Features built in this app
 
+
+## Polising tasks
+
+- make it to show only active items for category and genres selection
+- finish the categories page
+- fix the categories page to show at least 10 items
+- remove the limit from landing page categories & genres
+
 > these are general app features that are available in the application
 >
 ## landing page featues
@@ -7,9 +15,9 @@
 - [ ] HomePage
   - [x] categories
   - [x] genres
-  - [] new arrival(latest) books
+  - [x] new arrival(latest) books
   - [] searching
-  - [] banner page: manual
+  - [x] banner page: manual
 - listing page features
   - [x] sorting
   - [ ] filter sidebar: category, genres, author, languate

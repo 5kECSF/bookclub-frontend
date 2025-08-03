@@ -15,7 +15,7 @@ export const GenreSelectionSection = (): JSX.Element => {
   const { isLoading, data, isError, error } = useFetch(
     [KY.genre],
     `${KY.genre}`,
-    {status: "active",}
+    {status: "active", limit:100 }
   );
 
   const displayedData = data?.body || [];

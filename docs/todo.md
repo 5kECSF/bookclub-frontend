@@ -8,7 +8,7 @@
 
 ## landing page tasks
 
-- [] banner update: content & images(use meta or use static)
+- [x] banner update: content & images(use meta or use static)
 - when creting book use wysing for description
   - [] wysing for book description
 

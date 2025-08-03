@@ -17,7 +17,7 @@ export function AddEditModal({
   isUpdate,
   genre,
 }: IGenreProps) {
-  const { data: category } = useFetch([KY.category], `${KY.category}`);
+  const { data: category } = useFetch([KY.category], `${KY.category}`,{status:"active"});
   return (
     <AddEditWithFileLayout<IGenre, TGenreDto>
       isOpen={isOpen}

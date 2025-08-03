@@ -23,6 +23,7 @@ export const CategoriesSection = () => {
     `${KY.category}`,
     {
       status: "active",
+      limit:100
     },
   );
   const displayedData = data?.body || [];
