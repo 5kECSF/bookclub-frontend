@@ -5,6 +5,7 @@
 
 - finish the categories page
 - remove requirement for meta from the api
+- [] fix pagination on categories
 - [x] make it to show only active items for category and genres selection
 - [x] fix the categories page to show at least 10 items
 - [x] remove the limit from landing page categories & genres

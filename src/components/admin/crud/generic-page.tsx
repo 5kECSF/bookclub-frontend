@@ -34,7 +34,7 @@ export function PageLayout({
     setQuery({ ...query, page });
   };
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
-    [url, JSON.stringify(query)],
+    [url, JSON.stringify(query), `${query.page}`],
     `${url}`,
     query,
   );
