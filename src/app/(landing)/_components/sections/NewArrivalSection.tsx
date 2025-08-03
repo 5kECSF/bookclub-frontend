@@ -41,7 +41,7 @@ export const ScrollingBooks = (): JSX.Element => {
   const { isLoading, data, isError, error, isPlaceholderData } = useFetch(
     [KY.book, "newArrival"],
     `${KY.book}`,
-    { _sortDir: "desc" },
+    { _sortDir: "desc", status: "active" },
   );
   const newArrival = data?.body || [];
   return (
