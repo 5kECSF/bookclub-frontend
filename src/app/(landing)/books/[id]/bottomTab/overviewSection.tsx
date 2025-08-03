@@ -79,7 +79,7 @@ export const OverviewSection = ({ book }: { book: IBook }) => (
                 Number of pages
               </div>
               <div className="text-xs font-semibold text-[#333333]">
-                {book.page}
+                {book.pageNo}
               </div>
             </div>
           </div>

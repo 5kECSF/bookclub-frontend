@@ -16,7 +16,7 @@ export const BookValidator = z.object({
   categoryName: z.string().min(3, { message: "category is required" }),
   authorName: z.string(),
   status: z.string(),
-  page: z.number().optional(),
+  pageNo: z.number().optional(),
   publishDate: z.number().optional(),
   genres: z.array(z.string()).min(1, { message: "select at least 1 genre" }),
   meta: z.array(z.string()).optional(),

@@ -48,7 +48,7 @@ export const Description = ({ book }: { book: IBook }) => {
         <Metadata title="Publish Date" value={String(book.publishDate)} />
         <Metadata title="Category" value={book.categoryName} />
         <Metadata title="Language" value={book?.language || ""} />
-        <Metadata title="Pages" value={String(book?.page)} />
+        <Metadata title="Pages" value={String(book?.pageNo)} />
       </div>
 
       {/* Preview language */}

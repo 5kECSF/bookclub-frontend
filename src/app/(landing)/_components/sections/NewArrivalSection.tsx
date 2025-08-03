@@ -72,7 +72,7 @@ export const ScrollingBooks = (): JSX.Element => {
                         </div>
 
                         <div className="h-[11px] w-[101px] whitespace-nowrap text-[10px] font-normal leading-[12.9px] tracking-[0] [font-family:'Inter',Helvetica]">
-                          <span className="text-[#4c4c4c]">{book.page}</span>
+                          <span className="text-[#4c4c4c]">{book.pageNo}</span>
                           {/* <span className="text-[#a6a6a6]">/5</span> */}
                         </div>
                       </div>

@@ -6,7 +6,7 @@ export interface IBook {
     desc: string;
     categoryName: string;
     authorName?: string;
-    page?: number;
+    pageNo?: number;
     featured?: boolean;
     status?: string;
     publishDate?: number;

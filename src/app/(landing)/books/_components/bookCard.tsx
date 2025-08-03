@@ -38,7 +38,7 @@ export const BookCard = ({ book }: { book: IBook }) => {
                 {book.authorName}
               </p>
               <p className="mt-2 text-[22px] font-bold tracking-[0.44px] text-[#ed553b]">
-                {book?.page}
+                {book?.pageNo}
               </p>
             </div>
           </CardContent>
