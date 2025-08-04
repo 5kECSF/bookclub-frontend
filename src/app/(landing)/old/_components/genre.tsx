@@ -1,14 +1,14 @@
 "use client";
+import { IGenre } from "@/app/admin/genre/model-def";
 import GenreLoader from "@/components/loader/genre-loader";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { Igenre } from "@/types/db";
 import Image from "next/image";
 import Link from "next/link";
 
 const Genre = () => {
-  const { isLoading, data, isError, isSuccess, error } = useFetch(
+  const { isLoading, data, error } = useFetch(
     [KY.genre],
     `${KY.genre}`,
   );
@@ -27,7 +27,7 @@ const Genre = () => {
         JSON.stringify(error)
       ) : (
         <div className="grid grid-cols-2 flex-wrap sm:grid-cols-3 lg:grid-cols-6  ">
-          {displayedData?.map((gener: Igenre, i: number) => {
+          {displayedData?.map((gener: IGenre, i: number) => {
             return (
               <Link
                 href={`/books?genres=${gener.name}`}

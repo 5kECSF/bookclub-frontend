@@ -1,9 +1,9 @@
 "use client";
+import { ICategory } from "@/app/admin/category/model-def";
 import CataroryLoader from "@/components/loader/catagory-loader";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { ICategory } from "@/types/db";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

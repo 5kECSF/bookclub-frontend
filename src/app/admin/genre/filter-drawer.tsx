@@ -33,7 +33,7 @@ export function FilterDrawer({
        data={category?.body}
         idx={"name"}
         label={"Category"}
-        name={"category"}
+        name={"categories"}
         dispIdx={"name"}
         req={false}
       />

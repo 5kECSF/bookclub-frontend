@@ -1,7 +1,8 @@
 "use client";
 
-import { AddEditModal } from "@/app/admin/genre/add-edit-modal";
+import AddEditModal from "@/app/admin/genre/add-edit";
 import { EditDeleteButtons } from "@/components/admin/crud/edit-delete-buttons";
+import { MultiItem } from "@/components/admin/ui/cell-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
@@ -12,7 +13,8 @@ import { z } from "zod";
 export interface IGenre {
   _id?: string;
   name: string;
-  category?: string;
+  // category?: string;
+  categories: string[];
   slug?: string;
   desc?: string;
   fileId?: string;
@@ -22,7 +24,8 @@ export interface IGenre {
 
 export const GenreValidator = z.object({
   name: z.string().min(2, { message: "min length is 2" }),
-  category: z.string().min(2, { message: "min length is 2" }),
+  // category: z.string().min(2, { message: "min length is 2" }),
+  categories: z.array(z.string()).min(1, { message: "select at least 1 category" }),
   desc: z.string().min(3, { message: "min length is 2" }),
   status: z.string().optional(),
 });
@@ -52,11 +55,13 @@ export const agColumns = [
       </Avatar>
     ),
   },
-    {
-    field: "category",
-    filter: "agMultiColumnFilter",
-    minWidth: 200,
-  },
+  {
+     cellStyle: { padding: "0.4em" },
+     autoHeight: true,
+     headerName: "Categories",
+     minWidth: 200,
+     cellRenderer: (params: any) => <MultiItem list={params.data?.categories} />,
+   },
   {
     headerName: "Status",
     field: "status",

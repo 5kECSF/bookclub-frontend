@@ -1,21 +1,5 @@
-import { IUpload } from "@/types/upload";
 
-export interface ICategory {
-  _id?: string;
-  name: string;
-  upload?: IUpload;
-  desc?: string;
-  count?: number;
-  url?: string;
-}
 
-export interface Iauthor {
-  _id?: string;
-  name: string;
-  img?: img;
-  info?: string;
-  count?: number;
-}
 
 export interface OldIBook {
   _id?: string;
@@ -32,11 +16,5 @@ export interface OldIBook {
   availableCnt?: number;
 }
 
-export interface Igenre {
-  _id?: string;
-  name: string;
-  upload: IUpload;
-  desc?: string;
-  count?: number;
-}
+
 

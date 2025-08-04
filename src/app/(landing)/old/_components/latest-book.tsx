@@ -4,9 +4,10 @@ import { useFetch } from "@/lib/state/hooks/useQuery";
 import Image from "next/image";
 
 import LatestBookLoader from "@/components/loader/latest-book-loader";
-import { ICategory, OldIBook } from "@/types/db";
+import { OldIBook } from "@/types/db";
 import Link from "next/link";
 
+import { ICategory } from "@/app/admin/category/model-def";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";

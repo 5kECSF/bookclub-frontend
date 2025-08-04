@@ -4,7 +4,7 @@ import { KY } from "@/lib/constants/routes";
 import { getQueryFromUrl, setUrl } from "@/lib/functions/url";
 import withAuthorization from "@/lib/functions/withAuthorization";
 import { useEffect, useState } from "react";
-import { AddEditModal } from "./add-edit-modal";
+import AddEditModal from "./add-edit";
 import { FilterDrawer } from "./filter-drawer";
 import { agColumns } from "./model-def";
 

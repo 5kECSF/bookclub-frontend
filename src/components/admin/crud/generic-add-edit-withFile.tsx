@@ -83,7 +83,7 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
     //==========================================================
 
     if (uploadRef.current) {
-      console.log("file.body=====>>", resp.body);
+      // console.log("file.body=====>>", resp.body);
       //@ts-ignore
       const uploadResp: Resp<any> = await uploadRef.current.uploadSingle(
         resp.body.fileId,
@@ -112,7 +112,7 @@ export function AddEditWithFileLayout<T extends Obj, TDto extends FieldValues>({
         return handleErr(`No data is modified`);
       //this is because the modified data is not updated if the update is only for the file
       let updateData = { ...modifiedData, ...updatedData };
-      console.log("-updateData", updatedData);
+      // console.log("-updateData", updatedData);
       resp = await makeReq(`${url}/${data._id}`, updateData, MTD.PATCH);
       if (!resp.ok) return handleErr(resp.message);
     } else if (!isUpdate) {

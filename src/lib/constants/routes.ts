@@ -53,6 +53,7 @@ export enum UI_ROUTES{
 
 export const NavRoutes = [
   { name: "HOME", active: true, url: "/" },
+  { name: "Genres", active: true, url: "/genres" },
   { name: "NEW ARRIVAL", url: "/#newArrival" },
   { name: "Featured", url: "/#featured" },
   { name: "BOOKS", active: false, url: "/books" },

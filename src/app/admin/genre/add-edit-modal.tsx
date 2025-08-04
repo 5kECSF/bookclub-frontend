@@ -1,5 +1,6 @@
 import { GenreValidator, IGenre, TGenreDto } from "@/app/admin/genre/model-def";
 import { AddEditWithFileLayout } from "@/components/admin/crud/generic-add-edit-withFile";
+import { ReactMultiSelect } from "@/components/forms/react-select-multi";
 import { SelectInput } from "@/components/forms/select";
 import { InputField, TextAreaField } from "@/components/forms/useFormInputs";
 import { KY } from "@/lib/constants/routes";
@@ -46,6 +47,17 @@ export function AddEditModal({
         placeholder={"select category"}
         cssCls="w-1/2"
       />
+      {/* <ReactMultiSelect
+        // handleChange={(e: any) => handleChange("genres", e)}
+        // control={control}
+        // errors={errors}
+        data={genre?.body || []}
+        label={"genre"}
+        name={"genres"}
+        idx={"name"}
+        placeholder={"select genres"}
+        cssCls="w-1/2"
+      /> */}
 
       <TextAreaField
         label={"Description"}

@@ -2,11 +2,13 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 
+import { IGenre } from "@/app/admin/genre/model-def";
 import GenreLoader from "@/components/loader/genre-loader";
+import { Button } from "@/components/ui/button";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { Igenre } from "@/types/db";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { JSX } from "react";
 
@@ -29,7 +31,7 @@ export const GenreSelectionSection = (): JSX.Element => {
         {isLoading ? (
           <GenreLoader count={6} />
         ) : (
-          displayedData.map((genre: Igenre, i: number) => (
+          displayedData.map((genre: IGenre, i: number) => (
             <Link
               href={`/books?genres=${genre.name}`}
               className="mx-auto"
@@ -65,6 +67,22 @@ export const GenreSelectionSection = (): JSX.Element => {
           ))
         )}
       </section>
+      <div className="flex justify-center">
+           <Link
+                    className="inline-flex cursor-pointer flex-col items-center  px-2"
+                    href={`/genres`}
+                  >
+            <Button
+          variant="outline"
+             className="h-[61px] w-[197px] rounded-[7px] font-normal text-base tracking-[1.60px] leading-[35.2px] text-[#393280] border-[#393280] font-['Inter',Helvetica]"
+         >
+            VIEW MORE
+                <ArrowRight
+                   className="ml-4 w-[13px] h-2.5"
+           />
+         </Button> 
+          </Link>
+        </div>
     </div>
   );
 };

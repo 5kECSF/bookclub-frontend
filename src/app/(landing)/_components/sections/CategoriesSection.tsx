@@ -5,10 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getImg } from "@/lib/constants";
 import { KY } from "@/lib/constants/routes";
 import { useFetch } from "@/lib/state/hooks/useQuery";
-import { ICategory } from "@/types/db";
-import { Loader } from "lucide-react";
+
+import { ArrowRight, Loader } from "lucide-react";
 import Link from "next/link";
 // import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ICategory } from "@/app/admin/category/model-def";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -117,17 +119,22 @@ export const CategoriesSection = () => {
           </Carousel>
         )}
 
-        {/*<div className="flex justify-center">*/}
-        {/*    <Button*/}
-        {/*        variant="outline"*/}
-        {/*        className="h-[61px] w-[197px] rounded-[7px] font-normal text-base tracking-[1.60px] leading-[35.2px] text-[#393280] border-[#393280] font-['Inter',Helvetica]"*/}
-        {/*    >*/}
-        {/*        VIEW MORE*/}
-        {/*        <ArrowRight*/}
-        {/*            className="ml-4 w-[13px] h-2.5"*/}
-        {/*        />*/}
-        {/*    </Button>*/}
-        {/*</div>*/}
+        <div className="flex justify-center">
+           <Link
+                    className="inline-flex cursor-pointer flex-col items-center  px-2"
+                    href={`/genres`}
+                  >
+            <Button
+          variant="outline"
+             className="h-[61px] w-[197px] rounded-[7px] font-normal text-base tracking-[1.60px] leading-[35.2px] text-[#393280] border-[#393280] font-['Inter',Helvetica]"
+         >
+            VIEW MORE
+                <ArrowRight
+                   className="ml-4 w-[13px] h-2.5"
+           />
+         </Button> 
+          </Link>
+        </div>
       </div>
     </section>
   );

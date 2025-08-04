@@ -16,8 +16,12 @@ export interface ICategory {
   desc?: string;
   fileId?: string;
   body?: string;
+   count?: number;
   upload?: IUpload;
+  url?: string;
 }
+
+
 
 export const CategoryValidator = z.object({
   name: z.string().min(2, { message: "min length is 2" }),
