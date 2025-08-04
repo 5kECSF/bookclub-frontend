@@ -34,14 +34,14 @@ export const agColumns = [
   {
     field: "name",
     filter: "agMultiColumnFilter",
-    maxWidth: 200,
+    minWidth: 200,
   },
   // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "10px" },
     autoHeight: true,
     headerName: "Image",
-    maxWidth: 120,
+    minWidth: 120,
     cellRenderer: (params: any) => (
       <Avatar className="h-10 w-10">
         <AvatarImage src={`${getImg(params.data?.upload)}`} />
@@ -54,7 +54,7 @@ export const agColumns = [
     field: "status",
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
-    minWidth: 70, // Adjust based on typical status text length
+    minWidth: 80, // Adjust based on typical status text length
     maxWidth: 100,
   },
 
@@ -63,6 +63,7 @@ export const agColumns = [
     headerName: "Bio",
     field: "bio",
     filter: "agMultiColumnFilter",
+     minWidth: 200,
   },
   // 3
 
@@ -74,7 +75,7 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
-    pinned: "right",
+    // pinned: "right",
   },
 ];
 

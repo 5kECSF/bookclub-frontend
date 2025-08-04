@@ -67,7 +67,7 @@ export const agColumns = [
     field: "status",
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
-    minWidth: 70, // Adjust based on typical status text length
+    minWidth: 90, // Adjust based on typical status text length
     maxWidth: 150,
   },
 
@@ -88,6 +88,7 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
+    minWidth: 170,
   },
 ];
 

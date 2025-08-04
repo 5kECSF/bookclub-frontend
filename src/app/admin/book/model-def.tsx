@@ -114,7 +114,7 @@ export const agColumns = [
     headerName: "Description",
     field: "desc",
     filter: "agMultiColumnFilter",
-    minWidth: 200,
+    minWidth: 150,
   },
   // 3
 

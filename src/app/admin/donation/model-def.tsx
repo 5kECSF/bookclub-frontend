@@ -65,13 +65,13 @@ export const agColumns = [
   {
     field: "uid",
     filter: "agMultiColumnFilter",
-    maxWidth: 150,
+    minWidth: 150,
   },
   {
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Image",
-    maxWidth: 120,
+    minWidth: 100,
     cellRenderer: (params: any) => (
       <Avatar className="h-10 w-10">
         <AvatarImage src={`${getImg(params.data?.upload)}`} />
@@ -94,13 +94,14 @@ export const agColumns = [
     field: "status",
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
-    minWidth: 70, // Adjust based on typical status text length
+    minWidth: 90, // Adjust based on typical status text length
     maxWidth: 100,
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
   {
     headerName: "Note",
+    minWidth: 150,
     field: "note",
     filter: "agMultiColumnFilter",
   },
@@ -114,7 +115,8 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
-    pinned: "right",
+     minWidth: 170,
+    // pinned: "right",
   },
 ];
 

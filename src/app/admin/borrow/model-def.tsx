@@ -63,13 +63,13 @@ export type TBorrowDto = z.infer<typeof BorrowValidator>;
 
 export const agColumns = [
   // 1 - undefined - Grid renders the value as a string.
-  { field: "bookName", filter: "agMultiColumnFilter", maxWidth: 200 },
+  { field: "bookName", filter: "agMultiColumnFilter", minWidth: 200 },
   // 2 - String - The name of a cell renderer registered with the grid.
   {
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Image",
-    maxWidth: 120,
+    minWidth: 100,
     cellRenderer: (params: any) => (
       <Avatar className="h-10 w-10">
         <AvatarImage src={`${getImg(params.data?.upload)}`} />
@@ -77,20 +77,21 @@ export const agColumns = [
       </Avatar>
     ),
   },
-  { field: "instanceUid", filter: "agMultiColumnFilter", maxWidth: 200 },
-  { field: "userName", filter: "agMultiColumnFilter", maxWidth: 200 },
+  { field: "instanceUid", filter: "agMultiColumnFilter", minWidth: 100 },
+  { field: "userName", filter: "agMultiColumnFilter", minWidth: 150 },
   {
     headerName: "Status",
     field: "status",
     suppressSizeToFit: false, // Allows column to shrink to content size
     filter: "agMultiColumnFilter",
-    minWidth: 70, // Adjust based on typical status text length
-    maxWidth: 200,
+    minWidth: 90, // Adjust based on typical status text length
+    maxWidth: 150,
   },
 
   // 3 - Class - Provide your own cell renderer component directly without registering.
   {
     headerName: "note",
+    minWidth: 200, 
     field: "note",
     filter: "agMultiColumnFilter",
   },
@@ -104,7 +105,8 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Borrow Actions",
-    pinned: "right",
+    // pinned: "right",
+    minWidth: 120, 
   },
   {
     cellRenderer: (params: { data: IBorrow }) => (
@@ -113,7 +115,8 @@ export const agColumns = [
     cellStyle: { padding: "0.4em" },
     autoHeight: true,
     headerName: "Action",
-    pinned: "right",
+    // pinned: "right",
+    minWidth: 120, 
   },
 ];
 
