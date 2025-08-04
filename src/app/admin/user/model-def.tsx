@@ -32,6 +32,7 @@ export const agColumns = [
   { field: "department", filter: "agMultiColumnFilter",minWidth: 100, maxWidth: 200 },
 
   { field: "donatedCount", filter: "agMultiColumnFilter",minWidth: 100, maxWidth: 200 },
+  { field: "createdAt", filter: "agMultiColumnFilter",minWidth: 100, maxWidth: 200 },
 
   // 3
 
