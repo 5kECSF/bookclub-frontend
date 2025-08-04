@@ -56,11 +56,11 @@ export const FeaturedBooksSection = (): JSX.Element => {
   return (
     <section
       id="featured"
-      className="w-full py-20 [background:linear-gradient(79deg,rgba(251,238,238,1)_0%,rgba(247,255,254,1)_100%)]"
+      className="w-full  [background:linear-gradient(79deg,rgba(251,238,238,1)_0%,rgba(247,255,254,1)_100%)]"
     >
       <div className="container relative mx-auto px-4">
-        <Carousel className="w-full max-w-[1200px]  gap-8">
-          <CarouselContent className="  gap-8">
+        <Carousel className="w-full max-w-[1200px]  ">
+          <CarouselContent className="  ">
             {isLoading || isPlaceholderData ? (
               <Loading />
             ) : isError ? (
@@ -88,8 +88,8 @@ export const FeaturedBooksSection = (): JSX.Element => {
 
 export const FeaturedItem = ({ featuredBook }: { featuredBook: IBook }) => {
   return (
-    <CarouselItem className="m-2">
-      <div className="flex flex-col items-center gap-8 md:flex-row">
+    <CarouselItem className="">
+      <div className="flex flex-col items-center gap-8 h-full md:flex-row">
         {/* Book Image */}
         <div className="flex justify-center md:w-1/2">
           <img
